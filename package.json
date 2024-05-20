@@ -2,7 +2,9 @@
   "name": "ai-jackfish",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "nx serve"
+  },
   "private": true,
   "devDependencies": {
     "@nrwl/next": "^19.0.4",

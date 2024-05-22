@@ -11,7 +11,47 @@ module.exports = {
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: {
+          DEFAULT: 'var(--color-primary-300)',
+          100: 'var(--color-primary-100)',
+          200: 'var(--color-primary-200)',
+          300: 'var(--color-primary-300)',
+          400: 'var(--color-primary-400)',
+          500: 'var(--color-primary-500)',
+        },
+        secondary: {
+          DEFAULT: 'var(--color-secondary-300)',
+          100: 'var(--color-secondary-100)',
+          200: 'var(--color-secondary-200)',
+          300: 'var(--color-secondary-300)',
+          400: 'var(--color-secondary-400)',
+          500: 'var(--color-secondary-500)',
+        },
+        tertiary: {
+          DEFAULT: 'var(--color-tertiary-300)',
+          100: 'var(--color-tertiary-100)',
+          200: 'var(--color-tertiary-200)',
+          300: 'var(--color-tertiary-300)',
+          400: 'var(--color-tertiary-400)',
+          500: 'var(--color-tertiary-500)',
+        },
+        neutral: {
+          DEFAULT: 'var(--color-neutral-100)',
+          100: 'var(--color-neutral-100)',
+          200: 'var(--color-neutral-200)',
+          300: 'var(--color-neutral-300)',
+          400: 'var(--color-neutral-400)',
+          500: 'var(--color-neutral-500)',
+        },
+        warning: {
+          DEFAULT: 'var(--color-warning-100)',
+          100: 'var(--color-warning-100)',
+          200: 'var(--color-warning-200)',
+        },
+      },
+    },
   },
   plugins: [],
 };

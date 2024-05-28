@@ -1,6 +1,6 @@
 # operations
 
-This library was generated with [Nx](https://nx.dev).
+放置業務邏輯用的 Lib，如 `withdrawalManager`、`depositManager` 等。
 
 ## Running unit tests
 

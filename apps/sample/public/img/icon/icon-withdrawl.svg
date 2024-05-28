@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_圖層_1" data-name="圖層 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        stroke-width: 0px;
+      }
+
+      .cls-1, .cls-3 {
+        fill: #000;
+      }
+
+      .cls-4, .cls-5 {
+        fill: none;
+        stroke-linejoin: round;
+      }
+
+      .cls-4, .cls-5, .cls-3 {
+        stroke: #fff;
+        stroke-width: 20px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-5 {
+        stroke-linecap: round;
+      }
+
+      .cls-3 {
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M243.53,350.46c0-66.52,53.93-120.45,120.45-120.45,32.19,0,61.44,12.63,83.04,33.21V105.67c0-28.5-23.32-51.82-51.82-51.82H91.85c-28.5,0-51.82,23.32-51.82,51.82v282.06c0,28.5,23.32,51.82,51.82,51.82h191.07c-24.2-22.03-39.39-53.79-39.39-89.09Z"/>
+  <path class="cls-3" d="M40.03,191.24h62.07c30.51,0,55.47,24.96,55.47,55.47h0c0,30.51-24.96,55.47-55.47,55.47h-62.07"/>
+  <circle class="cls-2" cx="101.42" cy="246.7" r="13.5"/>
+  <circle class="cls-1" cx="364.29" cy="350.46" r="95.68"/>
+  <g>
+    <path class="cls-4" d="M364.29,400.05v-99.18"/>
+    <path class="cls-5" d="M320.67,344.49l43.62-43.62,43.62,43.62"/>
+  </g>
+</svg>

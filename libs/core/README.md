@@ -1,6 +1,6 @@
 # core
 
-This library was generated with [Nx](https://nx.dev).
+用來放置網站基礎建設和新功能，如：middleware...
 
 ## Running unit tests
 

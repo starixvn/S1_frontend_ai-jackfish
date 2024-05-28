@@ -4,6 +4,7 @@ import { changeTheme } from 'core'
 import { useClientTranslation } from '../../i18n/client'
 
 import Link from 'next/link'
+import { checkSignIn } from 'api-services'
 
 export default function Home({
 	params: { locale },
@@ -13,7 +14,8 @@ export default function Home({
 	}
 }) {
 	const { t } = useClientTranslation(locale)
-
+	const code = checkSignIn()
+	console.log(code)
 	return (
 		<div className='grid grid-rows-3 place-items-center bg-primary min-h-full'>
 			<div className='text-center'>
@@ -21,6 +23,7 @@ export default function Home({
 					This is a Client side i18n sample
 				</h2>
 				<h3 className='text-tertiary'>{t('Label_APP_DOWNLOAD')}</h3>
+				<h3 className='text-tertiary'>{`ENV is ${process.env.NEXT_PUBLIC_ENV_DB_HOST}`}</h3>
 			</div>
 			<div className='grid grid-cols-4 gap-2'>
 				<button

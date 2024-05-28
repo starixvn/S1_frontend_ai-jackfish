@@ -15,6 +15,7 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
+			"api-services": ["libs/api-services/src/index.ts"],
 			"constants": ["libs/constants/src/index.ts"],
 			"core": ["libs/core/src/index.ts"],
 			"core/server": ["libs/core/src/server.ts"],

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_圖層_1" data-name="圖層 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 40px;
+      }
+    </style>
+  </defs>
+  <line class="cls-1" x1="30.5" y1="31.5" x2="471.17" y2="472.17"/>
+  <line class="cls-1" x1="471.17" y1="31.5" x2="30.5" y2="472.17"/>
+</svg>

@@ -4,7 +4,6 @@ import { changeTheme } from 'core'
 import { useClientTranslation } from '../../i18n/client'
 
 import Link from 'next/link'
-import { checkSignIn } from 'api-services'
 
 export default function Home({
 	params: { locale },
@@ -13,7 +12,6 @@ export default function Home({
 		locale: string
 	}
 }) {
-	console.log(locale)
 	const { t } = useClientTranslation(locale)
 	// const code = checkSignIn()
 	return (

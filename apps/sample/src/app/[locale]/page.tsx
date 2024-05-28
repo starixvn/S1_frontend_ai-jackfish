@@ -13,9 +13,9 @@ export default function Home({
 		locale: string
 	}
 }) {
+	console.log(locale)
 	const { t } = useClientTranslation(locale)
-	const code = checkSignIn()
-	console.log(code)
+	// const code = checkSignIn()
 	return (
 		<div className='grid grid-rows-3 place-items-center bg-primary min-h-full'>
 			<div className='text-center'>

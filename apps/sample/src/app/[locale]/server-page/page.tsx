@@ -15,9 +15,7 @@ export default async function Page({
 			<img
 				alt='test'
 				className='w-24'
-				src={`${
-					process.env.NEXT_PUBLIC_IMAGE_HOST || ''
-				}/img/sidebar/common-icon-casino.svg`}
+				src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/img/sidebar/common-icon-casino.svg`}
 			/>
 		</div>
 	)

@@ -1,4 +1,4 @@
-import { paths } from "@constants";
+import { paths } from "JF-constants";
 
 export interface INavMenuProps {
   displayKey: string;

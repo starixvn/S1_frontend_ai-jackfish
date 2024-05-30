@@ -1,4 +1,4 @@
-// import { LANG_GROUP_COUNTRY, languageGroup } from "@constants";
+// import { LANG_GROUP_COUNTRY, languageGroup } from "JF-constants";
 // import classNames from "classnames";
 import React, { useRef } from "react";
 // import { useBoolean, useOnClickOutside } from "usehooks-ts";

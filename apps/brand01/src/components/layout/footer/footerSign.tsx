@@ -1,4 +1,4 @@
-import { paths } from "@constants";
+import { paths } from "JF-constants";
 import Link from "next/link";
 import React from "react";
 

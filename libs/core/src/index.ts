@@ -3,3 +3,4 @@
 export * from './lib/utils/themeHelper'
 export * from './lib/middleware/config'
 export * from './lib/middleware/appMiddleware'
+export * from './lib/hooks'

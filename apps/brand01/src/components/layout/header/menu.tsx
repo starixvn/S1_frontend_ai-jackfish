@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useClientTranslation } from "@brand01/src/i18n/client";
 import { INavMenuProps, MENU_NAV_DATA } from "@brand01/src/data/layout/header";
 import classNames from "classnames";
-import { useGetPathname } from "core";
+import { useGetPathname } from "JF-core";
 
 const Menu = () => {
   const { locale, routeName } = useGetPathname();

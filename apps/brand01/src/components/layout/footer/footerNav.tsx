@@ -5,7 +5,7 @@ import {
   IFooterNavProps,
 } from "@brand01/src/data/layout/footer";
 import { useClientTranslation } from "@brand01/src/i18n/client";
-import { useGetPathname } from "core";
+import { useGetPathname } from "JF-core";
 import Link from "next/link";
 import React from "react";
 

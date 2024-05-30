@@ -2,9 +2,9 @@
 import { useForm } from "react-hook-form";
 import Form from "@brand01/src/components/form";
 import { useClientTranslation } from "@brand01/src/i18n/client";
-import { useGetPathname } from "core";
 import { useRouter } from "next/navigation";
-import { paths } from "@constants";
+import { useGetPathname } from "JF-core";
+import { paths } from "JF-constants";
 
 export type LoginFormType = {
   userName: string;

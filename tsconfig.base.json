@@ -16,13 +16,13 @@
 		"baseUrl": ".",
 		"paths": {
 			"@brand01/*": ["apps/brand01/*"],
-			"api-services": ["libs/api-services/src/index.ts"],
-			"@constants": ["libs/constants/src/index.ts"],
-			"core": ["libs/core/src/index.ts"],
-			"core/server": ["libs/core/src/server.ts"],
-			"locales": ["locales"],
-			"operations": ["libs/operations/src/index.ts"],
-			"operations/server": ["libs/operations/src/server.ts"]
+			"JF-api": ["libs/api-services/src/index.ts"],
+			"JF-constants": ["libs/constants/src/index.ts"],
+			"JF-core": ["libs/core/src/index.ts"],
+			"JF-core/server": ["libs/core/src/server.ts"],
+			"JF-locales": ["locales"],
+			"JF-operations": ["libs/operations/src/index.ts"],
+			"JF-operations/server": ["libs/operations/src/server.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]

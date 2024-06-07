@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { useClientTranslation } from "@brand01/src/i18n/client";
 import { INavMenuProps, MENU_NAV_DATA } from "@brand01/src/data/layout/header";
-import classNames from "classnames";
+import clsx from "clsx";
 import { useGetPathname } from "JF-core";
 
 const Menu = () => {
@@ -19,7 +19,7 @@ const Menu = () => {
             <div key={displayKey}>
               <Link
                 href={pathname}
-                className={classNames(
+                className={clsx(
                   "whitespace-nowrap px-4 py-2 hover:border-b-2 hover:border-primary-400",
                   {
                     "border-b-2 border-primary-400": active === routeName,

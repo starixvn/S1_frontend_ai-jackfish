@@ -18,7 +18,7 @@ export const MENU_NAV_DATA: INavMenuProps[] = [
     active: "promotion",
   },
   {
-    displayKey: "Contact",
+    displayKey: "Label_General_Contact",
     pathname: "https://line.me/R/ti/p/@743gnvdf?oat_content=url&ts=05031614",
     active: "contact",
   },

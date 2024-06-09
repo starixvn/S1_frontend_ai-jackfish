@@ -5,7 +5,7 @@ import {
   IFooterNavProps,
 } from "@brand01/src/data/layout/footer";
 import { useClientTranslation } from "@brand01/src/i18n/client";
-import { useGetPathname } from "JF-core";
+import { imageUrl, useGetPathname } from "JF-core";
 import Link from "next/link";
 import React from "react";
 
@@ -20,6 +20,7 @@ const FooterNav = () => {
         <div className="flex justify-evenly">
           {FOOTER_NAV_LEFT_DATA.map((value: IFooterNavProps) => {
             const { displayKey, pathname, iconPath } = value;
+
             return (
               <div role="button" key={displayKey}>
                 <Link
@@ -27,8 +28,8 @@ const FooterNav = () => {
                   className="text-sk-grey-400 flex flex-col items-center justify-center pt-3 text-center"
                 >
                   <img
-                    src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/img/footer/${iconPath}`}
-                    alt="Profile"
+                    src={imageUrl(`/img/footer/${iconPath}`)}
+                    alt={`icon-${displayKey}`}
                     className="h-6 w-6"
                   />
                   <div className="text-body-sm font-subtitle dark:text-sk-grey-400 mt-1 whitespace-nowrap text-xs text-neutral-300">
@@ -47,8 +48,8 @@ const FooterNav = () => {
         >
           <div className="mx-auto my-4 h-6 w-6">
             <img
-              src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/img/footer/h5-icon-home.svg`}
-              alt=""
+              src={imageUrl("/img/footer/h5-icon-home.svg")}
+              alt="icon-home"
               className="h-full w-full"
             />
           </div>
@@ -58,6 +59,7 @@ const FooterNav = () => {
         <div className="flex justify-evenly">
           {FOOTER_NAV_RIGHT_DATA.map((value) => {
             const { displayKey, pathname, iconPath } = value;
+
             return (
               <div role="button" key={displayKey}>
                 <Link
@@ -65,8 +67,8 @@ const FooterNav = () => {
                   className="text-sk-grey-400 flex flex-col items-center justify-center pt-3 text-center"
                 >
                   <img
-                    src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/img/footer/${iconPath}`}
-                    alt="Profile"
+                    src={imageUrl(`/img/footer/${iconPath}`)}
+                    alt={`icon-${displayKey}`}
                     className="h-6 w-6"
                   />
                   <div className="text-body-sm font-subtitle dark:text-sk-grey-400 mt-1 whitespace-nowrap text-xs text-neutral-300">

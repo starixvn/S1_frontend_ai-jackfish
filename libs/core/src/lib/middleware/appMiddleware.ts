@@ -19,7 +19,8 @@ export const appMiddleware = ({
 
 	// 執行 middleware logic
 	if (
-		req.nextUrl.pathname.indexOf('icon') > -1 ||
+		// 遇到在public/img裡的圖片就跳過middleware
+		req.nextUrl.pathname.startsWith('/img/') ||
 		req.nextUrl.pathname.indexOf('chrome') > -1
 	) {
 		return NextResponse.next()
@@ -45,7 +46,7 @@ export const appMiddleware = ({
 		!req.nextUrl.pathname.startsWith('/_next')
 	) {
 		return NextResponse.redirect(
-			new URL(`/${lng}${req.nextUrl.pathname}`, req.url)
+			new URL(`/${lng}${req.nextUrl.pathname}`, req.url),
 		)
 	}
 

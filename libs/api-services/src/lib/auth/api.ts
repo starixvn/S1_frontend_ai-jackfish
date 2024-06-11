@@ -3,7 +3,7 @@ import { trim } from 'lodash-es'
 import { AxiosRequestConfig } from 'axios'
 
 import { ISignInArgs } from './type'
-import { baseAxios, fetcher, IAxiosResponse } from '../baseApi'
+import { baseAxios, fetcher } from '../baseApi'
 import { accountStrictApiUrl } from '../accountStrict/api'
 
 const authApiUrl = {
@@ -13,10 +13,11 @@ const authApiUrl = {
 }
 
 export const signIn = async ({ userName, userpwd, ...rest }: ISignInArgs) => {
-	const data = await fetcher<IAxiosResponse<null>, ISignInArgs>(
-		authApiUrl.signIn,
-		{ userName: trim(userName), userpwd: trim(userpwd), ...rest },
-	)
+	const data = await fetcher<null, ISignInArgs>(authApiUrl.signIn, {
+		userName: trim(userName),
+		userpwd: trim(userpwd),
+		...rest,
+	})
 	if (data.errorCode === 0) {
 		await mutate(accountStrictApiUrl.getCustProfile) // Revalidate
 		return true

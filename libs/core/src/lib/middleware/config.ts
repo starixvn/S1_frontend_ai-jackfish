@@ -1,5 +1,3 @@
 export const middlewareConfig = {
-	matcher: [
-		'/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js|site.webmanifest).*)',
-	],
+	matcher: ['/((?!api/|img/|_next/|favicon.ico|sw.js|site.webmanifest).*)'],
 }

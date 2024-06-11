@@ -7,20 +7,80 @@ declare module 'axios' {
 	}
 }
 
+export interface IAxiosResponse<T> {
+	data: T
+	totalPages?: number
+	pageNumber?: number
+	rowCount?: number
+	errorCode: number
+	message: string
+	rawErrorCode?: string
+	rawMessage?: string
+}
+
+export interface IAxiosError extends globalThis.Error {
+	status?: number
+	statusText?: string
+	errorCode?: number
+	data?: unknown
+	rawMessage?: string
+}
+
 export const baseUrl = '/api/'
 
-// use in serverSide
+const preHeaders = {
+	'ai-host': `${process.env['NEXT_PUBLIC_REFERER_HOST']}`,
+	'origin-host':
+		typeof window !== 'undefined' ? window?.location?.origin : undefined,
+}
+
 export const baseAxios = axios.create({
 	withCredentials: true,
-	baseURL: `${process.env['NEXT_PUBLIC_ENV_DB_HOST']}${baseUrl}`,
+	baseURL: baseUrl,
 	headers: {
 		common: {
-			'ai-host': `${process.env['NEXT_PUBLIC_REFERER_HOST']}`, // 預設 referrer
+			'ai-host': `${process.env['NEXT_PUBLIC_REFERER_HOST']}`,
 			'origin-host':
 				typeof window !== 'undefined' ? window?.location?.origin : undefined,
 		},
 	},
 })
+
+export const fetcher = async <Response = any, Data = any, Params = any>(
+	url: string,
+	data?: Data,
+	method: 'GET' | 'POST' = 'POST',
+	params?: Params,
+	headers?: object,
+): Promise<IAxiosResponse<Response>> => {
+	try {
+		const response = await baseAxios({
+			url,
+			method,
+			headers: { ...preHeaders, ...headers },
+			...(data && { data }),
+			...(params && { params }),
+		})
+		const axiosData: IAxiosResponse<Response> = response.data
+
+		// 非 0 就視為錯誤
+		if (axiosData?.errorCode !== 0) {
+			const error: IAxiosError = new Error()
+			error.message = axiosData?.message
+			error.status = response.status
+			error.statusText = response.statusText
+			error.errorCode = axiosData?.errorCode
+			error.data = axiosData?.data
+			error.rawMessage = axiosData?.rawMessage
+
+			throw error
+		}
+
+		return axiosData
+	} catch (axiosError) {
+		throw axiosError as IAxiosError
+	}
+}
 
 export function setServerSideHeaders(context: GetServerSidePropsContext): void {
 	// 從 context 物件中解構出 req
@@ -50,7 +110,7 @@ baseAxios.interceptors.request.use(
 	},
 	error => {
 		return Promise.reject(error)
-	}
+	},
 )
 
 export default baseAxios

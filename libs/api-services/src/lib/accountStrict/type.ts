@@ -1,0 +1,46 @@
+export enum UserInfoActStatusEnum {
+	NonDeposit = 1,
+	HasDeposit,
+}
+
+// *  會員類型
+export enum UserInfoMemberType {
+	Normal = 1,
+	Affiliate,
+	LiveStreaming,
+}
+
+export interface IUserInfoData {
+	custId?: number
+	currencyName?: string // * 由前端透過 i18n 塞進的值
+	userName: string
+	currencyId?: number
+	langId?: string
+	email?: string
+	accountName?: string
+	birth_d?: string
+	birth_m?: string
+	birth_y?: string
+	regTime?: string
+	lastLogin?: string
+	country?: string
+	areaCode?: string
+	phoneNo?: string
+	perCountry?: string
+	userLevel?: number
+	phoneVerified?: false
+	phoneReward?: number
+	emailVerified?: false
+	emailReward?: number
+	enablePromotion?: number
+	isLineBinding?: boolean
+	addressCountry?: null | string
+	addressState?: null | string
+	addressPostCode?: null | string
+	addressCity?: null | string
+	addressLineFirst?: null | string
+	addressLineSecond?: null | string
+	isResetPwd?: boolean
+	actStatus?: UserInfoActStatusEnum
+	memberType?: UserInfoMemberType
+}

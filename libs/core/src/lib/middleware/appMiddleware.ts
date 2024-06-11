@@ -18,11 +18,7 @@ export const appMiddleware = ({
 	acceptLanguage.languages(languages)
 
 	// 執行 middleware logic
-	if (
-		// 遇到在public/img裡的圖片就跳過middleware
-		req.nextUrl.pathname.startsWith('/img/') ||
-		req.nextUrl.pathname.indexOf('chrome') > -1
-	) {
+	if (req.nextUrl.pathname.indexOf('chrome') > -1) {
 		return NextResponse.next()
 	}
 

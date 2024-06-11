@@ -1,6 +1,14 @@
 import { NextRequest } from "next/server";
-import { appMiddleware, middlewareConfig as config } from "JF-core";
+import { appMiddleware } from "JF-core";
 import { fallbackLng, languages, cookieName } from "./i18n/settings";
+
+// NextJS 官方定義的 config 寫法
+// config 寫在外部 import 不會運作，不管用哪種 import 方式都一樣，待解決，先這樣寫
+export const config = {
+  matcher: [
+    "/((?!api/|img/|_next/|favicon.ico|sw.js|site.webmanifest|[^/]+/Cashier/).*)",
+  ],
+};
 
 export function middleware(req: NextRequest) {
   return appMiddleware({
@@ -12,6 +20,3 @@ export function middleware(req: NextRequest) {
     },
   });
 }
-
-// NextJS 官方定義的 config 寫法
-export { config };

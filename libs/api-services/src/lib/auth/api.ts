@@ -1,10 +1,8 @@
-import { mutate } from 'swr'
 import { trim } from 'lodash-es'
 import { AxiosRequestConfig } from 'axios'
 
 import { ISignInArgs } from './type'
 import { baseAxios, fetcher } from '../baseApi'
-import { accountStrictApiUrl } from '../accountStrict/api'
 
 const authApiUrl = {
 	checkSignIn: 'Site/CheckSignIn',
@@ -18,11 +16,7 @@ export const signIn = async ({ userName, userpwd, ...rest }: ISignInArgs) => {
 		userpwd: trim(userpwd),
 		...rest,
 	})
-	if (data.errorCode === 0) {
-		await mutate(accountStrictApiUrl.getCustProfile) // Revalidate
-		return true
-	}
-	return false
+	return data.errorCode === 0
 }
 
 export const signOut = async () => {

@@ -46,7 +46,11 @@ export const baseAxios = axios.create({
 	},
 })
 
-export const fetcher = async <Response = any, Data = any, Params = any>(
+export const fetcher = async <
+	Response = undefined,
+	Data = undefined,
+	Params = undefined,
+>(
 	url: string,
 	data?: Data,
 	method: 'GET' | 'POST' = 'POST',

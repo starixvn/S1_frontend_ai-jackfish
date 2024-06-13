@@ -26,6 +26,8 @@ export interface IAxiosError extends globalThis.Error {
 	rawMessage?: string
 }
 
+const isServer = typeof window === 'undefined'
+
 export const baseUrl = '/api/'
 
 const preHeaders = {
@@ -36,7 +38,9 @@ const preHeaders = {
 
 export const baseAxios = axios.create({
 	withCredentials: true,
-	baseURL: baseUrl,
+	baseURL: isServer
+		? `${process.env['NEXT_PUBLIC_ENV_DB_HOST']}${baseUrl}`
+		: baseUrl,
 	headers: {
 		common: {
 			'ai-host': `${process.env['NEXT_PUBLIC_REFERER_HOST']}`,

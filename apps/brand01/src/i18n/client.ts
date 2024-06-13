@@ -9,10 +9,10 @@ import {
 	UseTranslationResponse,
 	FallbackNs,
 } from 'react-i18next'
-import { useCookies } from 'react-cookie'
+// import { useCookies } from 'react-cookie'
 import resourcesToBackend from 'i18next-resources-to-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
-import { getOptions, languages, cookieName } from './settings'
+import { getOptions, languages } from './settings'
 
 const runsOnServerSide = typeof window === 'undefined'
 
@@ -43,7 +43,7 @@ export function useClientTranslation<
 	ns?: Ns,
 	options?: UseTranslationOptions<KPrefix>
 ): UseTranslationResponse<FallbackNs<Ns>, KPrefix> {
-	const [cookies, setCookie] = useCookies([cookieName])
+	// const [cookies, setCookie] = useCookies([cookieName])
 	const ret = useTranslationOrg(ns, options)
 	const { i18n } = ret
 	if (runsOnServerSide && lng && i18n.resolvedLanguage !== lng) {
@@ -61,12 +61,12 @@ export function useClientTranslation<
 			if (!lng || i18n.resolvedLanguage === lng) return
 			i18n.changeLanguage(lng)
 		}, [lng, i18n])
-		// eslint-disable-next-line react-hooks/rules-of-hooks
-		useEffect(() => {
-			if (cookies.i18next === lng) return
-			setCookie(cookieName, lng, { path: '/' })
-			// eslint-disable-next-line react-hooks/exhaustive-deps
-		}, [lng, cookies.i18next])
+		// // eslint-disable-next-line react-hooks/rules-of-hooks
+		// useEffect(() => {
+		// 	if (cookies.i18next) return
+		// 	setCookie(cookieName, lng, { path: '/' })
+		// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// }, [cookies.i18next])
 	}
 	return ret
 }

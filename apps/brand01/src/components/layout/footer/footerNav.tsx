@@ -2,12 +2,12 @@
 import {
   FOOTER_NAV_LEFT_DATA,
   FOOTER_NAV_RIGHT_DATA,
-  IFooterNavProps,
 } from "@brand01/src/data/layout/footer";
 import { useClientTranslation } from "@brand01/src/i18n/client";
 import { imageUrl, useGetPathname } from "JF-core";
 import Link from "next/link";
 import React from "react";
+import { paths } from "JF-constants";
 
 const FooterNav = () => {
   const { locale } = useGetPathname();
@@ -18,7 +18,7 @@ const FooterNav = () => {
       <div className="box-shadow grid w-full grid-cols-2 justify-between overflow-hidden px-2 pb-4">
         {/* 左邊三個 */}
         <div className="flex justify-evenly">
-          {FOOTER_NAV_LEFT_DATA.map((value: IFooterNavProps) => {
+          {FOOTER_NAV_LEFT_DATA.map((value) => {
             const { displayKey, pathname, iconPath } = value;
 
             return (
@@ -43,7 +43,7 @@ const FooterNav = () => {
 
         {/* 橘色小ＬＯＧＯ */}
         <Link
-          href={"/"}
+          href={paths.home.root}
           className="absolute -top-7 left-1/2 z-30 h-14 w-14 translate-x-[-50%] rounded-full bg-primary-400"
         >
           <div className="mx-auto my-4 h-6 w-6">

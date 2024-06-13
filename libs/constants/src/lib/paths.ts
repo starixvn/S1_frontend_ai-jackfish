@@ -29,4 +29,4 @@ export const paths = {
 	privacy: {
 		root: '/privacy',
 	},
-}
+} as const

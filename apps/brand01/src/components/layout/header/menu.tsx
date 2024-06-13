@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { useClientTranslation } from "@brand01/src/i18n/client";
-import { INavMenuProps, MENU_NAV_DATA } from "@brand01/src/data/layout/header";
+import { MENU_NAV_DATA } from "@brand01/src/data/layout/header";
 import clsx from "clsx";
 import { useGetPathname } from "JF-core";
 
@@ -13,7 +13,7 @@ const Menu = () => {
   return (
     <div>
       <div className="font-headline mx-2 hidden items-center gap-2 text-neutral-100 lg:flex">
-        {MENU_NAV_DATA.map((value: INavMenuProps) => {
+        {MENU_NAV_DATA.map((value) => {
           const { displayKey, pathname, active } = value;
           return (
             <div key={displayKey}>

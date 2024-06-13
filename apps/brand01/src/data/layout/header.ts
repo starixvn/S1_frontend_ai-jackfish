@@ -6,7 +6,7 @@ export interface INavMenuProps {
   active: string;
 }
 
-export const MENU_NAV_DATA: INavMenuProps[] = [
+export const MENU_NAV_DATA = [
   {
     displayKey: "Label_General_Home",
     pathname: paths.home.root,
@@ -22,4 +22,4 @@ export const MENU_NAV_DATA: INavMenuProps[] = [
     pathname: "https://line.me/R/ti/p/@743gnvdf?oat_content=url&ts=05031614",
     active: "contact",
   },
-];
+] as const satisfies Array<INavMenuProps>;

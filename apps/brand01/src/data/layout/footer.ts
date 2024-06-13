@@ -1,12 +1,12 @@
 import { paths } from "JF-constants";
 
-export interface IFooterNavProps {
+interface IFooterNavProps {
   displayKey: string;
   pathname: string;
   iconPath: string;
 }
 
-export const FOOTER_NAV_LEFT_DATA: IFooterNavProps[] = [
+export const FOOTER_NAV_LEFT_DATA = [
   {
     displayKey: "Label_General_Profile",
     pathname: paths.profile.root,
@@ -22,7 +22,7 @@ export const FOOTER_NAV_LEFT_DATA: IFooterNavProps[] = [
     pathname: paths.promotion.root,
     iconPath: "h5-icon-gift.svg",
   },
-];
+] as const satisfies Array<IFooterNavProps>;
 
 export const FOOTER_NAV_RIGHT_DATA = [
   {
@@ -35,4 +35,4 @@ export const FOOTER_NAV_RIGHT_DATA = [
     pathname: "https://line.me/R/ti/p/@743gnvdf?oat_content=url&ts=05031614",
     iconPath: "h5-icon-contact.svg",
   },
-];
+] as const satisfies Array<IFooterNavProps>;

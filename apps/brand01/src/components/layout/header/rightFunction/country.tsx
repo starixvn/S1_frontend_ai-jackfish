@@ -1,6 +1,6 @@
 "use client";
 import { languageGroup } from "JF-constants";
-import { imageUrl } from "JF-core";
+import { imageUrl, objectEntries } from "JF-core";
 import clsx from "clsx";
 import { usePathname, useRouter } from "next/navigation";
 import React, { Fragment, useRef } from "react";
@@ -52,7 +52,7 @@ const Country = () => {
           { hidden: !isActive },
         )}
       >
-        {Object.entries(languageGroup).map(([lang, item]) => {
+        {objectEntries(languageGroup).map(([lang, item]) => {
           return (
             <Fragment key={lang}>
               {/* <div className="" key={lang}>

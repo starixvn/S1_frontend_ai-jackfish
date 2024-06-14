@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google'
 
+import 'swiper/css/bundle'
 import '../../style/global.css'
 import { languages, fallbackLng } from '../../i18n/settings'
 import { useServerTranslation } from '../../i18n'
@@ -34,7 +35,7 @@ export default function RootLayout({
 	return (
 		<html lang={locale}>
 			<body
-				className={`${inter.className} flex flex-col h-screen bg-neutral-500 max-w-[1180px] mx-auto`}
+				className={`${inter.className} mx-auto max-w-[1180px] bg-neutral-500`}
 			>
 				<Layout locale={locale}>{children}</Layout>
 			</body>

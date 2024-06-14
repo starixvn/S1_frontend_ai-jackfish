@@ -1,17 +1,22 @@
-'use client'
+import React from 'react'
+import HomeBanner from '@brand01/src/components/home/homeBanneer'
+import HomeMenu from '@brand01/src/components/home/homeMenu'
+import HomeContent from '@brand01/src/components/home/homeContent'
+interface IHomeProps {
+	locale: string
+}
 
-export default function Home({
-	params: { locale },
-}: {
-	params: {
-		locale: string
-	}
-}) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Home: React.FC<IHomeProps> = ({ locale }) => {
 	return (
-		<div className='grid grid-rows-3 place-items-center min-h-full border-2 w-full h-screen'>
-			<div className='text-center'>
-				<h2 className='py-0 text-primary-400 text-lg'>CHILDREN</h2>
+		<div className='min-h-[80vh] w-full'>
+			<div className='grid grid-cols-12 gap-4 lg:grid-flow-col'>
+				<HomeBanner />
+				<HomeMenu />
+				<HomeContent />
 			</div>
 		</div>
 	)
 }
+
+export default Home

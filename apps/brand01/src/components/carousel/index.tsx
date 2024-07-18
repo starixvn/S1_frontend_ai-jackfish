@@ -9,7 +9,7 @@ const Carousel = ({ children, className, ...rest }: ICarouselProps) => {
 	const defaultConfig: SwiperProps = {
 		modules: [Pagination, Navigation, Autoplay],
 		spaceBetween: 0,
-		centeredSlides: true,
+		centeredSlides: false,
 		loop: true,
 		grabCursor: true,
 		autoplay: {

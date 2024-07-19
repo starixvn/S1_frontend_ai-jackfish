@@ -13,6 +13,14 @@ const SubMenu = () => {
 	const { onMenuOpen } = useMenuOpen()
 	const { subMenuData } = useHomeStore()
 
+	// const [data, setData] = useState<TStaticSubMenuItem[] | null>(null)
+	//
+	// // 測試 loading 用
+	// if (!data) {
+	// 	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	// 	return new Promise(() => {})
+	// }
+
 	return (
 		<>
 			{subMenuData?.map(item => (

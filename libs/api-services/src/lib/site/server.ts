@@ -27,6 +27,8 @@ export const getBanner = async () => {
 		},
 	)
 
+	await wait(2000)
+
 	return data?.data.map(
 		(
 			{ actionMode, bonusCode, urlRouter, tpId, tpGameType, gameId, ...rest },
@@ -71,4 +73,8 @@ export const getBanner = async () => {
 			}
 		},
 	) as TBannerData[]
+}
+
+export const wait = async (ms: number) => {
+	return new Promise(resolve => setTimeout(resolve, ms))
 }

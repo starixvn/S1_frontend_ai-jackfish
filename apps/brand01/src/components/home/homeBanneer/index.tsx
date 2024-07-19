@@ -1,3 +1,4 @@
+import React from 'react'
 import { getAnnouncement, getBanner } from 'JF-api'
 import Banner from './Banner'
 import Announcement from './Announcement'

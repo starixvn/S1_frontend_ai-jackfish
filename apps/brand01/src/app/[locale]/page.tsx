@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import HomeBanner from '@brand01/src/components/home/homeBanneer'
 import HomeMenu from '@brand01/src/components/home/homeMenu'
 import HomeContent from '@brand01/src/components/home/homeContent'
+import BannerSkeleton from '@brand01/src/components/home/skeleton/BannerSkeleton'
+
 interface IHomeProps {
 	locale: string
 }
@@ -11,7 +13,9 @@ const Home: React.FC<IHomeProps> = ({ locale }) => {
 	return (
 		<div className='min-h-[80vh] w-full'>
 			<div className='grid grid-cols-12 gap-4 lg:grid-flow-col'>
-				<HomeBanner />
+				<Suspense fallback={<BannerSkeleton />}>
+					<HomeBanner />
+				</Suspense>
 				<HomeMenu />
 				<HomeContent />
 			</div>

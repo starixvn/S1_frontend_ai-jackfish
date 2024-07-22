@@ -38,7 +38,7 @@ module.exports = {
 					500: 'var(--color-tertiary-500)',
 				},
 				neutral: {
-					DEFAULT: 'var(--color-neutral-100)',
+					DEFAULT: 'var(--color-neutral-300)',
 					100: 'var(--color-neutral-100)',
 					200: 'var(--color-neutral-200)',
 					300: 'var(--color-neutral-300)',
@@ -47,13 +47,13 @@ module.exports = {
 				},
 				warning: {
 					DEFAULT: 'var(--color-warning-300)',
-					200: 'var(--color-warning-100)',
-					300: 'var(--color-warning-200)',
+					200: 'var(--color-warning-200)',
+					300: 'var(--color-warning-300)',
 				},
 				check: {
-					DEFAULT: 'var(--color-check-200)',
-					200: 'var(--color-check-100)',
-					300: 'var(--color-check-200)',
+					DEFAULT: 'var(--color-check-300)',
+					200: 'var(--color-check-200)',
+					300: 'var(--color-check-300)',
 				},
 			},
 		},

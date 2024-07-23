@@ -11,6 +11,7 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 	userInfo: {
 		userName: 'guest',
 	},
+	setLogin: loginStatus => set({ isLogin: loginStatus }),
 	onSignIn: async (userName, password) => {
 		if (typeof window === 'undefined') return
 

@@ -5,15 +5,13 @@ import DepositAndWithdrawalBtn from './DepositAndWithdrawalBtn'
 import DepositLeft from './DepositLeft'
 import Country from '../../headerOld/rightFunction/country'
 import Profile from './Profile'
+import Auth from './Auth'
 
 const Navbar = () => {
 	return (
 		<>
 			{/* 存提款選擇左邊的功能 */}
 			<DepositLeft />
-
-			{/* 登入註冊 */}
-			{/* <Auth /> */}
 
 			{/* 存提款按鈕 */}
 			<DepositAndWithdrawalBtn />
@@ -24,8 +22,12 @@ const Navbar = () => {
 			{/* 個人資訊 */}
 			<Profile />
 
+			{/* ==============之後關掉=============== */}
 			{/* 語系選擇 */}
 			<Country />
+			{/* 登入註冊 */}
+			<Auth />
+			{/* ==================================== */}
 		</>
 	)
 }

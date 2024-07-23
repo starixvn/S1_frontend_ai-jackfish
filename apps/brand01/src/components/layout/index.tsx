@@ -1,17 +1,26 @@
-import React, { ReactNode } from 'react'
+'use client'
+
+import React, { ReactNode, useEffect } from 'react'
+import { FOOTER_PAYMENT_ICONS } from '@brand01/src/data/layout/footer'
+import { imageUrl } from 'JF-core'
+import { useAuthStore } from 'JF-operations'
+import FooterSign from './footer/FooterSign'
 import Footer from './footer'
 import Header from './header'
 import Sidebar from './sidebar'
-import { FOOTER_PAYMENT_ICONS } from '@brand01/src/data/layout/footer'
-import { imageUrl } from 'JF-core'
-import FooterSign from './footer/FooterSign'
-
 interface ILayoutProps {
 	children: ReactNode
 	locale: string
+	isSignedIn: boolean
 }
 
-const Layout = ({ children }: ILayoutProps) => {
+const Layout = ({ children, isSignedIn }: ILayoutProps) => {
+	const { setLogin } = useAuthStore()
+
+	useEffect(() => {
+		setLogin(isSignedIn)
+	}, [isSignedIn, setLogin])
+
 	return (
 		<>
 			<Header />

@@ -1,5 +1,6 @@
 export * from './lib/baseApi'
-export * from './lib/auth/api'
+export * from './lib/auth/client'
+export * from './lib/auth/server'
 export * from './lib/auth/type'
 export * from './lib/accountStrict/api'
 export * from './lib/accountStrict/type'

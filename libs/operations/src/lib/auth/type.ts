@@ -7,6 +7,7 @@ export interface IAuthState {
 }
 
 export interface IAuthAction {
+	setLogin: (loginStatus: boolean) => void
 	onSignIn: (userName: string, password: string) => Promise<void>
 	onSignOut: () => Promise<void>
 	getUserInfo: () => Promise<void>

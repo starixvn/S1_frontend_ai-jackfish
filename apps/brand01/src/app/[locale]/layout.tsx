@@ -1,10 +1,10 @@
 import { Inter } from 'next/font/google'
-
-import 'swiper/css/bundle'
+import { ToastContainer } from 'react-toastify'
 import '../../style/global.css'
+import 'swiper/css/bundle'
+import 'react-toastify/dist/ReactToastify.css'
 import { languages, fallbackLng } from '../../i18n/settings'
 import { useServerTranslation } from '../../i18n'
-import Layout from '../../components/layout'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -35,7 +35,8 @@ export default function RootLayout({
 	return (
 		<html lang={locale}>
 			<body className={`${inter.className} mx-auto bg-neutral-500`}>
-				<Layout locale={locale}>{children}</Layout>
+				{children}
+				<ToastContainer />
 			</body>
 		</html>
 	)

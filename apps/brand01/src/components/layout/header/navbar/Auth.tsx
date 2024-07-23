@@ -1,21 +1,29 @@
 'use client'
-import { useClientTranslation } from '@brand01/src/i18n/client'
+
+import React from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { paths } from 'JF-constants'
 import { useGetPathname } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
-import Link from 'next/link'
-import React from 'react'
+import { useClientTranslation } from '@brand01/src/i18n/client'
 
 const Auth = () => {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
+	const router = useRouter()
 	const { isLogin, onSignOut } = useAuthStore()
+
+	const handleSignOut = () => {
+		onSignOut()
+		router.push(paths.login.root)
+	}
 
 	return (
 		<>
 			{isLogin && (
 				<button
-					onClick={onSignOut}
+					onClick={handleSignOut}
 					className='font-headline text-body-md border-secondary-300 from-secondary-400 to-secondary-300 mx-2.5 w-28 rounded-lg border-2 bg-gradient-to-t px-2 py-1.5 text-center font-semibold shadow-md'
 				>
 					{t('Label_General_LogOut')}

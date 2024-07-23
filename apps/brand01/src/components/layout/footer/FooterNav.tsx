@@ -17,19 +17,23 @@ const FooterNav = () => {
 	return (
 		<div className='mx-auto my-0 flex lg:hidden'>
 			<div
-				className='fixed bottom-0 left-0 right-0 z-30 flex w-full bg-neutral-500 px-2 py-4 shadow-2xl'
+				className='fixed bottom-0 left-0 right-0 z-30 flex h-16 w-full shadow-2xl'
 				style={{ boxShadow: '0px 0px 20px 1px #cccccc' }}
 			>
 				{/* 左邊兩個 */}
-				<div className='mr-4 flex flex-1 items-center justify-evenly'>
+				<div className='z-10 mr-[70px] flex w-full flex-1 items-center rounded-tr-2xl rounded-tl-lg bg-neutral-500'>
 					{FOOTER_NAV_LEFT_DATA.map((value: IFooterNavProps) => {
 						const { displayKey, pathname, iconPath } = value
 
 						return (
-							<div role='button' key={displayKey}>
+							<div
+								role='button'
+								key={displayKey}
+								className='flex w-1/2 items-center justify-center'
+							>
 								<Link
 									href={pathname}
-									className='text-sk-grey-400 flex h-8 w-8 flex-col items-center justify-center text-center'
+									className='text-sk-grey-400 flex h-10 w-10 flex-col items-center justify-center text-center'
 								>
 									<img
 										src={imageUrl(iconPath)}
@@ -46,10 +50,10 @@ const FooterNav = () => {
 				</div>
 
 				{/* HOME ＬＯＧＯ */}
-				<div className='border-primary-300 absolute left-1/2 bottom-5 z-20 h-20 w-20 translate-x-[-50%] rounded-full border-8 border-[#8F43DF] bg-neutral-500 p-2'>
+				<div className='absolute left-1/2 bottom-4 z-20 h-20 w-20 translate-x-[-50%] rounded-full bg-neutral-500 p-2'>
 					<Link
 						href={paths.home.root}
-						className='absolute left-1/2 bottom-6 h-14 w-14 translate-x-[-50%]'
+						className='absolute left-1/2 bottom-8 h-16 w-16 translate-x-[-50%]'
 					>
 						<img
 							src={imageUrl('/desktop/img/home.png')}
@@ -62,17 +66,29 @@ const FooterNav = () => {
 						</div>
 					</Link>
 				</div>
+				{/* 為了透明border的墊背圖 */}
+				<div className='absolute bottom-0 left-1/2 -z-10 h-14 w-full translate-x-[-50%]'>
+					<img
+						className='h-full w-full'
+						src='/img/footer/footer-bg-01.svg'
+						alt=''
+					/>
+				</div>
 
 				{/* 右邊兩個 */}
-				<div className='ml-4 flex flex-1 items-center justify-evenly'>
+				<div className='z-10 ml-5 flex w-full flex-1 items-center rounded-tl-2xl rounded-tr-lg bg-neutral-500'>
 					{FOOTER_NAV_RIGHT_DATA.map(value => {
 						const { displayKey, pathname, iconPath } = value
 
 						return (
-							<div role='button' key={displayKey}>
+							<div
+								role='button'
+								key={displayKey}
+								className='flex w-1/2 items-center justify-center'
+							>
 								<Link
 									href={pathname}
-									className='text-sk-grey-400 flex h-8 w-8 flex-col items-center justify-center text-center'
+									className='text-sk-grey-400 flex h-10 w-10 flex-col items-center justify-center text-center'
 								>
 									<img
 										src={imageUrl(iconPath)}

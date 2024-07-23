@@ -7,7 +7,7 @@ import clsx from 'clsx'
 import { useGetPathname } from 'JF-core'
 
 const Menu = () => {
-	const { locale, routeName } = useGetPathname()
+	const { locale, currentPath } = useGetPathname()
 	const { t } = useClientTranslation(locale)
 
 	return (
@@ -22,7 +22,7 @@ const Menu = () => {
 								className={clsx(
 									'hover:border-primary-400 whitespace-nowrap px-4 py-2 hover:border-b-2',
 									{
-										'border-primary-400 border-b-2': active === routeName,
+										'border-primary-400 border-b-2': active === currentPath,
 									},
 								)}
 							>

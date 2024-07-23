@@ -3,8 +3,8 @@ import MenuData from './Menu'
 
 const HomeMenu = () => {
 	return (
-		<div className='col-span-4 pl-4 md:col-span-3 lg:order-first lg:row-span-3 lg:p-4 xl:col-span-2'>
-			<div className='sticky top-24 grid h-80 w-full place-items-center'>
+		<div className='bg-tertiary-400 col-span-4 h-full pl-4 md:col-span-3 lg:order-first lg:row-span-3 lg:p-4 xl:col-span-2'>
+			<div className='sticky top-24 grid h-full w-full place-items-center'>
 				{HOME_MENU_DATA.map(({ category, displayKey, iconUrl, subMenu }) => (
 					<MenuData
 						key={category}

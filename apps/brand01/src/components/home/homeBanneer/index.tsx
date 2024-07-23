@@ -11,11 +11,11 @@ const HomeBanner = async () => {
 
 	return (
 		<div className='col-span-12'>
+			<div className='min-h-[1.5rem] bg-neutral-100 text-xs text-neutral-100 lg:mr-4'>
+				<Announcement announcementData={announcementData} />
+			</div>
 			<div className='lg:mr-4 lg:pt-4'>
 				<Banner bannerData={bannerData} />
-			</div>
-			<div className='bg-primary-400 min-h-[1.5rem] text-xs text-neutral-100 lg:mr-4'>
-				<Announcement announcementData={announcementData} />
 			</div>
 		</div>
 	)

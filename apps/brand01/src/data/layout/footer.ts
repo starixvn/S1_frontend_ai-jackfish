@@ -1,38 +1,46 @@
-import { paths } from "JF-constants";
+import { paths } from 'JF-constants'
 
-interface IFooterNavProps {
-  displayKey: string;
-  pathname: string;
-  iconPath: string;
+export const FOOTER_PAYMENT_ICONS = [
+	{ key: 'payment-1', icon: '/desktop/img/icon-payment-1.png' },
+	{ key: 'payment-2', icon: '/desktop/img/icon-payment-2.png' },
+	{ key: 'payment-3', icon: '/desktop/img/icon-payment-3.png' },
+	{ key: 'payment-4', icon: '/desktop/img/icon-payment-4.png' },
+	{ key: 'payment-5', icon: '/desktop/img/icon-payment-5.png' },
+	{ key: 'payment-6', icon: '/desktop/img/icon-payment-6.png' },
+	{ key: 'payment-7', icon: '/desktop/img/icon-payment-7.png' },
+	{ key: 'payment-8', icon: '/desktop/img/icon-payment-8.png' },
+	{ key: 'payment-9', icon: '/desktop/img/icon-payment-9.png' },
+	{ key: 'payment-10', icon: '/desktop/img/icon-payment-10.png' },
+]
+
+export interface IFooterNavProps {
+	displayKey: string
+	pathname: string
+	iconPath: string
 }
 
 export const FOOTER_NAV_LEFT_DATA = [
-  {
-    displayKey: "Label_General_Profile",
-    pathname: paths.profile.root,
-    iconPath: "h5-icon-profile.svg",
-  },
-  {
-    displayKey: "Label_General_Deposit",
-    pathname: paths.deposit.root,
-    iconPath: "h5-icon-deposit.svg",
-  },
-  {
-    displayKey: "Label_General_Promotion",
-    pathname: paths.promotion.root,
-    iconPath: "h5-icon-gift.svg",
-  },
-] as const satisfies Array<IFooterNavProps>;
+	{
+		displayKey: 'Label_General_LinePay',
+		pathname: paths.promotion.root,
+		iconPath: '/desktop/img/line.png',
+	},
+	{
+		displayKey: 'Label_General_Promos',
+		pathname: paths.promotion.root,
+		iconPath: '/desktop/img/promos.png',
+	},
+] as const satisfies Array<IFooterNavProps>
 
 export const FOOTER_NAV_RIGHT_DATA = [
-  {
-    displayKey: "Label_General_Affiliate",
-    pathname: paths.affiliate.root,
-    iconPath: "h5-icon-affiliate.svg",
-  },
-  {
-    displayKey: "Label_General_Contact",
-    pathname: "https://line.me/R/ti/p/@743gnvdf?oat_content=url&ts=05031614",
-    iconPath: "h5-icon-contact.svg",
-  },
-] as const satisfies Array<IFooterNavProps>;
+	{
+		displayKey: 'Label_General_JoinNow',
+		pathname: paths.deposit.root,
+		iconPath: '/desktop/img/join.png',
+	},
+	{
+		displayKey: 'Label_General_LogIn',
+		pathname: 'https://line.me/R/ti/p/@743gnvdf?oat_content=url&ts=05031614',
+		iconPath: '/desktop/img/login.png',
+	},
+] as const satisfies Array<IFooterNavProps>

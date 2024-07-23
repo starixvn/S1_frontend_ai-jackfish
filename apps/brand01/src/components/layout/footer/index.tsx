@@ -1,27 +1,32 @@
-import React from "react";
-import FooterNav from "./footerNav";
-import FooterSign from "./footerSign";
-import { imageUrl } from "JF-core";
+import React from 'react'
+import FooterNav from './FooterNav'
+import FooterSign from './FooterSign'
+import { imageUrl } from 'JF-core'
+import { FOOTER_PAYMENT_ICONS } from '@brand01/src/data/layout/footer'
 
 const Footer = () => {
-  return (
-    <footer className="mx-auto p-4 text-center">
-      <div className="pt-8 pb-28 text-neutral-100 lg:pb-10">
-        <div className="flex justify-center">
-          <img
-            src={imageUrl(`/img/jackfish-logo.png`)}
-            alt="Footer Logo"
-            className="mb-3"
-          />
-        </div>
+	return (
+		<footer className='mx-auto p-4 text-center max-lg:absolute max-lg:bottom-14'>
+			<div className='pt-8 text-neutral-100 max-lg:hidden lg:pb-10'>
+				<ul className='mb-6 flex justify-center gap-4'>
+					{FOOTER_PAYMENT_ICONS.map(item => {
+						const { key, icon } = item
+						return (
+							<li key={key}>
+								<img src={imageUrl(icon)} alt={key} />
+							</li>
+						)
+					})}
+				</ul>
 
-        {/* 隱私權政策側標語和連結 */}
-        <FooterSign />
-      </div>
-      {/* 手機版才會有的底部Nav */}
-      <FooterNav />
-    </footer>
-  );
-};
+				{/* 隱私權政策側標語和連結 */}
+				<FooterSign />
+			</div>
 
-export default Footer;
+			{/* 手機版才會有的底部Nav */}
+			<FooterNav />
+		</footer>
+	)
+}
+
+export default Footer

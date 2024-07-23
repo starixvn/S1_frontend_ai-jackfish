@@ -1,6 +1,7 @@
 import { TProductProps } from '../products'
 
 export enum MenuKeyEnum {
+	HotGame = 'HotGame',
 	Sports = 'Sports',
 	ESports = 'ESports',
 	Casino = 'Casino',

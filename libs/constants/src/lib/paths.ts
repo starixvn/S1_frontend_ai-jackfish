@@ -14,6 +14,9 @@ export const paths = {
 	deposit: {
 		root: '/deposit',
 	},
+	withdrawal: {
+		root: '/withdrawal',
+	},
 	slots: {
 		root: '/slots',
 	},
@@ -28,5 +31,8 @@ export const paths = {
 	},
 	privacy: {
 		root: '/privacy',
+	},
+	referral: {
+		root: '/referral',
 	},
 } as const

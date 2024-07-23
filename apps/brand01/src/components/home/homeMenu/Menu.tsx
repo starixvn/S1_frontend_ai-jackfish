@@ -24,8 +24,9 @@ const Menu: React.FC<THomeMenuData> = ({
 	return (
 		<button
 			className={clsx(
-				'xl:min-w-500px hover:bg-primary-300 mb-3 grid w-full items-center justify-items-center gap-3 rounded-xl px-3 py-1 text-sm text-neutral-100 drop-shadow-lg lg:grid-cols-[auto_1fr] lg:justify-items-start lg:px-6 lg:py-3 lg:text-base xl:h-[4.5rem]',
-				category === activeHomeMenu ? 'bg-primary-300' : 'bg-neutral-400',
+				'xl:min-w-500px hover:from-secondary-300 hover:to-primary-300 grid w-full items-center justify-items-center gap-3 px-3 py-1 text-sm text-neutral-100 drop-shadow-lg hover:bg-gradient-to-r lg:grid-cols-[auto_1fr] lg:justify-items-start lg:px-6 lg:py-3 lg:text-base xl:h-[4.5rem]',
+				category === activeHomeMenu &&
+					'from-secondary-300 to-primary-300 bg-gradient-to-r',
 			)}
 			key={category}
 			onClick={() => setActiveHomeMenu(category)}
@@ -35,7 +36,10 @@ const Menu: React.FC<THomeMenuData> = ({
 				alt={t(displayKey)}
 				className='h-6 w-6 object-cover lg:h-10 lg:w-10'
 			/>
-			<span>{t(displayKey)}</span>
+			<div className='text-left'>
+				<p>{t(displayKey)}</p>
+				<p>ยอดนิยม</p>
+			</div>
 		</button>
 	)
 }

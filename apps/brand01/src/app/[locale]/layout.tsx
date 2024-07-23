@@ -34,9 +34,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang={locale}>
-			<body
-				className={`${inter.className} mx-auto max-w-[1180px] bg-neutral-500`}
-			>
+			<body className={`${inter.className} mx-auto bg-neutral-500`}>
 				<Layout locale={locale}>{children}</Layout>
 			</body>
 		</html>

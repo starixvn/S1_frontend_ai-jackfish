@@ -1,6 +1,6 @@
 'use client'
 import { languageGroup } from 'JF-constants'
-import { imageUrl, objectEntries } from 'JF-core'
+import { objectEntries } from 'JF-core'
 import clsx from 'clsx'
 import { usePathname, useRouter } from 'next/navigation'
 import React, { Fragment, useEffect, useRef } from 'react'
@@ -28,12 +28,10 @@ const Country = () => {
 
 		router.refresh()
 	}
-	// eslint-disable-next-line react-hooks/rules-of-hooks
 	useEffect(() => {
 		if (cookies.i18next) return
 		setCookie(cookieName, currentLocale, { path: '/' })
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [cookies.i18next, currentLocale])
+	}, [cookies.i18next, currentLocale, setCookie])
 
 	// 點選畫面任何區域關閉語言下拉選單
 	useOnClickOutside(ref, setFalse)
@@ -41,14 +39,14 @@ const Country = () => {
 	return (
 		<div ref={ref} className='flex flex-col items-center'>
 			<button
-				className='h-8 w-8 cursor-pointer object-cover'
+				className='h-10 w-10 cursor-pointer object-cover'
 				type='button'
 				aria-label='country-flag'
 				onClick={toggle}
 				style={{ whiteSpace: 'nowrap' }}
 			>
 				<img
-					src={imageUrl(`/img/flag/${currentLocale}.png`)}
+					src={`/img/flag/${currentLocale}.png`}
 					alt={`flag_${currentLocale}`}
 					className='h-full w-full rounded-full'
 				/>
@@ -56,7 +54,7 @@ const Country = () => {
 
 			<div
 				className={clsx(
-					'absolute top-16 right-3 z-10 rounded-xl border-2 border-white/20 bg-neutral-500 py-5 px-3 shadow-md shadow-white/20 lg:right-0',
+					'absolute top-24 right-3 z-10 rounded-xl border-2 border-white/20 bg-neutral-500 py-5 px-3 shadow-md shadow-white/20 lg:right-0',
 					{ hidden: !isActive },
 				)}
 			>
@@ -85,7 +83,7 @@ const Country = () => {
 										>
 											<img
 												className='h-6 w-6 object-cover'
-												src={imageUrl(`/img/flag/${value}.png`)}
+												src={`/img/flag/${value}.png`}
 												alt={`flag_${lang}`}
 											/>
 											<span>{displayText}</span>

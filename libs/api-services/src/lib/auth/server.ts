@@ -3,10 +3,7 @@
 import { AxiosRequestConfig } from 'axios'
 import { baseAxios } from '../baseApi'
 import { cookies } from 'next/headers'
-
-const authApiUrl = {
-	checkSignIn: 'Site/CheckSignIn',
-}
+import { authApiUrl } from './url'
 
 export const checkSignIn = async (
 	config?: AxiosRequestConfig,

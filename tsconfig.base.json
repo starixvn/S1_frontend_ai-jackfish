@@ -16,10 +16,11 @@
 		"baseUrl": ".",
 		"paths": {
 			"@brand01/*": ["apps/brand01/*"],
-			"JF-api": ["libs/api-services/src/index.ts"],
+			"JF-api/*": ["libs/api-services/src/lib/*"],
 			"JF-constants": ["libs/constants/src/index.ts"],
 			"JF-core": ["libs/core/src/index.ts"],
 			"JF-core/server": ["libs/core/src/server.ts"],
+			"JF-core/middleware": ["libs/core/src/lib/middleware"],
 			"JF-locales": ["locales"],
 			"JF-operations": ["libs/operations/src/index.ts"],
 			"JF-operations/server": ["libs/operations/src/server.ts"]

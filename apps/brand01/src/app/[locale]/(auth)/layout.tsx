@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import { checkSignIn } from 'JF-api'
+import { checkSignIn } from 'JF-api/auth/server'
 import { paths } from 'JF-constants'
 
 export default async function AuthLayout({

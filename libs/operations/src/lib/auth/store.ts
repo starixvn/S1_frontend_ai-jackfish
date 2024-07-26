@@ -1,6 +1,7 @@
 // authStore.ts
 import { create } from 'zustand'
-import { getUserInfo, signIn, signOut } from 'JF-api'
+import { signIn, signOut } from 'JF-api/auth/client'
+import { getUserInfo } from 'JF-api/accountStrict/api'
 import { IAuthAction, IAuthState } from './type'
 
 const defaultUserInfo = { userName: 'guest' }

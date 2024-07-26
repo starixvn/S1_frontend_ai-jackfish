@@ -1,10 +1,7 @@
 import useSWR from 'swr'
 import { fetcher, IAxiosResponse } from '../baseApi'
 import { type TTpMaintainData } from './type'
-
-const siteApiUrl = {
-	getTpMaintainList: 'Site/GetTpMaintainList',
-}
+import { siteApiUrl } from './url'
 
 export const getTpMaintainList = () => {
 	const { data, isLoading } = useSWR<IAxiosResponse<TTpMaintainData>>(

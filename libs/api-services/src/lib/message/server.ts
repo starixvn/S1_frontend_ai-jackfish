@@ -3,10 +3,7 @@
 import { fetcher } from '../baseApi'
 import { TAnnouncementData, IGetAnnouncementPayload } from './type'
 import { cookies } from 'next/headers'
-
-const messageApiUrl = {
-	announcement: 'Message/GetAnnouncement',
-}
+import { messageApiUrl } from './url'
 
 export const getAnnouncement = async () => {
 	const cookieStore = cookies()

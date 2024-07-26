@@ -15,7 +15,8 @@ import {
 	type TDynamicSubMenuLinkType,
 } from 'JF-constants'
 import { useAuthStore } from 'JF-operations'
-import { IAxiosError, useGoToGame } from 'JF-api'
+import { IAxiosError } from 'JF-api/baseApi'
+import { useGoToGame } from 'JF-api/tp/client'
 
 type LoginCallbackType = () => void
 type MessageCallbackType = (message: string) => void

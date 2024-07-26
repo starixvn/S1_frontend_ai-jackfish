@@ -1,7 +1,7 @@
 'use client'
 
 import { paths, PRODUCTS } from 'JF-constants'
-import { BannerActionEnum, TBannerData } from 'JF-api'
+import { BannerActionEnum, TBannerData } from 'JF-api/site/type'
 import { useMenuOpen } from './useMenuOpen'
 import { useGetPathname } from './useGetPathname'
 import { useRouter } from 'next/navigation'

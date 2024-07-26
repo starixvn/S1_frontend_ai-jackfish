@@ -10,10 +10,7 @@ import {
 import { paths } from 'JF-constants'
 import { isNumber } from 'lodash-es'
 import { cookies } from 'next/headers'
-
-const siteApiUrl = {
-	getBanner: 'Site/GetBannerV3',
-}
+import { siteApiUrl } from './url'
 
 export const getBanner = async () => {
 	const cookieStore = cookies()

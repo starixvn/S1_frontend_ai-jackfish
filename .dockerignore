@@ -1,0 +1,10 @@
+﻿**/.dockerignore
+**/.env.example
+**/.gitignore
+**/.vscode
+**/.idea
+dockerfile
+node_modules
+README
+README.md
+dist

@@ -1,4 +1,4 @@
-import { IUserInfoData } from 'JF-api'
+import { IUserInfoData } from 'JF-api/accountStrict/type'
 
 export interface IAuthState {
 	isLogin: boolean | undefined

@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { appMiddleware, middlewareConfig as config } from "JF-core";
+import { appMiddleware, middlewareConfig as config } from "JF-core/middleware";
 import { fallbackLng, languages, cookieName } from "./i18n/settings";
 
 export function middleware(req: NextRequest) {

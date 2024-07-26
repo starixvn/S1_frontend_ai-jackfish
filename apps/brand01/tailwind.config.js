@@ -56,6 +56,9 @@ module.exports = {
 					300: 'var(--color-check-300)',
 				},
 			},
+			fontFamily: {
+				chakra: ['Chakra Petch'],
+			},
 		},
 	},
 	plugins: [],

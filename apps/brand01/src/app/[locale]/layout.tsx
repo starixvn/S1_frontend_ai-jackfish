@@ -1,12 +1,9 @@
-import { Inter } from 'next/font/google'
 import { ToastContainer } from 'react-toastify'
 import '../../style/global.css'
 import 'swiper/css/bundle'
 import 'react-toastify/dist/ReactToastify.css'
 import { languages, fallbackLng } from '../../i18n/settings'
 import { useServerTranslation } from '../../i18n'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export async function generateMetadata({
 	params: { locale },
@@ -34,7 +31,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang={locale}>
-			<body className={`${inter.className} mx-auto bg-neutral-500`}>
+			<body className='mx-auto bg-neutral-500'>
 				{children}
 				<ToastContainer />
 			</body>

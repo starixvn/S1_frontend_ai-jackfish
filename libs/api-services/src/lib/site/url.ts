@@ -9,4 +9,5 @@ export const siteApiUrl = {
 	reSetPwdByOTP: 'Site/ReSetPwdByOTP',
 	reSetPwdByPhone: 'Site/ReSetPwdByPhone',
 	verifyOTP: 'Site/VerifyOTP',
+	getIpCountry: 'Site/GetIpCountry',
 }

@@ -3,11 +3,11 @@ import HomeBanner from '@brand01/src/components/home/homeBanneer'
 import HomeContent from '@brand01/src/components/home/homeContent'
 
 interface IHomeProps {
-	locale: string
+	params: { locale: string }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Home: React.FC<IHomeProps> = ({ locale }) => {
+const Home: React.FC<IHomeProps> = ({ params: { locale } }) => {
 	return (
 		<div className='min-h-[80vh] w-full'>
 			<div className=''>

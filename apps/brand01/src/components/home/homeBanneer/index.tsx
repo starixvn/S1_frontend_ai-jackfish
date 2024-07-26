@@ -1,4 +1,5 @@
-import { getAnnouncement, getBanner } from 'JF-api'
+import { getAnnouncement } from 'JF-api/message/server'
+import { getBanner } from 'JF-api/site/server'
 import Banner from './Banner'
 import Announcement from './Announcement'
 

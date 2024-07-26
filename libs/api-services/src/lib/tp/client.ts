@@ -1,10 +1,7 @@
 import { fetcher, IAxiosResponse } from '../baseApi'
 import { IGoToGameArgs } from 'JF-constants'
 import { IGoToGamePayload } from './type'
-
-const tpApiUrl = {
-	gotoGame: 'Tp/GotoGame',
-}
+import { tpApiUrl } from './url'
 
 export const useGoToGame = async ({ ...args }: IGoToGameArgs) => {
 	const data = await fetcher<IAxiosResponse<boolean>, IGoToGamePayload>(

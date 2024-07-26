@@ -4,7 +4,7 @@ import React from 'react'
 import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
 import { useBannerClick } from 'JF-core'
-import { TBannerData } from 'JF-api'
+import { TBannerData } from 'JF-api/site/type'
 import { SwiperSlide } from 'swiper/react'
 import Carousel from '../../carousel'
 

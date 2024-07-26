@@ -1,5 +1,5 @@
 import React from 'react'
-import { TAnnouncementData } from 'JF-api'
+import { TAnnouncementData } from 'JF-api/message/type'
 import Marquee from '../../marquee'
 
 interface IAnnouncementProps {

@@ -1,11 +1,7 @@
 import { trim } from 'lodash-es'
 import { ISignInArgs } from './type'
 import { fetcher } from '../baseApi'
-
-const authApiUrl = {
-	signIn: 'Site/SignIn',
-	signOut: 'Account/SignOut',
-}
+import { authApiUrl } from './url'
 
 export const signIn = async ({ userName, userpwd, ...rest }: ISignInArgs) => {
 	const data = await fetcher<null, ISignInArgs>(authApiUrl.signIn, {

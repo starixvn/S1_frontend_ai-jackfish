@@ -61,5 +61,17 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [],
+	plugins: [
+		function ({ addBase }) {
+			addBase({
+				'input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button':
+					{
+						'@apply appearance-none': {},
+					},
+				'input[type="number"]': {
+					'@apply appearance-none': {}, // 適用於 Firefox
+				},
+			})
+		},
+	],
 }

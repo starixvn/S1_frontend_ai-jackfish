@@ -1,13 +1,14 @@
 'use client'
-
-import React, { ReactNode, useEffect } from 'react'
+import React, { ReactNode, Suspense, useEffect } from 'react'
 import { FOOTER_PAYMENT_ICONS } from '@brand01/src/data/layout/footer'
-import { imageUrl } from 'JF-core'
+import { useMediaQuery } from 'usehooks-ts'
+import { cn, imageUrl, useGetPathname } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
 import FooterSign from './footer/FooterSign'
 import Footer from './footer'
 import Header from './header'
 import Sidebar from './sidebar'
+import { paths } from 'JF-constants'
 interface ILayoutProps {
 	children: ReactNode
 	locale: string
@@ -16,21 +17,30 @@ interface ILayoutProps {
 
 const Layout = ({ children, isSignedIn }: ILayoutProps) => {
 	const { setLogin } = useAuthStore()
+	const { currentPath } = useGetPathname()
+	const isMobile = useMediaQuery('(max-width: 1024px)')
 
 	useEffect(() => {
 		setLogin(isSignedIn)
 	}, [isSignedIn, setLogin])
 
 	return (
-		<>
+		<Suspense fallback={<div>Loading...</div>}>
 			<Header />
 			<div className='relative grid grid-cols-12'>
-				<div className='bg-tertiary-400 col-span-2'>
-					<Sidebar />
-				</div>
+				{/* 如果不是首頁而且是手機版時不需要有sidebar */}
+				{!(isMobile && currentPath !== paths.home.root) && (
+					<div
+						className={cn(
+							'bg-tertiary-400 col-span-2 max-lg:max-h-[calc(100%-256px)] max-lg:overflow-auto',
+						)}
+					>
+						<Sidebar />
+					</div>
+				)}
 
 				{/* 內頁＋footer */}
-				<div className='relative col-span-10 max-lg:mb-32'>
+				<div className='relative col-span-10 min-h-screen max-lg:mb-32'>
 					{children}
 					<Footer />
 				</div>
@@ -51,7 +61,7 @@ const Layout = ({ children, isSignedIn }: ILayoutProps) => {
 					<FooterSign />
 				</div>
 			</div>
-		</>
+		</Suspense>
 	)
 }
 

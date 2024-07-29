@@ -3,8 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import { MENU_NAV_DATA } from '@brand01/src/data/layout/header'
-import clsx from 'clsx'
-import { useGetPathname } from 'JF-core'
+import { cn, useGetPathname } from 'JF-core'
 
 const Menu = () => {
 	const { locale, currentPath } = useGetPathname()
@@ -19,7 +18,7 @@ const Menu = () => {
 						<div key={displayKey}>
 							<Link
 								href={pathname}
-								className={clsx(
+								className={cn(
 									'hover:border-primary-400 whitespace-nowrap px-4 py-2 hover:border-b-2',
 									{
 										'border-primary-400 border-b-2': active === currentPath,

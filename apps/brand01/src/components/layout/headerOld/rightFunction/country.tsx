@@ -1,7 +1,6 @@
 'use client'
 import { languageGroup } from 'JF-constants'
-import { objectEntries } from 'JF-core'
-import clsx from 'clsx'
+import { cn, objectEntries } from 'JF-core'
 import { usePathname, useRouter } from 'next/navigation'
 import React, { Fragment, useEffect, useRef } from 'react'
 import { useCookies } from 'react-cookie'
@@ -53,7 +52,7 @@ const Country = () => {
 			</button>
 
 			<div
-				className={clsx(
+				className={cn(
 					'absolute top-24 right-3 z-10 rounded-xl border-2 border-white/20 bg-neutral-500 py-5 px-3 shadow-md shadow-white/20 lg:right-0',
 					{ hidden: !isActive },
 				)}
@@ -65,7 +64,7 @@ const Country = () => {
                 {LANG_GROUP_COUNTRY[lang]}
               </div> */}
 							<div
-								className={clsx(
+								className={cn(
 									'rounded py-2 pr-2 pl-1 hover:bg-white/20 hover:text-neutral-100',
 								)}
 								key={`flag_${lang}`}

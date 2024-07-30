@@ -6,8 +6,8 @@
 
 | 屬性名稱     | 類型                                                              | 預設值     | 說明                                                   |
 | ------------ | ----------------------------------------------------------------- | ---------- | ------------------------------------------------------ |
-| `size`       | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| '3xl' \| '4xl'` | `'sm'`     | 指定按鈕的尺寸。                                       |
-| `variant`    | `'fill' \| 'gradient' \| 'demo' \| 'disabled'`                    | `'fill'`   | 指定按鈕的樣式變體。                                   |
+| `size`       | `\| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| '3xl' \| '4xl'` | `'sm'`     | 指定按鈕的尺寸。                                       |
+| `type`    | `'primary' \| 'secondary' \|'cancel' \| 'ghost' \| 'disabled'`                    |   | 指定按鈕的樣式變體。                                   |
 | `onClick`    | `() => void`                                                      |            | 點擊按鈕時執行的回調函數。                             |
 | `children`   | `React.ReactNode`                                                 |            | 按鈕內顯示的內容。                                     |
 | `isDisabled` | `boolean`                                                         | `false`    | 是否將按鈕設為禁用狀態。                               |
@@ -27,23 +27,29 @@
 - `xl`: `min-h-[50px] min-w-[313px]`
 - `2xl`: `min-h-[50px] min-w-[348px]`
 - `3xl`: `min-h-[50px] min-w-[374px]`
-- `4xl`: `min-h-[40px] min-w-[500px]`
+- `4xl`: `min-h-[60px] min-w-[500px]`
 
-| 尺寸  | 適用場景                           | 裝置           |
-| ----- | ---------------------------------- | -------------- |
-| `sm`  | `deposit`, `withdrawal`            | 適用於所有設備 |
-| `md`  | `Submit`, `Cancel`                 | 適用於 h5      |
-| `lg`  | `Submit`, `Cancel`                 | 適用於 desktop |
-| `xl`  | `Submit`, `Cancel`                 | 適用於所有設備 |
-| `2xl` | `Financial-Transactions 的 submit` | 適用於 h5      |
-| `3xl` | `login`, `join now`, `confirm`     | 適用於所有設備 |
-| `4xl` | `Financial Transaction Submit`     | 適用於 desktop |
+
+| Page                   | Device  | Buttons                          | Size |
+|------------------------|---------|----------------------------------|------|
+| **BankSlip**           | h5      | Submit, Cancel                   | md   |
+|                        | desktop | Submit, Cancel                   | lg   |
+| **Header**             | desktop | Deposit, Withdraw                | sm   |
+| **Slot: Play Now**     | h5      | Play Now, Demo                   | sm   |
+|                        | desktop | Play Now, Demo                   | 3xl  |
+| **Financial-Transactions** | h5  | Submit, Cancel                   | 2xl  |
+|                        | desktop | Submit, Cancel                   | 4xl  |
+| **Login+Register**     | all     | Login, Confirm, Join Now         | 3xl  |
+| **Universal-Popup**    | all     | Join Now                         | md   |
+| **User-Info**          | h5      | Submit                           | 3xl  |
+|                        | desktop | Submit                           | sm   |
 
 顏色變體包括：
 
-- `fill`: 基礎色填充，帶有活動狀態的邊框。
-- `gradient`: 漸變背景色。
-- `demo`: 帶有白色邊框的背景。
+- `primary`: 基礎色填充，帶有活動狀態的邊框。
+- `secondary`: 基礎色填充，帶有活動狀態的邊框。
+- `cancel`: 用於取消。
+- `demo`: 用於demo。
 - `disabled`: 灰色背景，無交互效果。
 
 ## 用法示例
@@ -57,7 +63,7 @@
 使用自定義尺寸和顏色變體：
 
 ```jsx
-<Button size='lg' variant='gradient'>
+<Button size='lg' type='primary'>
 	Large Button
 </Button>
 ```

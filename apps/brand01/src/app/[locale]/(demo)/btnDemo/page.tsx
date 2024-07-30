@@ -1,27 +1,6 @@
 import Button from '@brand01/src/components/button'
 import React from 'react'
 
-//   - 尺寸說明：
-//     - `xs`: 適用於 `play now`, `submit` 按鈕。
-//     - `sm`: 適用於 `deposit`, `withdrawal` 按鈕。
-//     - `md`: 適用於 h5 `Submit`, `Cancel` 按鈕。
-//     - `lg`: 適用於 desktop `Submit`, `Cancel` 按鈕。
-//     - `xl`: 適用於 Universal Popup `Submit`, `Cancel` 按鈕。
-//     - `2xl`: 適用於 `h5 Financial-Transactions 的 submit` 按鈕。
-//     - `3xl`: 適用於 `login`,`join now`, `confirm` 按鈕。
-//     - `4xl`: 適用於 `Financial Transaction (desktop) Submit` 按鈕。
-
-// | 尺寸  | 適用場景                                     |  裝置        |
-// |-------|---------------------------------------------|----------------|
-// | `xs`  | `play now`, `submit`                        | 適用於所有設備  |
-// | `sm`  | `deposit`, `withdrawal`                     | 適用於所有設備  |
-// | `md`  | `Submit`, `Cancel`                          | 適用於 h5      |
-// | `lg`  | `Submit`, `Cancel`                          | 適用於 desktop |
-// | `xl`  | `Submit`, `Cancel`                          | 適用於所有設備 |
-// | `2xl` | `Financial-Transactions 的 submit`          | 適用於 h5      |
-// | `3xl` | `login`, `join now`, `confirm`              | 適用於所有設備  |
-// | `4xl` | `Financial Transaction Submit`              | 適用於 desktop |
-
 const page = () => {
 	const buttonData = [
 		{ size: 'sm', scenarios: 'deposit, withdrawal', device: '所有設備' },
@@ -160,11 +139,15 @@ const page = () => {
 					<Button size='4xl' type='cancel'>
 						Cancel
 					</Button>
+
+					<Button size='4xl' type='cancel'>
+						Cancel
+					</Button>
 				</div>
 			</div>
 
 			<div className='relative ml-2 mt-8 w-[500px] overflow-x-auto shadow-md sm:rounded-lg'>
-				<p className=' text-gray-200'>隨手做表格</p>
+				<p className=' text-gray-200'>隨手做表格 最新的內容以figma為主</p>
 				<table className='w-full text-left text-sm text-gray-500 dark:text-gray-400'>
 					<thead className='bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400'>
 						<tr>

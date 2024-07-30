@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import { cn } from 'JF-core'
 
 type ButtonProps = {
 	size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
@@ -65,7 +66,13 @@ const Button: React.FC<ButtonProps> = ({
 	return (
 		<button
 			type={htmlType}
-			className={`${baseClasses} ${widthClass} ${sizeClass} ${variantClass} ${additionalClasses}`}
+			className={cn(
+				baseClasses,
+				widthClass,
+				sizeClass,
+				variantClass,
+				additionalClasses,
+			)}
 			onClick={onClick}
 			disabled={isDisabled}
 		>

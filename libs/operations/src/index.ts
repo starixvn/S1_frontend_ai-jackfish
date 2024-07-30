@@ -1,5 +1,7 @@
 // Use this file to export React client components (e.g. those with 'use client' directive) or other non-server utilities
 export * from './lib/auth/store'
+export * from './lib/deposit/store'
+export * from './lib/deposit/type'
 export * from './lib/home/store'
 export * from './lib/slots/store'
 export * from './lib/socialChannel/store'

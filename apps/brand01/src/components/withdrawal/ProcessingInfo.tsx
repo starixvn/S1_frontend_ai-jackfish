@@ -10,7 +10,11 @@ import {
 	scrollToTop,
 	useGetPathname,
 } from 'JF-core'
-import { useAuthStore, useWithdrawalStore } from 'JF-operations'
+import {
+	useAuthStore,
+	useSocialChannelStore,
+	useWithdrawalStore,
+} from 'JF-operations'
 import { Trans } from 'react-i18next'
 import { toast } from 'react-toastify'
 
@@ -27,12 +31,11 @@ export const ProcessingInfo = () => {
 		kycStatus,
 		isLoading,
 	} = useWithdrawalStore()
+	const { lineChannel } = useSocialChannelStore()
 
 	const { transId, amount } = runningWithdrawalRequest ?? {}
 	// kyc processing 跟 withdrawal processing 共用同一個 component , 用 status 判斷
 	const isKycProcessing = kycStatus === KycStatusEnum.KycProcessing
-
-	// TODO, 補 Line Link ,
 
 	const onCancelClick = async () => {
 		if (!transId) return
@@ -88,12 +91,11 @@ export const ProcessingInfo = () => {
 					<p>{t('Label_Withdrawal_Processing_Hint')}</p>
 				)}
 
-				{/*todo : 補 Line link */}
 				<p>
 					<Trans
 						i18nKey='Label_Withdrawal_Processing_ContactHint'
 						components={{
-							Link: <a className='text-check-200' href='#' />,
+							Link: <a className='text-check-200' href={lineChannel?.link} />,
 						}}
 					/>
 				</p>

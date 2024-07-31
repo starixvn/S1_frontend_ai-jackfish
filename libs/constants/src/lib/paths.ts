@@ -20,6 +20,24 @@ export const paths = {
 	slots: {
 		root: '/slots',
 	},
+	eSport: {
+		root: '/eSport',
+	},
+	sports: {
+		root: '/sports',
+	},
+	lottery: {
+		root: '/lottery',
+	},
+	liveCasino: {
+		root: '/liveCasino',
+	},
+	game: {
+		root: '/game',
+	},
+	fishing: {
+		root: '/fishing',
+	},
 	profile: {
 		root: '/profile',
 	},

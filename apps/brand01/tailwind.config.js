@@ -59,6 +59,9 @@ module.exports = {
 			fontFamily: {
 				chakra: ['Chakra Petch'],
 			},
+			backgroundImage: {
+				'layout-bg': `url("${process.env.NEXT_PUBLIC_IMAGE_HOST}/desktop/img/bg.jpg")`,
+			},
 		},
 	},
 	plugins: [

@@ -1,7 +1,18 @@
 // pages/ModalExample.tsx
 'use client'
 
+import { cn } from 'JF-core'
 import React, { useState } from 'react'
+
+interface ModalProps {
+	children: React.ReactNode
+	size: 'sm' | 'md'
+	className?: string
+}
+
+// const isRounded = false; // Replace 'false' with the appropriate value based on your logic
+// const roundedClass = isRounded ? 'w-full' : ''; // 根據 fullWidth 決定是否全寬
+// 'relative mx-auto w-full lg:max-w-md lg:rounded-md lg:h-[300px]  h-full scale-100 transform  bg-tertiary-500 shadow-xl transition-transform duration-300 ease-in-out'
 
 const Modal: React.FC = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false)
@@ -9,17 +20,32 @@ const Modal: React.FC = () => {
 	const openModal = () => setIsModalOpen(true)
 	const closeModal = () => setIsModalOpen(false)
 
-	const Modal = () => {
+	const Modal: React.FC<ModalProps> = ({
+		children,
+		size = 'md',
+		className = '',
+	}) => {
+		const baseClasses =
+			'lg:rounded-xl relative mx-auto scale-100 transform  bg-tertiary-500 shadow-xl transition-transform duration-300 ease-in-out'
+
+		const sizeClasses = {
+			sm: 'w-full h-full  lg:w-[600px] lg:h-[800px]',
+			md: 'w-full h-full lg:w-[800px] lg:h-[750px]',
+		}
+
+		const sizeClass = sizeClasses[size]
+		const additionalClasses = className
+
 		return (
 			<>
 				<div
-					className='bg-primary-200 fixed inset-0 z-50 flex items-center justify-center bg-opacity-20 transition-opacity duration-300 ease-in-out'
+					className='bg-primary-200 fixed  inset-0 z-50 flex items-center justify-center bg-opacity-20 transition-opacity duration-300 ease-in-out'
 					aria-labelledby='modal-title'
 					role='dialog'
 					aria-modal='true'
 				>
-					<div className='relative top-40 mx-auto max-w-md scale-100 transform rounded-md bg-black shadow-xl transition-transform duration-300 ease-in-out'>
-						<div className='flex justify-end p-2'>
+					<div className={cn(baseClasses, sizeClass, additionalClasses)}>
+						<div className='flex justify-end p-3 bg-teal-200 lg:rounded-tl-xl lg:rounded-tr-xl'>
 							<button
 								onClick={closeModal}
 								type='button'
@@ -27,9 +53,11 @@ const Modal: React.FC = () => {
 							>
 								<svg
 									className='h-5 w-5'
-									fill='currentColor'
+									fill='#afa9d6'
+									stroke='#afa9d6'
 									viewBox='0 0 20 20'
 									xmlns='http://www.w3.org/2000/svg'
+									strokeWidth='2'
 								>
 									<path
 										fillRule='evenodd'
@@ -39,53 +67,47 @@ const Modal: React.FC = () => {
 								</svg>
 							</button>
 						</div>
-
-						<div className='p-6 pt-0 text-center'>
-							<svg
-								className='mx-auto h-20 w-20 text-red-600'
-								fill='none'
-								stroke='currentColor'
-								viewBox='0 0 24 24'
-								xmlns='http://www.w3.org/2000/svg'
-							>
-								<path
-									strokeLinecap='round'
-									strokeLinejoin='round'
-									strokeWidth='2'
-									d='M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-								></path>
-							</svg>
-							<h3 className='mt-5 mb-6 text-xl font-normal text-gray-500'>
-								Are you sure you want to delete this user?
-							</h3>
-							<button
-								onClick={closeModal}
-								className='mr-2 inline-flex items-center rounded-lg bg-red-600 px-3 py-2.5 text-center text-base font-medium text-white hover:bg-red-800 focus:ring-4 focus:ring-red-300'
-							>
-								Yes Im sure
-							</button>
-							<button
-								onClick={closeModal}
-								className='inline-flex items-center rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-center text-base font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200'
-							>
-								No, cancel
-							</button>
+						{/* contents */}
+						<div className='px-5 py-3 bg-teal-100 h-full lg:rounded-bl-xl lg:rounded-br-xl'>
+							{children}
 						</div>
 					</div>
 				</div>
+				ss
 			</>
 		)
 	}
 
 	return (
-		<div className='h-full w-full items-center justify-center align-middle text-white'>
+		<div className='h-full w-full items-center justify-center align-middle text-white '>
 			<button
 				className='rounded-md bg-rose-500 px-4 py-2 text-white transition hover:bg-rose-700'
 				onClick={openModal}
 			>
 				Click to Open modal
 			</button>
-			{isModalOpen && <Modal />}
+			{isModalOpen && (
+				<Modal size='sm'>
+					<div className='p-3 pt-2 bg-teal-500'>
+						<h3 className='mb-6 text-xl font-normal text-gray-500'>
+							Are you sure you want to delete this user?
+						</h3>
+
+						<button
+							onClick={closeModal}
+							className='mr-2 inline-flex items-center rounded-lg bg-red-600 px-3 py-2.5 text-center text-base font-medium text-white hover:bg-red-800 focus:ring-4 focus:ring-red-300'
+						>
+							Yes Im sure
+						</button>
+						<button
+							onClick={closeModal}
+							className='inline-flex items-center rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-center text-base font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200'
+						>
+							No, cancel
+						</button>
+					</div>
+				</Modal>
+			)}
 		</div>
 	)
 }

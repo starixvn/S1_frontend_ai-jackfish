@@ -29,7 +29,10 @@ const Layout = ({ children, isSignedIn }: ILayoutProps) => {
 	return (
 		<Suspense fallback={<div>Loading...</div>}>
 			<Header />
-			<div className='relative grid grid-cols-12'>
+			<div
+				className='relative grid grid-cols-12 text-sm lg:text-base
+'
+			>
 				{/* 如果不是首頁or lobby頁面而且是手機版時不需要有sidebar */}
 				{hasSidebar && (
 					<div

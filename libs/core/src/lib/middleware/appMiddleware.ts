@@ -1,5 +1,5 @@
-import { NextResponse, NextRequest } from 'next/server'
 import acceptLanguage from 'accept-language'
+import { NextRequest, NextResponse } from 'next/server'
 
 export const appMiddleware = ({
 	req,
@@ -35,14 +35,17 @@ export const appMiddleware = ({
 	if (!lng) {
 		lng = fallbackLng
 	}
-
 	// 檢查當前 path 攜帶的 locale 是否支援，若不支援則 redirect
 	if (
 		!languages.some(loc => req.nextUrl.pathname.startsWith(`/${loc}`)) &&
 		!req.nextUrl.pathname.startsWith('/_next')
 	) {
+		const query = req.nextUrl.searchParams.toString()
 		return NextResponse.redirect(
-			new URL(`/${lng}${req.nextUrl.pathname}`, req.url),
+			new URL(
+				`/${lng}${req.nextUrl.pathname}${query ? `?${query}` : ''}`,
+				req.url,
+			),
 		)
 	}
 

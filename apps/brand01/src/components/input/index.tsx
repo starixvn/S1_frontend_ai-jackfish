@@ -1,8 +1,8 @@
 'use client'
 
+import { cn } from 'JF-core'
 import { useState, type InputHTMLAttributes } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
-import { cn } from 'JF-core'
 
 interface IInputProps
 	extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'> {
@@ -30,7 +30,7 @@ interface IInputProps
  * @param {UseFormRegisterReturn} register - 必填，傳入 react-hook-form 的 register 綁定元件
  * @param {boolean} dirty - 必填，樣式需透過判斷是否觸發過元件，才可做進一步渲染，傳入 dirtyFields[pathName] 做判斷
  * @param {boolean} [password] - 傳遞 password props 控制是否為 pwd input
- * @param {string} [className] - 傳入 classname 加在最上層div，指定寬度可以從外部加入 w-xx 的 classname
+ * @param {string} [className] - 傳入 classname 加在最上層div以及input，可以手動加入寬度圓角等設定
  * @param {string} [icon] - icon's filename
  * @param {string} [title] - Input 開頭，Icon 右側
  * @param {string} [type] - HTMLInputTypeAttribute
@@ -172,11 +172,12 @@ const Input = ({
 					)}
 					<input
 						className={cn(
-							'w-full appearance-none rounded-[5px] border-2 border-solid border-transparent py-3 px-12 text-center text-sm',
+							'text-tertiary-400 w-full appearance-none rounded-[5px] border-2 border-solid border-transparent py-3 px-12 text-center text-sm',
 							'placeholder:text-neutral-300',
 							'focus:border-secondary-300 focus:outline-none',
 							'disabled:bg-neutral-200',
 							{ 'bg-warning-200 border-warning-300': error },
+							className,
 						)}
 						type={password ? passwordType() : type}
 						{...register}

@@ -7,10 +7,8 @@ interface ModalProps {
 	size: 'sm' | 'md'
 	className?: string
 	isOpen: boolean
-	onClick?: () => void
 	onClose: () => void
 	blockScrollOnMount?: boolean
-	needGoBack?: boolean
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -19,9 +17,7 @@ const Modal: React.FC<ModalProps> = ({
 	children,
 	className,
 	onClose,
-	onClick,
 	blockScrollOnMount = true,
-	needGoBack = false,
 }) => {
 	const baseClasses =
 		'lg:rounded-xl relative mx-auto scale-100 transform bg-tertiary-500 shadow-xl transition-transform duration-300 ease-in-out'
@@ -58,12 +54,16 @@ const Modal: React.FC<ModalProps> = ({
 					onClick={e => e.stopPropagation()} // 防止點擊內容區域觸發關閉
 				>
 					<div
-						className={`flex ${needGoBack ? 'justify-between' : 'justify-end'} bg-teal-200 p-3 lg:rounded-tl-xl lg:rounded-tr-xl`}
+						className={`bg-tertiary-500 flex justify-end p-3 lg:rounded-tl-xl lg:rounded-tr-xl`}
 					>
-						{needGoBack && (
+						{/* 這邊先保留 */}
+
+						{/* <div
+						className={`flex ${needGoBack ? 'justify-between' : 'justify-end'} bg-teal-200 p-3 lg:rounded-tl-xl lg:rounded-tr-xl`}
+					> */}
+						{/* {needGoBack && (
 							<button
 								type='button'
-								onClick={onClick} // 只有點擊這個按鈕時才觸發 onClose
 								className='inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900'
 							>
 								<svg
@@ -81,7 +81,7 @@ const Modal: React.FC<ModalProps> = ({
 									></path>
 								</svg>
 							</button>
-						)}
+						)} */}
 						<button
 							type='button'
 							onClick={onClose} // 只有點擊這個按鈕時才觸發 onClose
@@ -103,7 +103,7 @@ const Modal: React.FC<ModalProps> = ({
 							</svg>
 						</button>
 					</div>
-					<div className='h-full bg-teal-100 px-5 py-3 lg:rounded-bl-xl lg:rounded-br-xl'>
+					<div className='h-fullbg-tertiary-500 px-5 py-3 lg:rounded-bl-xl lg:rounded-br-xl'>
 						{children}
 					</div>
 				</div>

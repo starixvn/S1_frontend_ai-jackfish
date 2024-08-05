@@ -10,7 +10,7 @@ const { SHEET_URL_ID } = require('./sheet')
 
 // * url：https://docs.google.com/spreadsheets/d/1yQNCCdV2UGOGE8-GhM0eOMEoTG23F0JpcR5pf5tTq5E
 
-// * 可吃參數 ex: node sheetSort.js nova88 common
+// * 可吃參數 ex: node sheetSort.js tuk555 common
 const args = process.argv.slice(2)
 
 const getContents = data => {
@@ -50,7 +50,7 @@ extractSheets(
 		spreadsheetKey: SHEET_URL_ID,
 		// eslint-disable-next-line global-require
 		credentials: auth,
-		sheetsToExtract: args.length !== 0 ? args : ['nova88', 'common'],
+		sheetsToExtract: args.length !== 0 ? args : ['tuk555', 'common'],
 	},
 	(err, data) => {
 		if (err) throw err

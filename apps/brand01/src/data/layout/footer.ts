@@ -23,24 +23,24 @@ export const FOOTER_NAV_LEFT_DATA = [
 	{
 		displayKey: 'Label_General_LinePay',
 		pathname: paths.promotion.root,
-		iconPath: '/desktop/img/line.png',
+		iconPath: '/img/mobile-footer/icon-line.png',
 	},
 	{
 		displayKey: 'Label_General_Promos',
 		pathname: paths.promotion.root,
-		iconPath: '/desktop/img/promos.png',
+		iconPath: '/img/mobile-footer/icon-promos.png',
 	},
 ] as const satisfies Array<IFooterNavProps>
 
 export const FOOTER_NAV_RIGHT_DATA = [
 	{
-		displayKey: 'Label_General_JoinNow',
+		displayKey: 'Label_General_Deposit',
 		pathname: paths.deposit.root,
-		iconPath: '/desktop/img/join.png',
+		iconPath: '/img/mobile-footer/icon-deposit.png',
 	},
 	{
-		displayKey: 'Label_General_LogIn',
-		pathname: 'https://line.me/R/ti/p/@743gnvdf?oat_content=url&ts=05031614',
-		iconPath: '/desktop/img/login.png',
+		displayKey: 'Label_General_Withdrawal',
+		pathname: paths.withdrawal.root,
+		iconPath: '/img/mobile-footer/icon-withdraw.png',
 	},
 ] as const satisfies Array<IFooterNavProps>

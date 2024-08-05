@@ -60,7 +60,7 @@ module.exports = {
 				chakra: ['Chakra Petch'],
 			},
 			backgroundImage: {
-				'layout-bg': `url("${process.env.NEXT_PUBLIC_IMAGE_HOST}/desktop/img/bg.jpg")`,
+				'layout-bg': `url("${process.env.NEXT_PUBLIC_IMAGE_HOST}/img/bg.jpg")`,
 			},
 		},
 	},

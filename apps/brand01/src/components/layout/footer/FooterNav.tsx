@@ -5,10 +5,9 @@ import {
 	IFooterNavProps,
 } from '@brand01/src/data/layout/footer'
 import { useClientTranslation } from '@brand01/src/i18n/client'
+import { paths } from 'JF-constants'
 import { imageUrl, useGetPathname } from 'JF-core'
 import Link from 'next/link'
-import React from 'react'
-import { paths } from 'JF-constants'
 
 const FooterNav = () => {
 	const { locale } = useGetPathname()
@@ -16,10 +15,7 @@ const FooterNav = () => {
 
 	return (
 		<div className='mx-auto my-0 flex lg:hidden'>
-			<div
-				className='fixed bottom-0 left-0 right-0 z-30 flex h-16 w-full shadow-2xl'
-				style={{ boxShadow: '0px 0px 20px 1px #cccccc' }}
-			>
+			<div className='fixed bottom-0 left-0 right-0 z-30 flex h-16 w-full shadow-[0_0_20px_1px_rgb(var(--color-neutral-100)/0.5)]'>
 				{/* 左邊兩個 */}
 				<div className='z-10 mr-[70px] flex w-full flex-1 items-center rounded-tr-2xl rounded-tl-lg bg-neutral-500'>
 					{FOOTER_NAV_LEFT_DATA.map((value: IFooterNavProps) => {
@@ -50,13 +46,13 @@ const FooterNav = () => {
 				</div>
 
 				{/* HOME ＬＯＧＯ */}
-				<div className='absolute left-1/2 bottom-4 z-20 h-20 w-20 translate-x-[-50%] rounded-full bg-neutral-500 p-2'>
+				<div className='absolute left-1/2 bottom-4 z-20 h-20 w-20 translate-x-[-50%] rounded-full bg-neutral-500 p-2 shadow-[0_0_20px_1px_rgb(var(--color-neutral-100)/0.5)]'>
 					<Link
 						href={paths.home.root}
 						className='absolute left-1/2 bottom-8 h-16 w-16 translate-x-[-50%]'
 					>
 						<img
-							src={imageUrl('/desktop/img/home.png')}
+							src={imageUrl('/img/mobile-footer/icon-home.png')}
 							alt='icon-home'
 							className='h-full w-full'
 						/>
@@ -67,7 +63,7 @@ const FooterNav = () => {
 					</Link>
 				</div>
 				{/* 為了透明border的墊背圖 */}
-				<div className='absolute bottom-0 left-1/2 -z-10 h-14 w-full translate-x-[-50%]'>
+				<div className='absolute bottom-0 left-1/2 -z-10 h-14 min-w-[470px] translate-x-[-50%]'>
 					<img
 						className='h-full w-full'
 						src='/img/footer/footer-bg-01.svg'

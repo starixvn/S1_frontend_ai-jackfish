@@ -1,31 +1,33 @@
-export const fallbackLng = "en";
+export const fallbackLng = 'en'
 export const languages = [
-  fallbackLng,
-  "th",
-  "bd",
-  "ch",
-  "cs",
-  "gb",
-  "id",
-  "in",
-  "kh",
-  "vn",
-];
-export const defaultNS = "common";
-export const cookieName = "i18next";
+	fallbackLng,
+	'th',
+	'bd',
+	'ch',
+	'cs',
+	'gb',
+	'id',
+	'in',
+	'kh',
+	'vn',
+]
+export const cookieName = 'i18next'
+
+const defaultNS = process.env.NEXT_PUBLIC_SITE_NAME
+const commonNS = 'common'
 
 export function getOptions(
-  lng = fallbackLng,
-  ns: string | string[] = defaultNS,
+	lng = fallbackLng,
+	ns: string | string[] = defaultNS ? [defaultNS, commonNS] : commonNS,
 ) {
-  return {
-    // debug: true,
-    supportedLngs: languages,
-    // preload: languages,
-    fallbackLng,
-    lng,
-    fallbackNS: defaultNS,
-    defaultNS,
-    ns,
-  };
+	return {
+		// debug: true,
+		supportedLngs: languages,
+		// preload: languages,
+		lng,
+		ns,
+		defaultNS,
+		fallbackNS: commonNS,
+		fallbackLng,
+	}
 }

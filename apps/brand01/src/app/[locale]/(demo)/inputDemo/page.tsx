@@ -43,7 +43,7 @@ const Page = () => {
 						},
 					})}
 					password
-					placeholder={t('Label_General_Passsword') || ''}
+					placeholder={t('Label_General_Password') || ''}
 					icon='icon-lock'
 					error={!!errors['password']}
 					errorMessage={errors['password']?.message as string}

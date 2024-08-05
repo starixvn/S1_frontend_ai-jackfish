@@ -1,12 +1,11 @@
 'use client'
 
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { useGetPathname } from 'JF-core'
-import { useClientTranslation } from '@brand01/src/i18n/client'
 import Input from '@brand01/src/components/input'
+import { useClientTranslation } from '@brand01/src/i18n/client'
+import { useGetPathname } from 'JF-core'
+import { useForm } from 'react-hook-form'
 
-const page = () => {
+const Page = () => {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
 	const {
@@ -74,4 +73,4 @@ const page = () => {
 	)
 }
 
-export default page
+export default Page

@@ -1,11 +1,7 @@
 'use client'
 import Button from '@brand01/src/components/button'
 
-const page = () => {
-	const handleClick = () => {
-		console.log('click')
-	}
-
+const Page = () => {
 	return (
 		<>
 			<div className='bg-red mx-2 mt-2 flex flex-col items-center gap-4'>
@@ -15,13 +11,7 @@ const page = () => {
 						來控制 h5 和 desktop 的大小，高度也可調 預設是sm(40px)
 					</p>
 					<div>
-						<Button
-							onClick={handleClick}
-							size='sm'
-							desktopSize='sm'
-							h='md'
-							type='primary'
-						>
+						<Button size='sm' desktopSize='sm' h='md' type='primary'>
 							sm/sm
 						</Button>
 					</div>
@@ -59,4 +49,4 @@ const page = () => {
 	)
 }
 
-export default page
+export default Page

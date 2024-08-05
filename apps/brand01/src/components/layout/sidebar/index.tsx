@@ -1,8 +1,8 @@
 'use client'
 import { HOME_MENU_DATA } from '@brand01/src/data/home/menu'
-import React from 'react'
-import SidebarData from './SidebarData'
+import { imageUrl } from 'JF-core'
 import Link from 'next/link'
+import SidebarData from './SidebarData'
 
 const Sidebar = () => {
 	return (
@@ -17,7 +17,11 @@ const Sidebar = () => {
 				/>
 			))}
 			<Link href='' className='mx-auto mt-8 block lg:w-28'>
-				<img className='w-full' src='/img/icon/icon-line-sidebar.png' alt='' />
+				<img
+					className='w-full'
+					src={imageUrl('/img/menu/sever-line.png')}
+					alt=''
+				/>
 			</Link>
 		</>
 	)

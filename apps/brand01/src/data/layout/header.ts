@@ -31,13 +31,13 @@ export const Nav_Links = [
 	{
 		displayKey: 'Label_General_Referral',
 		pathname: paths.referral.root, // TODO: 待確認要導到哪頁
-		icon: `${imageUrl('/desktop/img/referral.png')}`,
+		icon: `${imageUrl('/img/header/referral.png')}`,
 		active: 'referral',
 	},
 	{
 		displayKey: 'Label_General_Promotion',
 		pathname: paths.promotion.root,
-		icon: `${imageUrl('/desktop/img/promos.png')}`,
+		icon: `${imageUrl('/img/mobile-footer/icon-promos.png')}`,
 		active: 'promotion',
 	},
 ] as const satisfies Array<INavMenuProps>

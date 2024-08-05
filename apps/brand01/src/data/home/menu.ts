@@ -1,10 +1,10 @@
 import {
-	paths,
-	PRODUCTS,
 	MenuActionEnum,
+	MenuKeyEnum,
+	PRODUCTS,
+	paths,
 	type TStaticSubMenuItem,
 } from 'JF-constants'
-import { MenuKeyEnum } from 'JF-constants'
 
 export type THomeMenuData = {
 	category: MenuKeyEnum
@@ -18,7 +18,7 @@ export const HOME_MENU_DATA: THomeMenuData[] = [
 	{
 		category: MenuKeyEnum.HotGame,
 		displayKey: 'Label_General_HotGames',
-		iconUrl: '/desktop/img/hotgame.png',
+		iconUrl: '/img/menu/hotgame.png',
 		// lobbyCategoryId: LobbyCategoryEnum.Sports,
 		subMenu: [
 			{
@@ -35,7 +35,7 @@ export const HOME_MENU_DATA: THomeMenuData[] = [
 	{
 		category: MenuKeyEnum.Slots,
 		displayKey: 'Label_General_Slots',
-		iconUrl: '/desktop/img/slot.png',
+		iconUrl: '/img/menu/slot.png',
 		// lobbyCategoryId: LobbyCategoryEnum.SLOTS,
 		subMenu: [
 			{
@@ -318,7 +318,7 @@ export const HOME_MENU_DATA: THomeMenuData[] = [
 	{
 		category: MenuKeyEnum.Sports,
 		displayKey: 'Label_General_Sports',
-		iconUrl: '/desktop/img/sport.png',
+		iconUrl: '/img/menu/sport.png',
 		// lobbyCategoryId: LobbyCategoryEnum.Sports,
 		subMenu: [
 			{
@@ -380,7 +380,7 @@ export const HOME_MENU_DATA: THomeMenuData[] = [
 	{
 		category: MenuKeyEnum.ESports,
 		displayKey: 'Label_General_ESports',
-		iconUrl: '/desktop/img/esport.png',
+		iconUrl: '/img/menu/esport.png',
 		// lobbyCategoryId: LobbyCategoryEnum.ESports,
 		subMenu: [
 			{
@@ -406,7 +406,7 @@ export const HOME_MENU_DATA: THomeMenuData[] = [
 	{
 		category: MenuKeyEnum.Casino,
 		displayKey: 'Label_General_LiveCasino',
-		iconUrl: '/desktop/img/casino.png',
+		iconUrl: '/img/menu/casino.png',
 		// lobbyCategoryId: LobbyCategoryEnum.Casino,
 		subMenu: [
 			{
@@ -498,7 +498,7 @@ export const HOME_MENU_DATA: THomeMenuData[] = [
 	{
 		category: MenuKeyEnum.Games,
 		displayKey: 'Label_General_Games',
-		iconUrl: '/desktop/img/games.png',
+		iconUrl: '/img/menu/games.png',
 		// lobbyCategoryId: LobbyCategoryEnum.Game,
 		subMenu: [
 			{
@@ -584,7 +584,7 @@ export const HOME_MENU_DATA: THomeMenuData[] = [
 	{
 		category: MenuKeyEnum.Fishing,
 		displayKey: 'Label_General_Fishing',
-		iconUrl: '/desktop/img/fishing.png',
+		iconUrl: '/img/menu/fishing.png',
 		// lobbyCategoryId: LobbyCategoryEnum.Fishing,
 		subMenu: [
 			{
@@ -646,7 +646,7 @@ export const HOME_MENU_DATA: THomeMenuData[] = [
 	{
 		category: MenuKeyEnum.Lottery,
 		displayKey: 'Label_General_Lottery',
-		iconUrl: '/desktop/img/lottery.png',
+		iconUrl: '/img/menu/lottery.png',
 		// lobbyCategoryId: LobbyCategoryEnum.Game,
 		subMenu: [
 			{

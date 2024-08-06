@@ -1,14 +1,16 @@
 'use client'
 import { cn } from 'JF-core'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 interface ModalProps {
 	children: React.ReactNode
 	size: 'sm' | 'md'
-	className?: string
 	isOpen: boolean
 	onClose: () => void
+	className?: string
 	blockScrollOnMount?: boolean
+	closeOnEsc?: boolean
+	closeOnOverlayClick?: boolean
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -18,6 +20,8 @@ const Modal: React.FC<ModalProps> = ({
 	className,
 	onClose,
 	blockScrollOnMount = true,
+	closeOnEsc = true,
+	closeOnOverlayClick = true,
 }) => {
 	const baseClasses =
 		'lg:rounded-xl relative mx-auto scale-100 transform bg-tertiary-500 shadow-xl transition-transform duration-300 ease-in-out'
@@ -30,14 +34,24 @@ const Modal: React.FC<ModalProps> = ({
 	const sizeClass = sizeClasses[size]
 	const additionalClasses = className
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (blockScrollOnMount && isOpen) {
 			document.body.style.overflow = 'hidden'
 		}
+
+		const handleEsc = (event: KeyboardEvent) => {
+			if (event.key === 'Escape' && closeOnEsc) {
+				onClose()
+			}
+		}
+
+		document.addEventListener('keydown', handleEsc)
+
 		return () => {
 			document.body.style.overflow = 'unset'
+			document.removeEventListener('keydown', handleEsc)
 		}
-	}, [isOpen, blockScrollOnMount])
+	}, [isOpen, blockScrollOnMount, closeOnEsc, onClose])
 
 	if (!isOpen) return null
 
@@ -48,6 +62,7 @@ const Modal: React.FC<ModalProps> = ({
 				aria-labelledby='modal-title'
 				role='dialog'
 				aria-modal='true'
+				onClick={() => closeOnOverlayClick && onClose()} // Closing on overlay click
 			>
 				<div
 					className={cn(baseClasses, sizeClass, additionalClasses)}

@@ -2,19 +2,21 @@
 
 import Button from '@brand01/src/components/button'
 import Modal from '@brand01/src/components/modal'
-import { useState } from 'react'
+import useDisclosure from 'libs/core/src/lib/hooks/useDisclosure'
 
 const ModalPage = () => {
-	const [isModalOpen, setIsModalOpen] = useState(false)
-	const openModal = () => setIsModalOpen(true)
-	const closeModal = () => setIsModalOpen(false)
-
+	const { isOpen, onOpen, onClose } = useDisclosure()
 	return (
 		<>
-			{/*  下這條測試 防止彈窗打開時是否無法滾動  */}
 			<div className='h-[4000px]'>
-				<Button onClick={openModal}>Click to Open Modal</Button>
-				<Modal size='sm' isOpen={isModalOpen} onClose={closeModal}>
+				<Button onClick={onOpen}>Click to Open Modal</Button>
+				<Modal
+					size='sm'
+					isOpen={isOpen}
+					onClose={onClose}
+					// closeOnEsc={false}
+					// closeOnOverlayClick={false}
+				>
 					<h3 className='border-top mb-6 text-xl font-normal'>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
 						consectetur. Numquam temporibus sit reiciendis doloremque cumque

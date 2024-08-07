@@ -1,14 +1,17 @@
 'use client'
 
-import { cn } from 'JF-core'
+import { cn, imageUrl } from 'JF-core'
 import { useState, type InputHTMLAttributes } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
+import { useCopyToClipboard } from 'usehooks-ts'
 
 interface IInputProps
 	extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'> {
 	register: UseFormRegisterReturn
 	dirty: boolean
 	password?: boolean
+	copy?: boolean
+	divClassName?: string
 	icon?: string
 	error?: boolean
 	loading?: boolean
@@ -28,16 +31,18 @@ interface IInputProps
  * 若 validate 有 call api 的地方再自己用 debounce 實作 ex: const debounceTrigger = debounce(trigger, 200)。
  * ---
  * @param {UseFormRegisterReturn} register - 必填，傳入 react-hook-form 的 register 綁定元件
- * @param {boolean} dirty - 必填，樣式需透過判斷是否觸發過元件，才可做進一步渲染，傳入 dirtyFields[pathName] 做判斷
+ * @param {boolean} dirty - 必填，樣式需透過判斷是否觸發過元件，才可做進一步渲染，傳入 dirtyFields[inputName] 做判斷
  * @param {boolean} [password] - 傳遞 password props 控制是否為 pwd input
- * @param {string} [className] - 傳入 classname 加在最上層div以及input，可以手動加入寬度圓角等設定
+ * @param {boolean} [copy] - 傳遞 copy props 控制是否顯示copy icon
+ * @param {string} [className] - 傳入 classname 加在input，可以手動加入圓角等設定
+ * @param {string} [divClassName] - 傳入 classname 加在最上層div，可以手動加入寬度等設定
  * @param {string} [icon] - icon's filename
  * @param {string} [title] - Input 開頭，Icon 右側
  * @param {string} [type] - HTMLInputTypeAttribute
  * @param {boolean} [error] - 驗證是否通過
  * @param {boolean} [loading] - 控制 loading state
  * @param {boolean}[isMessagesHide] - 啟用後將會隱藏所有 msg (包含 error, success)，若確定不要 message 要確實傳入此參數，不然會預留高度
- * @param {string} [errorMessage] - 錯誤訊息，由 formState.errors[pathName]?.message 傳遞下來
+ * @param {string} [errorMessage] - 錯誤訊息，由 formState.errors[inputName]?.message 傳遞下來
  * @param {string} [successMessage] - 正確訊息
  * @param {string} [infoMessage] - 有 infoMessage 時會出現 info icon，若有 errorMessage or successMessage 則不顯示
  * @param {boolean} [format] - 控制是否加入 formatStr
@@ -50,7 +55,9 @@ const Input = ({
 	register,
 	dirty,
 	password,
+	copy,
 	className,
+	divClassName,
 	icon,
 	title,
 	type = 'text',
@@ -68,11 +75,21 @@ const Input = ({
 }: IInputProps) => {
 	const [showPassword, setShowPassword] = useState<boolean>(false)
 	const [showInfo, setShowInfo] = useState<boolean>(false)
+	const [, copyToClipboard] = useCopyToClipboard()
 
 	// 判斷是否顯示password
 	const passwordType = () => {
 		return showPassword ? 'text' : 'password'
 	}
+
+	// 點選複製icon複製input內的value
+	const onCopyClick = () => {
+		const element = document.querySelector(
+			`input[name="${register.name}"]`,
+		) as HTMLInputElement | null
+		element?.value && copyToClipboard(element.value)
+	}
+
 	// render 右邊狀態icon
 	const renderRightIcon = () => {
 		// password只顯示眼睛icon，優先判斷
@@ -80,9 +97,22 @@ const Input = ({
 			return (
 				<img
 					className='ml-2 h-5 w-5 cursor-pointer'
-					src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/desktop/img/${showPassword ? 'icon-eye' : 'icon-eye-close'}.svg`}
+					src={imageUrl(
+						`/img/icon/input/${showPassword ? 'icon-eye' : 'icon-eye-close'}.svg`,
+					)}
 					alt='eye'
 					onClick={() => setShowPassword(prev => !prev)}
+				/>
+			)
+		}
+		// copy只顯示複製icon
+		if (copy) {
+			return (
+				<img
+					className='ml-2 h-5 w-5 cursor-pointer'
+					src={imageUrl(`/img/icon/referral/icon-referral-copy.svg`)}
+					alt='copy'
+					onClick={onCopyClick}
 				/>
 			)
 		}
@@ -91,7 +121,7 @@ const Input = ({
 			return (
 				<img
 					className='ml-2 h-5 w-5 cursor-default'
-					src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/desktop/img/icon-invalid.svg`}
+					src={imageUrl('/img/icon/input/icon-invalid.svg')}
 					alt='invalid'
 				/>
 			)
@@ -101,7 +131,7 @@ const Input = ({
 			return (
 				<img
 					className='ml-2 h-5 w-5 cursor-default'
-					src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/desktop/img/icon-valid.svg`}
+					src={imageUrl('/img/icon/input/icon-valid.svg')}
 					alt='valid'
 				/>
 			)
@@ -111,8 +141,8 @@ const Input = ({
 			return (
 				<img
 					className='ml-2 h-5 w-5 cursor-pointer'
-					src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/desktop/img/icon-error.svg`}
-					alt='info'
+					src={imageUrl('/img/icon/financial-transactions/icon-notice.svg')}
+					alt='notice'
 					onClick={() => {
 						setShowInfo(prev => !prev)
 						onInfoClick && onInfoClick()
@@ -146,14 +176,14 @@ const Input = ({
 
 	return (
 		<>
-			<div className={cn('grid w-full', className)}>
+			<div className={cn('grid w-full', divClassName)}>
 				<div className='relative grid place-items-center'>
 					{/* left - icon & title */}
 					<div className='absolute left-6 flex cursor-default items-center'>
 						{icon && (
 							<img
-								className='mr-2 h-5 w-5'
-								src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/desktop/img/${icon}.svg`}
+								className='mr-3.5 h-5 w-5'
+								src={imageUrl(`/img/icon/input/${icon}.svg`)}
 								alt={icon}
 							/>
 						)}

@@ -68,6 +68,14 @@ const Page = () => {
 					error={!!errors['information']}
 					errorMessage={errors['information']?.message as string}
 				/>
+				<Input
+					register={register('copy')}
+					dirty={!!dirtyFields['copy']}
+					placeholder='click icon to copy ->'
+					copy
+					error={!!errors['copy']}
+					errorMessage={errors['copy']?.message as string}
+				/>
 			</form>
 		</div>
 	)

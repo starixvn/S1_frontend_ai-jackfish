@@ -75,6 +75,7 @@ const Input = ({
 }: IInputProps) => {
 	const [showPassword, setShowPassword] = useState<boolean>(false)
 	const [showInfo, setShowInfo] = useState<boolean>(false)
+	const [isCopied, setIsCopied] = useState<boolean>(false)
 	const [, copyToClipboard] = useCopyToClipboard()
 
 	// 判斷是否顯示password
@@ -83,11 +84,17 @@ const Input = ({
 	}
 
 	// 點選複製icon複製input內的value
-	const onCopyClick = () => {
+	const onCopyClick = async () => {
 		const element = document.querySelector(
 			`input[name="${register.name}"]`,
 		) as HTMLInputElement | null
-		element?.value && copyToClipboard(element.value)
+		if (element?.value) {
+			await copyToClipboard(element.value)
+			setIsCopied(true)
+			setTimeout(() => {
+				setIsCopied(false)
+			}, 3000)
+		}
 	}
 
 	// render 右邊狀態icon
@@ -107,7 +114,13 @@ const Input = ({
 		}
 		// copy只顯示複製icon
 		if (copy) {
-			return (
+			return isCopied ? (
+				<img
+					className='ml-2 h-5 w-5 cursor-default'
+					src={imageUrl('/img/icon/input/icon-valid.svg')}
+					alt='valid'
+				/>
+			) : (
 				<img
 					className='ml-2 h-5 w-5 cursor-pointer'
 					src={imageUrl(`/img/icon/referral/icon-referral-copy.svg`)}

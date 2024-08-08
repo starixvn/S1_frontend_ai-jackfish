@@ -1,10 +1,12 @@
 'use client'
 
-import { IAxiosError, fetcher } from '../baseApi'
+import useSWR from 'swr'
+import { IAxiosError, IAxiosResponse, fetcher } from '../baseApi'
 import {
 	IWalletInfoData,
 	TCustBankInfoData,
 	TEWalletData,
+	TReferralSummaryData,
 	TWithdrawalAvailableBalanceData,
 } from './type'
 import { accountApiUrl } from './url'
@@ -78,5 +80,30 @@ export const getCustEWalletInfo = async () => {
 		return data
 	} catch (e) {
 		return []
+	}
+}
+
+export const useGetReferralCode = () => {
+	const { data, isLoading, error } = useSWR<IAxiosResponse<string>>(
+		accountApiUrl.getReferralCode,
+		(url: string) => fetcher<string>(url),
+	)
+	return {
+		referralCode: data?.data,
+		isLoading,
+		error,
+	}
+}
+
+export const useGetReferralSummary = () => {
+	const { data, isLoading, error } = useSWR<
+		IAxiosResponse<TReferralSummaryData>
+	>(accountApiUrl.getReferralSummary, (url: string) =>
+		fetcher<TReferralSummaryData>(url),
+	)
+	return {
+		referralSummary: data?.data,
+		isLoading,
+		error,
 	}
 }

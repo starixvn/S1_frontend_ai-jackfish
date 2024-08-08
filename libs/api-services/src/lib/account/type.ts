@@ -72,3 +72,11 @@ export type TEWalletData = {
 	eWalletSite: string
 	sysId: number
 }
+
+export type TReferralSummaryData = {
+	amountCount: number
+	amountSum: number
+	conditionCount: number
+	hasReferral: boolean
+	referralCount: number
+}

@@ -78,10 +78,11 @@ const Modal: React.FC<ModalProps> = ({
 					>
 						{/* 這邊先保留 */}
 
-						{/* <div
+						 {/* <div
 						className={`flex ${needGoBack ? 'justify-between' : 'justify-end'} bg-teal-200 p-3 lg:rounded-tl-xl lg:rounded-tr-xl`}
-					> */}
-						{/* {needGoBack && (
+					> 
+					
+						 {needGoBack && ( 
 							<button
 								type='button'
 								className='inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900'
@@ -101,7 +102,7 @@ const Modal: React.FC<ModalProps> = ({
 									></path>
 								</svg>
 							</button>
-						)} */}
+						)}  */}
 
 						<button
 							type='button'
@@ -124,7 +125,7 @@ const Modal: React.FC<ModalProps> = ({
 							</svg>
 						</button>
 					</div>
-					<div className='bg-tertiary-500 h-full overflow-y-scroll px-5 py-6 lg:rounded-bl-xl lg:rounded-br-xl'>
+					<div className='bg-tertiary-500 h-full overflow-y-scroll px-4 py-3 lg:rounded-bl-xl lg:rounded-br-xl'>
 						{children}
 					</div>
 				</div>

@@ -14,7 +14,7 @@ const Profile = () => {
 			case 'Financial Log':
 				return '222'
 			case 'Promotion Code':
-				return '333'
+				return 'asd'
 			case 'Active Promotion':
 				return '444'
 		}
@@ -50,8 +50,10 @@ const Profile = () => {
 							</Button>
 						</div>
 					</div>
-					<div className='right bg-primary-500 h-full flex-shrink-0 flex-grow-0 basis-[60%]'>
+					<div className='right bg-primary-500 h-full flex-shrink-0 flex-grow-0 basis-[60%] overflow-y-scroll'>
+						<div className='h-[4000px]'>
 						{getContent()}
+						</div>
 					</div>
 				</div>
 			</Modal>

@@ -13,7 +13,7 @@
 - `onClose`: `() => void` - 關閉彈窗時時觸發的函數。
 - `blockScrollOnMount`: `boolean?` - 是否時在彈窗開啟時阻止滾動。默認為 `false`。
 - `closeOnEsc`: `boolean?` - 是否按下esc的時候關閉彈窗。默認為 `true`。
-- `closeOnOverlayClick`- 是否能夠在彈窗外部點擊時，就能夠關閉彈窗 。默認為 `true`。
+- `closeOnOverlayClick`- 是否能夠在彈窗外部點擊時，就能夠關閉彈窗 。默認為 `false`。
 
 # `useDisclosure` Hook
 

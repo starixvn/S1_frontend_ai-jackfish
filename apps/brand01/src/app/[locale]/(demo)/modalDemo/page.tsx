@@ -47,6 +47,31 @@ const ModalPage = () => {
 						distinctio reprehenderit consequuntur aliquam molestiae fugiat, nisi
 						repellendus maiores est, in suscipit magni qui!
 					</h3>
+					<h3 className='border-top mb-6 text-xl font-normal'>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
+						consectetur. Numquam temporibus sit reiciendis doloremque cumque
+						distinctio reprehenderit consequuntur aliquam molestiae fugiat, nisi
+						repellendus maiores est, in suscipit magni qui!
+					</h3>
+					<h3 className='border-top mb-6 text-xl font-normal'>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
+						consectetur. Numquam temporibus sit reiciendis doloremque cumque
+						distinctio reprehenderit consequuntur aliquam molestiae fugiat, nisi
+						repellendus maiores est, in suscipit magni qui!
+					</h3>
+					<h3 className='border-top mb-6 text-xl font-normal'>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
+						consectetur. Numquam temporibus sit reiciendis doloremque cumque
+						distinctio reprehenderit consequuntur aliquam molestiae fugiat, nisi
+						repellendus maiores est, in suscipit magni qui!
+					</h3>
+					<h3 className='border-top mb-6 text-xl font-normal'>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
+						consectetur. Numquam temporibus sit reiciendis doloremque cumque
+						distinctio reprehenderit consequuntur aliquam molestiae fugiat, nisi
+						repellendus maiores est, in suscipit magni qui!
+					</h3>
+
 					<Button className='mr-5'>Yes</Button>
 					<Button type='cancel'>No</Button>
 				</Modal>

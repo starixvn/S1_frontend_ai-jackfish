@@ -27,8 +27,8 @@ const Modal: React.FC<ModalProps> = ({
 		'lg:rounded-xl relative transform bg-tertiary-500 shadow-xl transition-transform duration-300 ease-in-out'
 
 	const sizeClasses = {
-		sm: 'w-full h-full lg:w-[600px] lg:h-[810px]',
-		md: 'w-full h-full lg:w-[800px] lg:h-[561px]',
+		sm: 'pb-14 w-full h-full lg:w-[600px] lg:h-[810px]',
+		md: 'pb-14 w-full h-full lg:w-[800px] lg:h-[561px]',
 	}
 
 	const sizeClass = sizeClasses[size]

@@ -11,12 +11,36 @@ const ModalPage = () => {
 			<div className='h-[4000px]'>
 				<Button onClick={onOpen}>Click to Open Modal</Button>
 				<Modal
-					size='sm'
+					size='md'
 					isOpen={isOpen}
 					onClose={onClose}
 					// closeOnEsc={false}
-					// closeOnOverlayClick={false}
+					// closeOnOverlayClick={true}
 				>
+					<h3 className='border-top mb-6 text-xl font-normal'>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
+						consectetur. Numquam temporibus sit reiciendis doloremque cumque
+						distinctio reprehenderit consequuntur aliquam molestiae fugiat, nisi
+						repellendus maiores est, in suscipit magni qui!
+					</h3>
+					<h3 className='border-top mb-6 text-xl font-normal'>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
+						consectetur. Numquam temporibus sit reiciendis doloremque cumque
+						distinctio reprehenderit consequuntur aliquam molestiae fugiat, nisi
+						repellendus maiores est, in suscipit magni qui!
+					</h3>
+					<h3 className='border-top mb-6 text-xl font-normal'>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
+						consectetur. Numquam temporibus sit reiciendis doloremque cumque
+						distinctio reprehenderit consequuntur aliquam molestiae fugiat, nisi
+						repellendus maiores est, in suscipit magni qui!
+					</h3>
+					<h3 className='border-top mb-6 text-xl font-normal'>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
+						consectetur. Numquam temporibus sit reiciendis doloremque cumque
+						distinctio reprehenderit consequuntur aliquam molestiae fugiat, nisi
+						repellendus maiores est, in suscipit magni qui!
+					</h3>
 					<h3 className='border-top mb-6 text-xl font-normal'>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
 						consectetur. Numquam temporibus sit reiciendis doloremque cumque

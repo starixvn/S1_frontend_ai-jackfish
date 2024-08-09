@@ -14,7 +14,7 @@ export enum BannerActionEnum {
 }
 
 export interface IGetBannerPayload {
-	currencyId: number
+	currencyId?: number
 	bannerType: BannerTypeEnum
 }
 

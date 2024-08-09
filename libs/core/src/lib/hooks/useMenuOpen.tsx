@@ -1,22 +1,22 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import { useGetPathname, onWindowOpenProduct } from 'JF-core'
-import {
-	paths,
-	PRODUCTS,
-	MenuActionEnum,
-	IEnterPageArgs,
-	IGoToGameArgs,
-	IEnterSlotsPageArgs,
-	IOpen9WSportsArgs,
-	type TStaticSubMenuItem,
-	type TDynamicSubMenuItem,
-	type TDynamicSubMenuLinkType,
-} from 'JF-constants'
-import { useAuthStore } from 'JF-operations'
 import { IAxiosError } from 'JF-api/baseApi'
 import { useGoToGame } from 'JF-api/tp/client'
+import {
+	IEnterPageArgs,
+	IEnterSlotsPageArgs,
+	IGoToGameArgs,
+	IOpen9WSportsArgs,
+	MenuActionEnum,
+	PRODUCTS,
+	paths,
+	type TDynamicSubMenuItem,
+	type TDynamicSubMenuLinkType,
+	type TStaticSubMenuItem,
+} from 'JF-constants'
+import { onWindowOpenProduct, useGetPathname } from 'JF-core'
+import { useAuthStore } from 'JF-operations'
+import { useRouter } from 'next/navigation'
 
 type LoginCallbackType = () => void
 type MessageCallbackType = (message: string) => void
@@ -237,9 +237,7 @@ const useMenuOpen = () => {
 
 		const linkMethod = () => {
 			const { pathname = '/', params } = (item as TDynamicSubMenuLinkType) || {}
-			// TODO 確認slots是否用動態路由
 			router.push(params ? `${pathname}/${params.value}` : pathname)
-			// router.push(params ? `${pathname}?${params.name}=${params.value}` : pathname)
 		}
 
 		const enterPageMethod = () => {

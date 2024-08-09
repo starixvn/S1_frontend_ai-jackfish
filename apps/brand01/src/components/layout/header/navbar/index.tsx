@@ -1,11 +1,10 @@
 'use client'
-import React from 'react'
-import Wallet from './Wallet'
+import Language from '@brand01/src/components/language'
+import Auth from './Auth'
 import DepositAndWithdrawalBtn from './DepositAndWithdrawalBtn'
 import DepositLeft from './DepositLeft'
-import Country from '../../headerOld/rightFunction/country'
 import Profile from './Profile'
-import Auth from './Auth'
+import Wallet from './Wallet'
 
 const Navbar = () => {
 	return (
@@ -24,7 +23,7 @@ const Navbar = () => {
 
 			{/* ==============之後關掉=============== */}
 			{/* 語系選擇 */}
-			<Country />
+			<Language />
 			{/* 登入註冊 */}
 			<Auth />
 			{/* ==================================== */}

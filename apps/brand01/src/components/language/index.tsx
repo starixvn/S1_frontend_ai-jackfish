@@ -1,32 +1,44 @@
 'use client'
-import { languageGroup } from 'JF-constants'
-import { cn, objectEntries } from 'JF-core'
-import { usePathname, useRouter } from 'next/navigation'
-import React, { Fragment, useEffect, useRef } from 'react'
-import { useCookies } from 'react-cookie'
+import { useClientTranslation } from '@brand01/src/i18n/client'
 import { cookieName } from '@brand01/src/i18n/settings'
+import { languageGroup } from 'JF-constants'
+import { cn, objectEntries, useGetPathname } from 'JF-core'
+import { useAuthStore } from 'JF-operations'
+import { usePathname, useRouter } from 'next/navigation'
+import { Fragment, useEffect, useRef } from 'react'
+import { useCookies } from 'react-cookie'
 import { useTranslation } from 'react-i18next'
 import { useBoolean, useOnClickOutside } from 'usehooks-ts'
 
-const Country = () => {
+const Language = () => {
+	const { locale } = useGetPathname()
+	const { t } = useClientTranslation(locale)
 	const router = useRouter()
 	const ref = useRef(null)
 	const { i18n } = useTranslation(['common'])
 	const currentPathname = usePathname()
 	const currentLocale = i18n.language
+	const { userInfo, isSetLanguage, onSetLanguage } = useAuthStore()
 
 	const { value: isActive, toggle, setFalse } = useBoolean(false)
 	const [cookies, setCookie] = useCookies([cookieName])
 	// 點選語言下拉選單，更換url language
 	const handleSetLanguage = (value: string) => {
-		// set cookie for next-i18n-router
-		// Cookies.set("NEXT_LOCALE", newLocale, { expires: 30 });
+		const { currencyId = 4 } = userInfo
+		const errorMsg = `setLanguage: ${t('Label_Error_TooManyRequests')}`
+		onSetLanguage(value, currencyId, errorMsg)
 		setCookie(cookieName, value)
-		// redirect to the new locale path
-		router.push(currentPathname.replace(`/${currentLocale}`, `/${value}`))
-
-		router.refresh()
 	}
+
+	useEffect(() => {
+		if (isSetLanguage) {
+			router.push(
+				currentPathname.replace(`/${currentLocale}`, `/${cookies.i18next}`),
+			)
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [cookies.i18next, isSetLanguage])
+
 	useEffect(() => {
 		if (cookies.i18next) return
 		setCookie(cookieName, currentLocale, { path: '/' })
@@ -98,4 +110,4 @@ const Country = () => {
 	)
 }
 
-export default Country
+export default Language

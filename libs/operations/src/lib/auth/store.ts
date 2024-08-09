@@ -1,17 +1,30 @@
 // authStore.ts
-import { create } from 'zustand'
-import { signIn, signOut } from 'JF-api/auth/client'
+import { getWalletInfo, setLanguage } from 'JF-api/account/client'
 import { getUserInfo } from 'JF-api/accountStrict/api'
+import { signIn, signOut } from 'JF-api/auth/client'
+import { create } from 'zustand'
 import { IAuthAction, IAuthState } from './type'
 
-const defaultUserInfo = { userName: 'guest' }
+const defaultUserInfo = { userName: '' }
+const defaultWalletInfo = {
+	balance: 0,
+	isHideBalance: false,
+	lastLoginTime: '',
+	lastTransaction: '',
+	tpWallets: [],
+	bonusWallets: [],
+}
+
+/**
+ * @isSetLanguage 是否成功打設定語言'Account/SetLanguage' api
+ */
 
 const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 	isLoading: false,
 	isLogin: false,
-	userInfo: {
-		userName: 'guest',
-	},
+	userInfo: defaultUserInfo,
+	walletInfo: defaultWalletInfo,
+	isSetLanguage: false,
 	setLogin: loginStatus => set({ isLogin: loginStatus }),
 	onSignIn: async (userName, password) => {
 		if (typeof window === 'undefined') return
@@ -81,6 +94,27 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 	},
 	resetAuth: () => {
 		set({ isLogin: false, userInfo: defaultUserInfo })
+	},
+	// 撈用戶錢包資訊
+	getWalletInfo: async () => {
+		set({ isLoading: true })
+		try {
+			const data = await getWalletInfo()
+			set({ walletInfo: data ?? defaultWalletInfo })
+		} catch (e) {
+			set({ isLoading: false })
+		}
+	},
+
+	// 切換語系時設定語系api
+	onSetLanguage: async (
+		langCode: string,
+		currencyId: number,
+		errorMsg: string,
+	) => {
+		const args = { langId: langCode, currencyId }
+		const success = await setLanguage(args, errorMsg)
+		set({ isSetLanguage: success })
 	},
 }))
 

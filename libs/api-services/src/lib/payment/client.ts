@@ -109,3 +109,48 @@ export const checkKyc = async (): Promise<KycStatusEnum> => {
 		return KycStatusEnum.Normal
 	}
 }
+
+
+interface IGetStatementArgs {
+	startDate: number;
+	endDate: number;
+}
+
+interface IStatementData {
+	type: string;
+	changeAmount: number;
+	beforeAmount: number;
+	afterAmount: number;
+	refTransId: string;
+	createTime: string;
+	createTimeOffset: string;
+	direction: number;
+	typeName: string;
+	custTimeZone: string;
+}
+
+export const getFinancialLog = async (startDate: string, endDate: string, pageNumber: number = 1): Promise<IStatementData[]> => {
+	try {
+		// 將日期轉換為秒為單位的 Unix 時間戳
+		const startDateTimestamp = Math.floor(new Date(startDate).getTime() / 1000);
+		const endDateTimestamp = Math.floor(new Date(endDate).getTime() / 1000);
+
+		// 構建請求的 payload
+		const payload = {
+			startDate: startDateTimestamp,
+			endDate: endDateTimestamp,
+			pageNumber,
+		};
+
+		// 在發送請求之前打印 payload 以進行檢查
+		// console.log('Request Payload:', payload);
+
+		// 使用 fetcher 發送請求
+		const response = await fetcher<IStatementData[], typeof payload>(paymentApiUrl.getStatement, payload);
+
+		return response.data || [];
+	} catch (e) {
+		console.error('Error fetching financial log:', e);
+		return [];
+	}
+};

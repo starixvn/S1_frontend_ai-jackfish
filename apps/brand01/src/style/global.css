@@ -4,6 +4,25 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: #010326;  /* tertiary 500 */
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #e9d3fe; /* primary 100 */
+    border-radius: 5px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #afa9d6; /* primary 200 */
+}
+
 @layer base {
 	html {
 		--color-primary-100: 233 211 254; /* #e9d3fe */

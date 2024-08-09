@@ -1,13 +1,12 @@
-import React from 'react'
+import { FOOTER_PAYMENT_ICONS } from '@brand01/src/data/layout/footer'
+import { imageUrl } from 'JF-core'
 import FooterNav from './FooterNav'
 import FooterSign from './FooterSign'
-import { imageUrl } from 'JF-core'
-import { FOOTER_PAYMENT_ICONS } from '@brand01/src/data/layout/footer'
 
 const Footer = () => {
 	return (
-		<footer className='mx-auto p-4 text-center max-lg:absolute max-lg:bottom-14'>
-			<div className='pt-8 text-neutral-100 max-lg:hidden lg:pb-10'>
+		<footer className='absolute bottom-14 mx-auto p-4 text-center lg:relative lg:bottom-0 lg:p-0'>
+			<div className='lg:bg-tertiary-500 hidden pt-8 text-neutral-100 lg:block lg:pb-10'>
 				<ul className='mb-6 flex justify-center gap-4'>
 					{FOOTER_PAYMENT_ICONS.map(item => {
 						const { key, icon } = item

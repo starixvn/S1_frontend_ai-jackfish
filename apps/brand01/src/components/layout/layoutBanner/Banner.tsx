@@ -1,27 +1,34 @@
 'use client'
 
-import React from 'react'
-import { useRouter } from 'next/navigation'
-import { cn, useBannerClick } from 'JF-core'
 import { TBannerData } from 'JF-api/site/type'
+import { cn, useBannerClick } from 'JF-core'
+import { useRouter } from 'next/navigation'
+import React from 'react'
 import { SwiperSlide } from 'swiper/react'
 import Carousel from '../../carousel'
+import Loading from '../../loading'
 
 interface IBannerProps {
 	bannerData: TBannerData[]
+	bannerIsLoading: boolean
 }
 
-const Banner: React.FC<IBannerProps> = ({ bannerData }) => {
+const Banner: React.FC<IBannerProps> = ({ bannerData, bannerIsLoading }) => {
 	const router = useRouter()
-	return (
+	const { bannerClick } = useBannerClick()
+	return bannerIsLoading ? (
+		<>
+			<Loading />
+		</>
+	) : (
 		<Carousel>
-			{bannerData?.map(item => (
+			{bannerData?.map((item: TBannerData) => (
 				<SwiperSlide key={item.itemKey}>
 					<div
 						onClick={
 							item.redirectLink
 								? () => router.push(item.redirectLink ?? '/')
-								: () => useBannerClick(item)
+								: () => bannerClick(item)
 						}
 					>
 						<img

@@ -4,9 +4,11 @@ import { FOOTER_PAYMENT_ICONS } from '@brand01/src/data/layout/footer'
 import { cn, imageUrl, useGetPathname } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
 import { ReactNode, Suspense, useEffect } from 'react'
+import Loading from '../loading'
 import Footer from './footer'
 import FooterSign from './footer/FooterSign'
 import Header from './header'
+import LayoutBanner from './layoutBanner'
 import Sidebar from './sidebar'
 interface ILayoutProps {
 	children: ReactNode
@@ -14,23 +16,32 @@ interface ILayoutProps {
 }
 
 const Layout = ({ children, isSignedIn }: ILayoutProps) => {
-	const { setLogin } = useAuthStore()
+	const { setLogin, getUserInfo } = useAuthStore()
 	const { currentPath } = useGetPathname()
 
 	useEffect(() => {
 		setLogin(isSignedIn)
-	}, [isSignedIn, setLogin])
+		if (isSignedIn) {
+			getUserInfo()
+		}
+	}, [getUserInfo, isSignedIn, setLogin])
 
 	// ⭐️：需要有sidebar的頁面：所有桌機＆首頁(h5)＆lobby games(h5)
 
 	return (
-		<Suspense fallback={<div>Loading...</div>}>
+		<Suspense
+			fallback={
+				<>
+					<Loading />
+				</>
+			}
+		>
 			<Header />
 			<div className='relative grid grid-cols-12 text-sm lg:text-base'>
 				{/* 先判斷桌機手機 再判斷是不是lobby相關的routes以顯示sidebar */}
 				<div
 					className={cn(
-						'bg-tertiary-400 col-span-2 max-lg:max-h-[calc(100%-256px)] max-lg:overflow-auto',
+						'bg-tertiary-400 col-span-2 overflow-auto max-lg:max-h-[calc(100%-256px)]',
 						'hidden lg:block',
 						{ block: lobbyRoutes.includes(currentPath) },
 					)}
@@ -45,7 +56,8 @@ const Layout = ({ children, isSignedIn }: ILayoutProps) => {
 						{ 'col-span-10': lobbyRoutes.includes(currentPath) },
 					)}
 				>
-					{children}
+					<LayoutBanner />
+					<div className='h-screen'>{children}</div>
 					<Footer />
 				</div>
 

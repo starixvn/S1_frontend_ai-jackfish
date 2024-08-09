@@ -1,5 +1,8 @@
 'use server'
 
+import { paths } from 'JF-constants'
+import { isNumber } from 'lodash-es'
+import { cookies } from 'next/headers'
 import { fetcher } from '../baseApi'
 import {
 	BannerActionEnum,
@@ -7,15 +10,11 @@ import {
 	IGetBannerPayload,
 	type TBannerData,
 } from './type'
-import { paths } from 'JF-constants'
-import { isNumber } from 'lodash-es'
-import { cookies } from 'next/headers'
 import { siteApiUrl } from './url'
 
 export const getBanner = async () => {
 	const cookieStore = cookies()
 	const langId = cookieStore.get('i18next')?.value
-	// TODO currencyId目前沒有存在cookie?
 	const data = await fetcher<TBannerData[], IGetBannerPayload>(
 		`${siteApiUrl.getBanner}/${langId}`,
 		{

@@ -1,3 +1,4 @@
+import HomeBanner from '@brand01/src/components/home/homeBanner'
 import HomeContent from '@brand01/src/components/home/homeContent'
 import React from 'react'
 
@@ -8,8 +9,9 @@ interface IHomeProps {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Home: React.FC<IHomeProps> = ({ params: { locale } }) => {
 	return (
-		<div className=' w-full'>
+		<div className='w-full'>
 			<div className=''>
+				<HomeBanner />
 				<HomeContent />
 			</div>
 		</div>

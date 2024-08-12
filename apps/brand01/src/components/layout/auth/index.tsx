@@ -4,13 +4,20 @@ import { useInitEffect } from 'JF-core'
 import { ReactNode } from 'react'
 
 interface IAuthLayoutProps {
-	isSignedIn: boolean
 	children: ReactNode
+	isSignedIn: boolean
+	cookieLangId: string
+	cookieCurrencyId: number
 }
 
-const AuthLayout = ({ isSignedIn, children }: IAuthLayoutProps) => {
+const AuthLayout = ({
+	children,
+	isSignedIn,
+	cookieLangId,
+	cookieCurrencyId,
+}: IAuthLayoutProps) => {
 	// 初始化
-	useInitEffect({ isSignedIn })
+	useInitEffect({ isSignedIn, cookieLangId, cookieCurrencyId })
 	return <>{children}</>
 }
 

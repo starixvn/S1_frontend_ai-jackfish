@@ -107,7 +107,8 @@ const Step3 = ({ bankInfoSysListByCurrencyId }: IStep3Props) => {
 						htmlType='submit'
 						type='secondary'
 						className='h-12 w-full'
-						isDisabled={isSubmitting || !watchSysId}
+						loading={isSubmitting}
+						isDisabled={!watchSysId}
 					>
 						{t('Label_General_Confirm')}
 					</Button>

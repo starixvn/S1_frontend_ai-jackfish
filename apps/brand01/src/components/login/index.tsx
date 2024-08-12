@@ -125,7 +125,7 @@ const Login = () => {
 					htmlType='submit'
 					type='primary'
 					className='h-12 w-full'
-					isDisabled={isLoading}
+					loading={isLoading}
 					onClick={handleSubmit(handleSignIn)}
 				>
 					{t('Label_General_LogIn')}
@@ -134,7 +134,7 @@ const Login = () => {
 					htmlType='button'
 					type='secondary'
 					className='h-12 w-full'
-					isDisabled={isLoading}
+					disabled={isLoading}
 					onClick={() => router.push(paths.join.root)}
 				>
 					{t('Label_General_Join')}

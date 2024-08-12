@@ -3,6 +3,7 @@ import Input from '@brand01/src/components/input'
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import { verifyOTP } from 'JF-api/site/client'
 import { imageUrl, useGetPathname } from 'JF-core'
+import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
@@ -21,11 +22,14 @@ const Step2 = ({ goToNextStep }: IStep2Props) => {
 		getValues,
 	} = useFormContext()
 
+	const [isLoading, setIsLoading] = useState<boolean>(false)
+
 	const handleConfirmOTP = async () => {
 		const isOtpCodeValid = await trigger('otpCode')
 		if (isOtpCodeValid) {
 			const { areaCode, phoneNo, otpCode } = getValues()
 			try {
+				setIsLoading(true)
 				await verifyOTP({
 					areaCode,
 					phoneNo,
@@ -34,6 +38,8 @@ const Step2 = ({ goToNextStep }: IStep2Props) => {
 				goToNextStep()
 			} catch (error) {
 				toast.error((error as Error).message ?? t('Label_Profile_OTPInvalid'))
+			} finally {
+				setIsLoading(false)
 			}
 		}
 	}
@@ -61,6 +67,7 @@ const Step2 = ({ goToNextStep }: IStep2Props) => {
 				htmlType='button'
 				type='secondary'
 				className='h-12 w-full'
+				loading={isLoading}
 				onClick={handleConfirmOTP}
 			>
 				{t('Label_General_Confirm')}

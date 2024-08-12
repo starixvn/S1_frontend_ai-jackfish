@@ -5,6 +5,7 @@ import { existsPhoneNo } from 'JF-api/site/client'
 import { AREA_CODE_BY_CURRENCY } from 'JF-constants'
 import { imageUrl, useGetPathname } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
+import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
@@ -18,7 +19,6 @@ const Step1 = ({ goToNextStep }: IStep1Props) => {
 	const {
 		userInfo: { currencyId },
 	} = useAuthStore()
-
 	const {
 		formState: { errors, dirtyFields },
 		register,
@@ -28,11 +28,14 @@ const Step1 = ({ goToNextStep }: IStep1Props) => {
 		clearErrors,
 	} = useFormContext()
 
+	const [isLoading, setIsLoading] = useState<boolean>(false)
+
 	const handlePhoneConfirm = async () => {
 		const isPhoneVaild = await trigger('phoneNo')
 		if (isPhoneVaild) {
 			const { areaCode, phoneNo } = getValues()
 			try {
+				setIsLoading(true)
 				const isExistsPhoneNo = await existsPhoneNo({
 					areaCode,
 					phoneNo,
@@ -48,6 +51,8 @@ const Step1 = ({ goToNextStep }: IStep1Props) => {
 				}
 			} catch (error) {
 				toast.error((error as Error).message)
+			} finally {
+				setIsLoading(false)
 			}
 		}
 	}
@@ -77,6 +82,7 @@ const Step1 = ({ goToNextStep }: IStep1Props) => {
 				htmlType='button'
 				type='secondary'
 				className='h-12 w-full'
+				loading={isLoading}
 				onClick={handlePhoneConfirm}
 			>
 				{t('Label_General_Confirm')}

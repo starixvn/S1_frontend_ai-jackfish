@@ -11,7 +11,7 @@ export const accountStrictApiUrl = {
 	// deleteEWalletCard: 'AccountStrict/DelCustEWalletInfo',
 	// setLocalBankInfo: 'AccountStrict/SetCustBankInfo',
 	// setEWalletInfo: 'AccountStrict/SetCustEWalletInfo',
-	// uploadCustPhoto: 'AccountStrict/UploadCustPhotoId',
+	uploadCustPhoto: 'AccountStrict/UploadCustPhotoId',
 	// resetPassword: 'AccountStrict/ResetPassword',
 	// verifyEmail: 'AccountStrict/VerifyEmail',
 }

@@ -15,3 +15,7 @@ export const onWindowOpenProduct = ({
 			?.focus()
 	}
 }
+
+export const scrollToTop = () => {
+	window !== undefined && window.scrollTo({ top: 0, behavior: 'smooth' })
+}

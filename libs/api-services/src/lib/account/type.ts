@@ -27,3 +27,48 @@ export interface IWalletInfoData {
 	tpWallets: ITpWalletInfoData[]
 	bonusWallets: IBonusWallets[]
 }
+
+export interface ISetLangArgs {
+	langId: string
+	currencyId: number
+}
+
+export type TWithdrawalAvailableBalanceData = {
+	availableBalance: number
+	balance: number
+	deduction: number
+}
+
+export type TBankInfoData = {
+	accountNo: string
+	bankLogo: string
+	bankName: string
+	bankSite: string
+	disabled: boolean
+	ifscCode: string
+	sysId: number
+}
+
+export type TUSDTDetailData = {
+	currencyId: number
+	currencyName: string
+	disabled: boolean
+	network: string
+	nickName: string
+	usdtAddress: string
+}
+
+export type TCustBankInfoData = {
+	accountName: string
+	defAccountNo: number
+	bankInfoDetail: TBankInfoData[]
+	uSDTDetail: TUSDTDetailData[]
+}
+
+export type TEWalletData = {
+	accountNo: string
+	eWalletLogo: string
+	eWalletName: string
+	eWalletSite: string
+	sysId: number
+}

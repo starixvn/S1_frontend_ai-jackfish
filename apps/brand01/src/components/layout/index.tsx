@@ -1,5 +1,5 @@
 'use client'
-
+import { IovationScript } from '@brand01/src/components/thirdPartyScript/thirdPartyJS'
 import { lobbyRoutes } from '@brand01/src/data/home/lobbyRoutes'
 import { FOOTER_PAYMENT_ICONS } from '@brand01/src/data/layout/footer'
 import {
@@ -63,23 +63,25 @@ const Layout = ({ children, isSignedIn }: ILayoutProps) => {
 					<Footer />
 				</div>
 
-				{/* 手機版滑到最下方才會出現的payment logo */}
-				<div className='from-secondary-300 to-tertiary-300 absolute bottom-0 left-0 z-20 flex h-64 w-full flex-wrap items-center justify-center bg-gradient-to-b lg:hidden'>
-					<ul className='mx-auto -mt-20 flex max-w-[290px] flex-wrap justify-center gap-4'>
-						{FOOTER_PAYMENT_ICONS.map(item => {
-							const { key, icon } = item
-							return (
-								<li key={key} className='h-10 w-10'>
-									<img src={imageUrl(icon)} alt={key} />
-								</li>
-							)
-						})}
-						{/* 隱私權政策側標語和連結 */}
-						<FooterSign />
-					</ul>
+					{/* 手機版滑到最下方才會出現的payment logo */}
+					<div className='from-secondary-300 to-tertiary-300 absolute bottom-0 left-0 z-20 flex h-64 w-full flex-wrap items-center justify-center bg-gradient-to-b lg:hidden'>
+						<ul className='mx-auto -mt-20 flex max-w-[290px] flex-wrap justify-center gap-4'>
+							{FOOTER_PAYMENT_ICONS.map(item => {
+								const { key, icon } = item
+								return (
+									<li key={key} className='h-10 w-10'>
+										<img src={imageUrl(icon)} alt={key} />
+									</li>
+								)
+							})}
+							{/* 隱私權政策側標語和連結 */}
+							<FooterSign />
+						</ul>
+					</div>
 				</div>
-			</div>
-		</Suspense>
+			<IovationScript />
+			</Suspense>
+
 	)
 }
 

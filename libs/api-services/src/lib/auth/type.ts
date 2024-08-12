@@ -1,5 +1,6 @@
-export interface ISignInArgs {
-	userName: string
+export interface ISignInPhoneArgs {
+	areaCode: string
+	phoneNo: string
 	userpwd: string
 	isPersistent: boolean
 	url: string

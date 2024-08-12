@@ -1,18 +1,32 @@
+'use client'
+
 import { trim } from 'lodash-es'
-import { ISignInArgs } from './type'
-import { fetcher } from '../baseApi'
+import { fetcher, IAxiosError } from '../baseApi'
+import { ISignInPhoneArgs } from './type'
 import { authApiUrl } from './url'
 
-export const signIn = async ({ userName, userpwd, ...rest }: ISignInArgs) => {
-	const data = await fetcher<null, ISignInArgs>(authApiUrl.signIn, {
-		userName: trim(userName),
-		userpwd: trim(userpwd),
-		...rest,
-	})
-	return data.errorCode === 0
+export const signInPhone = async ({
+	phoneNo,
+	userpwd,
+	...rest
+}: ISignInPhoneArgs) => {
+	try {
+		const data = await fetcher<null, ISignInPhoneArgs>(authApiUrl.signInPhone, {
+			phoneNo: trim(phoneNo),
+			userpwd: trim(userpwd),
+			...rest,
+		})
+		return data
+	} catch (error) {
+		throw error as IAxiosError
+	}
 }
 
 export const signOut = async () => {
-	const data = await fetcher(authApiUrl.signOut)
-	return data.errorCode === 0
+	try {
+		const data = await fetcher<null>(authApiUrl.signOut)
+		return data
+	} catch (error) {
+		throw error as IAxiosError
+	}
 }

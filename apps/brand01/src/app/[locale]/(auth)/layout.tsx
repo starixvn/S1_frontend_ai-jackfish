@@ -1,8 +1,9 @@
-import { redirect } from 'next/navigation'
+import AuthLayout from '@brand01/src/components/layout/auth'
 import { checkSignIn } from 'JF-api/auth/server'
 import { paths } from 'JF-constants'
+import { redirect } from 'next/navigation'
 
-export default async function AuthLayout({
+export default async function Layout({
 	children,
 }: {
 	children: React.ReactNode
@@ -11,5 +12,5 @@ export default async function AuthLayout({
 	if (isSignedIn) {
 		redirect(paths.home.root)
 	}
-	return <>{children}</>
+	return <AuthLayout isSignedIn={isSignedIn}>{children}</AuthLayout>
 }

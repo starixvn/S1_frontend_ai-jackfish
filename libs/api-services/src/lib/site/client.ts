@@ -1,13 +1,20 @@
 'use client'
 import { paths } from 'JF-constants'
 import { useAuthStore } from 'JF-operations'
-import { isNumber } from 'lodash-es'
+import { isNumber, trim } from 'lodash-es'
 import useSWR from 'swr'
-import { fetcher, IAxiosResponse } from '../baseApi'
+import { IAxiosError, IAxiosResponse, fetcher } from '../baseApi'
 import {
 	BannerActionEnum,
 	BannerTypeEnum,
+	IExistsPhoneNoArgs,
+	IResetPwdByOTPArgs,
+	IResetPwdByPhoneArgs,
+	ISignUpPhoneArgs,
+	ISocialChannelArgs,
+	IVerifyOTPArgs,
 	TBannerData,
+	TSocialChannelData,
 	type TTpMaintainData,
 } from './type'
 import { siteApiUrl } from './url'
@@ -81,5 +88,109 @@ export const getBanner = () => {
 	return {
 		bannerData: newBennerData,
 		isLoading,
+	}
+}
+
+export const signUpPhone = async ({
+	phoneNo,
+	userpwd,
+	...rest
+}: ISignUpPhoneArgs) => {
+	try {
+		const data = await fetcher<null, ISignUpPhoneArgs>(siteApiUrl.signUpPhone, {
+			phoneNo: trim(phoneNo),
+			userpwd: trim(userpwd),
+			...rest,
+		})
+		return data
+	} catch (error) {
+		throw error as IAxiosError
+	}
+}
+
+export const affiliateCheck = async ({ affCode }: { affCode: string }) => {
+	try {
+		const data = await fetcher<null, { affCode: string }>(
+			siteApiUrl.affiliateCheck,
+			{
+				affCode,
+			},
+		)
+		return data
+	} catch (error) {
+		throw error as IAxiosError
+	}
+}
+
+export const getAffiliateAgent = async ({ affId }: { affId: string }) => {
+	try {
+		const data = await fetcher<
+			{ currencyId: number },
+			{
+				affId: string
+			}
+		>(siteApiUrl.getAffiliateAgent, {
+			affId,
+		})
+		return data?.data
+	} catch (error) {
+		return { currencyId: null }
+	}
+}
+
+export const existsPhoneNo = async ({ ...args }: IExistsPhoneNoArgs) => {
+	try {
+		const data = await fetcher<boolean, IExistsPhoneNoArgs>(
+			siteApiUrl.existsPhoneNo,
+			args,
+		)
+		return data?.data
+	} catch (error) {
+		return true
+	}
+}
+
+export const resetPwdByOTP = async ({ ...args }: IResetPwdByOTPArgs) => {
+	try {
+		const data = await fetcher<null, IResetPwdByOTPArgs>(
+			siteApiUrl.reSetPwdByOTP,
+			args,
+		)
+		return data
+	} catch (error) {
+		throw error as IAxiosError
+	}
+}
+
+export const resetPwdByPhone = async ({ ...args }: IResetPwdByPhoneArgs) => {
+	try {
+		const data = await fetcher<null, IResetPwdByPhoneArgs>(
+			siteApiUrl.reSetPwdByPhone,
+			args,
+		)
+		return data
+	} catch (error) {
+		throw error as IAxiosError
+	}
+}
+
+export const verifyOTP = async ({ ...args }: IVerifyOTPArgs) => {
+	try {
+		const data = await fetcher<null, IVerifyOTPArgs>(siteApiUrl.verifyOTP, args)
+		return data
+	} catch (error) {
+		throw error as IAxiosError
+	}
+}
+
+export const getSocialChannel = async ({ ...args }: ISocialChannelArgs) => {
+	try {
+		const data = await fetcher<TSocialChannelData[], ISocialChannelArgs>(
+			siteApiUrl.getSocialChannel,
+			args,
+		)
+		return data?.data
+	} catch (error) {
+		return []
 	}
 }

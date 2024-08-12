@@ -27,8 +27,3 @@ export interface IWalletInfoData {
 	tpWallets: ITpWalletInfoData[]
 	bonusWallets: IBonusWallets[]
 }
-
-export interface ISetLangArgs {
-	langId: string
-	currencyId: number
-}

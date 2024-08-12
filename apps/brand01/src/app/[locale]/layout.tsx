@@ -39,7 +39,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang={locale}>
-			<body className='mx-auto bg-neutral-500'>
+			<body className='bg-tertiary-500 mx-auto lg:bg-neutral-500'>
 				{children}
 				<ToastContainer />
 			</body>

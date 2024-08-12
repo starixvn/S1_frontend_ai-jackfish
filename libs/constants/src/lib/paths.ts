@@ -11,6 +11,9 @@ export const paths = {
 	login: {
 		root: '/login',
 	},
+	forgetPassword: {
+		root: '/forget-password',
+	},
 	deposit: {
 		root: '/deposit',
 	},

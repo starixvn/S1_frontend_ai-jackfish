@@ -1,8 +1,8 @@
 'use server'
 
 import { AxiosRequestConfig } from 'axios'
-import { baseAxios } from '../baseApi'
 import { cookies } from 'next/headers'
+import { fetcher } from '../baseApi'
 import { authApiUrl } from './url'
 
 export const checkSignIn = async (
@@ -13,17 +13,15 @@ export const checkSignIn = async (
 	const cookieHeader = allCookies
 		.map(cookie => `${cookie.name}=${cookie.value}`)
 		.join(';')
-
 	try {
-		const { data: { errorCode } = {} } = await baseAxios.post(
+		const data = await fetcher<null>(
 			authApiUrl.checkSignIn,
+			config && config,
+			'POST',
 			null,
-			{
-				headers: { cookie: cookieHeader },
-				...config,
-			},
+			{ cookie: cookieHeader },
 		)
-		return errorCode === 0
+		return data.errorCode === 0
 	} catch (error) {
 		return false
 	}

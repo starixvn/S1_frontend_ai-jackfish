@@ -10,12 +10,12 @@ export enum UserInfoMemberType {
 	LiveStreaming,
 }
 
-export interface IUserInfoData {
+export type TUserInfoData = {
 	custId?: number
-	currencyName?: string // * 由前端透過 i18n 塞進的值
+	currencyName?: string // * AuthStore 透過 CURRENCY_NAME_BY_CURRENCY 塞值
 	userName: string
-	currencyId?: number
-	langId?: string
+	currencyId: number
+	langId: string
 	email?: string
 	accountName?: string
 	birth_d?: string

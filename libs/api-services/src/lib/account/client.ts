@@ -1,8 +1,17 @@
 'use client'
-import { toast } from 'react-toastify'
-import { IAxiosError, fetcher } from '../baseApi'
-import { ISetLangArgs, IWalletInfoData } from './type'
+
+import { fetcher, IAxiosError } from '../baseApi'
+import { IWalletInfoData } from './type'
 import { accountApiUrl } from './url'
+
+export const onlineCheck = async () => {
+	try {
+		const data = await fetcher<null>(accountApiUrl.onlineCheck)
+		return data
+	} catch (error) {
+		throw error as IAxiosError
+	}
+}
 
 export const getWalletInfo = async () => {
 	try {
@@ -15,20 +24,14 @@ export const getWalletInfo = async () => {
 	}
 }
 
-export const setLanguage = async (
-	{ langId, currencyId }: ISetLangArgs,
-	errorMsg: string,
-) => {
+export const setLanguage = async ({ langId }: { langId: string }) => {
 	try {
-		const data = await fetcher<null, ISetLangArgs>(accountApiUrl.setLang, {
-			langId,
-			currencyId,
-		})
-		return data.errorCode === 0
+		const data = await fetcher<null, { langId: string }>(
+			accountApiUrl.setLang,
+			{ langId },
+		)
+		return data
 	} catch (error) {
-		// api出問題時跳出錯誤通知
-		toast.error(errorMsg)
-		const { errorCode } = error as IAxiosError
-		return errorCode
+		throw error as IAxiosError
 	}
 }

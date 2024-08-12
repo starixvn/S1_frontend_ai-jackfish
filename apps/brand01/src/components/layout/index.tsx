@@ -1,9 +1,15 @@
 'use client'
+
 import { lobbyRoutes } from '@brand01/src/data/home/lobbyRoutes'
 import { FOOTER_PAYMENT_ICONS } from '@brand01/src/data/layout/footer'
-import { cn, imageUrl, useGetPathname } from 'JF-core'
-import { useAuthStore } from 'JF-operations'
-import { ReactNode, Suspense, useEffect } from 'react'
+import {
+	cn,
+	imageUrl,
+	useGetPathname,
+	useInitEffect,
+	useOnlineCheckInterval,
+} from 'JF-core'
+import { ReactNode, Suspense } from 'react'
 import Loading from '../loading'
 import Footer from './footer'
 import FooterSign from './footer/FooterSign'
@@ -16,15 +22,11 @@ interface ILayoutProps {
 }
 
 const Layout = ({ children, isSignedIn }: ILayoutProps) => {
-	const { setLogin, getUserInfo } = useAuthStore()
 	const { currentPath } = useGetPathname()
-
-	useEffect(() => {
-		setLogin(isSignedIn)
-		if (isSignedIn) {
-			getUserInfo()
-		}
-	}, [getUserInfo, isSignedIn, setLogin])
+	// 初始化
+	useInitEffect({ isSignedIn })
+	// check login interval
+	useOnlineCheckInterval()
 
 	// ⭐️：需要有sidebar的頁面：所有桌機＆首頁(h5)＆lobby games(h5)
 
@@ -52,7 +54,7 @@ const Layout = ({ children, isSignedIn }: ILayoutProps) => {
 				{/* 內頁＋footer */}
 				<div
 					className={cn(
-						`bg-layout-bg relative col-span-12 mb-64 min-h-screen lg:col-span-10 lg:mb-0`,
+						'bg-layout-bg relative col-span-12 mb-64 min-h-screen bg-cover bg-center lg:col-span-10 lg:mb-0',
 						{ 'col-span-10': lobbyRoutes.includes(currentPath) },
 					)}
 				>

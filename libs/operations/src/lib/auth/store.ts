@@ -1,11 +1,16 @@
 // authStore.ts
-import { getWalletInfo, setLanguage } from 'JF-api/account/client'
-import { getUserInfo } from 'JF-api/accountStrict/api'
-import { signIn, signOut } from 'JF-api/auth/client'
+import { getWalletInfo } from 'JF-api/account/client'
+import { getUserInfo } from 'JF-api/accountStrict/client'
+import { signInPhone, signOut } from 'JF-api/auth/client'
+import { CURRENCY_NAME_BY_CURRENCY, CurrenciesEnum } from 'JF-constants'
 import { create } from 'zustand'
 import { IAuthAction, IAuthState } from './type'
 
-const defaultUserInfo = { userName: '' }
+const defaultUserInfo = {
+	userName: 'guest',
+	langId: 'en',
+	currencyId: CurrenciesEnum.THB,
+}
 const defaultWalletInfo = {
 	balance: 0,
 	isHideBalance: false,
@@ -15,23 +20,18 @@ const defaultWalletInfo = {
 	bonusWallets: [],
 }
 
-/**
- * @isSetLanguage 是否成功打設定語言'Account/SetLanguage' api
- */
-
 const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 	isLoading: false,
 	isLogin: false,
 	userInfo: defaultUserInfo,
 	walletInfo: defaultWalletInfo,
-	isSetLanguage: false,
 	setLogin: loginStatus => set({ isLogin: loginStatus }),
-	onSignIn: async (userName, password) => {
+	setUserInfo: newUserInfo => set({ userInfo: newUserInfo }),
+	onSignInPhone: async ({ areaCode, phoneNo, password }) => {
 		if (typeof window === 'undefined') return
 
 		const url = window.location.origin
-		const { platform } = navigator
-		const { userAgent } = navigator
+		const { platform, userAgent } = navigator
 		const screen = `${window.screen.width}:${window.screen.height}:${window.screen.colorDepth}`
 		let di = ''
 		let bi = ''
@@ -49,7 +49,8 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 		token = (document.getElementById('__tk') as HTMLInputElement)?.value // * 默認為 empty
 
 		const args = {
-			userName,
+			areaCode,
+			phoneNo,
 			userpwd: password,
 			isPersistent: false,
 			url,
@@ -64,18 +65,20 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 				token,
 			},
 		}
+
 		set({ isLoading: true })
 
-		const success = await signIn(args)
-
-		if (success) {
-			set({ isLogin: true })
-			await get().getUserInfo()
-		} else {
-			get().resetAuth()
+		try {
+			const success = await signInPhone(args)
+			if (success) {
+				set({ isLogin: true })
+				await get().getUserInfo()
+			} else {
+				get().resetAuth()
+			}
+		} finally {
+			set({ isLoading: false })
 		}
-
-		set({ isLoading: false })
 	},
 	onSignOut: async () => {
 		await signOut()
@@ -86,8 +89,15 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 	getUserInfo: async () => {
 		set({ isLoading: true })
 		try {
-			const { data } = await getUserInfo()
-			set({ userInfo: data ?? defaultUserInfo })
+			const data = await getUserInfo()
+			get().setUserInfo({
+				...defaultUserInfo,
+				...data,
+				currencyName:
+					CURRENCY_NAME_BY_CURRENCY[
+						data?.currencyId ?? defaultUserInfo.currencyId
+					],
+			})
 		} finally {
 			set({ isLoading: false })
 		}
@@ -104,17 +114,6 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 		} catch (e) {
 			set({ isLoading: false })
 		}
-	},
-
-	// 切換語系時設定語系api
-	onSetLanguage: async (
-		langCode: string,
-		currencyId: number,
-		errorMsg: string,
-	) => {
-		const args = { langId: langCode, currencyId }
-		const success = await setLanguage(args, errorMsg)
-		set({ isSetLanguage: success })
 	},
 }))
 

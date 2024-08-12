@@ -134,6 +134,7 @@
   "Label_Home_StartWinning": "ชัยชนะ",
   "Label_Home_StartWinningDescription": "เริ่มต้นชนะจากเกมที่คุณชื่นชอบ",
   "Label_Join_Bank_Select": "กรุณาเลือกบัญชีธนาคารของคุณ",
+  "Label_Join_Check_Account": "กรุณาตรวจสอบชื่อและหมายเลขบัญชีของคุณ! \n<span className=\"{{classname}}\">หากไม่ถูกต้องจะไม่สามารถแก้ไขหรือฝาก/ถอนเงินได้</span>",
   "Label_Join_Choose_Bank": "เลือกธนาคาร",
   "Label_Join_EnjoyVipExclusiveBonus": "เพลิดเพลินไปกับ TUK555 โบนัสและเงินคืนพิเศษ",
   "Label_Join_MemberBenefits_1": "โบนัสต้อนรับสมาชิกใหม่ สปอร์ตบุ๊ค",

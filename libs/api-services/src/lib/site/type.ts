@@ -49,3 +49,58 @@ export type TTpMaintainData = {
 	beginTime: null | string
 	endTime: null | string
 }
+
+export interface ISignUpPhoneArgs {
+	currencyId: number
+	userpwd: string
+	areaCode: string
+	phoneNo: string
+	affCode?: string
+	userLang: string
+	referralUrl?: string
+	affId?: string
+	realName: string
+	sysId: number
+	accountNo: string
+}
+
+export interface IExistsPhoneNoArgs {
+	areaCode: string
+	phoneNo: string
+}
+
+export interface IResetPwdByOTPArgs {
+	userName?: string
+	areaCode: string
+	phoneNo: string
+}
+
+export interface IResetPwdByPhoneArgs {
+	areaCode: string
+	phoneNo: string
+	newPassword: string
+}
+
+export interface IVerifyOTPArgs {
+	areaCode: string
+	phoneNo: string
+	inputOTPcode: string
+}
+
+export interface ISocialChannelArgs {
+	currencyId: number
+	langId: string
+	displayPage: number
+}
+
+export type TSocialChannelData = {
+	id: number
+	channelName: string
+	title: string
+	link: string
+	linkType: number
+	scheme: {
+		ios: string
+		android: string
+	}
+}

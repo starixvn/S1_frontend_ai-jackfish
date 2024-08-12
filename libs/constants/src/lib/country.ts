@@ -17,8 +17,8 @@ export const langId = {
 export const languageGroup = {
 	[langId.en]: [{ displayText: 'English', value: langId.en, currencyId: 4 }],
 	[langId.th]: [
-		// { displayText: 'English', value: 'en', currencyId: 4 },
-		{ displayText: 'ไทย', value: langId.th, currencyId: 4 },
+		{ displayText: 'ภาษาไทย', value: langId.th, currencyId: 4 },
+		{ displayText: 'English', value: langId.en, currencyId: 4 },
 	],
 	[langId.cs]: [
 		// { displayText: 'English', value: 'en', currencyId: 4 },

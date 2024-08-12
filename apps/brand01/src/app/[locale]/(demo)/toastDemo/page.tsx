@@ -11,7 +11,7 @@ const Page = () => {
 	const notifyDefault = () => toast('This is a default message!')
 
 	return (
-		<div className='my-5 mx-5 flex flex-col items-start gap-6 text-white'>
+		<div className='my-5 mx-5 flex flex-col items-start gap-6'>
 			<Button onClick={notifySuccess}>Success</Button>
 			<Button onClick={notifyError}>Error</Button>
 			<Button onClick={notifyWarning}>Warning</Button>

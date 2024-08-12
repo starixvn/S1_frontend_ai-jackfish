@@ -14,7 +14,6 @@ import Loading from '../loading'
 import Footer from './footer'
 import FooterSign from './footer/FooterSign'
 import Header from './header'
-import LayoutBanner from './layoutBanner'
 import Sidebar from './sidebar'
 interface ILayoutProps {
 	children: ReactNode
@@ -54,12 +53,11 @@ const Layout = ({ children, isSignedIn }: ILayoutProps) => {
 				{/* 內頁＋footer */}
 				<div
 					className={cn(
-						'bg-layout-bg relative col-span-12 mb-64 min-h-screen bg-cover bg-center lg:col-span-10 lg:mb-0',
+						'bg-layout-bg relative col-span-12 mb-64 bg-cover bg-center lg:col-span-10 lg:mb-0',
 						{ 'col-span-10': lobbyRoutes.includes(currentPath) },
 					)}
 				>
-					<LayoutBanner />
-					<div className='h-screen'>{children}</div>
+					<div className='min-h-screen'>{children}</div>
 					<Footer />
 				</div>
 

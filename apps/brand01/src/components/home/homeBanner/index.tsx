@@ -4,7 +4,7 @@ import { getBanner } from 'JF-api/site/client'
 import Announcement from './Announcement'
 import Banner from './Banner'
 
-const LayoutBanner = () => {
+const HomeBanner = () => {
 	const { announcementData } = getAnnouncement()
 	const { bannerData, isLoading: bannerIsLoading } = getBanner()
 	// TODO: 目前從useSWR取回的banner api會讓畫面有跳一下的感覺，之後再來改進
@@ -19,4 +19,4 @@ const LayoutBanner = () => {
 		</div>
 	)
 }
-export default LayoutBanner
+export default HomeBanner

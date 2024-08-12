@@ -5,6 +5,7 @@ import { resetPwdByOTP } from 'JF-api/site/client'
 import { AREA_CODE_BY_CURRENCY } from 'JF-constants'
 import { imageUrl, useGetPathname } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
+import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
@@ -27,11 +28,14 @@ const Step1 = ({ goToNextStep }: IStep1Props) => {
 		getValues,
 	} = useFormContext()
 
+	const [isLoading, setIsLoading] = useState<boolean>(false)
+
 	const handleGetOTP = async () => {
 		const isPhoneValid = await trigger('phoneNo')
 		if (isPhoneValid) {
 			const { areaCode, phoneNo } = getValues()
 			try {
+				setIsLoading(true)
 				await resetPwdByOTP({
 					areaCode,
 					phoneNo,
@@ -39,6 +43,8 @@ const Step1 = ({ goToNextStep }: IStep1Props) => {
 				goToNextStep()
 			} catch (error) {
 				toast.error((error as Error).message)
+			} finally {
+				setIsLoading(false)
 			}
 		}
 	}
@@ -68,6 +74,7 @@ const Step1 = ({ goToNextStep }: IStep1Props) => {
 				htmlType='button'
 				type='secondary'
 				className='h-12 w-full'
+				loading={isLoading}
 				onClick={handleGetOTP}
 			>
 				{t('Label_General_Confirm')}

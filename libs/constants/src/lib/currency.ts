@@ -1,4 +1,4 @@
-import { CurrenciesEnum } from './types'
+import { CurrenciesEnum } from 'JF-constants'
 
 export const CURRENCY_NAME_BY_CURRENCY: { [key: number]: string } = {
 	[CurrenciesEnum.MYR]: 'MYR',

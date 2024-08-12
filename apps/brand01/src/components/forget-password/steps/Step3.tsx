@@ -54,7 +54,8 @@ const Step3 = ({ setIsTimeOut }: IStep3Props) => {
 				htmlType='submit'
 				type='secondary'
 				className='h-12 w-full'
-				isDisabled={isSubmitting || isSubmitSuccessful}
+				loading={isSubmitting}
+				isDisabled={isSubmitSuccessful}
 			>
 				{t('Label_General_Confirm')}
 			</Button>

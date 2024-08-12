@@ -19,15 +19,16 @@ const Language = ({ isLogin, className }: ILanguageProps) => {
 		envCookieNames.currencyId,
 	])
 
+	// 切換語系 func. setCookie觸發Effect更新userInfo資料
+	// 已登入呼叫 setLanguage api，未登入 push 到新的url
 	const handleLangChange = async (langId: string, currencyId: number) => {
 		if (cookies[envCookieNames.langId] !== langId) {
 			try {
-				if (isLogin) {
-					await setLanguage({ langId })
-				}
+				isLogin
+					? await setLanguage({ langId })
+					: window.history.pushState(null, '', `/${langId}${currentPath}`)
 				setCookie(envCookieNames.langId, langId, { path: '/' })
 				setCookie(envCookieNames.currencyId, currencyId, { path: '/' })
-				window.history.pushState(null, '', `/${langId}${currentPath}`)
 			} catch (error) {
 				toast.error((error as Error).message)
 			}

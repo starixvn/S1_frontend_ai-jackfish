@@ -7,7 +7,17 @@ import { useEffect } from 'react'
 import { useCookies } from 'react-cookie'
 import { useGetPathname } from './useGetPathname'
 
-const useInitEffect = ({ isSignedIn }: { isSignedIn: boolean }) => {
+interface IUseInitEffectProps {
+	isSignedIn: boolean
+	cookieLangId: string
+	cookieCurrencyId: number
+}
+
+const useInitEffect = ({
+	isSignedIn,
+	cookieLangId,
+	cookieCurrencyId,
+}: IUseInitEffectProps) => {
 	const { locale, currentPath } = useGetPathname()
 	const [cookies, setCookie] = useCookies([
 		envCookieNames.langId,
@@ -22,11 +32,20 @@ const useInitEffect = ({ isSignedIn }: { isSignedIn: boolean }) => {
 	} = useAuthStore()
 	const { getSocialChannels } = useSocialChannelStore()
 
-	// 初始化 AuthStore，切換語系時會再觸發更新 userInfo 資料
-	// 已登入就透過 api 取得 userInfo 資料
-	// 未登入則從 cookie 設定 userInfo 資料
+	// 初始化 AuthStore，透過 server side init 資料
 	useEffect(() => {
 		setLogin(isSignedIn)
+		setUserInfo({
+			userName: 'guest',
+			langId: cookieLangId,
+			currencyId: cookieCurrencyId,
+		})
+	}, [cookieCurrencyId, cookieLangId, isSignedIn, setLogin, setUserInfo])
+
+	// 手動切換語系時會 setCookie 觸發更新 userInfo 資料
+	// 已登入就透過 api 取得
+	// 未登入則從 cookie 設定
+	useEffect(() => {
 		isSignedIn
 			? getUserInfo()
 			: setUserInfo({
@@ -36,17 +55,18 @@ const useInitEffect = ({ isSignedIn }: { isSignedIn: boolean }) => {
 				})
 	}, [cookies, getUserInfo, isSignedIn, setLogin, setUserInfo])
 
-	// 初始化 cookie landgId & currencyId
+	// 初始化 cookie landgId & currencyId，
 	// 已登入設定成 userInfo 資料，並且判斷 locale 是否符合帳號資料，不符合則倒轉
 	// 未登入設定成 locale 以及對應的 currencyId
 	useEffect(() => {
-		setCookie(envCookieNames.langId, isLogin ? langId : locale, { path: '/' })
-		setCookie(
-			envCookieNames.currencyId,
-			isLogin ? currencyId : LANG_TO_CURRENCY[locale],
-			{ path: '/' },
-		)
-		if (isLogin && locale !== langId) {
+		if (!isLogin) {
+			setCookie(envCookieNames.langId, locale, { path: '/' })
+			setCookie(envCookieNames.currencyId, LANG_TO_CURRENCY[locale], {
+				path: '/',
+			})
+		} else if (locale !== langId) {
+			setCookie(envCookieNames.langId, langId, { path: '/' })
+			setCookie(envCookieNames.currencyId, currencyId, { path: '/' })
 			window.history.pushState(null, '', `/${langId}${currentPath}`)
 		}
 	}, [currencyId, currentPath, isLogin, langId, locale, setCookie])

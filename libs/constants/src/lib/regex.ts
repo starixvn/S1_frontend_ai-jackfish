@@ -7,3 +7,5 @@ export const REALNAME_REGEX =
 	/^[\p{L}. \p{Script=Han}\p{Script=Hangul}\p{Script=Thai}\p{Script=Bengali}\p{Script=Devanagari}\p{Script=Latin}\p{Script=Cyrillic}\p{Script=Khmer}\p{Script=Hiragana}\p{Script=Katakana}]+$/u
 
 export const THAI_BANK_ACCOUNT_REGEX = /^\d{10}$/
+
+export const INTEGER_ONLY_REGEX = /(\..*)|[^0-9]/g

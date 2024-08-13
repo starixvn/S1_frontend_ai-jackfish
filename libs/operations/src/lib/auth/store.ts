@@ -2,13 +2,13 @@
 import { getWalletInfo } from 'JF-api/account/client'
 import { getUserInfo } from 'JF-api/accountStrict/client'
 import { signInPhone, signOut } from 'JF-api/auth/client'
-import { CURRENCY_NAME_BY_CURRENCY, CurrenciesEnum } from 'JF-constants'
+import { CURRENCY_NAME_BY_CURRENCY, CurrenciesEnum, langId } from 'JF-constants'
 import { create } from 'zustand'
 import { IAuthAction, IAuthState } from './type'
 
 const defaultUserInfo = {
 	userName: 'guest',
-	langId: 'en',
+	langId: langId.en,
 	currencyId: CurrenciesEnum.THB,
 }
 const defaultWalletInfo = {
@@ -25,7 +25,6 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 	isLogin: false,
 	userInfo: defaultUserInfo,
 	walletInfo: defaultWalletInfo,
-	setLogin: loginStatus => set({ isLogin: loginStatus }),
 	setUserInfo: newUserInfo => set({ userInfo: newUserInfo }),
 	onSignInPhone: async ({ areaCode, phoneNo, password }) => {
 		if (typeof window === 'undefined') return
@@ -84,21 +83,18 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 	// 撈用戶資訊
 	getUserInfo: async () => {
 		set({ isLoading: true })
-		try {
-			const data = await getUserInfo()
-			get().setUserInfo({
-				...defaultUserInfo,
-				...data,
-				currencyName:
-					CURRENCY_NAME_BY_CURRENCY[
-						data?.currencyId ?? defaultUserInfo.currencyId
-					],
-			})
-			// 成功撈取用戶資訊後便可確保已經登入
-			set({ isLogin: true })
-		} finally {
-			set({ isLoading: false })
-		}
+		const data = await getUserInfo()
+		get().setUserInfo({
+			...defaultUserInfo,
+			...data,
+			currencyName:
+				CURRENCY_NAME_BY_CURRENCY[
+					data?.currencyId ?? defaultUserInfo.currencyId
+				],
+		})
+		// 成功撈取用戶資訊後便可確保已經登入
+		data && set({ isLogin: true })
+		set({ isLoading: false })
 	},
 	resetAuth: () => {
 		set({ isLogin: false, userInfo: defaultUserInfo })

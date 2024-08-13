@@ -1,4 +1,4 @@
-// SocialChannelStore.ts
+// socialChannelStore.ts
 import { getSocialChannel } from 'JF-api/site/client'
 import { TSocialChannelData } from 'JF-api/site/type'
 import { find } from 'lodash-es'
@@ -20,26 +20,20 @@ const defaultSocialChannel: TSocialChannelData = {
 const useSocialChannelStore = create<
 	ISocialChannelState & ISocialChannelAction
 >(set => ({
-	isLoading: false,
 	socialChannels: [],
 	lineChannel: defaultSocialChannel,
 	getSocialChannels: async ({ currencyId, langId }) => {
-		set({ isLoading: true })
-		try {
-			const data = await getSocialChannel({
-				currencyId,
-				langId,
-				displayPage: 1,
-			})
-			set({ socialChannels: data })
-			set({
-				lineChannel:
-					find(data, channel => channel.channelName === 'LINE') ??
-					defaultSocialChannel,
-			})
-		} finally {
-			set({ isLoading: false })
-		}
+		const data = await getSocialChannel({
+			currencyId,
+			langId,
+			displayPage: 1,
+		})
+		set({ socialChannels: data })
+		set({
+			lineChannel:
+				find(data, channel => channel.channelName === 'LINE') ??
+				defaultSocialChannel,
+		})
 	},
 }))
 

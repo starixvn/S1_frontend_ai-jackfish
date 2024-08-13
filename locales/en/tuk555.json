@@ -148,7 +148,7 @@
   "Label_Home_StartWinning": "Start winning",
   "Label_Home_StartWinningDescription": "Start your winning from your favorite games",
   "Label_Join_Bank_Select": "Please select your bank account",
-  "Label_Join_Check_Account": "Please check your name and account number!!\n<span className=\"{{classname}}\">If it's incorrect will not be able to edit or deposit / withdraw.</span>",
+  "Label_Join_Check_Account": "Please check your name and account number!!\n<span className=\"{{className}}\">If it's incorrect will not be able to edit or deposit / withdraw.</span>",
   "Label_Join_Choose_Bank": "Choose a bank",
   "Label_Join_EnjoyVipExclusiveBonus": "Enjoy Tuk555 VIP Exclusive Bonus & Rebates",
   "Label_Join_MemberBenefits_1": "SPORTSBOOK WELCOME BONUS",

@@ -34,8 +34,8 @@ interface IInputProps
  * @param {boolean} dirty - 必填，樣式需透過判斷是否觸發過元件，才可做進一步渲染，傳入 dirtyFields[inputName] 做判斷
  * @param {boolean} [password] - 傳遞 password props 控制是否為 pwd input
  * @param {boolean} [copy] - 傳遞 copy props 控制是否顯示copy icon
- * @param {string} [className] - 傳入 classname 加在input，可以手動加入圓角等設定
- * @param {string} [divClassName] - 傳入 classname 加在最上層div，可以手動加入寬度等設定
+ * @param {string} [className] - 傳入 className 加在input，可以手動加入圓角等設定
+ * @param {string} [divClassName] - 傳入 className 加在最上層div，可以手動加入寬度等設定
  * @param {string} [icon] - icon's filename
  * @param {string} [title] - Input 開頭，Icon 右側
  * @param {string} [type] - HTMLInputTypeAttribute

@@ -3,6 +3,7 @@
 import { envCookieNames } from '@brand01/src/i18n/settings'
 import { LANG_TO_CURRENCY } from 'JF-constants'
 import { useAuthStore, useSocialChannelStore } from 'JF-operations'
+import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { useCookies } from 'react-cookie'
 import { useGetPathname } from './useGetPathname'
@@ -18,6 +19,7 @@ const useInitEffect = ({
 	cookieLangId,
 	cookieCurrencyId,
 }: IUseInitEffectProps) => {
+	const router = useRouter()
 	const { locale, currentPath } = useGetPathname()
 	const [cookies, setCookie] = useCookies([
 		envCookieNames.langId,
@@ -67,9 +69,11 @@ const useInitEffect = ({
 		} else if (locale !== langId) {
 			setCookie(envCookieNames.langId, langId, { path: '/' })
 			setCookie(envCookieNames.currencyId, currencyId, { path: '/' })
-			window.history.pushState(null, '', `/${langId}${currentPath}`)
+			router.push(`/${langId}${currentPath}`)
+			// window.history.pushState(null, '', `/${langId}${currentPath}`)
+			// document.documentElement.lang = langId
 		}
-	}, [currencyId, currentPath, isLogin, langId, locale, setCookie])
+	}, [currencyId, currentPath, isLogin, langId, locale, router, setCookie])
 
 	// 初始化取得 Social Channel 資料
 	useEffect(() => {

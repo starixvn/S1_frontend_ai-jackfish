@@ -4,15 +4,18 @@ import { envCookieNames } from '@brand01/src/i18n/settings'
 import { setLanguage } from 'JF-api/account/client'
 import { langId, languageGroup } from 'JF-constants'
 import { cn, imageUrl, useGetPathname } from 'JF-core'
+import { useAuthStore } from 'JF-operations'
+import { useRouter } from 'next/navigation'
 import { useCookies } from 'react-cookie'
 import { toast } from 'react-toastify'
 
 interface ILanguageProps {
-	isLogin: boolean
 	className?: string
 }
 
-const Language = ({ isLogin, className }: ILanguageProps) => {
+const Language = ({ className }: ILanguageProps) => {
+	const { isLogin } = useAuthStore()
+	const router = useRouter()
 	const { locale, currentPath } = useGetPathname()
 	const [cookies, setCookie] = useCookies([
 		envCookieNames.langId,
@@ -26,7 +29,7 @@ const Language = ({ isLogin, className }: ILanguageProps) => {
 			try {
 				isLogin
 					? await setLanguage({ langId })
-					: window.history.pushState(null, '', `/${langId}${currentPath}`)
+					: router.push(`/${langId}${currentPath}`)
 				setCookie(envCookieNames.langId, langId, { path: '/' })
 				setCookie(envCookieNames.currencyId, currencyId, { path: '/' })
 			} catch (error) {

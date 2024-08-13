@@ -3,6 +3,7 @@
 import Button from '@brand01/src/components/button'
 import Input from '@brand01/src/components/input'
 import Language from '@brand01/src/components/language'
+import NavLink from '@brand01/src/components/navLink'
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
@@ -114,12 +115,12 @@ const Login = () => {
 					dirty={!!dirtyFields['password']}
 				/>
 			</form>
-			<Link
+			<NavLink
 				className='text-secondary-300 text-center underline underline-offset-1'
 				href={paths.forgetPassword.root}
 			>
 				{t('Label_Header_ForgetPassword')}
-			</Link>
+			</NavLink>
 			<div className='mt-8 grid grid-cols-1 gap-4'>
 				<Button
 					htmlType='submit'
@@ -134,7 +135,7 @@ const Login = () => {
 					htmlType='button'
 					type='secondary'
 					className='h-12 w-full'
-					disabled={isLoading}
+					isDisabled={isLoading}
 					onClick={() => router.push(paths.join.root)}
 				>
 					{t('Label_General_Join')}
@@ -152,7 +153,7 @@ const Login = () => {
 					{t('Label_General_Contact_Service')}
 				</Link>
 			</div>
-			<Language isLogin={false} className='mt-16' />
+			<Language className='mt-16' />
 		</div>
 	)
 }

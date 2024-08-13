@@ -76,7 +76,7 @@ const Step3 = ({ bankInfoSysListByCurrencyId }: IStep3Props) => {
 								span: <span />,
 							}}
 							values={{
-								classname: 'mx-12 text-sm lg:mx-0',
+								className: 'mx-12 text-sm lg:mx-0',
 							}}
 						/>
 						<img

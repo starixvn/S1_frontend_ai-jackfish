@@ -8,8 +8,7 @@ const useGetPathname = () => {
 	const locale = pathname.substring(1, 3)
 
 	// 取得語系後面的路徑名，如：promption, join...
-	const routeName =
-		pathname.split('/')[2] === undefined ? '' : pathname.split('/')[2]
+	const routeName = pathname.substring(4)
 
 	// 用來實際和 path 匹配
 	const currentPath = `/${routeName}`

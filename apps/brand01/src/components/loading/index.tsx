@@ -9,10 +9,10 @@ interface ILoadingProps {
 
 /**
  * Server Component：使用Suspense fallback自動吃loading狀態 <Suspense fallback={<Loading />}>{Component}</Suspense>
- * Client Component：使用isLoading狀態判斷 <Loading loading={isLoading} />
+ * Client Component：使用isLoading狀態判斷 isLoading && <Loading />
  * --
  * @param {string} [className] - 手動傳入className撐開高度，其他可直接傳入className調整 ex:bg-transparent 等
- * @returns BounceLoader component with loading state, default to true. BounceLoader component with loading state, default to true.
+ * @returns BounceLoader component
  */
 const Loading = ({ className }: ILoadingProps) => {
 	return (

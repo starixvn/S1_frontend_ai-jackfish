@@ -20,7 +20,7 @@ const ReferralStatus = () => {
 				{t('Label_Referral_YourReferralStatus')}
 			</div>
 			{isLoading ? (
-				<Loading classname='mt-4 lg:mt-6 h-[13.25rem] lg:h-32 rounded-[5px]' />
+				<Loading className='mt-4 h-[13.25rem] rounded-[5px] lg:mt-6 lg:h-32' />
 			) : (
 				<div className='mt-4 grid grid-cols-1 place-items-center gap-5 lg:mt-6 lg:grid-cols-2'>
 					<div className='grid h-24 w-full rounded-[5px] bg-neutral-100 p-2.5 text-center lg:h-32'>

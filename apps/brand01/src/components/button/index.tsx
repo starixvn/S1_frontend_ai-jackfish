@@ -47,7 +47,6 @@ const variantClasses = {
 		'bg-secondary-300 hover:bg-secondary-400 active:bg-secondary-500 transition',
 	cancel:
 		'bg-primary-200 text-tertiary-500, hover:bg-primary-100 hover:text-tertiary-400 active:bg-primary-200  active:text-tertiary-500 transition ',
-
 	ghost:
 		'border border-white hover:border-secondary-200  hover:text-secondary-200 active:border-secondary-300  active:text-secondary-300 transition',
 	disabled:

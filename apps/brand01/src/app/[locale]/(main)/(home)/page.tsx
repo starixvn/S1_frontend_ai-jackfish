@@ -3,7 +3,9 @@ import HomeContent from '@brand01/src/components/home/homeContent'
 import React from 'react'
 
 interface IHomeProps {
-	params: { locale: string }
+	params: {
+		locale: string
+	}
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

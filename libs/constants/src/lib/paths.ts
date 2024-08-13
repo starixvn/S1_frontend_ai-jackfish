@@ -56,4 +56,8 @@ export const paths = {
 	referral: {
 		root: '/referral',
 	},
+	// slot 專用 page
+	slotLobby: {
+		root: '/slot-lobby',
+	},
 } as const

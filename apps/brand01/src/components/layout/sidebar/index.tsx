@@ -1,28 +1,35 @@
 'use client'
-import { HOME_MENU_DATA } from '@brand01/src/data/home/menu'
-import { imageUrl } from 'JF-core'
-import Link from 'next/link'
+import { useSocialChannelStore } from 'JF-operations'
+import useMenu from 'libs/core/src/lib/hooks/useMenu'
 import SidebarData from './SidebarData'
 
 const Sidebar = () => {
+	const { menuList } = useMenu()
+	const { lineChannel } = useSocialChannelStore()
 	return (
 		<>
-			{HOME_MENU_DATA.map(({ category, displayKey, iconUrl, subMenu }) => (
-				<SidebarData
-					key={category}
-					category={category}
-					displayKey={displayKey}
-					iconUrl={iconUrl}
-					subMenu={subMenu}
-				/>
-			))}
-			<Link href='' className='mx-auto mt-8 block lg:w-28'>
-				<img
-					className='w-full'
-					src={imageUrl('/img/menu/sever-line.png')}
-					alt=''
-				/>
-			</Link>
+			{menuList.map(
+				({ pathname, category, displayKey, subMenu, iconUrl, ...rest }) => {
+					return (
+						<SidebarData
+							key={category}
+							category={category}
+							subMenu={subMenu}
+							pathname={pathname}
+							displayKey={displayKey}
+							iconUrl={iconUrl}
+							{...rest}
+						/>
+					)
+				},
+			)}
+			<a
+				href={lineChannel.link}
+				target='_blank'
+				className='mx-auto mt-8 block w-3/4 lg:w-28'
+			>
+				<img className='w-full' src='/img/icon/icon-line-sidebar.png' alt='' />
+			</a>
 		</>
 	)
 }

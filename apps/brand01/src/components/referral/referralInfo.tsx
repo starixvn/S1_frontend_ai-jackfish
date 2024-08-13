@@ -5,7 +5,6 @@ import { useGetReferralCode } from 'JF-api/account/client'
 import { paths } from 'JF-constants'
 import { cn, imageUrl, useGetPathname } from 'JF-core'
 import { toUpper } from 'lodash-es'
-import Link from 'next/link'
 import QRCode from 'qrcode.react'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
@@ -113,13 +112,13 @@ const ReferralInfo = () => {
 								.replace('{{ref_url}}', referralLink)
 								.replace('{{text}}', t('Label_Referral_Welcome'))
 							return (
-								<Link key={name} href={href} target='_blank'>
+								<a key={name} href={href} target='_blank'>
 									<img
 										className='h-6 w-6 lg:h-8 lg:w-8'
 										src={imageUrl(`/img/icon/socialmedia/icon-${name}.svg`)}
 										alt={name}
 									/>
-								</Link>
+								</a>
 							)
 						})}
 					</div>

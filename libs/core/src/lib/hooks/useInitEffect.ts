@@ -73,10 +73,8 @@ const useInitEffect = ({ isSignedIn }: IUseInitEffectProps) => {
 
 	// 初始化取得 Social Channel 資料
 	useEffect(() => {
-		if (isLogin) {
-			getSocialChannels({ currencyId, langId })
-		}
-	}, [currencyId, getSocialChannels, langId, isLogin])
+		getSocialChannels({ currencyId, langId })
+	}, [currencyId, getSocialChannels, langId])
 }
 
 export { useInitEffect }

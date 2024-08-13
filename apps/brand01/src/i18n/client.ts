@@ -1,17 +1,17 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import i18next, { FlatNamespace, KeyPrefix } from 'i18next'
+import { useEffect } from 'react'
 import {
-	initReactI18next,
-	useTranslation as useTranslationOrg,
+	FallbackNs,
 	UseTranslationOptions,
 	UseTranslationResponse,
-	FallbackNs,
+	initReactI18next,
+	useTranslation as useTranslationOrg,
 } from 'react-i18next'
 // import { useCookies } from 'react-cookie'
-import resourcesToBackend from 'i18next-resources-to-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
+import resourcesToBackend from 'i18next-resources-to-backend'
 import { getOptions, languages } from './settings'
 
 const runsOnServerSide = typeof window === 'undefined'
@@ -23,8 +23,8 @@ i18next
 	.use(
 		resourcesToBackend(
 			(language: string, namespace: string) =>
-				import(`locales/${language}/${namespace}.json`)
-		)
+				import(`locales/${language}/${namespace}.json`),
+		),
 	)
 	.init({
 		...getOptions(),
@@ -37,11 +37,11 @@ i18next
 
 export function useClientTranslation<
 	Ns extends FlatNamespace,
-	KPrefix extends KeyPrefix<FallbackNs<Ns>> = undefined
+	KPrefix extends KeyPrefix<FallbackNs<Ns>> = undefined,
 >(
 	lng: string,
 	ns?: Ns,
-	options?: UseTranslationOptions<KPrefix>
+	options?: UseTranslationOptions<KPrefix>,
 ): UseTranslationResponse<FallbackNs<Ns>, KPrefix> {
 	// const [cookies, setCookie] = useCookies([cookieName])
 	const ret = useTranslationOrg(ns, options)
@@ -50,12 +50,12 @@ export function useClientTranslation<
 		i18n.changeLanguage(lng)
 	} else {
 		// eslint-disable-next-line react-hooks/rules-of-hooks
-		const [activeLng, setActiveLng] = useState(i18n.resolvedLanguage)
+		// const [activeLng, setActiveLng] = useState(i18n.resolvedLanguage)
 		// eslint-disable-next-line react-hooks/rules-of-hooks
-		useEffect(() => {
-			if (activeLng === i18n.resolvedLanguage) return
-			setActiveLng(i18n.resolvedLanguage)
-		}, [activeLng, i18n.resolvedLanguage])
+		// useEffect(() => {
+		// 	if (activeLng === i18n.resolvedLanguage) return
+		// 	setActiveLng(i18n.resolvedLanguage)
+		// }, [activeLng, i18n.resolvedLanguage])
 		// eslint-disable-next-line react-hooks/rules-of-hooks
 		useEffect(() => {
 			if (!lng || i18n.resolvedLanguage === lng) return

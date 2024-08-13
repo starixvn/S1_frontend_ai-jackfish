@@ -14,7 +14,7 @@ const Page = () => {
 		<>
 			<div className='my-3 text-center text-3xl'>Loading Demo</div>
 			{loading ? (
-				<Loading classname='h-80' />
+				<Loading className='h-80' />
 			) : (
 				<div className='flex h-80 items-center justify-center text-2xl'>
 					demo finished

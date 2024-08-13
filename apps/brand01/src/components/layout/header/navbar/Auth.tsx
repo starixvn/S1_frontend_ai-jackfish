@@ -2,15 +2,14 @@
 
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import { paths } from 'JF-constants'
-import { useGetPathname } from 'JF-core'
+import { useGetPathname, useLocaleRouter } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 
 const Auth = () => {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
-	const router = useRouter()
+	const router = useLocaleRouter()
 	const { isLogin, onSignOut } = useAuthStore()
 
 	const handleSignOut = async () => {

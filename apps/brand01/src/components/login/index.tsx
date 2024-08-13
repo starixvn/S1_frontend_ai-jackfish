@@ -3,7 +3,6 @@
 import Button from '@brand01/src/components/button'
 import Input from '@brand01/src/components/input'
 import Language from '@brand01/src/components/language'
-import NavLink from '@brand01/src/components/navLink'
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
@@ -13,10 +12,15 @@ import {
 	PHONE_LENGTH_REGEX,
 	paths,
 } from 'JF-constants'
-import { cn, imageUrl, useGetPathname } from 'JF-core'
+import {
+	LocaleLink,
+	cn,
+	imageUrl,
+	useGetPathname,
+	useLocaleRouter,
+} from 'JF-core'
 import { useAuthStore, useSocialChannelStore } from 'JF-operations'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
@@ -24,7 +28,7 @@ import { z } from 'zod'
 const Login = () => {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
-	const router = useRouter()
+	const { push } = useLocaleRouter()
 	const {
 		userInfo: { currencyId },
 		onSignInPhone,
@@ -74,8 +78,10 @@ const Login = () => {
 
 	const handleSignIn = async (args: z.infer<typeof formSchema>) => {
 		try {
-			await onSignInPhone(args)
-			router.push(paths.home.root)
+			const data = await onSignInPhone(args)
+			const { langId = locale } = data ?? {}
+			// 指定登入後的 user langId ，避免過度導轉
+			push(paths.home.root, { locale: langId })
 		} catch (error) {
 			toast.error((error as Error).message)
 		}
@@ -115,12 +121,12 @@ const Login = () => {
 					dirty={!!dirtyFields['password']}
 				/>
 			</form>
-			<NavLink
+			<LocaleLink
 				className='text-secondary-300 text-center underline underline-offset-1'
 				href={paths.forgetPassword.root}
 			>
 				{t('Label_Header_ForgetPassword')}
-			</NavLink>
+			</LocaleLink>
 			<div className='mt-8 grid grid-cols-1 gap-4'>
 				<Button
 					htmlType='submit'
@@ -136,7 +142,7 @@ const Login = () => {
 					type='secondary'
 					className='h-12 w-full'
 					isDisabled={isLoading}
-					onClick={() => router.push(paths.join.root)}
+					onClick={() => push(paths.join.root)}
 				>
 					{t('Label_General_Join')}
 				</Button>

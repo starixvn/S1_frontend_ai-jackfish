@@ -3,9 +3,8 @@
 import { envCookieNames } from '@brand01/src/i18n/settings'
 import { setLanguage } from 'JF-api/account/client'
 import { langId, languageGroup } from 'JF-constants'
-import { cn, imageUrl, useGetPathname } from 'JF-core'
+import { cn, imageUrl, useGetPathname, useLocaleRouter } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
-import { useRouter } from 'next/navigation'
 import { useCookies } from 'react-cookie'
 import { toast } from 'react-toastify'
 
@@ -14,8 +13,8 @@ interface ILanguageProps {
 }
 
 const Language = ({ className }: ILanguageProps) => {
-	const { isLogin } = useAuthStore()
-	const router = useRouter()
+	const { isLogin, getUserInfo } = useAuthStore()
+	const router = useLocaleRouter()
 	const { locale, currentPath } = useGetPathname()
 	const [cookies, setCookie] = useCookies([
 		envCookieNames.langId,
@@ -27,11 +26,15 @@ const Language = ({ className }: ILanguageProps) => {
 	const handleLangChange = async (langId: string, currencyId: number) => {
 		if (cookies[envCookieNames.langId] !== langId) {
 			try {
-				isLogin
-					? await setLanguage({ langId })
-					: router.push(`/${langId}${currentPath}`)
-				setCookie(envCookieNames.langId, langId, { path: '/' })
-				setCookie(envCookieNames.currencyId, currencyId, { path: '/' })
+				if (isLogin) {
+					// 設定語系後重撈 custProfile
+					await setLanguage({ langId })
+					await getUserInfo()
+				} else {
+					setCookie(envCookieNames.langId, langId, { path: '/' })
+					setCookie(envCookieNames.currencyId, currencyId, { path: '/' })
+					router.push(currentPath, { locale: langId })
+				}
 			} catch (error) {
 				toast.error((error as Error).message)
 			}

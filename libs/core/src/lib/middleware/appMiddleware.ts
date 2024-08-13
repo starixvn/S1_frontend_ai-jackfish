@@ -55,15 +55,5 @@ export const appMiddleware = ({
 		)
 	}
 
-	// 根據網頁 referer (prePage)，判斷用戶偏好的瀏覽器 locale , 我們不一定需要此邏輯，先註解保留
-	// if (req.headers.has('referer')) {
-	//   const refererUrl = new URL(req.headers.get('referer') || '');
-	//   const lngInReferer = languages.find(l =>
-	//     refererUrl.pathname.startsWith(`/${l}`)
-	//   );
-	//   const response = NextResponse.next();
-	//   if (lngInReferer) response.cookies.set(cookieName, lngInReferer);
-	//   return response;
-	// }
 	return res
 }

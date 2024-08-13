@@ -14,9 +14,8 @@ import {
 	type TDynamicSubMenuLinkType,
 	type TStaticSubMenuItem,
 } from 'JF-constants'
-import { onWindowOpenProduct, useGetPathname } from 'JF-core'
+import { onWindowOpenProduct, useGetPathname, useLocaleRouter } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
-import { useRouter } from 'next/navigation'
 
 type LoginCallbackType = () => void
 type MessageCallbackType = (message: string) => void
@@ -29,7 +28,7 @@ enum LoginGameTypeEnum {
 const useMenuOpen = () => {
 	const { isLogin } = useAuthStore()
 	const { locale } = useGetPathname()
-	const router = useRouter()
+	const router = useLocaleRouter()
 
 	const onDefaultEnterPage = ({
 		langId,

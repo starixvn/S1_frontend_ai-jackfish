@@ -18,19 +18,12 @@ import Sidebar from './sidebar'
 interface ILayoutProps {
 	children: ReactNode
 	isSignedIn: boolean
-	cookieLangId: string
-	cookieCurrencyId: number
 }
 
-const Layout = ({
-	children,
-	isSignedIn,
-	cookieLangId,
-	cookieCurrencyId,
-}: ILayoutProps) => {
+const Layout = ({ children, isSignedIn }: ILayoutProps) => {
 	const { currentPath } = useGetPathname()
 	// 初始化
-	useInitEffect({ isSignedIn, cookieLangId, cookieCurrencyId })
+	useInitEffect({ isSignedIn })
 	// check login interval
 	useOnlineCheckInterval()
 

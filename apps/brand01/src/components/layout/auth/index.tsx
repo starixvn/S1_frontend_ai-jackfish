@@ -6,18 +6,11 @@ import { ReactNode } from 'react'
 interface IAuthLayoutProps {
 	children: ReactNode
 	isSignedIn: boolean
-	cookieLangId: string
-	cookieCurrencyId: number
 }
 
-const AuthLayout = ({
-	children,
-	isSignedIn,
-	cookieLangId,
-	cookieCurrencyId,
-}: IAuthLayoutProps) => {
+const AuthLayout = ({ children, isSignedIn }: IAuthLayoutProps) => {
 	// 初始化
-	useInitEffect({ isSignedIn, cookieLangId, cookieCurrencyId })
+	useInitEffect({ isSignedIn })
 	return <>{children}</>
 }
 

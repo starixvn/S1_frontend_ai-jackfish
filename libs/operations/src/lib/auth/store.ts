@@ -69,16 +69,12 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 		set({ isLoading: true })
 
 		try {
-			const success = await signInPhone(args)
-			if (success) {
-				set({ isLogin: true })
-				await get().getUserInfo()
-			} else {
-				get().resetAuth()
-			}
+			await signInPhone(args)
+			await get().getUserInfo()
 		} finally {
 			set({ isLoading: false })
 		}
+		return { langId: get().userInfo.langId }
 	},
 	onSignOut: async () => {
 		await signOut()
@@ -98,6 +94,8 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 						data?.currencyId ?? defaultUserInfo.currencyId
 					],
 			})
+			// 成功撈取用戶資訊後便可確保已經登入
+			set({ isLogin: true })
 		} finally {
 			set({ isLoading: false })
 		}

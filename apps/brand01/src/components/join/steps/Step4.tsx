@@ -1,13 +1,12 @@
 import Button from '@brand01/src/components/button'
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import { paths } from 'JF-constants'
-import { imageUrl, useGetPathname } from 'JF-core'
-import { useRouter } from 'next/navigation'
+import { imageUrl, useGetPathname, useLocaleRouter } from 'JF-core'
 
 const Step4 = () => {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
-	const router = useRouter()
+	const router = useLocaleRouter()
 
 	return (
 		<>

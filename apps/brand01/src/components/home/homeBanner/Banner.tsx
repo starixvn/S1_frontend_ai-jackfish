@@ -1,8 +1,7 @@
 'use client'
 
 import { TBannerData } from 'JF-api/site/type'
-import { cn, useBannerClick } from 'JF-core'
-import { useRouter } from 'next/navigation'
+import { cn, useBannerClick, useLocaleRouter } from 'JF-core'
 import React from 'react'
 import { SwiperSlide } from 'swiper/react'
 import Carousel from '../../carousel'
@@ -14,7 +13,7 @@ interface IBannerProps {
 }
 
 const Banner: React.FC<IBannerProps> = ({ bannerData, bannerIsLoading }) => {
-	const router = useRouter()
+	const router = useLocaleRouter()
 	const { bannerClick } = useBannerClick()
 	return bannerIsLoading ? (
 		<>

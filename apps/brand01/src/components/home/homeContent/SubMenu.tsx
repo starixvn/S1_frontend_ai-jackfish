@@ -1,13 +1,12 @@
 'use client'
 
 import { useClientTranslation } from '@brand01/src/i18n/client'
-import { imageUrl, useGetPathname, useMenuOpen } from 'JF-core'
-import { useHomeStore } from 'JF-operations'
 import { paths } from 'JF-constants'
-import { useRouter } from 'next/navigation'
+import { imageUrl, useGetPathname, useLocaleRouter, useMenuOpen } from 'JF-core'
+import { useHomeStore } from 'JF-operations'
 
 const SubMenu = () => {
-	const router = useRouter()
+	const router = useLocaleRouter()
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
 	const { onMenuOpen } = useMenuOpen()

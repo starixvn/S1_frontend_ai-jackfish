@@ -11,10 +11,9 @@ import {
 	PHONE_LENGTH_REGEX,
 	paths,
 } from 'JF-constants'
-import { cn, useGetPathname } from 'JF-core'
+import { cn, useGetPathname, useLocaleRouter } from 'JF-core'
 import { useAuthStore, useSocialChannelStore } from 'JF-operations'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
@@ -25,7 +24,7 @@ import { Step1, Step2, Step3, StepTitle } from './steps'
 const ForgetPassword = () => {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
-	const router = useRouter()
+	const router = useLocaleRouter()
 	const {
 		userInfo: { currencyId },
 	} = useAuthStore()

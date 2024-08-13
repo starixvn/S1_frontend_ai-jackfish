@@ -9,7 +9,6 @@ export interface IAuthState {
 }
 
 export interface IAuthAction {
-	setLogin: (loginStatus: boolean) => void
 	setUserInfo: (newUserInfo: TUserInfoData) => void
 	onSignInPhone: ({
 		areaCode,

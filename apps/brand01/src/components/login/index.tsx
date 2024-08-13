@@ -20,7 +20,6 @@ import {
 	useLocaleRouter,
 } from 'JF-core'
 import { useAuthStore, useSocialChannelStore } from 'JF-operations'
-import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
@@ -28,7 +27,7 @@ import { z } from 'zod'
 const Login = () => {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
-	const { push } = useLocaleRouter()
+	const router = useLocaleRouter()
 	const {
 		userInfo: { currencyId },
 		onSignInPhone,
@@ -81,7 +80,8 @@ const Login = () => {
 			const data = await onSignInPhone(args)
 			const { langId = locale } = data ?? {}
 			// 指定登入後的 user langId ，避免過度導轉
-			push(paths.home.root, { locale: langId })
+			router.push(paths.home.root, { locale: langId })
+			router.refresh()
 		} catch (error) {
 			toast.error((error as Error).message)
 		}
@@ -142,7 +142,7 @@ const Login = () => {
 					type='secondary'
 					className='h-12 w-full'
 					isDisabled={isLoading}
-					onClick={() => push(paths.join.root)}
+					onClick={() => router.push(paths.join.root)}
 				>
 					{t('Label_General_Join')}
 				</Button>
@@ -151,13 +151,13 @@ const Login = () => {
 				<span className='mr-1 cursor-default'>
 					{t('Label_General_Found_Problem')}
 				</span>
-				<Link
+				<a
 					className='text-secondary-300 underline underline-offset-1'
 					href={lineChannel.link}
 					target='_blank'
 				>
 					{t('Label_General_Contact_Service')}
-				</Link>
+				</a>
 			</div>
 			<Language className='mt-16' />
 		</div>

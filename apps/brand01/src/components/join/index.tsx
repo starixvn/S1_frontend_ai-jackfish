@@ -19,7 +19,6 @@ import {
 } from 'JF-constants'
 import { cn, useGetPathname } from 'JF-core'
 import { useAuthStore, useSocialChannelStore } from 'JF-operations'
-import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useCallback, useEffect } from 'react'
 import { useCookies } from 'react-cookie'
@@ -212,13 +211,13 @@ const Join = () => {
 						<span className='mr-1 cursor-default'>
 							{t('Label_General_Found_Problem')}
 						</span>
-						<Link
+						<a
 							className='text-secondary-300 underline underline-offset-1'
 							href={lineChannel.link}
 							target='_blank'
 						>
 							{t('Label_General_Contact_Service')}
-						</Link>
+						</a>
 					</div>
 				</>
 			)}

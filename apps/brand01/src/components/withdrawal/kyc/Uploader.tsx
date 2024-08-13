@@ -1,6 +1,6 @@
 import Button from '@brand01/src/components/button'
 import { useClientTranslation } from '@brand01/src/i18n/client'
-import { uploadCustPhoto } from 'JF-api/accountStrict/api'
+import { uploadCustPhoto } from 'JF-api/accountStrict/client'
 import { useGetPathname, useImageUploader } from 'JF-core'
 import { useWithdrawalStore } from 'JF-operations'
 import { toast } from 'react-toastify'

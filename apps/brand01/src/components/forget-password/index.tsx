@@ -13,7 +13,6 @@ import {
 } from 'JF-constants'
 import { cn, useGetPathname, useLocaleRouter } from 'JF-core'
 import { useAuthStore, useSocialChannelStore } from 'JF-operations'
-import Link from 'next/link'
 import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
@@ -138,13 +137,13 @@ const ForgetPassword = () => {
 				<span className='mr-1 cursor-default'>
 					{t('Label_General_Found_Problem')}
 				</span>
-				<Link
+				<a
 					className='text-secondary-300 underline underline-offset-1'
 					href={lineChannel.link}
 					target='_blank'
 				>
 					{t('Label_General_Contact_Service')}
-				</Link>
+				</a>
 			</div>
 		</div>
 	)

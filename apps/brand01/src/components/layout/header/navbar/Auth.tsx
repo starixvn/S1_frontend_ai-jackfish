@@ -15,6 +15,7 @@ const Auth = () => {
 	const handleSignOut = async () => {
 		await onSignOut()
 		router.push(paths.login.root)
+		router.refresh()
 	}
 
 	return (

@@ -15,15 +15,8 @@ export const getUserInfo = async () => {
 	}
 }
 
-// 用 useSWR 封裝，不一定使用得到
-// export const useCustProfile = () => {
-// 	const { data, isLoading, error } = useSWR<IAxiosResponse<TUserInfoData>>(
-// 		accountStrictApiUrl.getCustProfile,
-// 		(url: string) => fetcher<TUserInfoData>(url),
-// 	)
-// 	return {
-// 		profile: data?.data,
-// 		isLoading,
-// 		error,
-// 	}
-// }
+export const uploadCustPhoto = async (file: File) => {
+	const formData = new FormData()
+	formData.append('PhotoId', file)
+	await fetcher<null, FormData>(accountStrictApiUrl.uploadCustPhoto, formData)
+}

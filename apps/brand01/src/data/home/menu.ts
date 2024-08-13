@@ -1,702 +1,1282 @@
 import {
+	LobbyCategoryEnum,
 	MenuActionEnum,
 	MenuKeyEnum,
 	PRODUCTS,
+	TProductProps,
 	paths,
-	type TStaticSubMenuItem,
 } from 'JF-constants'
 
-export type THomeMenuData = {
-	category: MenuKeyEnum
-	displayKey: string
-	iconUrl: string
-	subMenu?: TStaticSubMenuItem[]
-	// lobbyCategoryId: number
+export interface ISubMenu extends TProductProps {
+	currencyGameName?: string | null
+	iconEndTime?: string
+	iconStartTime?: string
+	iconType?: number
+	lobbyCategory?: string
+	pcHeaderPicUrl?: string
+	pcLobbyPicUrl?: string
+	mobileHeaderPicUrl?: string
+	mobileLobbyPicUrl?: string
+	productName?: string
+	rwdHeaderPicUrl?: string
+	rwdLobbyPicUrl?: string
+	sort?: number
+	tpName?: string
+	h5: {
+		hasLobby: boolean
+		menuActionType: keyof typeof MenuActionEnum
+		hasDesktopLink?: boolean
+	}
+	desktop: {
+		hasLobby: boolean
+		menuActionType: keyof typeof MenuActionEnum
+		subMenuImageClassName?: string
+	}
+	pathname?: string
+	query?: {
+		provider?: string
+		type?: string
+		tpId?: string | number
+	}
+	// needLogin?: boolean
 }
 
-export const HOME_MENU_DATA: THomeMenuData[] = [
+export type IMenuData = {
+	category: MenuKeyEnum
+	desktop: {
+		subMenuClassName: string
+		menuType?: 'menu' | 'banner'
+	}
+	display: 'h5' | 'desktop' | 'all'
+	displayKey?: string
+	h5: {
+		icon: string
+		subMenuClassName?: string
+	}
+	iconUrl?: string
+	lobbyCategoryId: number
+	pathname?: string
+	query?: { provider: string }
+	subMenu: ISubMenu[]
+	subMenuAllowCurrenciesWithAuth: boolean // * 決定是否需要登入後才過濾(暫時沒有用到)
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const HOT_GAME_DATA: IMenuData[] | any[] = [
+	// hot games
 	{
 		category: MenuKeyEnum.HotGame,
+		desktop: {
+			subMenuClassName: 'hotgame',
+		},
+		display: 'all',
 		displayKey: 'Label_General_HotGames',
-		iconUrl: '/img/menu/hotgame.png',
-		// lobbyCategoryId: LobbyCategoryEnum.Sports,
+		h5: {
+			icon: 'hotgame',
+			subMenuClassName: 'hotgame',
+		},
+		iconUrl: '/desktop/img/hotgame.png',
+		lobbyCategoryId: LobbyCategoryEnum.HotGame,
+		pathname: paths.home.root,
 		subMenu: [
 			{
-				imgUrl: '/img/lobby/SBSW/sports/soccer.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				// menuActionType: MenuActionEnum.Link,
-				displayKey: 'Label_General_Soccer',
-				...PRODUCTS.Soccer,
-				// pathname: paths.sports.root,
-				// params: { name: 'provider', value: 'Soccer' },
+				...PRODUCTS.CryptoSports,
+				desktop: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				currencyGameName: null,
+				gameId: '43',
+				iconEndTime: '2023-11-25T00:00:00',
+				iconStartTime: '2023-11-01T00:00:00',
+				iconType: 1,
+				lobbyCategory: 'esports',
+				mobileHeaderPicUrl:
+					'["https://banner.0814media.net/h5/img/Header/SBSW/esports/saba.png"]',
+				mobileLobbyPicUrl:
+					'["https://banner.0814media.net/h5/img/LobbyHeader/SBSW/esports/saba.png"]',
+				pathname: paths.home.root,
+				pcHeaderPicUrl:
+					'["https://banner.0814media.net/desktop/img/Header/SBSW/esports/saba.png"]',
+				pcLobbyPicUrl:
+					'["https://banner.0814media.net/desktop/img/LobbyHeader/SBSW/esports/saba.png"]',
+				productName: 'Saba',
+				rwdHeaderPicUrl:
+					'["https://imgs.tuk555.net/img/Header/SBSW/sports/virtual-sports.png"]',
+				rwdLobbyPicUrl:
+					'["https://imgs.tuk555.net/img/LobbyHeader/SBSW/sports/virtual-sports.png"]',
+				sort: 1,
+				tpGameIdNo: 6,
+				tpGameType: 69,
+				tpId: 41,
+				tpName: 'SBSW',
 			},
 		],
+		subMenuAllowCurrenciesWithAuth: false,
 	},
+]
+
+export const HOME_MENU_DATA: IMenuData[] = [
+	// sports
 	{
-		category: MenuKeyEnum.Slots,
-		displayKey: 'Label_General_Slots',
-		iconUrl: '/img/menu/slot.png',
-		// lobbyCategoryId: LobbyCategoryEnum.SLOTS,
-		subMenu: [
-			{
-				imgUrl: '/img/lobby/PP/slots/pragmatic-play.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'Pragmatic Play',
-				...PRODUCTS.PragmaticPlaySlot,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.PragmaticPlaySlot.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/SG/slots/spadegaming.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'Spadegaming',
-				...PRODUCTS.Spadegaming,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.Spadegaming.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/AP/slots/advantplay.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'AdvantPlay',
-				...PRODUCTS.AdvantPlay,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.AdvantPlay.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/Amigo/slots/amigo-gaming.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'Amigo Gaming',
-				...PRODUCTS.AmigoGaming,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.AmigoGaming.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/END/slots/endorphina.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'ES',
-				...PRODUCTS.ES,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.ES.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/Nextspin/slots/nextspin.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'Nextspin',
-				...PRODUCTS.Nextspin,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.Nextspin.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/PG/slots/pg-soft.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'PG Soft',
-				...PRODUCTS.PGSoft,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.PGSoft.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/BNG/slots/bng.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'BNG',
-				...PRODUCTS.BNG,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.BNG.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/FaChai/slots/fachai.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'Fa Chai',
-				...PRODUCTS.FaChai,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.FaChai.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/MG/slots/microgaming.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'Microgaming',
-				...PRODUCTS.MicrogamingSlot,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.MicrogamingSlot.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/JILI/slots/jili.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'Jili',
-				...PRODUCTS.JILI,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.JILI.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/SPRIBE/slots/spribe.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'SPRIBE',
-				...PRODUCTS.SPRIBE,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.SPRIBE.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/Joker/slots/joker.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'Joker',
-				...PRODUCTS.Joker,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.Joker.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/NLC/slots/nolimit-city.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'Nolimit City',
-				...PRODUCTS.NoLimitCity,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.NoLimitCity.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/RedTiger/slots/red-tiger.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'Red Tiger',
-				...PRODUCTS.RedTiger,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.RedTiger.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/Netent/slots/netent.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'NetEnt',
-				...PRODUCTS.NetEnt,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.NetEnt.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/CQ9/slots/cq9.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'CQ9',
-				...PRODUCTS.CQ9,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.CQ9.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/PNG/slots/playn-go.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: `Play' n GO`,
-				...PRODUCTS.PlaynGO,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.PlaynGO.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/GPI/slots/game-play.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'Game Play',
-				...PRODUCTS.GamePlay,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.GamePlay.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/YGG/slots/yggdrassil.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'YGGDrassil',
-				...PRODUCTS.YGGDrassil,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.YGGDrassil.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/AMB/slots/askmeslot.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'askmeslot',
-				...PRODUCTS.AskmeSlot,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.AskmeSlot.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/HB/slots/habanero.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'Habanero',
-				...PRODUCTS.Habanero,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.Habanero.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/SimplePlay/slots/simpleplay.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'SimplePlay',
-				...PRODUCTS.SimplePlay,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.SimplePlay.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/Skywind/slots/skywind.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'Skywind',
-				...PRODUCTS.SkywindSlot,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.SkywindSlot.tpId.toString(),
-				},
-			},
-			{
-				imgUrl: '/img/lobby/PT/slots/playtech.png',
-				menuActionType: MenuActionEnum.Link,
-				displayKey: 'Playtech',
-				...PRODUCTS.NewPlayTechSlot,
-				pathname: paths.slots.root,
-				params: {
-					name: 'tpId',
-					value: PRODUCTS.NewPlayTechSlot.tpId.toString(),
-				},
-			},
-		],
-	},
-	{
+		display: 'all',
+		iconUrl: '/desktop/img/sport.png',
+		lobbyCategoryId: LobbyCategoryEnum.Sports,
 		category: MenuKeyEnum.Sports,
 		displayKey: 'Label_General_Sports',
-		iconUrl: '/img/menu/sport.png',
-		// lobbyCategoryId: LobbyCategoryEnum.Sports,
+		pathname: paths.sports.root,
+		query: { provider: 'Soccer' },
+		desktop: {
+			subMenuClassName: 'sportsList',
+		},
+		h5: {
+			icon: 'sports',
+			subMenuClassName: 'sports',
+		},
 		subMenu: [
 			{
-				imgUrl: '/img/lobby/SBSW/sports/soccer.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				// menuActionType: MenuActionEnum.Link,
-				displayKey: 'Label_General_Soccer',
+				...PRODUCTS.CryptoSports,
+				desktop: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+			},
+			{
 				...PRODUCTS.Soccer,
-				// pathname: paths.sports.root,
-				// params: { name: 'provider', value: 'Soccer' },
+				pathname: paths.sports.root,
+				query: { provider: 'Soccer' },
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.Link,
+				},
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/SBSW/sports/saba-soccer.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				// menuActionType: MenuActionEnum.Link,
-				displayKey: 'Label_General_SabaSoccer',
 				...PRODUCTS.SabaSoccer,
-				// pathname: paths.sports.root,
-				// params: { name: 'provider', value: 'SabaSoccer' },
+				pathname: paths.sports.root,
+				query: { provider: 'SabaSoccer' },
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.Link,
+				},
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/SBSW/sports/basketball.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				// menuActionType: MenuActionEnum.Link,
-				displayKey: 'Label_General_Basketball',
 				...PRODUCTS.Basketball,
-				// pathname: paths.sports.root,
-				// params: { name: 'provider', value: 'Basketball' },
+				pathname: paths.sports.root,
+				query: { provider: 'Basketball' },
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.Link,
+				},
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/SBSW/sports/badminton.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				// menuActionType: MenuActionEnum.Link,
-				displayKey: 'Label_General_Badminton',
+				...PRODUCTS.Cricket,
+				pathname: paths.sports.root,
+				query: { provider: 'Cricket' },
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.Link,
+				},
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+			},
+			{
 				...PRODUCTS.Badminton,
-				// pathname: paths.sports.root,
-				// params: { name: 'provider', value: 'Badminton' },
+				pathname: paths.sports.root,
+				query: { provider: 'Badminton' },
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.Link,
+				},
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/SBSW/sports/volleyball.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				// menuActionType: MenuActionEnum.Link,
-				displayKey: 'Label_General_Volleyball',
 				...PRODUCTS.Volleyball,
-				// pathname: paths.sports.root,
-				// params: { name: 'provider', value: 'Volleyball' },
+				pathname: paths.sports.root,
+				query: { provider: 'Volleyball' },
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.Link,
+				},
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/SBSW/sports/virtual-sports.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				// menuActionType: MenuActionEnum.Link,
-				displayKey: 'Label_General_VirtualSports',
+				pathname: paths.sports.root,
+				query: { provider: 'VirtualSports' },
 				...PRODUCTS.VirtualSports,
-				// pathname: paths.sports.root,
-				// params: { name: 'provider', value: 'VirtualSports' },
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.Link,
+				},
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 		],
+		subMenuAllowCurrenciesWithAuth: false,
 	},
+
+	// esports
 	{
-		category: MenuKeyEnum.ESports,
+		display: 'all',
+		iconUrl: '/desktop/img/esport.png',
 		displayKey: 'Label_General_ESports',
-		iconUrl: '/img/menu/esport.png',
-		// lobbyCategoryId: LobbyCategoryEnum.ESports,
+		category: MenuKeyEnum.ESports,
+		pathname: paths.eSport.root,
+		subMenuAllowCurrenciesWithAuth: false,
+		lobbyCategoryId: LobbyCategoryEnum.ESports,
+		desktop: {
+			subMenuClassName: 'eSportsList',
+		},
+		h5: {
+			icon: 'esports',
+		},
 		subMenu: [
 			{
-				imgUrl: '/img/lobby/SBSW/esports/saba.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Saba',
 				...PRODUCTS.ESportALL,
+				pathname: paths.eSport.root,
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/IM/esports/im-e-sports.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'IM (Inplay Matrix)',
 				...PRODUCTS.IMESports,
+				pathname: paths.eSport.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/TFG/esports/tfgaming.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'TFGaming',
 				...PRODUCTS.TFGaming,
+				pathname: paths.eSport.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 		],
 	},
+
+	// casinos
 	{
+		display: 'all',
+		iconUrl: '/desktop/img/casino.png',
+		h5: {
+			icon: 'casino',
+		},
+		desktop: {
+			subMenuClassName: 'casinoList',
+		},
 		category: MenuKeyEnum.Casino,
 		displayKey: 'Label_General_LiveCasino',
-		iconUrl: '/img/menu/casino.png',
-		// lobbyCategoryId: LobbyCategoryEnum.Casino,
+		pathname: paths.liveCasino.root,
+		subMenuAllowCurrenciesWithAuth: false,
+		lobbyCategoryId: LobbyCategoryEnum.Casino,
 		subMenu: [
 			{
-				imgUrl: '/img/lobby/PP/casino/pragmatic-play.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Pragmatic Play',
 				...PRODUCTS.PragmaticPlayCasino,
+				pathname: paths.liveCasino.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/BG/casino/big-gaming.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Big Game',
+				...PRODUCTS.WonCasino,
+				pathname: paths.liveCasino.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+			},
+
+			{
 				...PRODUCTS.BigGaming,
+				pathname: paths.liveCasino.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/Yeebet/casino/yeebet-casino.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'YeeBet',
 				...PRODUCTS.YeebetCasino,
+				pathname: paths.liveCasino.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/Skywind/casino/skywind.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Skywind',
 				...PRODUCTS.SkywindCasino,
+				pathname: paths.liveCasino.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/MG/casino/microgaming.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Microgaming',
 				...PRODUCTS.MicrogamingCasino,
+				pathname: paths.liveCasino.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/EVO/casino/evolution-gaming.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Evolution Gaming',
 				...PRODUCTS.EvolutionGaming,
+				pathname: paths.liveCasino.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/PT/casino/playtech.png',
-				menuActionType: MenuActionEnum.UseGoToGame,
-				displayKey: 'Playtech',
 				...PRODUCTS.NewPlayTechCasino,
+				pathname: paths.liveCasino.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.UseGoToGame,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.UseGoToGame,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/DG/casino/dream-gaming.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Dream Gaming',
-				...PRODUCTS.DreamGaming,
+				...PRODUCTS.n2LIVE,
+				pathname: paths.liveCasino.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/Sexy/casino/ae-sexy.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'AE Sexy',
-				...PRODUCTS.AESexy,
-			},
-			{
-				imgUrl: '/img/lobby/SA/casino/sa-gaming.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'SA Gaming',
-				...PRODUCTS.SAGaming,
-			},
-			{
-				imgUrl: '/img/lobby/Allbet/casino/allbet.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Allbet',
-				...PRODUCTS.Allbet,
-			},
-			{
-				imgUrl: '/img/lobby/AG/casino/asia-gaming.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Asia Gaming',
-				...PRODUCTS.AsiaGaming,
-			},
-			{
-				imgUrl: '/img/lobby/WM/casino/wm-casino.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'WM Casino',
 				...PRODUCTS.WMCasino,
+				pathname: paths.liveCasino.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/WE/casino/we.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'WE(EBET)',
+				...PRODUCTS.Allbet,
+				pathname: paths.liveCasino.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+			},
+			{
 				...PRODUCTS.WE,
+				pathname: paths.liveCasino.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+			},
+			{
+				...PRODUCTS.SAGaming,
+				pathname: paths.liveCasino.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+			},
+			{
+				...PRODUCTS.AESexy,
+				pathname: paths.liveCasino.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+			},
+			{
+				...PRODUCTS.DreamGaming,
+				pathname: paths.liveCasino.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+			},
+			{
+				...PRODUCTS.AsiaGaming,
+				pathname: paths.liveCasino.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 		],
 	},
+
+	// slots
 	{
+		display: 'all',
+		iconUrl: '/desktop/img/slot.png',
+		h5: {
+			icon: 'slots',
+		},
+		desktop: {
+			subMenuClassName: 'livecasinoList',
+		},
+		category: MenuKeyEnum.Slots,
+		displayKey: 'Label_General_Slots',
+		pathname: paths.slots.root,
+		subMenuAllowCurrenciesWithAuth: false,
+		lobbyCategoryId: LobbyCategoryEnum.SLOTS,
+		subMenu: [
+			{
+				...PRODUCTS.PragmaticPlaySlot,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.PragmaticPlaySlot.tpId,
+				},
+			},
+			{
+				...PRODUCTS.Spadegaming,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.Spadegaming.tpId,
+				},
+			},
+			{
+				...PRODUCTS.AdvantPlay,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.AdvantPlay.tpId,
+				},
+			},
+			{
+				...PRODUCTS.AmigoGaming,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.AmigoGaming.tpId,
+				},
+			},
+			{
+				...PRODUCTS.ES,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.ES.tpId,
+				},
+			},
+			{
+				...PRODUCTS.Nextspin,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.Nextspin.tpId,
+				},
+			},
+			{
+				...PRODUCTS.PGSoft,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.PGSoft.tpId,
+				},
+			},
+			{
+				...PRODUCTS.BNG,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.BNG.tpId,
+				},
+			},
+			{
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.FaChai.tpId,
+				},
+				...PRODUCTS.FaChai,
+			},
+			{
+				...PRODUCTS.MicrogamingSlot,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.MicrogamingSlot.tpId,
+				},
+			},
+			{
+				...PRODUCTS.JILI,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.JILI.tpId,
+				},
+			},
+			{
+				...PRODUCTS.SPRIBE,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.SPRIBE.tpId,
+				},
+			},
+			{
+				...PRODUCTS.Joker,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.Joker.tpId,
+				},
+			},
+			{
+				...PRODUCTS.Pegasus,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.Pegasus.tpId,
+				},
+			},
+			{
+				...PRODUCTS.NoLimitCity,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.Link,
+				},
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.NoLimitCity.tpId,
+				},
+			},
+			{
+				...PRODUCTS.RedTiger,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.RedTiger.tpId,
+				},
+			},
+			{
+				...PRODUCTS.NetEnt,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.NetEnt.tpId,
+				},
+			},
+			{
+				...PRODUCTS.CQ9,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.CQ9.tpId,
+				},
+			},
+			{
+				...PRODUCTS.PlaynGO,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.PlaynGO.tpId,
+				},
+			},
+			{
+				...PRODUCTS.GamePlay,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.GamePlay.tpId,
+				},
+			},
+			{
+				...PRODUCTS.YGGDrassil,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.YGGDrassil.tpId,
+				},
+			},
+			{
+				...PRODUCTS.AMBPoker,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.AMBPoker.tpId,
+				},
+			},
+			{
+				...PRODUCTS.Habanero,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.Habanero.tpId,
+				},
+			},
+			{
+				...PRODUCTS.SimplePlay,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.SimplePlay.tpId,
+				},
+			},
+			{
+				...PRODUCTS.SkywindSlot,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.SkywindSlot.tpId,
+				},
+			},
+			{
+				...PRODUCTS.NewPlayTechSlot,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.NewPlayTechSlot.tpId,
+				},
+			},
+			{
+				...PRODUCTS.AskmeSlot,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.Link,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
+				pathname: paths.slots.root,
+				query: {
+					tpId: PRODUCTS.AskmeSlot.tpId,
+				},
+			},
+		],
+	},
+
+	// games
+	{
+		display: 'all',
+		iconUrl: '/desktop/img/games.png',
+		h5: {
+			icon: 'games',
+		},
+		desktop: { subMenuClassName: 'tableList' },
 		category: MenuKeyEnum.Games,
 		displayKey: 'Label_General_Games',
-		iconUrl: '/img/menu/games.png',
-		// lobbyCategoryId: LobbyCategoryEnum.Game,
+		pathname: paths.game.root,
+		subMenuAllowCurrenciesWithAuth: false,
+		lobbyCategoryId: LobbyCategoryEnum.Game,
 		subMenu: [
 			{
-				imgUrl: '/img/lobby/MP/games/mp-poker.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'MPoker',
 				...PRODUCTS.MPPoker,
+				pathname: paths.game.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/AMB/games/amb-poker.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'AMB Poker',
 				...PRODUCTS.AMBPoker,
+				pathname: paths.game.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/SBSW/games/vgaming.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Vgaming',
 				...PRODUCTS.Vgaming,
+				pathname: paths.game.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/MaxGame/games/maxgame.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Max Game',
-				...PRODUCTS.MaxGame,
-			},
-			{
-				imgUrl: '/img/lobby/KM/games/king-maker.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'King Maker',
 				...PRODUCTS.KingMaker,
+				pathname: paths.game.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/V8/games/v8-poker.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'V8 Poker',
 				...PRODUCTS.V8Poker,
+				pathname: paths.game.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/SPRIBE/games/aviator.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Avitor',
 				...PRODUCTS.Aviator,
+				pathname: paths.game.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/SPRIBE/games/mines.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Mines',
 				...PRODUCTS.Mines,
+				pathname: paths.game.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/SPRIBE/games/goal.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Goal',
 				...PRODUCTS.Goal,
+				pathname: paths.game.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/SPRIBE/games/dice.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Dice',
 				...PRODUCTS.Dice,
+				pathname: paths.game.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/PP/games/spaceman.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Spaceman',
 				...PRODUCTS.Spaceman,
+				pathname: paths.game.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/AP/games/crash.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Crash',
 				...PRODUCTS.Crash,
+				pathname: paths.game.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/JILI/games/go-rush.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Go Rush',
 				...PRODUCTS.GoRush,
+				pathname: paths.game.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+			},
+			{
+				...PRODUCTS.MaxGame,
+				pathname: paths.game.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+			},
+			{
+				...PRODUCTS['93Connect'],
+				pathname: paths.game.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 		],
 	},
+
+	// fishings
 	{
+		display: 'all',
+		iconUrl: '/desktop/img/fishing.png',
+		h5: {
+			icon: 'fishing',
+		},
+		desktop: {
+			subMenuClassName: 'fishList',
+		},
 		category: MenuKeyEnum.Fishing,
 		displayKey: 'Label_General_Fishing',
-		iconUrl: '/img/menu/fishing.png',
-		// lobbyCategoryId: LobbyCategoryEnum.Fishing,
+		pathname: paths.fishing.root,
+		lobbyCategoryId: LobbyCategoryEnum.Fishing,
 		subMenu: [
 			{
-				imgUrl: '/img/lobby/SG/fishing/fishing-god.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Fishing God',
 				...PRODUCTS.FishingGod,
+				pathname: paths.fishing.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/SG/fishing/fishing-war.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Fishing War',
 				...PRODUCTS.FishingWar,
+				pathname: paths.fishing.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/SG/fishing/zombie-party.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Fishing War',
 				...PRODUCTS.ZombieParty,
+				pathname: paths.fishing.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/SG/fishing/alien-hunter.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Alien Hunter',
 				...PRODUCTS.AlienHunter,
+				pathname: paths.fishing.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/CQ9/fishing/paradise.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Paradise',
 				...PRODUCTS.Paradise,
+				pathname: paths.fishing.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/Joker/fishing/fish-haiba.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Fish Haiba',
 				...PRODUCTS.FishHaiba,
+				pathname: paths.fishing.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/Joker/fishing/happy-fish-5.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Happy Fish 5',
 				...PRODUCTS.HappyFish5,
+				pathname: paths.fishing.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/Joker/fishing/monster-awaken.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Monster Awaken',
 				...PRODUCTS.MonsterAwaken,
+				pathname: paths.fishing.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/CQ9/fishing/oneshot-fishing.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Oneshot Fishing',
 				...PRODUCTS.OneshotFishing,
+				pathname: paths.fishing.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 		],
+		subMenuAllowCurrenciesWithAuth: false,
 	},
+
+	// lotteries
 	{
-		category: MenuKeyEnum.Lottery,
+		display: 'all',
+		iconUrl: '/desktop/img/lottery.png',
+		h5: {
+			icon: 'lottery',
+		},
+		desktop: { subMenuClassName: 'gameList' },
 		displayKey: 'Label_General_Lottery',
-		iconUrl: '/img/menu/lottery.png',
-		// lobbyCategoryId: LobbyCategoryEnum.Game,
+		pathname: paths.lottery.root,
+		category: MenuKeyEnum.Lottery,
+		lobbyCategoryId: LobbyCategoryEnum.Lottery,
 		subMenu: [
 			{
-				imgUrl: '/img/lobby/GPI/lottery/keno.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'GPIKeno',
 				...PRODUCTS.GPIKeno,
+				pathname: paths.lottery.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/GPI/lottery/thai-lottery.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Thai Lottery',
 				...PRODUCTS.ThaiLottery,
+				pathname: paths.lottery.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/GPI/lottery/fast-3.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Fast 3',
 				...PRODUCTS.Fast3,
+				pathname: paths.lottery.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/TCG/lottery/tc-gaming.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'TC Gaming',
-				...PRODUCTS.TCGaming,
+				...PRODUCTS.TCG,
+				pathname: paths.lottery.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/SBSW/lottery/keno.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Keno',
 				...PRODUCTS.Keno,
+				pathname: paths.lottery.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/SBSW/lottery/lottery.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Lottery',
 				...PRODUCTS.Lottery,
+				pathname: paths.lottery.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 			{
-				imgUrl: '/img/lobby/SBSW/lottery/number-game.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Number Game',
 				...PRODUCTS.NumberGame,
+				pathname: paths.sports.root,
+				query: { provider: 'NumberGame' },
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 			},
 			{
-				imgUrl: '/img/lobby/SBSW/lottery/table-game.png',
-				menuActionType: MenuActionEnum.EnterPage,
-				displayKey: 'Table Game',
 				...PRODUCTS.TableGame,
+				pathname: paths.lottery.root,
+				h5: {
+					hasLobby: false,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
+				desktop: {
+					hasLobby: true,
+					menuActionType: MenuActionEnum.EnterPage,
+				},
 			},
 		],
+		subMenuAllowCurrenciesWithAuth: false,
 	},
 ]

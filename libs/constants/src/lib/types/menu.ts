@@ -1,3 +1,4 @@
+import { ISubMenuData, ISubMenuDesktopData } from 'JF-api/game/type'
 import { TProductProps } from '../products'
 
 export enum MenuKeyEnum {
@@ -10,6 +11,17 @@ export enum MenuKeyEnum {
 	Fishing = 'Fishing',
 	Lottery = 'Lottery',
 }
+
+export const LobbyCategoryEnum = {
+	HotGame: 0,
+	Sports: 1,
+	ESports: 2,
+	Casino: 3,
+	SLOTS: 4,
+	Game: 6,
+	Fishing: 7,
+	Lottery: 8,
+} as const
 
 export enum MenuActionEnum {
 	EnterPage = 'EnterPage',
@@ -53,24 +65,24 @@ export interface IOpen9WSportsArgs {
 	key: string
 }
 
-export type TSubMenuData = {
-	lobbyCategory: string
-	tpId: number
-	tpName: string
-	productName: string
-	tpGameIdNo: number | undefined
-	gameId?: number | string
-	tpGameType: number
-	currencyGameName: Record<string, string> | null
-	pcHeaderPicUrl: string
-	pcLobbyPicUrl: string
-	mobileHeaderPicUrl: string
-	mobileLobbyPicUrl: string
-	sort: number
-	iconEndTime: string
-	iconStartTime: string
-	iconType: number
-}
+// export type TSubMenuData = {
+// 	lobbyCategory: string
+// 	tpId: number
+// 	tpName: string
+// 	productName: string
+// 	tpGameIdNo: number | undefined
+// 	gameId?: number | string
+// 	tpGameType: number
+// 	currencyGameName: Record<string, string> | null
+// 	pcHeaderPicUrl: string
+// 	pcLobbyPicUrl: string
+// 	mobileHeaderPicUrl: string
+// 	mobileLobbyPicUrl: string
+// 	sort: number
+// 	iconEndTime: string
+// 	iconStartTime: string
+// 	iconType: number
+// }
 
 type TMenuActionLinkType = Extract<
 	keyof typeof MenuActionEnum,
@@ -82,7 +94,7 @@ type TMenuActionOtherType = Exclude<
 	'Link' | 'WindowOpen'
 >
 
-type TStaticSubMenuItemLinkType = TProductProps & {
+export interface TStaticSubMenuItemLinkType extends TProductProps {
 	imgUrl: string
 	displayKey: string
 	menuActionType: TMenuActionLinkType
@@ -92,6 +104,9 @@ type TStaticSubMenuItemLinkType = TProductProps & {
 		value: string
 	}
 	needLogin?: boolean
+	desktop?: ISubMenuDesktopData
+	h5?: ISubMenuDesktopData
+	query?: { provider?: string; tpId?: number }
 }
 
 type TStaticSubMenuItemOtherType = TProductProps & {
@@ -101,18 +116,22 @@ type TStaticSubMenuItemOtherType = TProductProps & {
 	needLogin?: boolean
 }
 
-export type TDynamicSubMenuLinkType = TStaticSubMenuItemLinkType &
-	TSubMenuData & {
-		isTpMaintain: boolean
-		// noPlay?: boolean
-		// noShow?: boolean
-	}
+export interface IAddLiveStreamingProps {
+	isTpMaintain: boolean
+	noPlay?: boolean
+	noShow?: boolean
+}
+export interface TDynamicSubMenuLinkType
+	extends TStaticSubMenuItemLinkType,
+		ISubMenuData,
+		// TProductProps,
+		IAddLiveStreamingProps {}
 
 export type TDynamicSubMenuOtherType = TStaticSubMenuItemOtherType &
-	TSubMenuData & {
+	ISubMenuData & {
 		isTpMaintain: boolean
-		// noPlay?: boolean
-		// noShow?: boolean
+		noPlay?: boolean
+		noShow?: boolean
 	}
 
 export type TDynamicSubMenuItem =
@@ -122,3 +141,23 @@ export type TDynamicSubMenuItem =
 export type TStaticSubMenuItem =
 	| TStaticSubMenuItemLinkType
 	| TStaticSubMenuItemOtherType
+
+export type IMergedMenuData = {
+	display?: 'h5' | 'desktop' | 'all'
+	displayKey?: string
+	iconUrl?: string
+	pathname?: string
+	lobbyCategoryId?: number | undefined
+	subMenuAllowCurrenciesWithAuth?: boolean | undefined // * 決定是否需要登入後才過濾(暫時沒有用到)
+	query?: { provider: string }
+	category?: MenuKeyEnum | undefined
+	h5?: {
+		subMenuClassName?: string
+		icon: string
+	}
+	desktop?: {
+		subMenuClassName?: string | undefined
+	}
+	// subMenu: TDynamicSubMenuItem[]
+	subMenu: ISubMenuData[]
+}

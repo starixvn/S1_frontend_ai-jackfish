@@ -1,6 +1,7 @@
 'use client'
 
 import { IAxiosError } from 'JF-api/baseApi'
+import { ISubMenuData } from 'JF-api/game/type'
 import { useGoToGame } from 'JF-api/tp/client'
 import {
 	IEnterPageArgs,
@@ -14,7 +15,7 @@ import {
 	type TDynamicSubMenuLinkType,
 	type TStaticSubMenuItem,
 } from 'JF-constants'
-import { onWindowOpenProduct, useGetPathname, useLocaleRouter } from 'JF-core'
+import { onWindowOpenProduct, useGetPathname } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
 
 type LoginCallbackType = () => void
@@ -28,7 +29,6 @@ enum LoginGameTypeEnum {
 const useMenuOpen = () => {
 	const { isLogin } = useAuthStore()
 	const { locale } = useGetPathname()
-	const router = useLocaleRouter()
 
 	const onDefaultEnterPage = ({
 		langId,
@@ -210,7 +210,8 @@ const useMenuOpen = () => {
 	 * 目的是為了減少 find 造成 performance 低落以及明確的把動態靜態區分開，code 看起來可以更乾淨
 	 */
 	const onMenuOpen = (
-		item: TDynamicSubMenuItem | TStaticSubMenuItem | undefined,
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		item: (TDynamicSubMenuItem & TStaticSubMenuItem) | ISubMenuData,
 		{
 			loginCallback,
 			messageCallBack,
@@ -232,54 +233,73 @@ const useMenuOpen = () => {
 		// 	if (isTpMaintain) return
 		// }
 
-		const { menuActionType, tpId, gameId, tpGameType, betType } = item || {}
-
-		const linkMethod = () => {
-			const { pathname = '/', params } = (item as TDynamicSubMenuLinkType) || {}
-			router.push(params ? `${pathname}/${params.value}` : pathname)
-		}
-
-		const enterPageMethod = () => {
-			const enterPageArgs: IEnterPageArgs = {
-				langId: locale,
+		const redirectAction = (
+			product: (TDynamicSubMenuItem & TStaticSubMenuItem) | ISubMenuData,
+		) => {
+			const {
 				tpId,
 				gameId,
 				tpGameType,
-				betType: betType,
-			}
-			onEnterPage(enterPageArgs, { loginCallback })
-		}
+				betType,
+				desktop,
+				lobbyCategory,
+				pathname = '/',
+			} = product || {}
 
-		const goToGameMethod = () => {
-			const goToGameArgs: IGoToGameArgs = {
-				tpId,
-				langId: locale,
-				inputs: {
+			const { menuActionType } = desktop || {}
+			const linkMethod = () => {
+				if (lobbyCategory === 'slots') {
+					window.open(`${pathname}/${tpId}`, '_blank')
+				} else {
+					// nova88 如果menuActionType是link的話會導轉頁面，不過TUK555需求是都另開分頁，所以像sports就另開
+					enterPageMethod()
+				}
+			}
+
+			const enterPageMethod = () => {
+				const enterPageArgs: IEnterPageArgs = {
+					langId: locale,
+					tpId,
 					gameId,
-					fun: '0',
-					gameType: tpId === PRODUCTS.NewPlayTechSlot.tpId ? 'slots' : '',
 					tpGameType,
-				},
+					betType: betType,
+				}
+				onEnterPage(enterPageArgs, { loginCallback })
 			}
-			onGoToGame(goToGameArgs, { loginCallback, messageCallBack })
-		}
 
-		const windowOpenMethod = () => {
-			if (window !== undefined) {
-				const { pathname = '/' } = (item as TDynamicSubMenuLinkType) || {}
-				window.open(pathname, pathname)
+			const goToGameMethod = () => {
+				const goToGameArgs: IGoToGameArgs = {
+					tpId,
+					langId: locale,
+					inputs: {
+						gameId,
+						fun: '0',
+						gameType: tpId === PRODUCTS.NewPlayTechSlot.tpId ? 'slots' : '',
+						tpGameType,
+					},
+				}
+				onGoToGame(goToGameArgs, { loginCallback, messageCallBack })
 			}
-		}
 
-		const switchMethod = {
-			[MenuActionEnum.Link]: linkMethod,
-			[MenuActionEnum.EnterPage]: enterPageMethod,
-			[MenuActionEnum.UseGoToGame]: goToGameMethod,
-			[MenuActionEnum.WindowOpen]: windowOpenMethod,
-			// * 靜態遊戲 enterPage 走 Default
-			[MenuActionEnum.Null]: enterPageMethod,
+			const windowOpenMethod = () => {
+				if (window !== undefined) {
+					const { pathname = '/' } = (item as TDynamicSubMenuLinkType) || {}
+					window.open(pathname, pathname)
+				}
+			}
+
+			const switchMethod = {
+				[MenuActionEnum.Link]: linkMethod,
+				[MenuActionEnum.EnterPage]: enterPageMethod,
+				[MenuActionEnum.UseGoToGame]: goToGameMethod,
+				[MenuActionEnum.WindowOpen]: windowOpenMethod,
+				// * 靜態遊戲 enterPage 走 Default
+				[MenuActionEnum.Null]: enterPageMethod,
+			}
+			return switchMethod[menuActionType ?? MenuActionEnum.Null]()
 		}
-		return switchMethod[menuActionType ?? MenuActionEnum.Null]()
+		// * 靜態 (isTpMaintain noPlay 會在 onStaticMenuOpen 擋掉)
+		redirectAction(item)
 	}
 
 	/**

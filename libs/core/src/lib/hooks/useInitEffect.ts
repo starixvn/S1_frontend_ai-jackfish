@@ -31,7 +31,7 @@ const useInitEffect = ({ isSignedIn }: IUseInitEffectProps) => {
 	} = useAuthStore()
 	const { getSocialChannels } = useSocialChannelStore()
 
-	// 初始化 AuthStore，透過 server side init 資料，未登入就直接 set server side 資料，若登入則初始化 userInfo
+	// 初始化 AuthStore，未登入就直接 set cookie 資料，若登入則初始化 userInfo
 	useEffect(() => {
 		if (isSignedIn) {
 			getUserInfo()

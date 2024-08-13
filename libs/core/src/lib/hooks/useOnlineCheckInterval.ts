@@ -5,13 +5,13 @@ import { onlineCheck } from 'JF-api/account/client'
 import { IAxiosError } from 'JF-api/baseApi'
 import { paths } from 'JF-constants'
 import { useAuthStore } from 'JF-operations'
-import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 import { useInterval } from 'usehooks-ts'
 import { useGetPathname } from './useGetPathname'
+import { useLocaleRouter } from './useLocaleRouter'
 
 const useOnlineCheckInterval = () => {
-	const router = useRouter()
+	const router = useLocaleRouter()
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
 	const { isLogin, resetAuth } = useAuthStore()

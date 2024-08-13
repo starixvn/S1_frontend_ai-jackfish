@@ -14,6 +14,6 @@ export const IovationScript = () => (
                  `}
 		</Script>
 
-		<Script strategy='lazyOnload' src='/js/loader_only.js' />
+		{/*<Script strategy='lazyOnload' src='/js/loader_only.js' />*/}
 	</>
 )

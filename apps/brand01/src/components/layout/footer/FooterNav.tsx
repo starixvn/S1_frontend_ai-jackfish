@@ -1,4 +1,5 @@
 'use client'
+
 import {
 	FOOTER_NAV_LEFT_DATA,
 	FOOTER_NAV_RIGHT_DATA,
@@ -6,8 +7,7 @@ import {
 } from '@brand01/src/data/layout/footer'
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import { paths } from 'JF-constants'
-import { imageUrl, useGetPathname } from 'JF-core'
-import Link from 'next/link'
+import { LocaleLink, imageUrl, useGetPathname } from 'JF-core'
 
 const FooterNav = () => {
 	const { locale } = useGetPathname()
@@ -27,7 +27,7 @@ const FooterNav = () => {
 								key={displayKey}
 								className='flex w-1/2 items-center justify-center'
 							>
-								<Link
+								<LocaleLink
 									href={pathname}
 									className='text-sk-grey-400 flex h-10 w-10 flex-col items-center justify-center text-center'
 								>
@@ -39,7 +39,7 @@ const FooterNav = () => {
 									<div className='text-body-sm font-subtitle dark:text-sk-grey-400 mt-1 whitespace-nowrap text-xs text-neutral-100'>
 										{t(displayKey)}
 									</div>
-								</Link>
+								</LocaleLink>
 							</div>
 						)
 					})}
@@ -47,7 +47,7 @@ const FooterNav = () => {
 
 				{/* HOME ＬＯＧＯ */}
 				<div className='absolute left-1/2 bottom-4 z-20 h-20 w-20 translate-x-[-50%] rounded-full bg-neutral-500 p-2 shadow-[0_0_20px_1px_rgb(var(--color-neutral-100)/0.5)]'>
-					<Link
+					<LocaleLink
 						href={paths.home.root}
 						className='absolute left-1/2 bottom-8 h-16 w-16 translate-x-[-50%]'
 					>
@@ -60,7 +60,7 @@ const FooterNav = () => {
 						<div className='text-body-sm font-subtitle dark:text-sk-grey-400 whitespace-nowrap text-xs text-neutral-100'>
 							{t('Label_General_Home')}
 						</div>
-					</Link>
+					</LocaleLink>
 				</div>
 				{/* 為了透明border的墊背圖 */}
 				<div className='absolute bottom-0 left-1/2 -z-10 h-14 min-w-[470px] translate-x-[-50%]'>
@@ -82,7 +82,7 @@ const FooterNav = () => {
 								key={displayKey}
 								className='flex w-1/2 items-center justify-center'
 							>
-								<Link
+								<LocaleLink
 									href={pathname}
 									className='text-sk-grey-400 flex h-10 w-10 flex-col items-center justify-center text-center'
 								>
@@ -94,7 +94,7 @@ const FooterNav = () => {
 									<div className='text-body-sm font-subtitle dark:text-sk-grey-400 mt-1 whitespace-nowrap text-xs text-neutral-100'>
 										{t(displayKey)}
 									</div>
-								</Link>
+								</LocaleLink>
 							</div>
 						)
 					})}

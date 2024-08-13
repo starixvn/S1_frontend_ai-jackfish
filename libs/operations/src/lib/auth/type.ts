@@ -19,7 +19,7 @@ export interface IAuthAction {
 		areaCode: string
 		phoneNo: string
 		password: string
-	}) => Promise<void>
+	}) => Promise<{ langId: string } | undefined>
 	onSignOut: () => Promise<void>
 	getUserInfo: () => Promise<void>
 	resetAuth: () => void

@@ -79,6 +79,7 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 		} finally {
 			set({ isLoading: false })
 		}
+		return { langId: get().userInfo.langId }
 	},
 	onSignOut: async () => {
 		await signOut()
@@ -98,6 +99,8 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 						data?.currencyId ?? defaultUserInfo.currencyId
 					],
 			})
+			// 成功撈取用戶資訊後便可確保已經登入
+			set({ isLogin: true })
 		} finally {
 			set({ isLoading: false })
 		}

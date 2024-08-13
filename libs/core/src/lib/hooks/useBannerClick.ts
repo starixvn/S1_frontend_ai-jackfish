@@ -2,12 +2,12 @@
 
 import { BannerActionEnum, TBannerData } from 'JF-api/site/type'
 import { PRODUCTS, paths } from 'JF-constants'
-import { useRouter } from 'next/navigation'
 import { useGetPathname } from './useGetPathname'
+import { useLocaleRouter } from './useLocaleRouter'
 import { useMenuOpen } from './useMenuOpen'
 
 const useBannerClick = () => {
-	const router = useRouter()
+	const router = useLocaleRouter()
 	const { onGoToGame, onEnterPage } = useMenuOpen()
 	const { locale } = useGetPathname()
 

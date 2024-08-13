@@ -25,7 +25,6 @@ const useInitEffect = ({ isSignedIn }: IUseInitEffectProps) => {
 
 	const {
 		isLogin,
-		setLogin,
 		getUserInfo,
 		setUserInfo,
 		userInfo: { langId, currencyId },
@@ -43,14 +42,7 @@ const useInitEffect = ({ isSignedIn }: IUseInitEffectProps) => {
 				currencyId: cookieCurrencyId,
 			})
 		}
-	}, [
-		cookieCurrencyId,
-		cookieLangId,
-		getUserInfo,
-		isSignedIn,
-		setLogin,
-		setUserInfo,
-	])
+	}, [cookieCurrencyId, cookieLangId, getUserInfo, isSignedIn, setUserInfo])
 
 	// 初始化 cookie landgId & currencyId，
 	// 已登入設定成 userInfo 資料，並且判斷 locale 是否符合帳號資料，不符合則倒轉

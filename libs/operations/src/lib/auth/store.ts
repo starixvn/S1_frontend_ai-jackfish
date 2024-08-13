@@ -71,7 +71,6 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 		try {
 			const success = await signInPhone(args)
 			if (success) {
-				set({ isLogin: true })
 				await get().getUserInfo()
 			} else {
 				get().resetAuth()

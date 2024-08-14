@@ -1,7 +1,7 @@
 'use client'
 
 import i18next, { FlatNamespace, KeyPrefix } from 'i18next'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import {
 	FallbackNs,
 	UseTranslationOptions,
@@ -50,12 +50,12 @@ export function useClientTranslation<
 		i18n.changeLanguage(lng)
 	} else {
 		// eslint-disable-next-line react-hooks/rules-of-hooks
-		// const [activeLng, setActiveLng] = useState(i18n.resolvedLanguage)
+		const [activeLng, setActiveLng] = useState(i18n.resolvedLanguage)
 		// eslint-disable-next-line react-hooks/rules-of-hooks
-		// useEffect(() => {
-		// 	if (activeLng === i18n.resolvedLanguage) return
-		// 	setActiveLng(i18n.resolvedLanguage)
-		// }, [activeLng, i18n.resolvedLanguage])
+		useEffect(() => {
+			if (activeLng === i18n.resolvedLanguage) return
+			setActiveLng(i18n.resolvedLanguage)
+		}, [activeLng, i18n.resolvedLanguage])
 		// eslint-disable-next-line react-hooks/rules-of-hooks
 		useEffect(() => {
 			if (!lng || i18n.resolvedLanguage === lng) return

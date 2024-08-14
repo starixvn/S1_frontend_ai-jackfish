@@ -1,30 +1,32 @@
 'use client'
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import {
+	cn,
 	getProgressPercentage,
 	imageUrl,
 	numFormatToDigits,
 	useGetPathname,
-	useGetWalletInfo,
+	useIconSpin,
 } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
 import { useRef } from 'react'
-import { useOnClickOutside } from 'usehooks-ts'
+import { useBoolean, useOnClickOutside } from 'usehooks-ts'
 
 const Wallet = () => {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
 	const ref = useRef(null)
-	const { userInfo } = useAuthStore()
+	const { value: isActive, toggle, setFalse } = useBoolean(false)
+	const { userInfo, wallet, getWalletInfo } = useAuthStore()
 	const { userName } = userInfo
-	const {
-		isActive,
-		onClickWallet,
-		setFalse,
-		mainWallet,
-		bonusWallet,
-		totalWallet,
-	} = useGetWalletInfo()
+	const { mainWallet, bonusWallet, totalWallet } = wallet
+	const { isSpinActive, onIconSpin } = useIconSpin()
+
+	const handleRefetchWallet = () => {
+		getWalletInfo()
+		onIconSpin()
+	}
+
 	useOnClickOutside(ref, setFalse)
 	return (
 		<>
@@ -34,7 +36,7 @@ const Wallet = () => {
 			>
 				<div
 					className='cursor-pointer text-right lg:text-center'
-					onClick={onClickWallet}
+					onClick={toggle}
 				>
 					{userName}
 				</div>
@@ -43,18 +45,18 @@ const Wallet = () => {
 						className='hidden h-8 w-8 cursor-pointer lg:block'
 						src={imageUrl('/img/header/balance-money.png')}
 						alt=''
-						onClick={onClickWallet}
+						onClick={toggle}
 					/>
-					<span
-						className='text-primary-200 cursor-pointer'
-						onClick={onClickWallet}
-					>
+					<span className='text-primary-200 cursor-pointer' onClick={toggle}>
 						{totalWallet}
 					</span>
 					<img
-						className='h-4 w-4 cursor-pointer'
+						className={cn('h-4 w-4 cursor-pointer', {
+							'animate-spin-once': isSpinActive,
+						})}
 						src={imageUrl('/img/icon/icon-refresh.svg')}
-						alt=''
+						alt='refresh-icon'
+						onClick={handleRefetchWallet}
 					/>
 				</div>
 
@@ -72,9 +74,12 @@ const Wallet = () => {
 									{numFormatToDigits(totalWallet)}
 								</span>
 								<img
-									className='h-4 w-4 cursor-pointer'
+									className={cn('h-4 w-4 cursor-pointer', {
+										'animate-spin-once': isSpinActive,
+									})}
 									src={imageUrl('/img/icon/icon-refresh.svg')}
-									alt=''
+									alt='refresh-icon'
+									onClick={handleRefetchWallet}
 								/>
 							</div>
 						</div>

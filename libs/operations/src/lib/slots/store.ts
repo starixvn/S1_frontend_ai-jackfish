@@ -10,7 +10,7 @@ import { create } from 'zustand'
 
 interface ISlotPageType {
 	fetchSlotGameData: () => Promise<void>
-	isloading: boolean
+	isLoading: boolean
 	providerList: IVendorData[]
 	slotGamesData: ISlotsGameData
 	slotsCategoryData: ISlotsCategoryData
@@ -26,26 +26,26 @@ interface ISlotPageType {
  * @slotsCategoryData 根據CATEGORY_SORT裡的keys，去篩選從api回來的資料，以顯示在分類選單
  */
 export const useSlotPageStore = create<ISlotPageType>(set => ({
-	isloading: false,
+	isLoading: false,
 	providerList: [],
 	slotGamesData: {},
 	slotsCategoryData: {},
 	categoryKeys: [],
 	setCategoryKeys: categoryKey => set(() => ({ categoryKeys: categoryKey })),
 	fetchSlotGameData: async () => {
-		set({ isloading: true })
+		set({ isLoading: true })
 		try {
 			const data = await getSlotGamePage()
 			const { providerList } = data
 			set({
-				isloading: false,
+				isLoading: false,
 				providerList,
 				slotGamesData: data,
 				slotsCategoryData: pick(data, CATEGORY_SORT),
 				categoryKeys: Object.keys(pick(data, CATEGORY_SORT)),
 			})
 		} catch (error) {
-			set({ isloading: false })
+			set({ isLoading: false })
 		}
 	},
 }))

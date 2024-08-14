@@ -9,10 +9,14 @@ const ReferralStatus = () => {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
 	const {
+		isLoading: isAuthLoading,
 		userInfo: { currencyName },
 	} = useAuthStore()
 
-	const { referralSummary, isLoading } = useGetReferralSummary()
+	const { referralSummary, isLoading: isReferralLoading } =
+		useGetReferralSummary()
+
+	const isLoading = isAuthLoading || isReferralLoading
 
 	return (
 		<>

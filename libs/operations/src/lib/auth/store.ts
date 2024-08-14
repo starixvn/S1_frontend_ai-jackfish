@@ -19,12 +19,21 @@ const defaultWalletInfo = {
 	tpWallets: [],
 	bonusWallets: [],
 }
+const defaultWallet = {
+	mainWallet: 0,
+	bonusWallet: 0,
+	totalWallet: 0,
+}
 
+/**
+ * @defaultWalletInfo api取回的資料格式
+ * @defaultWallet 加工過後讓畫面使用的錢包金額與bonus金額
+ */
 const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 	isLoading: false,
 	isLogin: false,
 	userInfo: defaultUserInfo,
-	walletInfo: defaultWalletInfo,
+	wallet: defaultWallet,
 	setUserInfo: newUserInfo => set({ userInfo: newUserInfo }),
 	onSignInPhone: async ({ areaCode, phoneNo, password }) => {
 		if (typeof window === 'undefined') return
@@ -102,12 +111,19 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 	// 撈用戶錢包資訊
 	getWalletInfo: async () => {
 		set({ isLoading: true })
-		try {
-			const data = await getWalletInfo()
-			set({ walletInfo: data ?? defaultWalletInfo })
-		} catch (e) {
-			set({ isLoading: false })
-		}
+
+		const data = (await getWalletInfo()) ?? defaultWalletInfo
+		const { balance = 0, bonusWallets: [{ bonus = 0 } = {}] = [] } = data
+
+		set({
+			wallet: {
+				mainWallet: balance,
+				bonusWallet: bonus,
+				totalWallet: balance + bonus,
+			},
+		})
+
+		set({ isLoading: false })
 	},
 }))
 

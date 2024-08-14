@@ -62,6 +62,15 @@ module.exports = {
 			backgroundImage: {
 				'layout-bg': `url("${process.env.NEXT_PUBLIC_IMAGE_HOST}/img/bg.jpg")`,
 			},
+			keyframes: {
+				'spin-once': {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' },
+				},
+			},
+			animation: {
+				'spin-once': 'spin-once 1s ease-in-out forwards', // Adjust duration and timing function as needed
+			},
 		},
 	},
 	plugins: [

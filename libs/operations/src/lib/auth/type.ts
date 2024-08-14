@@ -1,11 +1,14 @@
-import { IWalletInfoData } from 'JF-api/account/type'
 import { TUserInfoData } from 'JF-api/accountStrict/type'
 
 export interface IAuthState {
 	isLogin: boolean | undefined
 	isLoading: boolean
 	userInfo: TUserInfoData
-	walletInfo: IWalletInfoData
+	wallet: {
+		mainWallet: number
+		bonusWallet: number
+		totalWallet: number
+	}
 }
 
 export interface IAuthAction {

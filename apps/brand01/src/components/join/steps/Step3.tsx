@@ -65,7 +65,7 @@ const Step3 = ({ bankInfoSysListByCurrencyId }: IStep3Props) => {
 					<div
 						className={cn(
 							'bg-tertiary-400 mt-7 grid w-full place-items-center gap-4 p-4',
-							'border-primary-200 rounded-2xl border-2 border-solid',
+							'border-primary-200 rounded-2xl border border-solid',
 							'text-primary-200 text-center text-base',
 							'lg:absolute lg:-left-[17.5rem] lg:-top-7 lg:h-40 lg:w-60 lg:gap-3',
 						)}

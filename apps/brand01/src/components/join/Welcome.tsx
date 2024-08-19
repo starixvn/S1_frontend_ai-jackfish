@@ -3,7 +3,7 @@ import { useClientTranslation } from '@brand01/src/i18n/client'
 import { paths } from 'JF-constants'
 import { imageUrl, useGetPathname, useLocaleRouter } from 'JF-core'
 
-const Step4 = () => {
+const Welcome: React.FC = () => {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
 	const router = useLocaleRouter()
@@ -35,4 +35,4 @@ const Step4 = () => {
 	)
 }
 
-export { Step4 }
+export default Welcome

@@ -9,7 +9,6 @@ import DepositSelectBankModule from '@brand01/src/components/deposit/module/depo
 import DepositSelectedBankAccount from '@brand01/src/components/deposit/module/deposit-selected-bank-account'
 import DepositSelectedBankAmountModule from '@brand01/src/components/deposit/module/deposit-selected-bank-amount-module'
 import DepositSubmitBankSlip from '@brand01/src/components/deposit/module/deposit-submit-bank-slip'
-import { baseDepositFormSchema } from '@brand01/src/components/deposit/schema'
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { IBankTransfer } from 'JF-api/payment/type'
@@ -27,6 +26,7 @@ import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
+import { baseDepositFormSchema } from '../../schema'
 
 type BankTransferFromProps = {
 	payments: IBankTransfer

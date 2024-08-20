@@ -4,7 +4,6 @@ import Button from '@brand01/src/components/button'
 import DepositAmount from '@brand01/src/components/deposit/module/deposit-amount'
 import DepositChooseAvailablePromotion from '@brand01/src/components/deposit/module/deposit-choose-available-promotion'
 import DepositSelectedBankAmountModule from '@brand01/src/components/deposit/module/deposit-selected-bank-amount-module'
-import { baseDepositFormSchema } from '@brand01/src/components/deposit/schema'
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { IEWallet } from 'JF-api/payment/type'
@@ -16,6 +15,7 @@ import { useSearchParams } from 'next/navigation'
 import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
+import { baseDepositFormSchema } from '../../schema'
 
 type MobilePayFormProps = {
 	payments: IEWallet

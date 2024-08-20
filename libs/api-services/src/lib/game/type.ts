@@ -101,6 +101,7 @@ export interface ISubMenuData extends TProductProps {
 	iconEndTime: string
 	iconStartTime: string
 	iconType: number
+	isTpMaintain: boolean
 	lobbyCategory: string
 	mobileHeaderPicUrl: string
 	mobileLobbyPicUrl: string

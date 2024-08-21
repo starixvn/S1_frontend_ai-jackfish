@@ -95,3 +95,230 @@ export type TWithdrawalRecentInfoData = {
 	withdrawalMessage: string
 	withdrawalMessageDetail: TWithdrawalMessageData[]
 }
+export interface IPayInfoListAllData {
+	BankTransfer: IBankTransfer
+	OnlineBanking: IOnlineBanking
+	QuickTransfer: IQuickTransfer
+	AutoChannel: IAutoChannel
+	ChatTransfer: IChatTransfer
+	LinePay: ILinePay
+	EWallet: IEWallet
+	TopUpCard: ITopUpCard
+	Crypto: ICrypto
+	QRPay: IQrPay
+}
+
+export interface IBankTransfer {
+	data: Array<BankTransferData>
+}
+
+export interface BankTransferData {
+	canSubmit: boolean
+	depositType: number
+	bankAccountInfo: BankAccountInfo
+	sysId: number
+	bankName: string
+	bankCode: string
+	bankLogo: string
+	minAmount: number
+	maxAmount: number
+}
+
+export interface BankAccountInfo {
+	bankId: number
+	accountName: string
+	accountNo: string
+	qrCodeUrl: string
+	code: string
+}
+
+export type TSupportBanks = {
+	sysId: number
+	bankName: string
+	bankCode: string
+	bankLogo: string
+	minAmount: number
+	maxAmount: number
+}
+
+export interface OnlineBankingData {
+	selectBank: boolean
+	supportBanks: Array<TSupportBanks>
+	payId: number
+	payName: string
+	groupId: number
+	groupName: string
+	displayGroupName: string
+	channelId: number
+	channelName: string
+	displayChannelName: string
+	mode: number
+	extraDataType: number
+	minAmount: number
+	maxAmount: number
+	amountRule: number
+	amountList: number[]
+	depositType: number
+}
+
+export interface IOnlineBanking {
+	data: Array<OnlineBankingData>
+}
+
+export interface IQuickTransfer {
+	data: null
+}
+
+export interface IAutoChannel {
+	data: null
+}
+
+export interface IChatTransfer {
+	data: null
+}
+export interface ILinePay {
+	data: { link: null }
+}
+
+export interface EWalletData {
+	groupId: number
+	groupName: string
+	displayGroupName: string
+	minAmount: number
+	maxAmount: number
+	supportChannels: SupportChannel[]
+}
+
+export interface IEWallet {
+	data: Array<EWalletData>
+}
+
+export interface SupportChannel {
+	payId: number
+	payName: string
+	groupId: number
+	groupName: string
+	displayGroupName: string
+	channelId: number
+	channelName: string
+	displayChannelName: string
+	mode: number
+	extraDataType: number
+	minAmount: number
+	maxAmount: number
+	amountRule: number
+	amountList?: number[]
+	depositType: number
+}
+
+export interface ITopUpCard {
+	data: null
+}
+
+export type ICryptoData = {
+	groupId: number
+	groupName: string
+	displayGroupName: string
+	minAmount: number
+	maxAmount: number
+	supportChannels: ICryptoSupportChannel[]
+}
+
+export interface ICrypto {
+	data: Array<ICryptoData>
+}
+
+export interface ICryptoSupportChannel {
+	payId: number
+	payName: string
+	groupId: number
+	groupName: string
+	displayGroupName: string
+	channelId: number
+	channelName: string
+	displayChannelName: string
+	mode: number
+	extraDataType: number
+	minAmount: number
+	maxAmount: number
+	amountRule: number
+	amountList: number[]
+	depositType: number
+}
+
+export interface IQrPay {
+	data: null
+}
+
+export interface IDepositBankTransferReqData {
+	bankName: string
+	bankLogo: string
+	bankSite: string
+	accountNo: string
+	accountName: string
+	ifscCode: string
+	transId: string
+	postScript: string
+	minAmount: number
+	maxAmount: number
+}
+
+export interface IPostDepositBankTransferReqArgs {
+	amount: number
+	sysId?: number
+	fromChannel?: number
+	fromSysId?: number
+	hasPromotion: boolean
+	bankId?: number
+	code?: string | null
+}
+
+export interface IUploadReceiptArgs {
+	receipt: string
+	transId: string
+}
+
+export interface IDepositInfoRecentData {
+	createTime: string
+	depositType: number
+	transId: string
+	amount: number
+	status: number
+	depositRep: {
+		ver: number
+		sysId: number
+		accountName: string
+		accountNo: string
+		ifscCode: string
+		currencyId: number
+		isLocalPay: boolean
+		groupId: number
+		code: null | string
+	}
+	bankInfo: {
+		sysId: number
+		currencyId: number
+		bankCode: string
+		bankName: string
+		bankLogo: string
+		bankSite: string
+		status: number
+	}
+	thirdId: null | string
+	refId: null | string
+	depositTime: null
+	depositReceipt: [
+		{
+			depositId: number
+			picFileName: string
+			receiptNo: number
+			depositPic: string
+		},
+	]
+	depositMessage: null | string
+	depositMessageDetail: {
+		errorTypeName: string
+		message: string
+		createTime: string
+	}[]
+}

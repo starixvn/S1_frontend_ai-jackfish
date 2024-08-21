@@ -46,4 +46,5 @@ export const paymentApiUrl = {
 	getWithdrawalBlockSetting: 'Payment/GetWithdrawalBlockSetting',
 	getCustBankInfo: 'Payment/GetCustBankInfo',
 	getBankInfoSysListByCurrencyId: 'Payment/GetBankInfoSysListByCurrencyId',
+	getPayInfoListAll: 'Payment/GetPayInfoListAll',
 }

@@ -11,6 +11,7 @@ import {
 } from './type'
 import { accountApiUrl } from './url'
 
+
 export const onlineCheck = async () => {
 	try {
 		const data = await fetcher<null>(accountApiUrl.onlineCheck)

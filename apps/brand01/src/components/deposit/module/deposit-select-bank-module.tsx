@@ -39,7 +39,7 @@ export default function DepositSelectBankModule({
 					return (
 						<Button
 							className={cn(
-								'w-full lg:w-full',
+								' h-fit w-full justify-start lg:w-full',
 								isActive && 'text-secondary-200 border-secondary-300 ',
 								!canSubmit &&
 									' text-secondary-200 bg-secondary-300/40 border-secondary-300 cursor-not-allowed',

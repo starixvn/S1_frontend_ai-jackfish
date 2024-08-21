@@ -46,7 +46,7 @@ export default function DepositSubmitBankSlip({
 			>
 				{imageFile ? (
 					<img
-						className='h-63 w-64 object-cover object-center'
+						className='h-full w-full object-contain '
 						src={URL.createObjectURL(imageFile)}
 						alt='upload-file'
 					/>

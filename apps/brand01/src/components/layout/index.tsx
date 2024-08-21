@@ -42,10 +42,11 @@ const Layout = ({ children, isSignedIn }: ILayoutProps) => {
 				{/* 先判斷桌機手機 再判斷是不是lobby相關的routes以顯示sidebar */}
 				<div
 					className={cn(
-						'bg-tertiary-400 col-span-2 overflow-y-auto overflow-x-hidden max-lg:max-h-[calc(100%-256px)]',
+						'bg-tertiary-400 col-span-2 overflow-y-auto overflow-x-hidden pb-10 max-lg:max-h-[calc(100%-256px)]',
 						'hidden lg:block',
 						{ block: lobbyRoutes.includes(currentPath) },
 					)}
+					style={{ scrollbarWidth: 'none' }}
 				>
 					<Sidebar />
 				</div>

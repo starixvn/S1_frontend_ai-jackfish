@@ -88,7 +88,6 @@ export interface IGetLobbyHeaderPayload {
 }
 
 export interface ISubMenuDesktopData {
-	hasLobby?: boolean
 	menuActionType: MenuActionEnum
 }
 

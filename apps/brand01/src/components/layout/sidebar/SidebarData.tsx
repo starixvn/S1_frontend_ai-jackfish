@@ -28,19 +28,23 @@ const SidebarData: React.FC<IMergedMenuData> = ({
 		<LocaleLink
 			href={pathname}
 			className={cn(
-				'xl:min-w-500px hover:from-secondary-300 hover:to-primary-300 grid w-full items-center justify-items-center gap-3 px-3 py-1 text-sm text-neutral-100 drop-shadow-lg hover:bg-gradient-to-r max-lg:mt-4 lg:grid-cols-[auto_1fr] lg:justify-items-start lg:px-6 lg:py-3 lg:text-base xl:h-[4.5rem]',
+				'xl:min-w-500px hover:from-secondary-300 hover:to-primary-300 grid w-full items-center justify-items-center gap-3 py-1 text-sm text-neutral-100 drop-shadow-lg hover:bg-gradient-to-r max-lg:mt-4 lg:grid-cols-[auto_1fr] lg:justify-items-start lg:px-6 lg:py-3 lg:text-base xl:h-[4.5rem]',
 				pathname === currentPath &&
 					'from-secondary-300 to-primary-300 bg-gradient-to-r',
 			)}
 			key={category}
 		>
-			<img
-				src={imageUrl(iconUrl)}
-				alt={t(displayKey)}
-				className='h-10 w-10 object-cover'
-			/>
-			<div className='text-center lg:text-left'>
-				<p>{t(displayKey)}</p>
+			<div className='items-center justify-center lg:flex lg:gap-x-2'>
+				<div className='mx-auto h-8 w-8 lg:h-10 lg:w-10'>
+					<img
+						src={imageUrl(iconUrl)}
+						alt={t(displayKey)}
+						className='h-full w-full object-cover'
+					/>
+				</div>
+				<div className='text-center lg:text-left'>
+					<p>{t(displayKey)}</p>
+				</div>
 			</div>
 		</LocaleLink>
 	)

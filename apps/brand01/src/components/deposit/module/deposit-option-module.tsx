@@ -56,7 +56,7 @@ export default function DepositOptionModule({
 					return (
 						<Button
 							type='ghost'
-							className={cn('h-fit w-full flex-col space-x-4 space-y-2', {
+							className={cn('h-fit w-full flex-col space-y-2', {
 								'text-secondary-200 border-secondary-300': isActive,
 							})}
 							onClick={() =>
@@ -71,7 +71,7 @@ export default function DepositOptionModule({
 							key={paymentOption.image}
 						>
 							<img src={paymentOption.image} alt='deposit-option' />
-							<div className='ml-2'>{paymentOption.title}</div>
+							<div>{paymentOption.title}</div>
 						</Button>
 					)
 				})}

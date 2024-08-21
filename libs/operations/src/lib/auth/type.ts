@@ -8,6 +8,8 @@ export interface IAuthState {
 		mainWallet: number
 		bonusWallet: number
 		totalWallet: number
+		rollover: number
+		turnover: number
 	}
 }
 

@@ -2,10 +2,8 @@
 
 import Button from '@brand01/src/components/button'
 import ModuleWrapper from '@brand01/src/components/deposit/module/moudle-wrapper'
-import Input from '@brand01/src/components/input'
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import { ChangeEvent, Dispatch, DragEvent, SetStateAction } from 'react'
-import { useFormContext } from 'react-hook-form'
 
 export default function DepositSubmitBankSlip({
 	locale,
@@ -23,7 +21,6 @@ export default function DepositSubmitBankSlip({
 	errorMessage: string
 }) {
 	const { t } = useClientTranslation(locale)
-	const { register } = useFormContext()
 
 	return (
 		<ModuleWrapper>
@@ -36,11 +33,10 @@ export default function DepositSubmitBankSlip({
 				<li>{t('Label_History_BankSlipHint2')}</li>
 				<li>{t('Label_History_BankSlipHint3')}</li>
 			</ul>
-			<Input
+			<input
 				type='file'
 				id='file-upload'
 				accept='image/*'
-				register={register('receipt')}
 				className='invisible absolute z-10 h-full w-full hover:cursor-pointer'
 				onChange={onImageFileChange}
 			/>

@@ -7,8 +7,8 @@ import { useCopyToClipboard } from 'usehooks-ts'
 
 interface IInputProps
 	extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'> {
-	register?: UseFormRegisterReturn
-	dirty?: boolean
+	register: UseFormRegisterReturn
+	dirty: boolean
 	password?: boolean
 	copy?: boolean
 	divClassName?: string

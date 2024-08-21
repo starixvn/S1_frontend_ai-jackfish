@@ -19,7 +19,7 @@ const Wallet = () => {
 	const { value: isActive, toggle, setFalse } = useBoolean(false)
 	const { userInfo, wallet, getWalletInfo } = useAuthStore()
 	const { userName } = userInfo
-	const { mainWallet, bonusWallet, totalWallet } = wallet
+	const { mainWallet, bonusWallet, totalWallet, rollover, turnover } = wallet
 	const { isSpinActive, onIconSpin } = useIconSpin()
 
 	const handleRefetchWallet = () => {
@@ -106,13 +106,13 @@ const Wallet = () => {
 										<div
 											className={`from-secondary-300 to-tertiary-300 h-3 rounded-3xl bg-gradient-to-r`}
 											style={{
-												width: `${getProgressPercentage(bonusWallet, totalWallet)}%`,
+												width: `${getProgressPercentage(turnover, rollover)}%`,
 											}}
 										></div>
 									</div>
 
 									<span className='text-secondary-300'>
-										{getProgressPercentage(bonusWallet, totalWallet)}%
+										{getProgressPercentage(turnover, rollover)}%
 									</span>
 								</div>
 							</div>

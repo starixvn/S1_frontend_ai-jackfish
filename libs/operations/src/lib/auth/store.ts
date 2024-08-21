@@ -23,6 +23,8 @@ const defaultWallet = {
 	mainWallet: 0,
 	bonusWallet: 0,
 	totalWallet: 0,
+	rollover: 0,
+	turnover: 0,
 }
 
 /**
@@ -113,13 +115,18 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 		set({ isLoading: true })
 
 		const data = (await getWalletInfo()) ?? defaultWalletInfo
-		const { balance = 0, bonusWallets: [{ bonus = 0 } = {}] = [] } = data
+		const {
+			balance = 0,
+			bonusWallets: [{ bonus = 0, rollover = 0, turnover = 0 } = {}] = [],
+		} = data
 
 		set({
 			wallet: {
 				mainWallet: balance,
 				bonusWallet: bonus,
 				totalWallet: balance + bonus,
+				rollover,
+				turnover,
 			},
 		})
 

@@ -9,6 +9,7 @@ import {
 	BannerActionEnum,
 	BannerTypeEnum,
 	IGetBannerPayload,
+	TpMaintainData,
 	type TBannerData,
 } from './type'
 import { siteApiUrl } from './url'
@@ -71,6 +72,17 @@ export const getBanner = async () => {
 			},
 		) as TBannerData[]
 	} catch (error) {
+		return []
+	}
+}
+
+export const getTpMaintainList = async () => {
+	try {
+		const data = await fetcher<TpMaintainData[], null>(
+			`${siteApiUrl.getTpMaintainList}`,
+		)
+		return data?.data
+	} catch (e) {
 		return []
 	}
 }

@@ -37,7 +37,7 @@ export default function DepositSubmitBankSlip({
 				type='file'
 				id='file-upload'
 				accept='image/*'
-				className='invisible absolute z-10 h-full w-full hover:cursor-pointer'
+				className='invisible z-10 h-full w-full hover:cursor-pointer'
 				onChange={onImageFileChange}
 			/>
 			<label

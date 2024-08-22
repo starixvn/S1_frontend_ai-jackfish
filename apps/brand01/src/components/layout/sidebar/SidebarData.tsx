@@ -27,9 +27,11 @@ const SidebarData: React.FC<IMergedMenuData> = ({
 		<LocaleLink
 			href={pathname}
 			className={cn(
-				'xl:min-w-500px hover:from-secondary-300 hover:to-primary-300 grid w-full items-center justify-items-center gap-3 px-3 py-1 text-sm text-neutral-100 drop-shadow-lg hover:bg-gradient-to-r max-lg:mt-4 lg:grid-cols-[auto_1fr] lg:justify-items-start lg:px-6 lg:py-3 lg:text-base xl:h-[4.5rem]',
+				'grid h-24 w-full items-center justify-items-center gap-3 px-3 py-1 text-sm text-neutral-100 drop-shadow-lg',
+				'lg:h-20 lg:grid-cols-[auto_1fr] lg:justify-items-start lg:px-6 lg:py-3 lg:text-base',
+				'hover:from-secondary-300 hover:to-tertiary-400 hover:bg-gradient-to-r',
 				pathname === currentPath &&
-					'from-secondary-300 to-primary-300 bg-gradient-to-r',
+					'from-secondary-300 to-tertiary-400 bg-gradient-to-r',
 			)}
 			key={category}
 		>

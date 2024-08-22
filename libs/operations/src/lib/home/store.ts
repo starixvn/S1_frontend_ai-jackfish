@@ -7,7 +7,8 @@ import {
 import { create } from 'zustand'
 
 interface IActiveHomeMenu {
-	isloading: boolean
+	isInit: boolean
+	isLoading: boolean
 	activeHomeMenu: MenuKeyEnum
 	setActiveHomeMenu: (menu: MenuKeyEnum) => void
 	lobbyHeaderList: TLobbyHeaderData[]
@@ -17,18 +18,15 @@ interface IActiveHomeMenu {
 }
 
 export const useHomeStore = create<IActiveHomeMenu>(set => ({
-	isloading: false,
+	isInit: false,
+	isLoading: false,
 	activeHomeMenu: MenuKeyEnum.Sports,
 	setActiveHomeMenu: menu => set(() => ({ activeHomeMenu: menu })),
 	lobbyHeaderList: [],
 	fetchLobbyHeader: async () => {
-		set({ isloading: true })
-		try {
-			const data = await getLobbyHeader()
-			set({ lobbyHeaderList: data, isloading: false })
-		} catch (error) {
-			set({ isloading: false })
-		}
+		set({ isLoading: true })
+		const data = await getLobbyHeader()
+		set({ lobbyHeaderList: data, isLoading: false, isInit: true })
 	},
 	subMenuData: [],
 	setSubMenuData: subMenu => set(() => ({ subMenuData: subMenu })),

@@ -1,11 +1,18 @@
 'use client'
-import { useSocialChannelStore } from 'JF-operations'
+import { useHomeStore, useSocialChannelStore } from 'JF-operations'
 import useMenu from 'libs/core/src/lib/hooks/useMenu'
 import SidebarData from './SidebarData'
+import SidebarSkeleton from './SidebarSkeleton'
 
 const Sidebar = () => {
 	const { menuList } = useMenu()
 	const { lineChannel } = useSocialChannelStore()
+	const { isInit } = useHomeStore()
+
+	if (!isInit) {
+		return [...Array(8)].map((_, index) => <SidebarSkeleton key={index} />)
+	}
+
 	return (
 		<>
 			{menuList.map(

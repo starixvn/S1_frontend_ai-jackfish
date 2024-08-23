@@ -9,6 +9,7 @@ import {
 import { create } from 'zustand'
 
 interface IActiveHomeMenu {
+	isInit: boolean
 	isloading: boolean
 	lobbyHeaderList: TLobbyHeaderData[]
 	tpMaintainList: TpMaintainData[]
@@ -19,6 +20,7 @@ interface IActiveHomeMenu {
 }
 
 export const useHomeStore = create<IActiveHomeMenu>((set, get) => ({
+	isInit: false,
 	isloading: false,
 	lobbyHeaderList: [],
 	tpMaintainList: [],
@@ -58,6 +60,7 @@ export const useHomeStore = create<IActiveHomeMenu>((set, get) => ({
 				lobbyHeaderList: newLobbyHeaderList,
 				tpMaintainList,
 				isloading: false,
+				isInit: true,
 			})
 		} catch (error) {
 			set({ isloading: false })

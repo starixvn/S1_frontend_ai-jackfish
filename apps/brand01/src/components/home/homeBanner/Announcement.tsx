@@ -10,27 +10,23 @@ interface IAnnouncementProps {
 
 const Announcement: React.FC<IAnnouncementProps> = ({ announcementData }) => {
 	return (
-		// TODO: announcementData是要顯示subject還是content，nova目前是有一個announcement頁面，首頁顯示subject
-		<>
-			<div className='flex'>
-				<img
-					className='mx-2 lg:mx-4'
-					src={imageUrl('/img/icon/icon-megaphone.svg')}
-					alt=''
-				/>
-
-				<Marquee>
-					{announcementData?.map(({ id, subject }) => (
-						<div
-							className='text-secondary-300 ml-8 cursor-pointer py-1 text-xs font-medium'
-							key={`announcement-${id}`}
-						>
-							{subject}
-						</div>
-					))}
-				</Marquee>
-			</div>
-		</>
+		<div className='flex h-8 items-center'>
+			<img
+				className='mx-2 h-4 w-4 lg:mx-4'
+				src={imageUrl('/img/icon/icon-megaphone.svg')}
+				alt=''
+			/>
+			<Marquee>
+				{announcementData?.map(({ id, subject }) => (
+					<div
+						className='text-secondary-300 ml-8 cursor-pointer py-1 text-xs font-medium'
+						key={`announcement-${id}`}
+					>
+						{subject}
+					</div>
+				))}
+			</Marquee>
+		</div>
 	)
 }
 

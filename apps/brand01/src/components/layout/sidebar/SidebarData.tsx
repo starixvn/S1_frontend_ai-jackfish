@@ -15,8 +15,9 @@ const SidebarData: React.FC<IMergedMenuData> = ({
 }) => {
 	const { locale, currentPath } = useGetPathname()
 	const { t } = useClientTranslation(locale)
-	const { setSubMenuData } = useHomeStore()
+	const { setSubMenuData, fetchTpMaintain } = useHomeStore()
 	useEffect(() => {
+		fetchTpMaintain()
 		if (pathname === currentPath) {
 			setSubMenuData(subMenu ?? [])
 		}
@@ -35,13 +36,17 @@ const SidebarData: React.FC<IMergedMenuData> = ({
 			)}
 			key={category}
 		>
-			<img
-				src={imageUrl(iconUrl)}
-				alt={t(displayKey)}
-				className='h-10 w-10 object-cover'
-			/>
-			<div className='text-center lg:text-left'>
-				<p>{t(displayKey)}</p>
+			<div className='items-center justify-center lg:flex lg:gap-x-2'>
+				<div className='mx-auto h-8 w-8 lg:h-10 lg:w-10'>
+					<img
+						src={imageUrl(iconUrl)}
+						alt={t(displayKey)}
+						className='h-full w-full object-cover'
+					/>
+				</div>
+				<div className='text-center lg:text-left'>
+					<p>{t(displayKey)}</p>
+				</div>
 			</div>
 		</LocaleLink>
 	)

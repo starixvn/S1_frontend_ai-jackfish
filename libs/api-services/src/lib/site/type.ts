@@ -104,3 +104,16 @@ export type TSocialChannelData = {
 		android: string
 	}
 }
+
+export type TpMaintainData = {
+	siteId: number
+	tpId: number
+	tpGameType: number
+	tpCategoryId: number
+	beginDate: null | string
+	endDate: null | string
+	maintainType: number
+	typeValue: number
+	beginTime: null | string
+	endTime: null | string
+}

@@ -11,7 +11,6 @@ const useMenu = () => {
 	useEffect(() => {
 		fetchLobbyHeader()
 	}, [fetchLobbyHeader])
-
 	const mergedMenus = (): IMergedMenuData[] => {
 		const mainLobbyHeaderList = lobbyHeaderList?.map(mainMenuItem => {
 			const defMainMenuItem = find(HOME_MENU_DATA, {

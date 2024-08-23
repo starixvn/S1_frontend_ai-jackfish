@@ -15,12 +15,11 @@ const useOnlineCheckInterval = () => {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
 	const { isLogin, resetAuth, getWalletInfo } = useAuthStore()
-	// 一分鐘檢查一次登入狀態
 	useInterval(
 		async () => {
 			try {
-				await onlineCheck()
-				getWalletInfo() // 每一分鐘更新重取一次錢包資料
+				await onlineCheck() // 一分鐘檢查一次登入狀態
+				await getWalletInfo() // 一分鐘更新一次錢包資料
 			} catch (error) {
 				// errorCode === 1001 登出
 				if ((error as IAxiosError)?.errorCode === 1001) {

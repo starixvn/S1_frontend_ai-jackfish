@@ -1,5 +1,7 @@
 import SlotLayout from '@brand01/src/components/layout/slots'
+import { useServerTranslation } from '@brand01/src/i18n'
 import { checkSignIn } from 'JF-api/auth/server'
+import { getLobbyHeader } from 'JF-api/game/server'
 import { paths } from 'JF-constants'
 import { redirect } from 'next/navigation'
 
@@ -22,4 +24,27 @@ export default async function SlotPageLayout({
 			{children}
 		</SlotLayout>
 	)
+}
+
+// setting metadata only for slot page
+export async function generateMetadata({
+	params: { locale, tpId },
+}: {
+	params: {
+		locale: string
+		tpId: string
+	}
+}) {
+	const { t } = await useServerTranslation(locale)
+
+	// 取得遊戲商名稱並顯示在title上
+	const data = await getLobbyHeader()
+	const slotsTpVendor = data
+		.find(item => item.lobbyCategoryId === 4)
+		?.data.find(item => item.tpId === Number(tpId))
+
+	return {
+		title: `${t(`${process.env.NEXT_PUBLIC_SITE_NAME}`)} - ${slotsTpVendor?.productName}`,
+		description: 'Slot Lobby Page',
+	}
 }

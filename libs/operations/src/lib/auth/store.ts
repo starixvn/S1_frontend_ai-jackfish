@@ -25,6 +25,7 @@ const defaultWallet = {
 	totalWallet: 0,
 	rollover: 0,
 	turnover: 0,
+	promoCategoryId: 0,
 }
 
 /**
@@ -117,7 +118,9 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 		const data = (await getWalletInfo()) ?? defaultWalletInfo
 		const {
 			balance = 0,
-			bonusWallets: [{ bonus = 0, rollover = 0, turnover = 0 } = {}] = [],
+			bonusWallets: [
+				{ bonus = 0, rollover = 0, turnover = 0, promoCategoryId = 0 } = {},
+			] = [],
 		} = data
 
 		set({
@@ -127,6 +130,7 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 				totalWallet: balance + bonus,
 				rollover,
 				turnover,
+				promoCategoryId,
 			},
 		})
 

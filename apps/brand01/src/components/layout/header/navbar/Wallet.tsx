@@ -19,9 +19,15 @@ const Wallet = () => {
 	const { value: isActive, toggle, setFalse } = useBoolean(false)
 	const { userInfo, wallet, getWalletInfo } = useAuthStore()
 	const { userName } = userInfo
-	const { mainWallet, bonusWallet, totalWallet, rollover, turnover } = wallet
+	const {
+		mainWallet,
+		bonusWallet,
+		totalWallet,
+		rollover,
+		turnover,
+		promoCategoryId,
+	} = wallet
 	const { isSpinActive, onIconSpin } = useIconSpin()
-
 	const handleRefetchWallet = () => {
 		getWalletInfo()
 		onIconSpin()
@@ -96,7 +102,9 @@ const Wallet = () => {
 						{bonusWallet !== 0 && (
 							<div className='bg-tertiary-500 flex flex-col justify-between gap-2 rounded-md px-4 py-2'>
 								<div className='flex justify-between'>
-									<p className='text-primary-200'>{t('Label_BonusWallet_0')}</p>
+									<p className='text-primary-200'>
+										{t(`Label_Wallet_BonusWallet_${promoCategoryId}`)}
+									</p>
 									<p className='text-secondary-300'>
 										{numFormatToDigits(bonusWallet)}
 									</p>

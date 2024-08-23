@@ -10,6 +10,7 @@ export interface IAuthState {
 		totalWallet: number
 		rollover: number
 		turnover: number
+		promoCategoryId: number // 用來判斷使用者獲得的bonus是哪類型的Live casino, saba......
 	}
 }
 

@@ -1,11 +1,11 @@
 'use client'
 
+import Carousel from '@brand01/src/components/carousel'
+import Loading from '@brand01/src/components/loading'
 import { TBannerData } from 'JF-api/site/type'
 import { cn, useBannerClick, useLocaleRouter } from 'JF-core'
 import React from 'react'
 import { SwiperSlide } from 'swiper/react'
-import Carousel from '../../carousel'
-import Loading from '../../loading'
 
 interface IBannerProps {
 	bannerData: TBannerData[]
@@ -15,11 +15,12 @@ interface IBannerProps {
 const Banner: React.FC<IBannerProps> = ({ bannerData, bannerIsLoading }) => {
 	const router = useLocaleRouter()
 	const { bannerClick } = useBannerClick()
-	return bannerIsLoading ? (
-		<>
-			<Loading />
-		</>
-	) : (
+
+	if (bannerIsLoading) {
+		return <Loading className='h-[30vw] lg:h-[20vw]' />
+	}
+
+	return (
 		<Carousel>
 			{bannerData?.map((item: TBannerData) => (
 				<SwiperSlide key={item.itemKey}>

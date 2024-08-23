@@ -1,6 +1,7 @@
 'use client'
 
 import { cn } from 'JF-core'
+import { useEffect, useState } from 'react'
 import { BounceLoader } from 'react-spinners'
 
 interface ILoadingProps {
@@ -8,13 +9,25 @@ interface ILoadingProps {
 }
 
 /**
- * Server Component：使用Suspense fallback自動吃loading狀態 <Suspense fallback={<Loading />}>{Component}</Suspense>
- * Client Component：使用isLoading狀態判斷 isLoading && <Loading />
+ * Server Component：使用 Suspense fallback 自動吃 loading 狀態: <Suspense fallback={<Loading />}>{Component}</Suspense>
+ * Client Component：使用 isLoading 狀態判斷: if (isLoading) return <Loading />
  * --
- * @param {string} [className] - 手動傳入className撐開高度，其他可直接傳入className調整 ex:bg-transparent 等
- * @returns BounceLoader component
+ * @param {string} [className] - 手動傳入 className 撐開高度以及修改背景顏色，ex:h-screen bg-transparent
+ * @returns BounceLoader component.
  */
 const Loading = ({ className }: ILoadingProps) => {
+	const [loaderSize, setLoaderSize] = useState(
+		window.innerWidth < 768 ? 60 : 80,
+	)
+	// 監聽視窗大小變化調整 loader 大小
+	useEffect(() => {
+		const handleResize = () => {
+			setLoaderSize(window.innerWidth < 768 ? 60 : 80)
+		}
+		window.addEventListener('resize', handleResize)
+		return () => window.removeEventListener('resize', handleResize)
+	}, [])
+
 	return (
 		<div
 			className={cn(
@@ -23,7 +36,7 @@ const Loading = ({ className }: ILoadingProps) => {
 			)}
 		>
 			<BounceLoader
-				size={60}
+				size={loaderSize}
 				color='rgb(var(--color-primary-100))'
 				speedMultiplier={1}
 			/>

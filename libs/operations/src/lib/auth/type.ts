@@ -28,5 +28,5 @@ export interface IAuthAction {
 	onSignOut: () => Promise<void>
 	getUserInfo: () => Promise<void>
 	resetAuth: () => void
-	getWalletInfo: () => void
+	getWalletInfo: () => Promise<void>
 }

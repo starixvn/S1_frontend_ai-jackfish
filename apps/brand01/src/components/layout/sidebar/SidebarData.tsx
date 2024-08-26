@@ -15,9 +15,8 @@ const SidebarData: React.FC<IMergedMenuData> = ({
 }) => {
 	const { locale, currentPath } = useGetPathname()
 	const { t } = useClientTranslation(locale)
-	const { setSubMenuData, fetchTpMaintain } = useHomeStore()
+	const { setSubMenuData } = useHomeStore()
 	useEffect(() => {
-		fetchTpMaintain()
 		if (pathname === currentPath) {
 			setSubMenuData(subMenu ?? [])
 		}

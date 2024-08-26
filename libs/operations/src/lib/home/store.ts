@@ -19,7 +19,7 @@ interface IActiveHomeMenu {
 	setSubMenuData: (subMenu: ISubMenuData[]) => void
 }
 
-export const useHomeStore = create<IActiveHomeMenu>((set, get) => ({
+export const useHomeStore = create<IActiveHomeMenu>(set => ({
 	isInit: false,
 	isloading: false,
 	lobbyHeaderList: [],
@@ -28,7 +28,7 @@ export const useHomeStore = create<IActiveHomeMenu>((set, get) => ({
 		set({ isloading: true })
 		try {
 			const tpMaintainList = await getTpMaintainList()
-			set({ tpMaintainList })
+			set({ tpMaintainList, isloading: false })
 		} catch (e) {
 			set({ isloading: false })
 		}
@@ -36,9 +36,11 @@ export const useHomeStore = create<IActiveHomeMenu>((set, get) => ({
 	fetchLobbyHeader: async () => {
 		set({ isloading: true })
 		try {
-			const data = await getLobbyHeader()
-			const tpMaintainList = get().tpMaintainList
-			const newLobbyHeaderList = data.map(mainMenuItem => {
+			const [lobbyHeaderData, tpMaintainList] = await Promise.all([
+				getLobbyHeader(),
+				getTpMaintainList(),
+			])
+			const newLobbyHeaderList = lobbyHeaderData.map(mainMenuItem => {
 				const { lobbyCategoryId, data: menuData = [] } = mainMenuItem || {}
 				const mergedSubMenus = menuData.map(subMenuItem => {
 					// * 插入 maintenance

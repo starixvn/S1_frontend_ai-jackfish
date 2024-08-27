@@ -1,6 +1,6 @@
 'use client'
-import Language from '@brand01/src/components/language'
-import Auth from './Auth'
+
+import ChangePasswordModal from './ChangePasswordModal'
 import DepositAndWithdrawalBtn from './DepositAndWithdrawalBtn'
 import DepositLeft from './DepositLeft'
 import Profile from './Profile'
@@ -21,12 +21,8 @@ const Navbar = () => {
 			{/* 個人資訊 */}
 			<Profile />
 
-			{/* ==============之後關掉=============== */}
-			{/* 語系選擇 */}
-			{/* <Language /> */}
-			{/* 登入註冊 */}
-			{/* <Auth /> */}
-			{/* ==================================== */}
+			{/* 後台手動設定修改密碼彈窗 */}
+			<ChangePasswordModal />
 		</>
 	)
 }

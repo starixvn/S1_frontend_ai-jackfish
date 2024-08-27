@@ -8,7 +8,6 @@ import AcountInfo from '@brand01/src/components/profile/menu/account-info'
 import ActivePromotion from '@brand01/src/components/profile/menu/active-promotion'
 import FinancialLog from '@brand01/src/components/profile/menu/financial-log'
 import PromotionCode from '@brand01/src/components/profile/menu/promotion-code'
-import Referral from '@brand01/src/components/profile/menu/referral'
 import { paths } from 'JF-constants'
 import {
 	cn,
@@ -71,7 +70,6 @@ const Profile = () => {
 		[t('Label_General_FinancialLog')]: <FinancialLog />,
 		[t('Label_Profile_PromoCode')]: <PromotionCode />,
 		[t('Label_Profile_ActivePromotion')]: <ActivePromotion />,
-		[t('Lable_Profile_Referral')]: <Referral />,
 	}
 
 	// 確保如果是手機的初始畫面 切回桌機時會顯示account info  （因為手機尺寸下activeButton是null）
@@ -80,12 +78,10 @@ const Profile = () => {
 	}
 
 	// 桌機跟手機的menuOptions不同
-	const displayedOptions = menuOptions
-		.filter(option => (isDesktop ? !option.onlyH5 : true))
-		.map(option => ({
-			...option,
-			label: t(option.label), // 翻譯定義的label
-		}))
+	const displayedOptions = menuOptions.map(option => ({
+		...option,
+		label: t(option.label), // 翻譯定義的label
+	}))
 
 	// 因為預設畫面右半邊是隱藏的，所以需要檢查activeButton是否為null
 	const getContent = () => {
@@ -233,6 +229,24 @@ const Profile = () => {
 						</div>
 					</MenuCard>
 				))}
+				{isMobile && (
+					<MenuCard
+						className='bg-tertiary-400 mt-1'
+						onClick={() => {
+							router.push(paths.referral.root)
+							onClose()
+						}}
+					>
+						<div className='flex justify-start'>
+							<img
+								src={imageUrl('/img/icon/user-info/icon-referral.png')}
+								alt='referral'
+								className='mr-3 h-7 w-7'
+							/>
+							{t('Label_General_Referral')}
+						</div>
+					</MenuCard>
+				)}
 				<MenuCard
 					className='bg-tertiary-400 to-primary-300 active:from-secondary-300 mt-1 mb-4 bg-gradient-to-b'
 					onClick={handleSignOut}
@@ -274,7 +288,9 @@ const Profile = () => {
 						</div>
 					)}
 					{/* 左側或在手機尺寸下顯示全寬 */}
-					<div className={`col-span-1 h-full overflow-y-scroll ${!isDesktop ? 'col-span-3' : ''}`}>
+					<div
+						className={`col-span-1 h-full overflow-y-scroll ${!isDesktop ? 'col-span-3' : ''}`}
+					>
 						{toggleView()}
 					</div>
 

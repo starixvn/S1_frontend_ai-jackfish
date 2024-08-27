@@ -71,7 +71,7 @@ const ChangePasswordModal = () => {
 
 	// 後台手動 ResetPassword 時要開啟 Modal 不給做任何事直到修改完密碼
 	useEffect(() => {
-		if (!isResetPwd) {
+		if (isResetPwd) {
 			// 進入首頁以外地方導回首頁
 			currentPath !== paths.home.root && router.push(paths.home.root)
 			onOpen()

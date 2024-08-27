@@ -2,7 +2,7 @@
 
 import { SelectOptionType } from '@brand01/src/components/select/type'
 import { useClientTranslation } from '@brand01/src/i18n/client'
-import { useGetPathname } from 'JF-core'
+import { cn, useGetPathname } from 'JF-core'
 import { SelectHTMLAttributes } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
@@ -16,6 +16,7 @@ export default function Select({
 	options,
 	register,
 	selectId,
+	className,
 	...props
 }: ISelectProps) {
 	const { locale } = useGetPathname()
@@ -23,7 +24,10 @@ export default function Select({
 	return (
 		<select
 			id={selectId}
-			className='text-tertiary-400 focus:border-secondary-300 col-span-3 w-full appearance-none rounded-[5px] border-2 border-solid border-transparent py-3 px-12 text-center text-sm placeholder:text-neutral-300 focus:outline-none disabled:bg-neutral-200 '
+			className={cn(
+				'text-tertiary-400 focus:border-secondary-300  w-full appearance-none rounded-[5px] border-2 border-solid border-transparent py-3 px-12 text-center text-sm placeholder:text-neutral-300 focus:outline-none disabled:bg-neutral-200 ',
+				className,
+			)}
 			{...register}
 			{...props}
 		>

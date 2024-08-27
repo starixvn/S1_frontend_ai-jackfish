@@ -50,14 +50,20 @@ export default function DepositAmount({
 				error={!!errors['amount']}
 			/>
 			{isShowShortcutList && (
-				<div className='grid grid-cols-3 gap-5'>
+				<div className=' grid w-full auto-cols-max grid-flow-col gap-2'>
 					{generateShortcutList({ minAmount }).map(amount => {
 						const disabled = isDisabled(amount)
-						const isActive = amount === getValues('amount')
+						const selected = amount === getValues('amount')
 
 						return (
 							<Button
-								className={cn(isActive && 'bg-primary-500')}
+								className={cn(
+									'h-6 w-11 rounded-xl text-xs',
+									'lg:h-10 lg:w-20',
+									{
+										'bg-primary-500': selected,
+									},
+								)}
 								isDisabled={disabled}
 								onClick={() => {
 									setValue('amount', amount, { shouldValidate: true })

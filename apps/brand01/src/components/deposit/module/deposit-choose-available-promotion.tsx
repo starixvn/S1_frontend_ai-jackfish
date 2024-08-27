@@ -36,6 +36,7 @@ export default function DepositChooseAvailablePromotion() {
 
 			<div className='grid grid-flow-col items-baseline space-x-2 space-y-4'>
 				<Select
+					className='col-span-4'
 					selectId='deposit-promotion'
 					options={selectOptions}
 					register={register('bonusCode')}
@@ -45,6 +46,7 @@ export default function DepositChooseAvailablePromotion() {
 				/>
 
 				<Input
+					className='col-span-3'
 					register={register('promoCode')}
 					format={isConvert(currencyId || 4)}
 					placeholder={t('Label_Promotions_PromoCode') || ''}

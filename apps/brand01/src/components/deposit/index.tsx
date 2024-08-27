@@ -59,12 +59,7 @@ export default function depositPage() {
 		fetchPayInfoListAll()
 	}, [fetchPayInfoListAll])
 
-	if (!isInit)
-		return (
-			<div className='h-3/4  py-6 px-8 lg:px-72'>
-				<Loading className='bg-tertiary-500 rounded-2xl' />
-			</div>
-		)
+	if (!isInit) return <Loading className='h-[80vh] bg-transparent' />
 
 	return (
 		<MaxWidthWrapper

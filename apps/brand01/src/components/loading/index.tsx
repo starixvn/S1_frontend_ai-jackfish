@@ -13,6 +13,7 @@ interface ILoadingProps {
  * Client Component：使用 isLoading 狀態判斷: if (isLoading) return <Loading />
  * --
  * @param {string} [className] - 手動傳入 className 撐開高度以及修改背景顏色，ex:h-screen bg-transparent
+ * @param {number} [size] - 手動傳入 size 修改 loader 大小，ex:size={60}
  * @returns BounceLoader component.
  */
 const Loading = ({ className, size = 80 }: ILoadingProps) => {

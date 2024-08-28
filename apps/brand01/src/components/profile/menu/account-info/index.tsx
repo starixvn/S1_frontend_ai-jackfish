@@ -95,7 +95,7 @@ const AcountInfo = () => {
 					</div>
 
 					<div className='flex justify-center'>
-						<div className='flex w-[100%] flex-col justify-center lg:w-[70%] '>
+						<div className='flex w-full flex-col justify-center lg:w-[70%] '>
 							{/* 密碼變更表單顯示區域 */}
 							<div
 								className={`overflow-hidden transition-all duration-1000 ${
@@ -113,7 +113,7 @@ const AcountInfo = () => {
 								<div className='mx-auto flex w-full justify-center rounded p-2'>
 									<div className='flex w-full flex-row items-center justify-center rounded-lg bg-white p-7'>
 										<img
-											className='h-[40px] w-[40px]'
+											className='h-10 w-10'
 											src={`${process.env.NEXT_PUBLIC_PAYMENT_HOST}/square/${bankLogo?.toLowerCase()}`}
 											alt='Bank Logo'
 										/>

@@ -3,11 +3,11 @@
 import Language from '@brand01/src/components/language'
 import Modal from '@brand01/src/components/modal'
 import MenuCard from '@brand01/src/components/profile/common/MenuCard'
-import { menuOptions } from '@brand01/src/components/profile/config/menuConfig'
 import AcountInfo from '@brand01/src/components/profile/menu/account-info'
 import ActivePromotion from '@brand01/src/components/profile/menu/active-promotion'
 import FinancialLog from '@brand01/src/components/profile/menu/financial-log'
 import PromotionCode from '@brand01/src/components/profile/menu/promotion-code'
+import { menuOptions } from '@brand01/src/data/profile'
 import { paths } from 'JF-constants'
 import {
 	cn,
@@ -134,7 +134,7 @@ const Profile = () => {
 						<div className='w-fill flex h-8 justify-center'>
 							<div className='bg-tertiary-400 relative flex w-[40vw] items-center justify-end gap-2 rounded-3xl pl-8 pr-3'>
 								<img
-									className='absolute left-[-10px] h-[40px] w-[40px] cursor-pointer lg:block'
+									className='absolute left-[-10px] h-10 w-10 cursor-pointer lg:block'
 									src={imageUrl('/img/icon/user-info/balance-money.png')}
 									alt='balance money'
 								/>

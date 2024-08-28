@@ -1,4 +1,5 @@
 import Button from '@brand01/src/components/button'
+import dayjs from 'dayjs'
 import { getFinancialLog } from 'JF-api/payment/client'
 import { useState } from 'react'
 import DatePicker from 'react-datepicker'
@@ -6,22 +7,21 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { useTranslation } from 'react-i18next'
 import { SyncLoader } from 'react-spinners'
 
-
 interface IFinancialLogItem {
-	createTime: string;
-	refTransId: string;
-	typeName: string;
-	beforeAmount: number;
-	changeAmount: number;
-	afterAmount: number;
-  }
+	createTime: string
+	refTransId: string
+	typeName: string
+	beforeAmount: number
+	changeAmount: number
+	afterAmount: number
+}
 
 const FinancialLog = () => {
 	const { t } = useTranslation()
 	const [hasSearched, setHasSearched] = useState<boolean>(false)
 	const [startDate, setStartDate] = useState<Date | null>(new Date())
 	const [endDate, setEndDate] = useState<Date | null>(new Date())
-	const [financialLogs, setFinancialLogs] = useState<IFinancialLogItem[]>([]) 
+	const [financialLogs, setFinancialLogs] = useState<IFinancialLogItem[]>([])
 	const [loading, setLoading] = useState<boolean>(false)
 
 	const handleStartDate = (date: Date | null) => {
@@ -33,43 +33,36 @@ const FinancialLog = () => {
 	}
 
 	const handleQuickPick = (type: string) => {
-		let tempEndDate = new Date();
-		let tempStartDate = new Date();
+		let tempEndDate = dayjs()
+		let tempStartDate = dayjs()
+
 		switch (type) {
 			case 'today':
-				// No changes to startDate or endDate as both will be today
-				break;
+				break
 			case 'yesterday':
-				tempStartDate.setDate(tempEndDate.getDate() - 1);
-				tempEndDate.setDate(tempEndDate.getDate() - 1);
-				break;
+				tempStartDate = tempEndDate.subtract(1, 'day')
+				tempEndDate = tempStartDate
+				break
 			case 'thisWeek':
-				{
-					const currentDay = tempEndDate.getDay(); // 取得今天是星期幾
-					tempStartDate.setDate(tempEndDate.getDate() - currentDay); // 本週一
-					// End date remains today, so we cover till the end of today
-				}
-				break;
+				tempStartDate = tempEndDate.startOf('week')
+				break
 			case 'lastWeek':
-				{
-					const dayOfWeek = tempEndDate.getDay(); // 取得今天是星期幾
-					tempStartDate.setDate(tempEndDate.getDate() - dayOfWeek - 7); // 上週一
-					tempEndDate.setDate(tempEndDate.getDate() - dayOfWeek - 1); // 上週日
-				}
-				break;
+				tempStartDate = tempEndDate.subtract(1, 'week').startOf('week')
+				tempEndDate = tempStartDate.endOf('week')
+				break
 			case 'thisMonth':
-				tempStartDate = new Date(tempEndDate.getFullYear(), tempEndDate.getMonth(), 1); // 本月第一天
-				// End date remains today, to include all of this month until today
-				break;
+				tempStartDate = tempEndDate.startOf('month')
+				break
 			case 'lastMonth':
-				tempStartDate = new Date(tempEndDate.getFullYear(), tempEndDate.getMonth() - 1, 1); // 上月第一天
-				tempEndDate = new Date(tempEndDate.getFullYear(), tempEndDate.getMonth(), 0); // 上月最後一天
-				break;
+				tempStartDate = tempEndDate.subtract(1, 'month').startOf('month')
+				tempEndDate = tempStartDate.endOf('month')
+				break
 			default:
-				return; // 如果選項不符合任何已知類型，則不進行操作
+				return // 如果選項不符合任何已知類型，則不進行操作
 		}
-		setStartDate(tempStartDate);
-		setEndDate(tempEndDate);
+
+		setStartDate(tempStartDate.toDate())
+		setEndDate(tempEndDate.toDate())
 	}
 
 	const handleQuickPickChange = (
@@ -86,8 +79,8 @@ const FinancialLog = () => {
 			setLoading(true) // 開始加載資料
 			setHasSearched(false) // 重置搜尋狀態
 			try {
-				const startDateString = startDate.toISOString().split('T')[0]
-				const endDateString = endDate.toISOString().split('T')[0]
+				const startDateString = dayjs(startDate).format('YYYY-MM-DD');
+				const endDateString = dayjs(endDate).format('YYYY-MM-DD');
 				// 使用 getFinancialLog 函數傳遞日期參數
 				const financialLog = await getFinancialLog(
 					startDateString,
@@ -192,33 +185,24 @@ const FinancialLog = () => {
 					</div>
 				)}
 
-				<div className='lg:h-[385px] space-y-4 pb-6 overflow-y-scroll'>
+				<div className='space-y-4 overflow-y-scroll pb-6 lg:h-[385px]'>
 					{!loading && financialLogs.length > 0 && (
 						<div>
 							{financialLogs.map(log => (
 								// wrapper
 								<div
-									className='mx-2 mt-4 rounded-xl bg-white pl-2 pr-4 text-black text-sm lg:text-base leading-3 lg:leading-0 '
+									className='lg:leading-0 mx-2 mt-4 rounded-xl bg-white pl-2 pr-4 text-sm leading-3 text-black lg:text-base '
 									key={log.createTime}
 								>
 									{/* 1 */}
 									<div className='flex justify-between '>
 										<div className='text-tertiary-500 text-md px-2 py-2'>
-											{new Date(log.createTime)
-												.toLocaleString('en-US', {
-													year: 'numeric',
-													month: '2-digit',
-													day: '2-digit',
-													hour: '2-digit',
-													minute: '2-digit',
-													second: '2-digit',
-													hour12: true, // 使用 12 小時制 (AM/PM)
-												})
-												.replace(',', '')}{' '}
-											{/* 使用 replace 去掉逗號 */}
+											{dayjs(log.createTime).format('MM/DD/YYYY hh:mm:ss A')}
 										</div>
 										<div className='flex flex-row items-center'>
-											<div className='text-neutral-300'>{t('Label_General_TransId')}</div>
+											<div className='text-neutral-300'>
+												{t('Label_General_TransId')}
+											</div>
 											<div className='text-tertiary-500 px-2 py-2 font-bold'>
 												{log.refTransId}
 											</div>
@@ -226,7 +210,9 @@ const FinancialLog = () => {
 									</div>
 									{/* 2 */}
 									<div className='div'>
-										<div className='px-2 text-neutral-300'>{t('Label_History_TypeName')}</div>
+										<div className='px-2 text-neutral-300'>
+											{t('Label_History_TypeName')}
+										</div>
 										<div className='px-2 py-2 text-lg font-bold  text-neutral-500 '>
 											{log.typeName}
 										</div>
@@ -243,14 +229,18 @@ const FinancialLog = () => {
 												</div>
 											</div>
 											<div>
-												<div className='text-neutral-300'>{t('Label_History_ChangeAmount')}</div>
+												<div className='text-neutral-300'>
+													{t('Label_History_ChangeAmount')}
+												</div>
 												<div className='text-tertiary-500 px-2 py-2 font-bold'>
 													{log.changeAmount}
 												</div>
 											</div>
 										</div>
 										<div>
-											<div className='text-neutral-300'>{t('Label_History_AfterAmount')}</div>
+											<div className='text-neutral-300'>
+												{t('Label_History_AfterAmount')}
+											</div>
 											<div className='text-secondary-300 px-2 py-2 font-bold'>
 												{log.afterAmount}
 											</div>

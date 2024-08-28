@@ -7,7 +7,6 @@ import {
 	ISubmitWithdrawalArgs,
 	KycStatusEnum,
 	TBankInfoSysData,
-	TStatementData,
 	TWithdrawalLimitData,
 	TWithdrawalRecentInfoData,
 	TWithdrawalSetting,
@@ -108,30 +107,5 @@ export const checkKyc = async (): Promise<KycStatusEnum> => {
 
 		// 如果是其他異常錯誤統一先回 normal，否則用戶會被卡在 KYC page
 		return KycStatusEnum.Normal
-	}
-}
-
-export const getFinancialLog = async (
-	startDate: string,
-	endDate: string,
-	pageNumber = 1,
-): Promise<TStatementData[]> => {
-	try {
-		// 將日期轉換為秒為單位的 Unix 時間戳
-		const startDateTimestamp = Math.floor(new Date(startDate).getTime() / 1000)
-		const endDateTimestamp = Math.floor(new Date(endDate).getTime() / 1000)
-		// payload
-		const payload = {
-			startDate: startDateTimestamp,
-			endDate: endDateTimestamp,
-			pageNumber,
-		}
-		const response = await fetcher<TStatementData[], typeof payload>(
-			paymentApiUrl.getStatement,
-			payload,
-		)
-		return response.data || []
-	} catch (e) {
-		return []
 	}
 }

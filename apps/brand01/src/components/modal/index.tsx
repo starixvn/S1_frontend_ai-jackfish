@@ -4,14 +4,13 @@ import React, { useEffect } from 'react'
 
 interface ModalProps {
 	children: React.ReactNode
-	size: 'sm' | 'md' | 'xs'
+	size: 'sm' | 'md'
 	isOpen: boolean
 	onClose: () => void
 	className?: string
 	blockScrollOnMount?: boolean
 	closeOnEsc?: boolean
 	closeOnOverlayClick?: boolean
-	showCloseButton?: boolean
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -23,15 +22,13 @@ const Modal: React.FC<ModalProps> = ({
 	blockScrollOnMount = true,
 	closeOnEsc = true,
 	closeOnOverlayClick = false,
-	showCloseButton = true,
 }) => {
 	const baseClasses =
 		'lg:rounded-xl relative transform bg-tertiary-500 shadow-xl transition-transform duration-300 ease-in-out'
 
 	const sizeClasses = {
-		xs: 'pb-14 w-full h-full lg:w-[500px] lg:h-[500px]',
 		sm: 'pb-14 w-full h-full lg:w-[600px] lg:h-[810px]',
-		md: 'pb-14 w-full h-full lg:w-[880px] lg:h-[561px]',
+		md: 'pb-14 w-full h-full lg:w-[800px] lg:h-[561px]',
 	}
 
 	const sizeClass = sizeClasses[size]
@@ -79,30 +76,28 @@ const Modal: React.FC<ModalProps> = ({
 					<div
 						className={`bg-tertiary-500 flex justify-end p-3 lg:rounded-tl-xl lg:rounded-tr-xl`}
 					>
-						{showCloseButton && (
-							<button
-								type='button'
-								onClick={onClose} // 只有點擊這個按鈕時才觸發 onClose
-								className='inline-flex items-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900'
+						<button
+							type='button'
+							onClick={onClose} // 只有點擊這個按鈕時才觸發 onClose
+							className='inline-flex items-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900'
+						>
+							<svg
+								className='h-5 w-5'
+								fill='#afa9d6'
+								stroke='#afa9d6'
+								viewBox='0 0 20 20'
+								xmlns='http://www.w3.org/2000/svg'
+								strokeWidth='2'
 							>
-								<svg
-									className='h-5 w-5'
-									fill='#afa9d6'
-									stroke='#afa9d6'
-									viewBox='0 0 20 20'
-									xmlns='http://www.w3.org/2000/svg'
-									strokeWidth='2'
-								>
-									<path
-										fillRule='evenodd'
-										d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
-										clipRule='evenodd'
-									></path>
-								</svg>
-							</button>
-						)}
+								<path
+									fillRule='evenodd'
+									d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+									clipRule='evenodd'
+								></path>
+							</svg>
+						</button>
 					</div>
-					<div className='bg-tertiary-500 h-full px-4 py-3 lg:rounded-bl-xl lg:rounded-br-xl'>
+					<div className='bg-tertiary-500 h-full overflow-y-scroll px-4 py-3 lg:rounded-bl-xl lg:rounded-br-xl'>
 						{children}
 					</div>
 				</div>

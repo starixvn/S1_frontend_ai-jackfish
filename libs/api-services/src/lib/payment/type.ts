@@ -95,16 +95,3 @@ export type TWithdrawalRecentInfoData = {
 	withdrawalMessage: string
 	withdrawalMessageDetail: TWithdrawalMessageData[]
 }
-
-export type TStatementData = {
-	type: string
-	changeAmount: number
-	beforeAmount: number
-	afterAmount: number
-	refTransId: string
-	createTime: string
-	createTimeOffset: string
-	direction: number
-	typeName: string
-	custTimeZone: string
-}

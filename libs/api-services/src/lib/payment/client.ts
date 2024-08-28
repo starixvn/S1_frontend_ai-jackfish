@@ -1,5 +1,6 @@
 'use client'
 
+import * as dayjs from 'dayjs'
 import useSWR from 'swr'
 import { IAxiosError, IAxiosResponse, fetcher } from '../baseApi'
 import {
@@ -118,8 +119,8 @@ export const getFinancialLog = async (
 ): Promise<TStatementData[]> => {
 	try {
 		// 將日期轉換為秒為單位的 Unix 時間戳
-		const startDateTimestamp = Math.floor(new Date(startDate).getTime() / 1000)
-		const endDateTimestamp = Math.floor(new Date(endDate).getTime() / 1000)
+		const startDateTimestamp = dayjs(startDate).unix()
+		const endDateTimestamp = dayjs(endDate).unix()
 		// payload
 		const payload = {
 			startDate: startDateTimestamp,

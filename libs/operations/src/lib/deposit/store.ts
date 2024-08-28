@@ -54,7 +54,7 @@ const useDepositStore = create<IDepositState & IDepositAction>((set, get) => ({
 			const { depositType, status } = item || {}
 			// 只有 BankTransfer 才有 Processing 狀態
 			return (
-				depositType === DepositTypeEnum.BankTransfer ||
+				depositType === DepositTypeEnum.BankTransfer &&
 				status === DepositStatusEnum.Pending
 			)
 		})

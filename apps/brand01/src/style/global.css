@@ -4,24 +4,40 @@
 @tailwind components;
 @tailwind utilities;
 
+/* date picker都會內建wrapper 內建inline block 所以要蓋掉*/
+.react-datepicker-wrapper
+{
+	display: block !important;
+}
 
-/* width */
-::-webkit-scrollbar {
-    width: 10px;
+
+/*  先註解 有時會影響佈局 改下方的隱藏樣式 */
+/* ::-webkit-scrollbar {
+    width: 5px;
 }
-/* Track */
 ::-webkit-scrollbar-track {
-    background: #010326;  /* tertiary 500 */
+    background: #010326; 
 }
-/* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #e9d3fe; /* primary 100 */
+    background: #e9d3fe;
     border-radius: 5px;
 }
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #afa9d6; /* primary 200 */
-}
+    background: #afa9d6; 
+} */
+
+
+/* 隱藏scroll bar */
+
+* {
+    -ms-overflow-style: none;  /* IE 和 Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  *::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari 和 Opera */
+  }
+
 
 
 @layer base {

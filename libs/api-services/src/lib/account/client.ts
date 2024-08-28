@@ -3,6 +3,7 @@
 import useSWR from 'swr'
 import { IAxiosError, IAxiosResponse, fetcher } from '../baseApi'
 import {
+	ISetChangePasswordArgs,
 	IWalletInfoData,
 	TCustBankInfoData,
 	TEWalletData,
@@ -105,5 +106,16 @@ export const useGetReferralSummary = () => {
 		referralSummary: data?.data,
 		isLoading,
 		error,
+	}
+}
+
+export const changePassword = async (args: ISetChangePasswordArgs) => {
+	try {
+		return await fetcher<null, ISetChangePasswordArgs>(
+			accountApiUrl.changePassword,
+			args,
+		)
+	} catch (error) {
+		throw error as IAxiosError
 	}
 }

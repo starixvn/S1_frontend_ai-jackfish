@@ -14,11 +14,12 @@ import {
 	getProgressPercentage,
 	imageUrl,
 	numFormatToDigits,
+	useDisclosure,
 	useIconSpin,
 	useLocaleRouter,
 } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
-import useDisclosure from 'libs/core/src/lib/hooks/useDisclosure'
+
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SyncLoader } from 'react-spinners'

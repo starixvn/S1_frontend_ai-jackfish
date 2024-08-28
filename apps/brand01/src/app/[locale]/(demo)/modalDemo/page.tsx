@@ -2,7 +2,7 @@
 
 import Button from '@brand01/src/components/button'
 import Modal from '@brand01/src/components/modal'
-import useDisclosure from 'libs/core/src/lib/hooks/useDisclosure'
+import { useDisclosure } from 'JF-core'
 
 //把原本內建的overflow-y-scroll 拿掉 需要的話自己加上
 

@@ -17,7 +17,7 @@ const Banner: React.FC<IBannerProps> = ({ bannerData, bannerIsLoading }) => {
 	const { bannerClick } = useBannerClick()
 
 	if (bannerIsLoading) {
-		return <Loading className='h-[30vw] lg:h-[20vw]' />
+		return <Loading className='h-[30vw] lg:h-[20vw]' size={60} />
 	}
 
 	return (

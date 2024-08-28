@@ -41,7 +41,10 @@ const ReferralStatus: React.FC = () => {
 				{t('Label_Referral_YourReferralStatus')}
 			</div>
 			{isLoading ? (
-				<Loading className='mt-4 h-[13.25rem] rounded-[5px] lg:mt-6 lg:h-32' />
+				<Loading
+					className='mt-4 h-[13.25rem] rounded-[5px] lg:mt-6 lg:h-32'
+					size={60}
+				/>
 			) : (
 				<div className='mt-4 grid grid-cols-1 place-items-center gap-5 lg:mt-6 lg:grid-cols-2'>
 					<StatusBox

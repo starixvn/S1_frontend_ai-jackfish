@@ -322,3 +322,16 @@ export interface IDepositInfoRecentData {
 		createTime: string
 	}[]
 }
+
+export type TStatementData = {
+	type: string
+	changeAmount: number
+	beforeAmount: number
+	afterAmount: number
+	refTransId: string
+	createTime: string
+	createTimeOffset: string
+	direction: number
+	typeName: string
+	custTimeZone: string
+}

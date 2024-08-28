@@ -12,6 +12,7 @@ import {
 	type ISubmitWithdrawalArgs,
 	type IUploadReceiptArgs,
 	type TBankInfoSysData,
+	TStatementData,
 	type TWithdrawalLimitData,
 	type TWithdrawalRecentInfoData,
 	type TWithdrawalSetting,
@@ -174,5 +175,30 @@ export const getDepositInfoRecentList = async () => {
 		return data
 	} catch (error) {
 		throw error as IAxiosError
+	}
+}
+
+export const getFinancialLog = async (
+	startDate: string,
+	endDate: string,
+	pageNumber = 1,
+): Promise<TStatementData[]> => {
+	try {
+		// 將日期轉換為秒為單位的 Unix 時間戳
+		const startDateTimestamp = Math.floor(new Date(startDate).getTime() / 1000)
+		const endDateTimestamp = Math.floor(new Date(endDate).getTime() / 1000)
+		// payload
+		const payload = {
+			startDate: startDateTimestamp,
+			endDate: endDateTimestamp,
+			pageNumber,
+		}
+		const response = await fetcher<TStatementData[], typeof payload>(
+			paymentApiUrl.getStatement,
+			payload,
+		)
+		return response.data || []
+	} catch (e) {
+		return []
 	}
 }

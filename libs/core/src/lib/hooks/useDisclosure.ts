@@ -19,4 +19,4 @@ const useDisclosure = (defaultIsOpen = false): IUseDisclosure => {
 	}
 }
 
-export default useDisclosure
+export { useDisclosure }

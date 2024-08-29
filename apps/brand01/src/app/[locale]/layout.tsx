@@ -1,4 +1,5 @@
 import { toUpper } from 'lodash-es'
+import NextTopLoader from 'nextjs-toploader'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import 'swiper/css/bundle'
@@ -39,6 +40,10 @@ export default function RootLayout({
 	return (
 		<html lang={locale}>
 			<body className='bg-tertiary-500 mx-auto lg:bg-neutral-500'>
+				<NextTopLoader
+					color='rgb(var(--color-primary-300))'
+					showSpinner={false}
+				/>
 				{children}
 				<ToastContainer />
 			</body>

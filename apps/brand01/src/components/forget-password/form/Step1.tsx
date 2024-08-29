@@ -1,9 +1,9 @@
 import Button from '@brand01/src/components/button'
 import Input from '@brand01/src/components/input'
-import { useClientTranslation } from '@brand01/src/i18n/client'
+import { TFunction } from 'i18next'
 import { resetPwdByOTP } from 'JF-api/site/client'
 import { AREA_CODE_BY_CURRENCY } from 'JF-constants'
-import { imageUrl, useGetPathname } from 'JF-core'
+import { imageUrl } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
 import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
@@ -11,12 +11,10 @@ import { toast } from 'react-toastify'
 
 interface IStep1Props {
 	goToNextStep: () => void
+	t: TFunction<string, undefined>
 }
 
-const Step1 = ({ goToNextStep }: IStep1Props) => {
-	const { locale } = useGetPathname()
-	const { t } = useClientTranslation(locale)
-
+const Step1: React.FC<IStep1Props> = ({ goToNextStep, t }) => {
 	const {
 		userInfo: { currencyId },
 	} = useAuthStore()

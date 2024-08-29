@@ -1,19 +1,17 @@
 import Button from '@brand01/src/components/button'
 import Input from '@brand01/src/components/input'
-import { useClientTranslation } from '@brand01/src/i18n/client'
-import { imageUrl, useGetPathname } from 'JF-core'
+import { TFunction } from 'i18next'
+import { imageUrl } from 'JF-core'
 import { Dispatch, SetStateAction } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useTimeout } from 'usehooks-ts'
 
 interface IStep3Props {
 	setIsTimeOut: Dispatch<SetStateAction<boolean>>
+	t: TFunction<string, undefined>
 }
 
-const Step3 = ({ setIsTimeOut }: IStep3Props) => {
-	const { locale } = useGetPathname()
-	const { t } = useClientTranslation(locale)
-
+const Step3: React.FC<IStep3Props> = ({ setIsTimeOut, t }) => {
 	const {
 		formState: { errors, dirtyFields, isSubmitting, isSubmitSuccessful },
 		register,

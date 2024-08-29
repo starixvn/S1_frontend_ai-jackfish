@@ -3,7 +3,7 @@
 import Language from '@brand01/src/components/language'
 import Modal from '@brand01/src/components/modal'
 import MenuCard from '@brand01/src/components/profile/common/MenuCard'
-import AcountInfo from '@brand01/src/components/profile/menu/account-info'
+import AccountInfo from '@brand01/src/components/profile/menu/account-info'
 import ActivePromotion from '@brand01/src/components/profile/menu/active-promotion'
 import FinancialLog from '@brand01/src/components/profile/menu/financial-log'
 import PromotionCode from '@brand01/src/components/profile/menu/promotion-code'
@@ -20,7 +20,7 @@ import {
 } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SyncLoader } from 'react-spinners'
 import { useBoolean, useMediaQuery } from 'usehooks-ts'
@@ -67,16 +67,18 @@ const Profile = () => {
 
 	//object literal to map the content to the button
 	const contentMap = {
-		[t('Label_Profile_AccountInfo')]: <AcountInfo />,
+		[t('Label_Profile_AccountInfo')]: <AccountInfo />,
 		[t('Label_General_FinancialLog')]: <FinancialLog />,
 		[t('Label_Profile_PromoCode')]: <PromotionCode />,
 		[t('Label_Profile_ActivePromotion')]: <ActivePromotion />,
 	}
 
 	// 確保如果是手機的初始畫面 切回桌機時會顯示account info  （因為手機尺寸下activeButton是null）
-	if (isDesktop && !activeButton) {
-		setActiveButton(t('Label_Profile_AccountInfo'))
-	}
+	useEffect(() => {
+		if (isDesktop && !activeButton) {
+			setActiveButton(t('Label_Profile_AccountInfo'))
+		}
+	}, [isDesktop, activeButton, t])
 
 	// 桌機跟手機的menuOptions不同
 	const displayedOptions = menuOptions.map(option => ({
@@ -90,7 +92,7 @@ const Profile = () => {
 		return contentMap[activeButton] || null
 	}
 
-	// 手機尺寸下只會不會有左右兩個畫面，只會有一個畫面
+	// 手機只會有一個畫面 但桌機會有左右兩個畫面 所以要特別處理
 	const toggleView = () => {
 		if (isMobile && activeButton) {
 			// 若為手機尺寸且有選擇項目，隱藏左側並顯示右側

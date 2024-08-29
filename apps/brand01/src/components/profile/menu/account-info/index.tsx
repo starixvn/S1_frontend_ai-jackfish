@@ -1,11 +1,10 @@
 import { getCustBankInfo } from 'JF-api/account/client'
-import { imageUrl } from 'JF-core'
+import { cn, imageUrl } from 'JF-core'
 import { useAuthStore, useSocialChannelStore } from 'JF-operations'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SyncLoader } from 'react-spinners'
 import ChangePasswordInput from './ChangePasswordInput'
-
 
 interface BankInfo {
 	bankLogo: string
@@ -13,7 +12,7 @@ interface BankInfo {
 	accountName: string
 }
 
-const AcountInfo = () => {
+const AccountInfo = () => {
 	const [loading, setLoading] = useState<boolean>(true)
 	const [error, setError] = useState<string | null>(null)
 	const [bankInfo, setBankInfo] = useState<BankInfo | null>(null)
@@ -63,7 +62,7 @@ const AcountInfo = () => {
 	}
 
 	return (
-		<div className='center block h-full lg:h-[460px] w-full justify-center overflow-y-scroll'>
+		<div className='center block h-full w-full justify-center overflow-y-scroll lg:h-[460px]'>
 			<div className='flex w-full justify-center pb-3'>
 				<h1 className='text-xl'>{t('Label_Profile_AccountInfo')}</h1>
 			</div>
@@ -98,9 +97,10 @@ const AcountInfo = () => {
 						<div className='flex w-full flex-col justify-center lg:w-[70%] '>
 							{/* 密碼變更表單顯示區域 */}
 							<div
-								className={`overflow-hidden transition-all duration-1000 ${
-									showChangePassword ? 'max-h-[400px]' : 'max-h-0'
-								}`}
+								className={cn(
+									'overflow-hidden transition-all duration-1000',
+									showChangePassword ? 'max-h-[400px]' : 'max-h-0',
+								)}
 							>
 								{showChangePassword && (
 									<div className='my-4'>
@@ -149,4 +149,4 @@ const AcountInfo = () => {
 	)
 }
 
-export default AcountInfo
+export default AccountInfo

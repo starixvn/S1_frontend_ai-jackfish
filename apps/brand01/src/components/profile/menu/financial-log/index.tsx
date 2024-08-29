@@ -6,6 +6,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useTranslation } from 'react-i18next'
 import { SyncLoader } from 'react-spinners'
+import { toast } from 'react-toastify'
 
 interface IFinancialLogItem {
 	createTime: string
@@ -79,8 +80,8 @@ const FinancialLog = () => {
 			setLoading(true) // 開始加載資料
 			setHasSearched(false) // 重置搜尋狀態
 			try {
-				const startDateString = dayjs(startDate).format('YYYY-MM-DD');
-				const endDateString = dayjs(endDate).format('YYYY-MM-DD');
+				const startDateString = dayjs(startDate).format('YYYY-MM-DD')
+				const endDateString = dayjs(endDate).format('YYYY-MM-DD')
 				// 使用 getFinancialLog 函數傳遞日期參數
 				const financialLog = await getFinancialLog(
 					startDateString,
@@ -94,7 +95,7 @@ const FinancialLog = () => {
 				setHasSearched(true)
 			}
 		} else {
-			alert('Please select both start and end dates.')
+			toast.error('Please select both start and end dates.')
 		}
 	}
 

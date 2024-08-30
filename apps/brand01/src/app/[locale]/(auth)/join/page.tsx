@@ -1,6 +1,6 @@
 import Join from '@brand01/src/components/join'
 
-const page = async () => {
+const Page: React.FC = () => {
 	return (
 		<div className='container mx-auto box-border grid h-screen max-w-lg place-items-center'>
 			<Join />
@@ -8,4 +8,4 @@ const page = async () => {
 	)
 }
 
-export default page
+export default Page

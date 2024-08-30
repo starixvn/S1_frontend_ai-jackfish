@@ -1,17 +1,15 @@
 import Button from '@brand01/src/components/button'
 import Input from '@brand01/src/components/input'
-import { useClientTranslation } from '@brand01/src/i18n/client'
-import { imageUrl, useGetPathname } from 'JF-core'
+import { TFunction } from 'i18next'
+import { imageUrl } from 'JF-core'
 import { useFormContext } from 'react-hook-form'
 
 interface IStep2Props {
 	goToNextStep: () => void
+	t: TFunction<string, undefined>
 }
 
-const Step2 = ({ goToNextStep }: IStep2Props) => {
-	const { locale } = useGetPathname()
-	const { t } = useClientTranslation(locale)
-
+const Step2: React.FC<IStep2Props> = ({ goToNextStep, t }) => {
 	const {
 		formState: { errors, dirtyFields },
 		register,
@@ -19,9 +17,8 @@ const Step2 = ({ goToNextStep }: IStep2Props) => {
 	} = useFormContext()
 
 	const handleConfirmPassword = async () => {
-		const isPasswordValid = await trigger('password')
-		const isConfirmPwdValid = await trigger('confirmPwd')
-		if (isPasswordValid && isConfirmPwdValid) {
+		const isValid = await trigger(['password', 'confirmPwd'])
+		if (isValid) {
 			goToNextStep()
 		}
 	}

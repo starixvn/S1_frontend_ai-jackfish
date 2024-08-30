@@ -1,19 +1,17 @@
 import Button from '@brand01/src/components/button'
 import Input from '@brand01/src/components/input'
-import { useClientTranslation } from '@brand01/src/i18n/client'
+import { TFunction } from 'i18next'
 import { TBankInfoSysData } from 'JF-api/payment/type'
-import { cn, imageUrl, useGetPathname } from 'JF-core'
+import { cn, imageUrl } from 'JF-core'
 import { useFormContext } from 'react-hook-form'
 import { Trans } from 'react-i18next'
 
 interface IStep3Props {
 	bankInfoSysListByCurrencyId: TBankInfoSysData[]
+	t: TFunction<string, undefined>
 }
 
-const Step3 = ({ bankInfoSysListByCurrencyId }: IStep3Props) => {
-	const { locale } = useGetPathname()
-	const { t } = useClientTranslation(locale)
-
+const Step3: React.FC<IStep3Props> = ({ bankInfoSysListByCurrencyId, t }) => {
 	const {
 		formState: { errors, dirtyFields, isSubmitting },
 		watch,

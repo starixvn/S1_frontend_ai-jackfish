@@ -1,23 +1,13 @@
-import { getCustBankInfo } from 'JF-api/account/client'
-import { cn, imageUrl } from 'JF-core'
+import { cn, imageUrl, useGetBankInfo } from 'JF-core'
 import { useAuthStore, useSocialChannelStore } from 'JF-operations'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SyncLoader } from 'react-spinners'
 import ChangePasswordInput from './ChangePasswordInput'
 
-interface BankInfo {
-	bankLogo: string
-	accountNo: string
-	accountName: string
-}
-
 const AccountInfo = () => {
-	const [loading, setLoading] = useState<boolean>(true)
-	const [error, setError] = useState<string | null>(null)
-	const [bankInfo, setBankInfo] = useState<BankInfo | null>(null)
-	const [showChangePassword, setShowChangePassword] = useState(false)
 	const { t } = useTranslation()
+	const [showChangePassword, setShowChangePassword] = useState(false)
 	const { lineChannel } = useSocialChannelStore()
 
 	const {
@@ -25,36 +15,19 @@ const AccountInfo = () => {
 		userInfo: { userName },
 	} = useAuthStore()
 
-	useEffect(() => {
-		const fetchbankInfo = async () => {
-			try {
-				setLoading(true)
-				const response = await getCustBankInfo()
-				const { accountName, bankInfoDetail: [{ bankLogo, accountNo }] = [] } =
-					response
-				setBankInfo({
-					bankLogo,
-					accountNo,
-					accountName,
-				})
-			} catch (err) {
-				setError('Failed to fetch user bank')
-			} finally {
-				setLoading(false)
-			}
-		}
-		fetchbankInfo()
-	}, [])
+	const { bankInfo, isLoading } = useGetBankInfo()
 
-	const { bankLogo, accountNo, accountName } = bankInfo || {}
+	const {
+		accountName,
+		bankInfoDetail: [{ bankLogo = '', accountNo = '' } = {}] = [],
+	} = bankInfo || {}
 
-	if (loading)
+	if (isLoading)
 		return (
 			<div className='flex h-full items-center justify-center'>
 				<SyncLoader color='#E1E1E1' />
 			</div>
 		)
-	if (error) return <div>{error}</div>
 
 	// 切換狀態以顯示或隱藏密碼變更表單
 	const handleToggleChangePassword = () => {

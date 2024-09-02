@@ -1,5 +1,6 @@
 import Button from '@brand01/src/components/button'
 import Input from '@brand01/src/components/input'
+import { useClientTranslation } from '@brand01/src/i18n/client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { TFunction } from 'i18next'
 import {
@@ -8,16 +9,11 @@ import {
 	PHONE_DIGITS_LIMIT,
 	PHONE_LENGTH_REGEX,
 } from 'JF-constants'
-import { LocaleLink, useLocaleRouter } from 'JF-core'
+import { LocaleLink, useGetPathname, useLocaleRouter } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
-
-interface ILoginFormProps {
-	t: TFunction<string, undefined>
-	locale: string
-}
 
 const createFormSchema = (
 	t: TFunction<string, undefined>,
@@ -42,7 +38,9 @@ const createFormSchema = (
 			.min(1, { message: t('Label_General_PasswordRequired') }),
 	})
 
-const LoginForm: React.FC<ILoginFormProps> = ({ t, locale }) => {
+const LoginForm: React.FC = () => {
+	const { locale } = useGetPathname()
+	const { t } = useClientTranslation(locale)
 	const router = useLocaleRouter()
 	const {
 		userInfo: { currencyId },

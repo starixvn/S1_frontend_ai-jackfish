@@ -1,12 +1,15 @@
-import { TFunction } from 'i18next'
+import { useClientTranslation } from '@brand01/src/i18n/client'
 import { ForgetPasswordStepEnum } from 'JF-constants'
+import { useGetPathname } from 'JF-core'
 
 interface ITitleProps {
 	step: ForgetPasswordStepEnum
-	t: TFunction<string, undefined>
 }
 
-const Title: React.FC<ITitleProps> = ({ step, t }) => {
+const Title: React.FC<ITitleProps> = ({ step }) => {
+	const { locale } = useGetPathname()
+	const { t } = useClientTranslation(locale)
+
 	const getTitle = () => {
 		if (step === ForgetPasswordStepEnum.ForgetPassword) {
 			return t('Label_Forget_Password')

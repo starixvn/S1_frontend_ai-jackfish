@@ -1,13 +1,11 @@
 import Button from '@brand01/src/components/button'
-import { TFunction } from 'i18next'
+import { useClientTranslation } from '@brand01/src/i18n/client'
 import { paths } from 'JF-constants'
-import { imageUrl, useLocaleRouter } from 'JF-core'
+import { imageUrl, useGetPathname, useLocaleRouter } from 'JF-core'
 
-interface IWelcomeProps {
-	t: TFunction<string, undefined>
-}
-
-const Welcome: React.FC<IWelcomeProps> = ({ t }) => {
+const Welcome: React.FC = () => {
+	const { locale } = useGetPathname()
+	const { t } = useClientTranslation(locale)
 	const router = useLocaleRouter()
 
 	return (

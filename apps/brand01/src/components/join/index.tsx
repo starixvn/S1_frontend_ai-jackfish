@@ -1,8 +1,7 @@
 'use client'
 
 import ContactSupport from '@brand01/src/components/contactSupport'
-import { useClientTranslation } from '@brand01/src/i18n/client'
-import { cn, useGetPathname } from 'JF-core'
+import { cn } from 'JF-core'
 import { useStep } from 'usehooks-ts'
 import { StepBar } from './StepBar'
 import { Title } from './Title'
@@ -10,10 +9,7 @@ import Welcome from './Welcome'
 import JoinForm from './form'
 
 const Join: React.FC = () => {
-	const { locale } = useGetPathname()
-	const { t } = useClientTranslation(locale)
-
-	// setup steps
+	// Setup steps
 	const [step, { goToNextStep, canGoToNextStep }] = useStep(4)
 
 	return (
@@ -25,18 +21,13 @@ const Join: React.FC = () => {
 		>
 			{canGoToNextStep ? (
 				<>
-					<Title step={step} t={t} />
+					<Title step={step} />
 					<StepBar step={step} />
-					<JoinForm
-						step={step}
-						t={t}
-						locale={locale}
-						goToNextStep={goToNextStep}
-					/>
-					<ContactSupport t={t} className='mt-5 lg:mt-9' />
+					<JoinForm step={step} goToNextStep={goToNextStep} />
+					<ContactSupport className='mt-5 lg:mt-9' />
 				</>
 			) : (
-				<Welcome t={t} />
+				<Welcome />
 			)}
 		</div>
 	)

@@ -1,3 +1,4 @@
+import { useClientTranslation } from '@brand01/src/i18n/client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useBankInfoSysListByCurrencyId } from 'JF-api/payment/client'
 import {
@@ -14,25 +15,18 @@ import {
 	REALNAME_REGEX,
 	THAI_BANK_ACCOUNT_REGEX,
 } from 'JF-constants'
+import { useGetPathname } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
+import { TFunction } from 'i18next'
 import { useSearchParams } from 'next/navigation'
 import { useCallback, useEffect } from 'react'
 import { useCookies } from 'react-cookie'
 import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
-
-import { TFunction } from 'i18next'
 import { Step1 } from './Step1'
 import { Step2 } from './Step2'
 import { Step3 } from './Step3'
-
-interface IJoinFormProps {
-	step: JoinStepEnum
-	t: TFunction<string, undefined>
-	locale: string
-	goToNextStep: () => void
-}
 
 const createFormSchema = (t: TFunction, currencyId: number) => {
 	return z
@@ -79,12 +73,14 @@ const createFormSchema = (t: TFunction, currencyId: number) => {
 		})
 }
 
-const JoinForm: React.FC<IJoinFormProps> = ({
-	step,
-	t,
-	goToNextStep,
-	locale,
-}) => {
+interface IJoinFormProps {
+	step: JoinStepEnum
+	goToNextStep: () => void
+}
+
+const JoinForm: React.FC<IJoinFormProps> = ({ step, goToNextStep }) => {
+	const { locale } = useGetPathname()
+	const { t } = useClientTranslation(locale)
 	const searchParams = useSearchParams()
 	const {
 		userInfo: { currencyId },

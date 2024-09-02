@@ -2,15 +2,11 @@
 
 import ContactSupport from '@brand01/src/components/contactSupport'
 import Language from '@brand01/src/components/language'
-import { useClientTranslation } from '@brand01/src/i18n/client'
-import { cn, useGetPathname } from 'JF-core'
+import { cn } from 'JF-core'
 import LoginForm from './LoginForm'
 import Logo from './Logo'
 
 const Login: React.FC = () => {
-	const { locale } = useGetPathname()
-	const { t } = useClientTranslation(locale)
-
 	return (
 		<div
 			className={cn(
@@ -19,8 +15,8 @@ const Login: React.FC = () => {
 			)}
 		>
 			<Logo />
-			<LoginForm t={t} locale={locale} />
-			<ContactSupport t={t} />
+			<LoginForm />
+			<ContactSupport />
 			<Language className='mt-16' />
 		</div>
 	)

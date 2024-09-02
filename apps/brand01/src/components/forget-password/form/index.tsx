@@ -1,3 +1,4 @@
+import { useClientTranslation } from '@brand01/src/i18n/client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { resetPwdByPhone } from 'JF-api/site/client'
 import {
@@ -8,7 +9,7 @@ import {
 	PHONE_LENGTH_REGEX,
 	paths,
 } from 'JF-constants'
-import { useLocaleRouter } from 'JF-core'
+import { useGetPathname, useLocaleRouter } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
 import { TFunction } from 'i18next'
 import { useState } from 'react'
@@ -18,12 +19,6 @@ import { z } from 'zod'
 import { Step1 } from './Step1'
 import { Step2 } from './Step2'
 import { Step3 } from './Step3'
-
-interface IForgetPasswordFormProps {
-	t: TFunction<string, undefined>
-	step: ForgetPasswordStepEnum
-	goToNextStep: () => void
-}
 
 const createFormSchema = (t: TFunction, currencyId: number) => {
 	return z
@@ -57,17 +52,23 @@ const createFormSchema = (t: TFunction, currencyId: number) => {
 		})
 }
 
+interface IForgetPasswordFormProps {
+	step: ForgetPasswordStepEnum
+	goToNextStep: () => void
+}
+
 const ForgetPasswordForm: React.FC<IForgetPasswordFormProps> = ({
-	t,
 	step,
 	goToNextStep,
 }) => {
+	const { locale } = useGetPathname()
+	const { t } = useClientTranslation(locale)
 	const router = useLocaleRouter()
 	const {
 		userInfo: { currencyId },
 	} = useAuthStore()
 
-	// setup submit timeout
+	// Setup submit timeout
 	const [isTimeOut, setIsTimeOut] = useState<boolean>(false)
 
 	const formSchema = createFormSchema(t, currencyId)

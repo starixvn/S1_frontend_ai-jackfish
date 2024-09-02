@@ -1,14 +1,15 @@
-import { cn } from 'JF-core'
+import { useClientTranslation } from '@brand01/src/i18n/client'
+import { cn, useGetPathname } from 'JF-core'
 import { useSocialChannelStore } from 'JF-operations'
-import { TFunction } from 'i18next'
 import React from 'react'
 
 interface IContactSupportProps {
-	t: TFunction<string, undefined>
 	className?: string
 }
 
-const ContactSupport: React.FC<IContactSupportProps> = ({ t, className }) => {
+const ContactSupport: React.FC<IContactSupportProps> = ({ className }) => {
+	const { locale } = useGetPathname()
+	const { t } = useClientTranslation(locale)
 	// 取得 Line 資料
 	const { lineChannel } = useSocialChannelStore()
 

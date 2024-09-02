@@ -80,3 +80,25 @@ export type TReferralSummaryData = {
 	hasReferral: boolean
 	referralCount: number
 }
+
+export type TReferralSettingDetailData = {
+	referralReward: number
+	invitationLimit: number
+	agentValidBet: number
+	agentDeposit: number
+	memberReward: number
+	vaildBet: number
+	deposit: number
+	periodDays: number
+	depositRewardPercentage: number
+	minPayout: number
+	maxPayout: number
+	referralContent: {
+		langId: string
+		bannerUrl: null | string
+		title: null | string
+		description: null | string
+		detail: null | string
+		type: number
+	}
+}

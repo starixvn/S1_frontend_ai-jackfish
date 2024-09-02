@@ -1,7 +1,7 @@
 import Input from '@brand01/src/components/input'
 import { socialMedias } from '@brand01/src/data/referral'
-import { useClientTranslation } from '@brand01/src/i18n/client'
-import { imageUrl, useGetPathname } from 'JF-core'
+import { TFunction } from 'i18next'
+import { imageUrl } from 'JF-core'
 import QRCode from 'qrcode.react'
 import { UseFormRegister } from 'react-hook-form'
 
@@ -12,16 +12,15 @@ interface IReferralLinksProps {
 		referralLink: string
 	}>
 	isLoading: boolean
+	t: TFunction<string, undefined>
 }
 
 const ReferralLinks: React.FC<IReferralLinksProps> = ({
 	referralLink,
 	register,
 	isLoading,
+	t,
 }) => {
-	const { locale } = useGetPathname()
-	const { t } = useClientTranslation(locale)
-
 	return (
 		<div className='flex w-full flex-col'>
 			<div className='text-check-200 text-center text-lg font-bold lg:text-left lg:text-xl'>

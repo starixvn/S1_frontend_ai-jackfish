@@ -1,11 +1,12 @@
 import { referralSteps } from '@brand01/src/data/referral'
-import { useClientTranslation } from '@brand01/src/i18n/client'
-import { cn, imageUrl, useGetPathname } from 'JF-core'
+import { TFunction } from 'i18next'
+import { cn, imageUrl } from 'JF-core'
 
-const ReferralSteps: React.FC = () => {
-	const { locale } = useGetPathname()
-	const { t } = useClientTranslation(locale)
+interface IReferralStepsProps {
+	t: TFunction<string, undefined>
+}
 
+const ReferralSteps: React.FC<IReferralStepsProps> = ({ t }) => {
 	return (
 		<div className='flex w-full flex-col'>
 			<div className='text-check-200 text-center text-lg font-bold lg:text-left lg:text-xl'>

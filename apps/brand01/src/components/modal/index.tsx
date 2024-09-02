@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 
 interface ModalProps {
 	children: React.ReactNode
-	size: 'sm' | 'md'
+	size: 'sm' | 'md' | 'lg'
 	isOpen: boolean
 	onClose: () => void
 	className?: string
@@ -29,6 +29,7 @@ const Modal: React.FC<ModalProps> = ({
 	const sizeClasses = {
 		sm: 'pb-14 w-full h-full lg:w-[600px] lg:h-[810px]',
 		md: 'pb-14 w-full h-full lg:w-[800px] lg:h-[561px]',
+		lg: 'pb-14 w-full h-full lg:w-[800px] lg:h-[810px]',
 	}
 
 	const sizeClass = sizeClasses[size]

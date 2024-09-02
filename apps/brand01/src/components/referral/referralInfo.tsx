@@ -1,16 +1,11 @@
 import { useGetReferralCode } from 'JF-api/account/client'
 import { paths } from 'JF-constants'
-import { TFunction } from 'i18next'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import ReferralLinks from './referralLinks'
 import ReferralSteps from './referralSteps'
 
-interface IReferralInfoProps {
-	t: TFunction<string, undefined>
-}
-
-const ReferralInfo: React.FC<IReferralInfoProps> = ({ t }) => {
+const ReferralInfo: React.FC = () => {
 	const { referralCode = '', isLoading } = useGetReferralCode()
 
 	const origin = (typeof window !== 'undefined' && window.location.origin) || ''
@@ -30,12 +25,11 @@ const ReferralInfo: React.FC<IReferralInfoProps> = ({ t }) => {
 
 	return (
 		<div className='mt-8 grid grid-cols-1 gap-8 px-5 lg:mt-16 lg:grid-cols-2 lg:px-0'>
-			<ReferralSteps t={t} />
+			<ReferralSteps />
 			<ReferralLinks
 				referralLink={referralLink}
 				register={register}
 				isLoading={isLoading}
-				t={t}
 			/>
 		</div>
 	)

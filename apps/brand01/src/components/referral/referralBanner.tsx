@@ -1,17 +1,16 @@
 import Loading from '@brand01/src/components/loading'
 import Modal from '@brand01/src/components/modal'
 import { useGetReferralSettingDetail } from 'JF-api/account/client'
-import { imageUrl } from 'JF-core'
+import { imageUrl, useGetPathname } from 'JF-core'
+// TODO: profile MR 有修改成 JF-core import，這邊待修改
 import useDisclosure from 'libs/core/src/lib/hooks/useDisclosure'
 
-interface IReferralBannerProps {
-	locale: string
-}
-
-const ReferralBanner: React.FC<IReferralBannerProps> = ({ locale }) => {
+const ReferralBanner: React.FC = () => {
+	const { locale } = useGetPathname()
 	const { isOpen, onClose, onOpen } = useDisclosure()
 	const { referralSettingDetail, isLoading } = useGetReferralSettingDetail()
 	const { referralContent } = referralSettingDetail ?? {}
+
 	return (
 		<>
 			<div className='w-full cursor-pointer' onClick={onOpen}>

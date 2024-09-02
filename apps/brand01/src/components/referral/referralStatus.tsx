@@ -1,6 +1,7 @@
 import Loading from '@brand01/src/components/loading'
-import { TFunction } from 'i18next'
+import { useClientTranslation } from '@brand01/src/i18n/client'
 import { useGetReferralSummary } from 'JF-api/account/client'
+import { useGetPathname } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
 
 interface IStatusBoxProps {
@@ -25,11 +26,9 @@ const StatusBox: React.FC<IStatusBoxProps> = ({
 	</div>
 )
 
-interface IReferralStatusProps {
-	t: TFunction<string, undefined>
-}
-
-const ReferralStatus: React.FC<IReferralStatusProps> = ({ t }) => {
+const ReferralStatus: React.FC = () => {
+	const { locale } = useGetPathname()
+	const { t } = useClientTranslation(locale)
 	const {
 		userInfo: { currencyName },
 	} = useAuthStore()

@@ -3,7 +3,7 @@ import { useClientTranslation } from '@brand01/src/i18n/client'
 import { imageUrl, useGetPathname } from 'JF-core'
 import { useDepositStore, useSocialChannelStore } from 'JF-operations'
 import { find } from 'lodash-es'
-import { parseAsInteger, useQueryStates } from 'next-usequerystate'
+import { parseAsInteger, useQueryStates } from 'nuqs'
 import { Trans } from 'react-i18next'
 
 export default function DepositProcessImage() {

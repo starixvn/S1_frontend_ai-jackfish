@@ -1,4 +1,5 @@
-import { fetcher } from '../baseApi'
+import useSWR from 'swr'
+import { fetcher, IAxiosResponse } from '../baseApi'
 import {
 	IGetPromotionBaseArgs,
 	IGetPromotionDetailArgs,
@@ -94,3 +95,18 @@ export const getRetentionPromotion = ({
 		`${promotionApiUrl.getRetentionPromotion}/${langId}`,
 		payload,
 	)
+
+// to be relocated
+export const useDepositPromotionList = ({ langId }: { langId: string }) => {
+	const { data, isLoading } = useSWR<IAxiosResponse<TDepositPromotionData[]>>(
+		`${promotionApiUrl.getDepositPromotionList}/${langId}`,
+		(url: string) =>
+			fetcher<TDepositPromotionData[]>(url, {
+				deviceType: 1,
+			}),
+	)
+	return {
+		depositPromotionList: data?.data,
+		isLoading,
+	}
+}

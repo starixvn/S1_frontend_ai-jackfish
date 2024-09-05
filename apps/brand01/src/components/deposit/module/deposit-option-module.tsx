@@ -6,11 +6,7 @@ import { DEPOSIT_PAYMENT_TYPE } from 'JF-constants'
 import { cn, useGetPathname } from 'JF-core'
 import type { PaymentOption } from 'JF-operations'
 import { isEqual } from 'lodash-es'
-import {
-	parseAsInteger,
-	parseAsString,
-	useQueryStates,
-} from 'next-usequerystate'
+import { parseAsInteger, parseAsString, useQueryStates } from 'nuqs'
 import ModuleWrapper from './moudle-wrapper'
 
 export default function DepositOptionModule({

@@ -4,7 +4,7 @@ import {
 } from 'JF-api/promotion/type'
 import { promotionApiUrl } from 'JF-api/promotion/url'
 import useSWR from 'swr'
-import { IAxiosError, IAxiosResponse, fetcher } from '../baseApi'
+import { IAxiosResponse, fetcher } from '../baseApi'
 
 export const getDepositPromotionList = ({ langId }: { langId: string }) => {
 	const { data, isLoading } = useSWR<IAxiosResponse<IDepositPromotionData[]>>(
@@ -20,15 +20,11 @@ export const getDepositPromotionList = ({ langId }: { langId: string }) => {
 	}
 }
 
-export const setDepositPromotionQueue = async ({
-	...args
-}: ISetDepositPromotionQueueArgs) => {
-	try {
-		return await fetcher<null, ISetDepositPromotionQueueArgs>(
-			promotionApiUrl.setDepositPromotionQueue,
-			args,
-		)
-	} catch (error) {
-		throw error as IAxiosError
-	}
-}
+export const setDepositPromotionQueue = ({
+	langId,
+	...payload
+}: ISetDepositPromotionQueueArgs) =>
+	fetcher<void>(
+		`${promotionApiUrl.setDepositPromotionQueue}/${langId}`,
+		payload,
+	)

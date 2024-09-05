@@ -5,8 +5,8 @@ import { useClientTranslation } from '@brand01/src/i18n/client'
 import type { IBankTransfer } from 'JF-api/payment/type'
 import { cn, useGetPathname } from 'JF-core'
 import { toLower } from 'lodash-es'
-import { parseAsInteger, useQueryStates } from 'next-usequerystate'
 import { useSearchParams } from 'next/navigation'
+import { parseAsInteger, useQueryStates } from 'nuqs'
 import ModuleWrapper from './moudle-wrapper'
 
 export default function DepositSelectBankModule({

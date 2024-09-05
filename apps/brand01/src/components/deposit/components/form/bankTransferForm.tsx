@@ -16,12 +16,8 @@ import { CurrenciesEnum, DEPOSIT_PAYMENT_TYPE } from 'JF-constants'
 import { scrollToTop, useGetPathname } from 'JF-core'
 import { useAuthStore, useDepositStore } from 'JF-operations'
 import { head } from 'lodash-es'
-import {
-	parseAsInteger,
-	parseAsString,
-	useQueryStates,
-} from 'next-usequerystate'
 import { useSearchParams } from 'next/navigation'
+import { parseAsInteger, parseAsString, useQueryStates } from 'nuqs'
 import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'

@@ -53,8 +53,12 @@ export interface IDepositPromotionData {
 	winOver: number
 }
 
-export interface ISetDepositPromotionQueueArgs {
+export interface IGetPromotionBaseArgs {
+	deviceType: number
 	langId: string
+}
+
+export interface ISetDepositPromotionQueueArgs extends IGetPromotionBaseArgs {
 	transId: string
 	bonusCode: string
 }

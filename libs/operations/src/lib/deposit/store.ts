@@ -13,6 +13,7 @@ import {
 	DEPOSIT_PAYMENT_TYPE,
 	DepositStatusEnum,
 	DepositTypeEnum,
+	DeviceTypeEnum,
 } from 'JF-constants'
 import { convertFileToBase64, isConvert, objectEntries } from 'JF-core'
 import { filter, head, isEmpty } from 'lodash-es'
@@ -170,7 +171,13 @@ const useDepositStore = create<IDepositState & IDepositAction>((set, get) => ({
 			if (transId) {
 				await Promise.all([
 					receipt && postUploadReceipt({ transId, receipt }),
-					bonusCode && setDepositPromotionQueue({ langId, transId, bonusCode }),
+					bonusCode &&
+						setDepositPromotionQueue({
+							langId,
+							transId,
+							bonusCode,
+							deviceType: DeviceTypeEnum.Desktop,
+						}),
 				])
 			}
 			setImageFile(null)

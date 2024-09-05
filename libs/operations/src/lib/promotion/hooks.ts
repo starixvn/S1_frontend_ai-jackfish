@@ -1,6 +1,7 @@
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import { envCookieNames } from '@brand01/src/i18n/settings'
 import {
+	getDepositPromotionList,
 	getPromotionDetail,
 	getPromotionListV3,
 	setClaimPromotion,
@@ -159,4 +160,20 @@ export const usePromotionDetail = ({
 	}
 
 	return { data, isLoading, claimPromotion }
+}
+
+export const useDepositPromotionList = () => {
+	const { langId } = useLocale()
+	const { data, isLoading } = useSWR(
+		{
+			url: promotionApiUrl.getDepositPromotionList,
+			args: { langId, deviceType },
+		},
+		({ args }) => getDepositPromotionList(args),
+	)
+
+	return {
+		depositPromotionList: data?.data,
+		isLoading,
+	}
 }

@@ -54,13 +54,11 @@ const PromotionDetails: FC<PromotionDetailsProps> = ({ data, onClaim }) => {
 
 	return (
 		<div className='flex h-full flex-col'>
-			<div className='mb-8 text-center text-[20px] lg:hidden'>
+			<div className='mb-8 text-center text-xl lg:hidden'>
 				{t('Label_General_Promotion')}
 			</div>
 			<main className='flex-1 overflow-auto'>
-				<h1 className='text-secondary-300 text-[20px] font-bold'>
-					{data.title}
-				</h1>
+				<h1 className='text-secondary-300 text-xl font-bold'>{data.title}</h1>
 				<div className='mt-4 w-full overflow-hidden rounded-2xl'>
 					{data.banner && <PromotionCard image={data.banner} />}
 				</div>
@@ -73,7 +71,12 @@ const PromotionDetails: FC<PromotionDetailsProps> = ({ data, onClaim }) => {
 			</main>
 			<footer className='mt-4 flex justify-center'>
 				{isJoinButton && (
-					<Button size='md' onClick={onClaimClick} isDisabled={isLoading}>
+					<Button
+						type='secondary'
+						size='md'
+						onClick={onClaimClick}
+						isDisabled={isLoading}
+					>
 						{isLoading ? (
 							<MoonLoader size={16} className='bg-transparent' />
 						) : isClaimNowButton ? (
@@ -85,7 +88,9 @@ const PromotionDetails: FC<PromotionDetailsProps> = ({ data, onClaim }) => {
 				)}
 				{isApplyNowButton && (
 					<a href={lineChannel.link} target='_blank' rel='noreferrer'>
-						<Button size='md'>{t('Label_Promotion_ApplyNow')}</Button>
+						<Button type='secondary' size='md'>
+							{t('Label_Promotion_ApplyNow')}
+						</Button>
 					</a>
 				)}
 			</footer>

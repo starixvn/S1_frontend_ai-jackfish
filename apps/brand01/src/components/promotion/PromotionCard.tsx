@@ -1,6 +1,7 @@
 'use client'
 
 import { PromotionStatus } from 'JF-api/promotion/type'
+import { cn } from 'JF-core'
 import { Claimed } from './tags/Claimed'
 import { Ongoing } from './tags/Ongoing'
 
@@ -11,19 +12,20 @@ interface PromotionCardProps {
 
 const PromotionCard: React.FC<PromotionCardProps> = ({ image, status }) => (
 	<div className='relative'>
-		<div className='relative overflow-hidden rounded-xl'>
+		<div className='overflow-hidden rounded-xl'>
 			<img
 				src={image}
 				alt='promotion-banner'
-				className='aspect-[547/197] max-h-[114px] w-full object-cover lg:max-h-[197px]'
+				className='aspect-[547/197] w-[318px] min-w-full object-cover lg:w-[547px]'
 			/>
 			{status ? (
 				<div
-					className={`${
+					className={cn(
 						status === PromotionStatus.Ongoing
 							? 'bg-primary-300'
-							: 'bg-tertiary-500'
-					} absolute inset-0 opacity-40`}
+							: 'bg-tertiary-500',
+						'absolute inset-0 opacity-40',
+					)}
 				/>
 			) : null}
 		</div>

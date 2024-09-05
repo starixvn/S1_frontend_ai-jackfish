@@ -135,6 +135,7 @@ const PromotionClaimForm: FC<PromotionClaimFormProps> = ({
 					className='lg:order-last'
 					htmlType='submit'
 					size='md'
+					type='secondary'
 					isDisabled={isSubmitting}
 				>
 					{isSubmitting ? (

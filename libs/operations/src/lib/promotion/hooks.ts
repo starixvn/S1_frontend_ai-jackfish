@@ -5,6 +5,7 @@ import {
 	getPromotionDetail,
 	getPromotionListV3,
 	setClaimPromotion,
+	setSpecialCode,
 } from 'JF-api/promotion/client'
 import { PromotionType } from 'JF-api/promotion/type'
 import { promotionApiUrl } from 'JF-api/promotion/url'
@@ -12,7 +13,9 @@ import { DeviceTypeEnum } from 'JF-constants'
 import { useAuthStore } from 'JF-operations'
 import dayjs from 'dayjs'
 import { every, filter, includes } from 'lodash-es'
+import { useState } from 'react'
 import { useCookies } from 'react-cookie'
+import { useForm } from 'react-hook-form'
 import useSWR from 'swr'
 
 const deviceType = DeviceTypeEnum.Desktop
@@ -69,13 +72,14 @@ export const useActivePromotionList = () => {
 		? filter(
 				originalPromotionList,
 				({ isJoin, promotionType, custExpiryTime, periodTo }) =>
-					isJoin &&
-					!includes(
-						[PromotionType.Rebate, PromotionType.Cashback],
-						promotionType,
-					)
-						? dayjs().isBefore(dayjs(custExpiryTime))
-						: dayjs().isBefore(dayjs(dayjs.unix(periodTo))),
+					isJoin
+						? !includes(
+								[PromotionType.Rebate, PromotionType.Cashback],
+								promotionType,
+							)
+							? dayjs().isBefore(dayjs(custExpiryTime))
+							: dayjs().isBefore(dayjs(dayjs.unix(periodTo)))
+						: false,
 			)
 		: []
 
@@ -144,7 +148,7 @@ export const usePromotionDetail = ({
 				data.promotionType,
 			)
 
-			// 依照 Nova88 原有邏輯，是 canJoin 才要求輸入金額，若非 canJoin 則送 API 拿錯誤訊息
+			// 依 Nova88 原有邏輯，是 canJoin 才要求輸入金額，若非 canJoin 則送 API 拿錯誤訊息
 			if (amountCallback && data.canJoin && isAmountRequired && !amount) {
 				amountCallback()
 				return
@@ -155,7 +159,8 @@ export const usePromotionDetail = ({
 			mutate()
 			if (successCallback) successCallback()
 		} catch (error) {
-			if (errorCallback) errorCallback((error as Error)?.message)
+			const { message } = error as Error
+			if (errorCallback && message) errorCallback((error as Error)?.message)
 		}
 	}
 
@@ -176,4 +181,37 @@ export const useDepositPromotionList = () => {
 		depositPromotionList: data?.data,
 		isLoading,
 	}
+}
+
+export const useSetSpecialCode = ({
+	errorCallback,
+	successCallback,
+}: {
+	errorCallback?: (message: string) => void
+	successCallback?: () => void
+}) => {
+	const { langId } = useLocale()
+	const [isSubmitting, setIsSubmitting] = useState(false)
+	const form = useForm<{ specialCode: string }>()
+	const handleFormSubmit = form.handleSubmit(
+		async ({ specialCode }: { specialCode: string }) => {
+			try {
+				setIsSubmitting(true)
+				if (!specialCode) throw new Error()
+				await setSpecialCode({
+					langId,
+					deviceType,
+					specialCode,
+				})
+				if (successCallback) successCallback()
+			} catch (error) {
+				const { message } = error as Error
+				if (errorCallback && message) errorCallback(message)
+			} finally {
+				setIsSubmitting(false)
+			}
+		},
+	)
+
+	return { form, handleFormSubmit, isSubmitting }
 }

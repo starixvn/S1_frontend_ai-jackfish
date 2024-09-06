@@ -1,9 +1,7 @@
 'use client'
 
 import { PromotionStatus } from 'JF-api/promotion/type'
-import { cn } from 'JF-core'
-import { Claimed } from './tags/Claimed'
-import { Ongoing } from './tags/Ongoing'
+import { cn, imageUrl } from 'JF-core'
 
 interface PromotionCardProps {
 	image: string
@@ -12,7 +10,7 @@ interface PromotionCardProps {
 
 const PromotionCard: React.FC<PromotionCardProps> = ({ image, status }) => (
 	<div className='relative'>
-		<div className='overflow-hidden rounded-xl'>
+		<div className='bg-tertiary-500 overflow-hidden rounded-xl'>
 			<img
 				src={image}
 				alt='promotion-banner'
@@ -30,8 +28,12 @@ const PromotionCard: React.FC<PromotionCardProps> = ({ image, status }) => (
 			) : null}
 		</div>
 		{status ? (
-			<div className='absolute -top-2 right-3'>
-				{status === PromotionStatus.Ongoing ? <Ongoing /> : <Claimed />}
+			<div className='absolute -top-3 right-3 w-[68px] lg:-top-2 lg:w-[76px]'>
+				{status === PromotionStatus.Ongoing ? (
+					<img alt='tag-claimed' src={imageUrl('/img/icon/tag-claimed.png')} />
+				) : (
+					<img alt='tag-ongoing' src={imageUrl('/img/icon/tag-ongoing.png')} />
+				)}
 			</div>
 		) : null}
 	</div>

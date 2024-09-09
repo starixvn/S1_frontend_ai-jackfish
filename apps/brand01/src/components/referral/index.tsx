@@ -1,11 +1,13 @@
 'use client'
 
+import ReferralBanner from './referralBanner'
 import ReferralInfo from './referralInfo'
 import ReferralStatus from './referralStatus'
 
-const Referral = () => {
+const Referral: React.FC = () => {
 	return (
-		<div className='mt-8 w-full cursor-default p-5 lg:mt-10'>
+		<div className='mb-10 w-full cursor-default'>
+			<ReferralBanner />
 			<ReferralStatus />
 			<ReferralInfo />
 		</div>

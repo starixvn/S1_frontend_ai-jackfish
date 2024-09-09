@@ -24,7 +24,7 @@ const ReferralInfo: React.FC = () => {
 	}, [referralCode, referralLink, setValue])
 
 	return (
-		<div className='mt-8 grid grid-cols-1 gap-8 lg:mt-16 lg:grid-cols-2'>
+		<div className='mt-8 grid grid-cols-1 gap-8 px-5 lg:mt-16 lg:grid-cols-2 lg:px-0'>
 			<ReferralSteps />
 			<ReferralLinks
 				referralLink={referralLink}

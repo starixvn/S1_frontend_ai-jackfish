@@ -1,5 +1,6 @@
 export * from './useBannerClick'
 export * from './useDisclosure'
+export * from './useGetBankInfo'
 export * from './useGetPathname'
 export * from './useIconSpin'
 export * from './useImageUploader'

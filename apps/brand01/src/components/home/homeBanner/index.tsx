@@ -9,7 +9,7 @@ const HomeBanner = () => {
 	const { bannerData, isLoading: bannerIsLoading } = getBanner()
 	return (
 		<div className='col-span-12 flex flex-col'>
-			<div className='order-2 bg-neutral-100 lg:order-1 lg:rounded-br-md lg:rounded-bl-md'>
+			<div className='order-4 bg-neutral-100 lg:order-1 lg:rounded-br-md lg:rounded-bl-md'>
 				<Announcement announcementData={announcementData} />
 			</div>
 			<div className='order-1 lg:order-2'>

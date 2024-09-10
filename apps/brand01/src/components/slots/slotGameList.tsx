@@ -6,6 +6,7 @@ import { paths } from 'JF-constants'
 import {
 	cn,
 	getIsTpMaintain,
+	imageUrl,
 	useGetPathname,
 	useInView,
 	useLocaleRouter,
@@ -200,7 +201,7 @@ const SlotGameList = ({
 			<div className='mx-auto my-0 h-16 w-16'>
 				<img
 					className='h-full w-full'
-					src={`${process.env['NEXT_PUBLIC_BANNER_HOST']}/desktop/img/4.0/nodata-icon.png`}
+					src={imageUrl('/img/icon/icon-nodata.png')}
 					alt=''
 				/>
 			</div>

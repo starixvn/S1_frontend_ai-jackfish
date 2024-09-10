@@ -1,6 +1,6 @@
 'use client'
 
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs'
 import useSWR from 'swr'
 import { IAxiosError, IAxiosResponse, fetcher } from '../baseApi'
 import {

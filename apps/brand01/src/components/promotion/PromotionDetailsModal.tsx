@@ -27,7 +27,7 @@ const PromotionDetailsModal: FC<PromotionDetailsModalProps> = ({
 		errorCallback: toast.error,
 		amountCallback: () => setIsEnteringAmount(true),
 		successCallback: () => {
-			toast.success(t('Label_Promotion_ClaimSuccess'))
+			toast.success(t('Label_Promotion_SuccessClaimed2'))
 			setIsEnteringAmount(false)
 		},
 	})

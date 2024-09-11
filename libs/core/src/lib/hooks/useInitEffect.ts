@@ -62,7 +62,7 @@ const useInitEffect = ({ isSignedIn }: IUseInitEffectProps) => {
 	// 未登入設定成 locale 以及對應的 currencyId
 	useEffect(() => {
 		if (!isLogin && locale !== cookieLangId) {
-			// 未登入判斷 url 語系是否與 cookieLangId 符合，只有透過 url 直接強切語系且未登入才會觸發此 effect
+			// 未登入判斷 url 語系是否與 cookieLangId 符合
 			setCookie(envCookieNames.langId, locale, { path: '/' })
 			setCookie(envCookieNames.currencyId, LANG_TO_CURRENCY[locale], {
 				path: '/',
@@ -84,7 +84,7 @@ const useInitEffect = ({ isSignedIn }: IUseInitEffectProps) => {
 		setCookie,
 	])
 
-	// 依賴 langId 以及 currencyId 初始化 Store 放在判斷式裡面避免多次觸發
+	// 初始化 Store 放在判斷式裡面避免多次觸發 langId 以及 currencyId dependencies
 	useEffect(() => {
 		if (
 			prevLangId.current !== langId ||

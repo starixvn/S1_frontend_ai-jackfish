@@ -16,14 +16,14 @@ const Language = ({ className }: ILanguageProps) => {
 	const { isLogin, getUserInfo } = useAuthStore()
 	const router = useLocaleRouter()
 	const { locale, currentPath } = useGetPathname()
-	const [cookies, setCookie] = useCookies([
+	const [cookies] = useCookies([
 		envCookieNames.langId,
 		envCookieNames.currencyId,
 	])
 
-	// 切換語系 func. setCookie觸發Effect更新userInfo資料
-	// 已登入呼叫 setLanguage api，未登入 push 到新的url
-	const handleLangChange = async (langId: string, currencyId: number) => {
+	// 切換語系 func.
+	// 已登入呼叫 setLanguage api，未登入 push 觸發 effect 更新 cookie userInfo 資料
+	const handleLangChange = async (langId: string) => {
 		if (cookies[envCookieNames.langId] !== langId) {
 			try {
 				if (isLogin) {
@@ -31,8 +31,6 @@ const Language = ({ className }: ILanguageProps) => {
 					await setLanguage({ langId })
 					await getUserInfo()
 				} else {
-					setCookie(envCookieNames.langId, langId, { path: '/' })
-					setCookie(envCookieNames.currencyId, currencyId, { path: '/' })
 					router.push(currentPath, { locale: langId })
 				}
 			} catch (error) {
@@ -43,11 +41,11 @@ const Language = ({ className }: ILanguageProps) => {
 
 	return (
 		<div className={cn('flex items-center justify-center gap-3', className)}>
-			{languageGroup[langId.th].map(({ displayText, value, currencyId }) => (
+			{languageGroup[langId.th].map(({ displayText, value }) => (
 				<button
 					key={value}
 					className='flex items-center justify-center gap-1.5'
-					onClick={() => handleLangChange(value, currencyId)}
+					onClick={() => handleLangChange(value)}
 				>
 					<img
 						className='h-7 w-7 rounded-full'

@@ -9,7 +9,7 @@ const Header = ({ tpId: providerTpId }: { tpId: string }) => {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
 	const { providerList } = useSlotPageStore()
-	const { userInfo, wallet, getWalletInfo } = useAuthStore()
+	const { wallet, getWalletInfo } = useAuthStore()
 	const [providerLogo, setProviderLogo] = useState<string | undefined>('')
 	const { isSpinActive, onIconSpin } = useIconSpin()
 
@@ -23,7 +23,7 @@ const Header = ({ tpId: providerTpId }: { tpId: string }) => {
 	}, [providerList, providerTpId])
 
 	return (
-		<div className='bg-tertiary-500 sticky top-0 z-50 grid h-14 grid-cols-10 place-content-center px-6 text-neutral-100 lg:px-52'>
+		<div className='bg-tertiary-500 sticky top-0 z-50 grid h-14 grid-cols-10 place-content-center px-4 text-neutral-100 lg:px-52'>
 			<div className='col-span-2 w-fit'>
 				<img
 					className='h-full w-full'
@@ -32,10 +32,10 @@ const Header = ({ tpId: providerTpId }: { tpId: string }) => {
 				/>
 			</div>
 			<div className='col-span-8 flex items-center justify-end gap-4'>
-				<div className='flex gap-1'>
+				{/* <div className='flex gap-1'>
 					<span>{t('Label_General_Welcome')}!</span>
 					<span className='text-check-200'>{userInfo.userName}</span>
-				</div>
+				</div> */}
 
 				<div className='flex gap-1'>
 					<span>{t('Label_General_Balance')}:</span>

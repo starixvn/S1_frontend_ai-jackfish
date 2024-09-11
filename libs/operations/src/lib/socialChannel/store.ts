@@ -22,10 +22,10 @@ const useSocialChannelStore = create<
 >(set => ({
 	socialChannels: [],
 	lineChannel: defaultSocialChannel,
-	getSocialChannels: async ({ currencyId, langId }) => {
+	getSocialChannels: async ({ langId, currencyId }) => {
 		const data = await getSocialChannel({
-			currencyId,
 			langId,
+			currencyId,
 			displayPage: 1,
 		})
 		set({ socialChannels: data })

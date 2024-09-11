@@ -3,7 +3,7 @@
 import { envCookieNames } from '@brand01/src/i18n/settings'
 import { LANG_TO_CURRENCY } from 'JF-constants'
 import { useAuthStore, useSocialChannelStore } from 'JF-operations'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useCookies } from 'react-cookie'
 import { useGetPathname } from './useGetPathname'
 import { useLocaleRouter } from './useLocaleRouter'
@@ -30,6 +30,10 @@ const useInitEffect = ({ isSignedIn }: IUseInitEffectProps) => {
 		userInfo: { langId, currencyId },
 		getWalletInfo,
 	} = useAuthStore()
+	// 新增 ref 避免渲染多次觸發 effect
+	const prevLangId = useRef(langId)
+	const prevCurrencyId = useRef(currencyId)
+
 	const { getSocialChannels } = useSocialChannelStore()
 
 	// 初始化 AuthStore，未登入就直接 set cookie 資料，若登入則初始化 userInfo
@@ -80,9 +84,16 @@ const useInitEffect = ({ isSignedIn }: IUseInitEffectProps) => {
 		setCookie,
 	])
 
-	// 初始化取得 Social Channel 資料
+	// 依賴 langId 以及 currencyId 初始化 Store 放在判斷式裡面避免多次觸發
 	useEffect(() => {
-		getSocialChannels({ currencyId, langId })
+		if (
+			prevLangId.current !== langId ||
+			prevCurrencyId.current !== currencyId
+		) {
+			prevLangId.current = langId
+			prevCurrencyId.current = currencyId
+			getSocialChannels({ langId, currencyId })
+		}
 	}, [currencyId, getSocialChannels, langId])
 }
 

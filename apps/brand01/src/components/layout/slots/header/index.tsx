@@ -39,7 +39,7 @@ const Header = ({ tpId: providerTpId }: { tpId: string }) => {
 
 				<div className='flex gap-1'>
 					<span>{t('Label_General_Balance')}:</span>
-					<span className='text-secondary-300'>{wallet.totalWallet}</span>
+					<span className='text-secondary-300'>{wallet.bonusWallet}</span>
 				</div>
 
 				<div className='flex cursor-pointer gap-2'>

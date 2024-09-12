@@ -11,12 +11,25 @@ const Header = ({ tpId: providerTpId }: { tpId: string }) => {
 	const { providerList } = useSlotPageStore()
 	const { userInfo, wallet, getWalletInfo } = useAuthStore()
 	const [providerLogo, setProviderLogo] = useState<string | undefined>('')
+	const [slotBalance, setSlotBalance] = useState<number>(0)
 	const { isSpinActive, onIconSpin } = useIconSpin()
+
+	const { mainWallet, totalWallet, promoCategoryId } = wallet
 
 	const handleRefetchWallet = () => {
 		getWalletInfo()
 		onIconSpin()
 	}
+
+	// 如果玩家的bonus是all or slot的話，slot page的balance就用total wallet，不然就單純顯示main wallet就好
+	useEffect(() => {
+		if (promoCategoryId === 0 || promoCategoryId === 1) {
+			setSlotBalance(totalWallet)
+		} else {
+			setSlotBalance(mainWallet)
+		}
+	}, [mainWallet, promoCategoryId, totalWallet])
+
 	useEffect(() => {
 		const logo = providerList.find(({ tpId }) => tpId === Number(providerTpId))
 		setProviderLogo(logo?.imgName)
@@ -39,7 +52,7 @@ const Header = ({ tpId: providerTpId }: { tpId: string }) => {
 
 				<div className='flex gap-1'>
 					<span>{t('Label_General_Balance')}:</span>
-					<span className='text-secondary-300'>{wallet.bonusWallet}</span>
+					<span className='text-secondary-300'>{slotBalance}</span>
 				</div>
 
 				<div className='flex cursor-pointer gap-2'>

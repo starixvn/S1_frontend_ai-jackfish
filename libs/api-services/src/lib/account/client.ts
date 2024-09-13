@@ -7,6 +7,7 @@ import {
 	IWalletInfoData,
 	TCustBankInfoData,
 	TEWalletData,
+	TReferralSettingDetailData,
 	TReferralSummaryData,
 	TWithdrawalAvailableBalanceData,
 } from './type'
@@ -104,6 +105,19 @@ export const useGetReferralSummary = () => {
 	)
 	return {
 		referralSummary: data?.data,
+		isLoading,
+		error,
+	}
+}
+
+export const useGetReferralSettingDetail = () => {
+	const { data, isLoading, error } = useSWR<
+		IAxiosResponse<TReferralSettingDetailData>
+	>(accountApiUrl.getReferralSettingDetail, (url: string) =>
+		fetcher<TReferralSettingDetailData>(url),
+	)
+	return {
+		referralSettingDetail: data?.data,
 		isLoading,
 		error,
 	}

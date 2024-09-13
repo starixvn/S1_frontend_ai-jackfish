@@ -36,7 +36,7 @@ const ReferralStatus: React.FC = () => {
 	const { referralSummary, isLoading } = useGetReferralSummary()
 
 	return (
-		<>
+		<div className='mt-7 px-5 lg:mt-9 lg:px-0'>
 			<div className='text-check-200 text-center text-2xl font-bold'>
 				{t('Label_Referral_YourReferralStatus')}
 			</div>
@@ -58,7 +58,7 @@ const ReferralStatus: React.FC = () => {
 					/>
 				</div>
 			)}
-		</>
+		</div>
 	)
 }
 

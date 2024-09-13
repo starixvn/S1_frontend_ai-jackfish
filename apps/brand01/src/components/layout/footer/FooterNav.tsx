@@ -29,7 +29,7 @@ const FooterNav = () => {
 							>
 								<LocaleLink
 									href={pathname}
-									className='text-sk-grey-400 flex h-10 w-10 flex-col items-center justify-center text-center'
+									className='text-sk-grey-400 flex w-10 flex-col items-center justify-center text-center'
 								>
 									<img
 										src={imageUrl(iconPath)}
@@ -84,7 +84,7 @@ const FooterNav = () => {
 							>
 								<LocaleLink
 									href={pathname}
-									className='text-sk-grey-400 flex h-10 w-10 flex-col items-center justify-center text-center'
+									className='text-sk-grey-400 flex w-10 flex-col items-center justify-center text-center'
 								>
 									<img
 										src={imageUrl(iconPath)}

@@ -19,7 +19,7 @@ const PromotionCode: React.FC = () => {
 				{t('Label_Profile_PromoCode')}
 			</header>
 			<img
-				className='mt-4 w-[126px]'
+				className='mt-4 h-[111px] w-[126px]'
 				src={imageUrl('/img/popup/popup-coupon.png')}
 				alt='profile icon'
 			/>

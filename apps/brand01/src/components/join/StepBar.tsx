@@ -5,7 +5,7 @@ interface IStepBarProps {
 	step: JoinStepEnum
 }
 
-const StepBar = ({ step }: IStepBarProps) => {
+const StepBar: React.FC<IStepBarProps> = ({ step }) => {
 	return (
 		<div className='mt-5 grid place-items-center lg:mt-4'>
 			<div className='grid h-2 w-32 grid-cols-3 place-items-center gap-1'>

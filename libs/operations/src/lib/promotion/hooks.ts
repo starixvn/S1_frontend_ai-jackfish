@@ -50,7 +50,7 @@ export const usePromotionList = () => {
 		isLoading: isLoadingSpecialPromotionList,
 	} = useSWR(
 		{
-			url: promotionApiUrl.getPromotionListV3,
+			url: promotionApiUrl.getSpecialPromotionList,
 			args: { langId, currencyId, deviceType },
 		},
 		({ args }) => getSpecialPromotionList(args),

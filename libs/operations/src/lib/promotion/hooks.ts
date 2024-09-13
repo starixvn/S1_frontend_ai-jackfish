@@ -4,6 +4,7 @@ import {
 	getDepositPromotionList,
 	getPromotionDetail,
 	getPromotionListV3,
+	getSpecialPromotionList,
 	setClaimPromotion,
 	setSpecialCode,
 } from 'JF-api/promotion/client'
@@ -12,7 +13,7 @@ import { promotionApiUrl } from 'JF-api/promotion/url'
 import { DeviceTypeEnum } from 'JF-constants'
 import { useAuthStore } from 'JF-operations'
 import dayjs from 'dayjs'
-import { every, filter, includes } from 'lodash-es'
+import { concat, every, filter, includes } from 'lodash-es'
 import { useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useForm } from 'react-hook-form'
@@ -33,7 +34,10 @@ const useLocale = () => {
 
 export const usePromotionList = () => {
 	const { langId, currencyId } = useLocale()
-	const { data: { data: originalPromotionList } = {}, isLoading } = useSWR(
+	const {
+		data: { data: promotionList = [] } = {},
+		isLoading: isLoadingPromotionList,
+	} = useSWR(
 		{
 			url: promotionApiUrl.getPromotionListV3,
 			args: { langId, currencyId, deviceType },
@@ -41,47 +45,42 @@ export const usePromotionList = () => {
 		({ args }) => getPromotionListV3(args),
 	)
 
-	const data = originalPromotionList
-		? filter(
-				originalPromotionList,
-				({ isJoin, promotionType, custExpiryTime, periodTo }) =>
-					isJoin &&
-					!includes(
-						[PromotionType.Rebate, PromotionType.Cashback],
-						promotionType,
-					)
-						? dayjs().isBefore(dayjs(custExpiryTime))
-						: dayjs().isBefore(dayjs(dayjs.unix(periodTo))),
-			)
-		: []
+	const {
+		data: { data: specialPromotionList = [] } = {},
+		isLoading: isLoadingSpecialPromotionList,
+	} = useSWR(
+		{
+			url: promotionApiUrl.getPromotionListV3,
+			args: { langId, currencyId, deviceType },
+		},
+		({ args }) => getSpecialPromotionList(args),
+	)
 
-	return { data, isLoading }
+	const joinedPromotionList = concat(promotionList, specialPromotionList)
+
+	const filteredList = filter(
+		joinedPromotionList,
+		({ isJoin, promotionType, custExpiryTime, periodTo }) => {
+			if (
+				isJoin &&
+				!includes([PromotionType.Rebate, PromotionType.Cashback], promotionType)
+			) {
+				return dayjs().isBefore(dayjs(custExpiryTime))
+			}
+			return dayjs().isBefore(dayjs(dayjs.unix(periodTo)))
+		},
+	)
+
+	return {
+		data: filteredList,
+		isLoading: isLoadingPromotionList || isLoadingSpecialPromotionList,
+	}
 }
 
 export const useActivePromotionList = () => {
-	const { langId, currencyId } = useLocale()
-	const { data: { data: originalPromotionList } = {}, isLoading } = useSWR(
-		{
-			url: promotionApiUrl.getPromotionListV3,
-			args: { langId, currencyId, deviceType },
-		},
-		({ args }) => getPromotionListV3(args),
-	)
+	const { data: originalPromotionList, isLoading } = usePromotionList()
 
-	const data = originalPromotionList
-		? filter(
-				originalPromotionList,
-				({ isJoin, promotionType, custExpiryTime, periodTo }) =>
-					isJoin
-						? !includes(
-								[PromotionType.Rebate, PromotionType.Cashback],
-								promotionType,
-							)
-							? dayjs().isBefore(dayjs(custExpiryTime))
-							: dayjs().isBefore(dayjs(dayjs.unix(periodTo)))
-						: false,
-			)
-		: []
+	const data = filter(originalPromotionList, ({ isJoin }) => isJoin)
 
 	return { data, isLoading }
 }

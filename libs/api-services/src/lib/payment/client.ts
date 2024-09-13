@@ -4,14 +4,19 @@ import dayjs from 'dayjs'
 import useSWR from 'swr'
 import { IAxiosError, IAxiosResponse, fetcher } from '../baseApi'
 import {
-	IGetBankInfoSysListByCurrencyIdArgs,
-	ISubmitWithdrawalArgs,
 	KycStatusEnum,
-	TBankInfoSysData,
-	TStatementData,
-	TWithdrawalLimitData,
-	TWithdrawalRecentInfoData,
-	TWithdrawalSetting,
+	type IDepositBankTransferReqData,
+	type IDepositInfoRecentData,
+	type IGetBankInfoSysListByCurrencyIdArgs,
+	type IPayInfoListAllData,
+	type IPostDepositBankTransferReqArgs,
+	type ISubmitWithdrawalArgs,
+	type IUploadReceiptArgs,
+	type TBankInfoSysData,
+	type TWithdrawalLimitData,
+	type TWithdrawalRecentInfoData,
+	type TWithdrawalSetting,
+	type TStatementData,
 } from './type'
 import { paymentApiUrl } from './url'
 
@@ -109,6 +114,68 @@ export const checkKyc = async (): Promise<KycStatusEnum> => {
 
 		// 如果是其他異常錯誤統一先回 normal，否則用戶會被卡在 KYC page
 		return KycStatusEnum.Normal
+	}
+}
+
+export const getPayInfoListAll = async () => {
+	try {
+		const { data } = await fetcher<IPayInfoListAllData, null>(
+			paymentApiUrl.getPayInfoListAll,
+		)
+		return data
+	} catch (e) {
+		return null
+	}
+}
+
+export const postDepositBankTransferReq = async ({
+	...args
+}: IPostDepositBankTransferReqArgs) => {
+	try {
+		return await fetcher<
+			IDepositBankTransferReqData,
+			IPostDepositBankTransferReqArgs
+		>(paymentApiUrl.postDepositBankTransferReq, args)
+	} catch (error) {
+		throw error as IAxiosError
+	}
+}
+
+export const postUploadReceipt = async ({ ...args }: IUploadReceiptArgs) => {
+	try {
+		return await fetcher<null, IUploadReceiptArgs>(
+			paymentApiUrl.uploadReceipt,
+			args,
+		)
+	} catch (error) {
+		throw error as IAxiosError
+	}
+}
+
+export const checkDepositSpecialCode = async ({
+	specialCode,
+}: {
+	specialCode: string
+}) => {
+	try {
+		return await fetcher<{ bonusCode: string }, { specialCode: string }>(
+			paymentApiUrl.checkDepositSpecialCode,
+			{ specialCode },
+		)
+	} catch (error) {
+		throw error as IAxiosError
+	}
+}
+
+export const getDepositInfoRecentList = async () => {
+	try {
+		const { data } = await fetcher<Array<IDepositInfoRecentData>, void>(
+			paymentApiUrl.getDepositInfoRecentList,
+		)
+
+		return data
+	} catch (error) {
+		throw error as IAxiosError
 	}
 }
 

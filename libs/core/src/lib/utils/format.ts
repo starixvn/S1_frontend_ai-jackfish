@@ -132,3 +132,12 @@ export const replaceStringToNumber = (str: string) => {
 	// 使用 replace 方法將匹配到的部分替換為空字串
 	return str.replace(regex, '')
 }
+
+export const convertFileToBase64 = (file: File) => {
+	return new Promise<string>((resolve, reject) => {
+		const reader = new FileReader()
+		reader.readAsDataURL(file)
+		reader.onload = () => resolve(reader.result as string)
+		reader.onerror = error => reject(error)
+	})
+}

@@ -68,12 +68,12 @@ const useDepositStore = create<IDepositState & IDepositAction>((set, get) => ({
 			if (key === DEPOSIT_PAYMENT_TYPE.EWallet) {
 				// EWallet 顯示的數量是根據 api 決定，在 nova 來說這裡是第二層
 				value?.data.forEach(EWalletData => {
-					const defEWalletItem = DEPOSIT_OPTIONS_IMAGE.EWallet.find(
+					const defEWalletItem = DEPOSIT_OPTIONS_IMAGE.EWallet.options.find(
 						item => item.groupId === EWalletData.groupId,
 					)
 
 					acc.push({
-						title: key,
+						title: DEPOSIT_OPTIONS_IMAGE[key]?.title,
 						query: {
 							paymentType: key,
 							groupId: EWalletData.groupId,
@@ -86,12 +86,12 @@ const useDepositStore = create<IDepositState & IDepositAction>((set, get) => ({
 				if (!isEmpty(value?.data)) {
 					const firstBankSysId = head(value?.data)?.sysId
 					acc.push({
-						title: key,
+						title: DEPOSIT_OPTIONS_IMAGE[key]?.title,
 						query: {
 							paymentType: key,
 							sysId: firstBankSysId,
 						},
-						image: DEPOSIT_OPTIONS_IMAGE[key],
+						image: DEPOSIT_OPTIONS_IMAGE[key]?.image,
 					})
 				}
 			} else if (key === DEPOSIT_PAYMENT_TYPE.OnlineBanking) {
@@ -99,23 +99,23 @@ const useDepositStore = create<IDepositState & IDepositAction>((set, get) => ({
 				if (!isEmpty(value?.data)) {
 					const firstPayId = head(value?.data)?.payId
 					acc.push({
-						title: key,
+						title: DEPOSIT_OPTIONS_IMAGE[key]?.title,
 						query: {
 							paymentType: key,
 							payId: firstPayId,
 						},
-						image: DEPOSIT_OPTIONS_IMAGE[key],
+						image: DEPOSIT_OPTIONS_IMAGE[key]?.image,
 					})
 				}
 			} else if (key === DEPOSIT_PAYMENT_TYPE.Crypto) {
 				// Crypto 顯示的數量只有一個，api 沒有就不顯示，這裡固定只有一個，不會有沒有的情況
 				if (!isEmpty(value?.data)) {
 					acc.push({
-						title: key,
+						title: DEPOSIT_OPTIONS_IMAGE[key]?.title,
 						query: {
 							paymentType: key,
 						},
-						image: DEPOSIT_OPTIONS_IMAGE[key],
+						image: DEPOSIT_OPTIONS_IMAGE[key]?.image,
 					})
 				}
 			}

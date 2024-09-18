@@ -112,7 +112,7 @@ const SlotGameList = ({
 		)
 	}
 	return slotsGameList.length > 0 ? (
-		<div className='grid grid-cols-3 place-items-center gap-6 px-8 py-6 lg:grid-cols-5 lg:px-52'>
+		<div className='grid grid-cols-3 place-items-center gap-y-3 px-8 py-6 lg:grid-cols-5 lg:gap-6 lg:px-52'>
 			{slotsGameList.map(({ tpId, gameId, imgName, playFree, isMaintain }) => {
 				/**
 				 * @resultImgUrl 根據語系組合過的遊戲圖片
@@ -125,7 +125,7 @@ const SlotGameList = ({
 				return (
 					<div
 						key={`game-${gameId}`}
-						className='max-w-[200px] cursor-pointer overflow-hidden rounded-xl'
+						className='w-3/4 cursor-pointer overflow-hidden rounded-xl lg:w-full lg:max-w-[200px]'
 						onClick={() => {
 							setNewGameId(gameId)
 						}}

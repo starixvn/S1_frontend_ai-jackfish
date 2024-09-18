@@ -31,12 +31,13 @@ export default function CryptoPayForm({ payments }: CryptoPayFormProps) {
 	const { onSubmitCryptoPay, isLoading } = useDepositStore()
 
 	const firstPayment = head(payments?.data)
+	const { supportChannels = [] } = firstPayment || {}
+	// Nova 的架構曬是從 selectedPayment 這裡拿 minAmount maxAmount，tuk555 要從 supportChannels 裡拿
 	const {
-		minAmount = 0,
+		channelId: firstChannelId,
 		maxAmount = 0,
-		supportChannels = [],
-	} = firstPayment || {}
-	const firstChannelId = head(supportChannels)?.channelId
+		minAmount = 0,
+	} = head(supportChannels) || {}
 
 	const cryptoPaySchema = baseDepositFormSchema({
 		minAmount,

@@ -12,7 +12,7 @@ import {
 	type ISubmitWithdrawalArgs,
 	type IUploadReceiptArgs,
 	type TBankInfoSysData,
-	TStatementData,
+	type TStatementData,
 	type TWithdrawalLimitData,
 	type TWithdrawalRecentInfoData,
 	type TWithdrawalSetting,

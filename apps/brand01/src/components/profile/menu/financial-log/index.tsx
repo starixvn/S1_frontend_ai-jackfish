@@ -1,11 +1,12 @@
 import Button from '@brand01/src/components/button'
 import dayjs from 'dayjs'
 import { getFinancialLog } from 'JF-api/payment/client'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useTranslation } from 'react-i18next'
 import { SyncLoader } from 'react-spinners'
+import { toast } from 'react-toastify'
 
 interface IFinancialLogItem {
 	createTime: string
@@ -22,7 +23,11 @@ const FinancialLog = () => {
 	const [startDate, setStartDate] = useState<Date | null>(new Date())
 	const [endDate, setEndDate] = useState<Date | null>(new Date())
 	const [financialLogs, setFinancialLogs] = useState<IFinancialLogItem[]>([])
-	const [loading, setLoading] = useState<boolean>(false)
+	const [isInitialLoading, setIsInitialLoading] = useState<boolean>(false)
+	const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false)
+	const [pageNumber, setPageNumber] = useState<number>(1)
+	const [hasMoreData, setHasMoreData] = useState<boolean>(true) // 是否有更多資料
+	const logContainerRef = useRef<HTMLDivElement>(null)
 
 	const handleStartDate = (date: Date | null) => {
 		setStartDate(date)
@@ -76,27 +81,81 @@ const FinancialLog = () => {
 
 	const handleSearch = async () => {
 		if (startDate && endDate) {
-			setLoading(true) // 開始加載資料
-			setHasSearched(false) // 重置搜尋狀態
+			setIsInitialLoading(true)
+			setHasSearched(false)
+			setPageNumber(1) // 搜尋時將頁碼重置為 1
+			setHasMoreData(true) // 重置是否有更多資料的狀態
 			try {
-				const startDateString = dayjs(startDate).format('YYYY-MM-DD');
-				const endDateString = dayjs(endDate).format('YYYY-MM-DD');
-				// 使用 getFinancialLog 函數傳遞日期參數
+				const startDateString = dayjs(startDate).format('YYYY-MM-DD')
+				const endDateString = dayjs(endDate).format('YYYY-MM-DD')
 				const financialLog = await getFinancialLog(
 					startDateString,
 					endDateString,
+					1, // 頁碼為 1
 				)
 				setFinancialLogs(financialLog)
+				setPageNumber(2) // 設定下一頁為 2
+				if (financialLog.length === 0) {
+					setHasMoreData(false)
+				}
 			} catch (error) {
+				// eslint-disable-next-line no-console
 				console.error('Error fetching financial log:', error)
 			} finally {
-				setLoading(false)
+				setIsInitialLoading(false)
 				setHasSearched(true)
 			}
 		} else {
-			alert('Please select both start and end dates.')
+			toast.error('Please select both start and end dates.')
 		}
 	}
+
+	useEffect(() => {
+		const container = logContainerRef.current
+		if (!container) return
+
+		const handleScroll = async () => {
+			if (isLoadingMore || !hasMoreData) return
+
+			const { scrollTop, scrollHeight, clientHeight } = container
+			if (scrollTop + clientHeight >= scrollHeight - 50) {
+				// 滾動到接近底部，開始加載更多數據
+				setIsLoadingMore(true)
+				try {
+					if (startDate && endDate) {
+						const startDateString = dayjs(startDate).format('YYYY-MM-DD')
+						const endDateString = dayjs(endDate).format('YYYY-MM-DD')
+						const financialLogResponse = await getFinancialLog(
+							startDateString,
+							endDateString,
+							pageNumber,
+						)
+						if (financialLogResponse.length > 0) {
+							setFinancialLogs(prevLogs => [
+								...prevLogs,
+								...financialLogResponse,
+							])
+							setPageNumber(prevPage => prevPage + 1)
+						} else {
+							setHasMoreData(false)
+						}
+					}
+				} catch (error) {
+					// eslint-disable-next-line no-console
+					console.error('Error fetching financial log:', error)
+					toast.error('Error fetching financial log.')
+				} finally {
+					setIsLoadingMore(false)
+				}
+			}
+		}
+
+		container.addEventListener('scroll', handleScroll)
+
+		return () => {
+			container.removeEventListener('scroll', handleScroll)
+		}
+	}, [startDate, endDate, pageNumber, isLoadingMore, hasMoreData])
 
 	return (
 		<div className='block h-full w-full overflow-auto'>
@@ -171,28 +230,31 @@ const FinancialLog = () => {
 					</div>
 				</div>
 
-				{loading && (
+				{/* 初始搜尋的 Loading 指示器 */}
+				{isInitialLoading && (
 					<div className='absolute top-[30vh] left-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 transform items-center justify-center lg:top-[13vh]'>
 						<SyncLoader color='#E1E1E1' />
 					</div>
 				)}
 
 				{/* 如果搜尋沒結果就顯示對應字串 */}
-
-				{!loading && hasSearched && financialLogs.length === 0 && (
+				{!isInitialLoading && hasSearched && financialLogs.length === 0 && (
 					<div className='absolute top-[30vh] left-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 transform items-center justify-center lg:top-[13vh]'>
 						<span className='text-gray-500'>{t('Label_General_NoData')}</span>
 					</div>
 				)}
 
-				<div className='space-y-4 overflow-y-scroll pb-6 lg:h-[385px]'>
-					{!loading && financialLogs.length > 0 && (
+				<div
+					className='h-[650px] space-y-4 overflow-y-scroll pb-6 lg:h-[385px]'
+					ref={logContainerRef}
+				>
+					{financialLogs.length > 0 && (
 						<div>
 							{financialLogs.map(log => (
 								// wrapper
 								<div
 									className='lg:leading-0 mx-2 mt-4 rounded-xl bg-white pl-2 pr-4 text-sm leading-3 text-black lg:text-base '
-									key={log.createTime}
+									key={log.refTransId} // 確保唯一 key
 								>
 									{/* 1 */}
 									<div className='flex justify-between '>
@@ -218,7 +280,7 @@ const FinancialLog = () => {
 										</div>
 									</div>
 									{/* 3 */}
-									<div className='bg-red flex justify-between'>
+									<div className='flex justify-between'>
 										<div className='flex flex-row space-x-5'>
 											<div>
 												<div className='px-2 text-neutral-300'>
@@ -250,6 +312,24 @@ const FinancialLog = () => {
 							))}
 						</div>
 					)}
+
+					{/* 後續加載的 Loading 指示器 */}
+					{isLoadingMore && (
+						<div className='flex items-center justify-center py-4'>
+							<SyncLoader color='#E1E1E1' />
+						</div>
+					)}
+
+					{/* 無更多數據的提示 */}
+					{hasMoreData === false &&
+						!isInitialLoading &&
+						financialLogs.length > 0 && (
+							<div className='flex items-center justify-center py-4'>
+								<span className='text-gray-500'>
+									{t('This is the end of the result')}
+								</span>
+							</div>
+						)}
 				</div>
 			</div>
 		</div>

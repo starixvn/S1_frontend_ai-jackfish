@@ -64,6 +64,18 @@ export type TCashBackDetailData = {
 	cashBackDetail: TCashBackDetailData[]
 }
 
+export interface IDepositPromotionCanJoinTierAmountData {
+	requiredAmount: number
+	bonusAmount: number
+	lockedAmount: number
+}
+
+export interface IDepositPromotionTierAmountData {
+	requiredAmount: number
+	bonus: number
+	maxBonus: number
+}
+
 export type TPromotionDataBase = {
 	banner: string
 	beenUsed: boolean
@@ -71,12 +83,17 @@ export type TPromotionDataBase = {
 	bonusCode: string
 	bonusType: number
 	canJoin: boolean
+	canJoinTierAmountList: IDepositPromotionCanJoinTierAmountData[]
+	cashBackDetails: null
 	categoryId: number
+	custExpiryTime: null | string
 	custRollOver: number
 	custTurnOver: number
 	depositAmount: number
 	depositId: null | string
 	description: string
+	details: null
+	deviceType: null
 	displayFrom: number
 	displayTo: number
 	fullFillType: number
@@ -87,12 +104,15 @@ export type TPromotionDataBase = {
 	periodFrom: number
 	periodTo: number
 	promotionAction: number
-	promotionType: PromotionType
+	promotionLink: null
+	promotionType: number
+	refList: null
 	requiredAmount: number
-	result: number // * 0=成功
+	result: number
 	rollOver: number
 	sort: number
-	status: PromotionStatus
+	status: number
+	tierAmountList: IDepositPromotionTierAmountData[]
 	title: string
 	tpId: number
 	walletType: number

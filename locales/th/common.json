@@ -434,6 +434,7 @@
   "Label_Event_TotalTickets": "ตั๋วทั้งหมด",
   "Label_Event_ValidTurnover": "เทิร์นโอเวอร์ >> เทิร์นโอเวอร์ที่ถุกต้อง",
   "Label_Event_ValidTurnoverTotal": "เทิร์นโอเวอร์ทั้งหมด  >> เทิร์นโอเวอร์ที่ถุกต้องทั้งหมด",
+  "Label_Event_YouHaveNotWonAnyPrize": "คุณยังไม่ได้รับรางวัล",
   "Label_Event_YouWin": "คุณชนะ",
   "Label_FishingGG": "โลกแห่งการตกปลา",
   "Label_Fishing_AlienHunter": "Alien Hunter",

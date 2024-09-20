@@ -1,3 +1,14 @@
+export interface IDepositPromotionCanJoinTierAmountData {
+	requiredAmount: number
+	bonusAmount: number
+	lockedAmount: number
+}
+
+export interface IDepositPromotionTierAmountData {
+	requiredAmount: number
+	bonus: number
+	maxBonus: number
+}
 export enum PromotionType {
 	FirstDeposit = 1,
 	Redeposit = 2,
@@ -64,18 +75,6 @@ export type TCashBackDetailData = {
 	cashBackDetail: TCashBackDetailData[]
 }
 
-export interface IDepositPromotionCanJoinTierAmountData {
-	requiredAmount: number
-	bonusAmount: number
-	lockedAmount: number
-}
-
-export interface IDepositPromotionTierAmountData {
-	requiredAmount: number
-	bonus: number
-	maxBonus: number
-}
-
 export type TPromotionDataBase = {
 	banner: string
 	beenUsed: boolean
@@ -83,17 +82,12 @@ export type TPromotionDataBase = {
 	bonusCode: string
 	bonusType: number
 	canJoin: boolean
-	canJoinTierAmountList: IDepositPromotionCanJoinTierAmountData[]
-	cashBackDetails: null
 	categoryId: number
-	custExpiryTime: null | string
 	custRollOver: number
 	custTurnOver: number
 	depositAmount: number
 	depositId: null | string
 	description: string
-	details: null
-	deviceType: null
 	displayFrom: number
 	displayTo: number
 	fullFillType: number
@@ -104,15 +98,12 @@ export type TPromotionDataBase = {
 	periodFrom: number
 	periodTo: number
 	promotionAction: number
-	promotionLink: null
-	promotionType: number
-	refList: null
+	promotionType: PromotionType
 	requiredAmount: number
-	result: number
+	result: number // * 0=成功
 	rollOver: number
 	sort: number
-	status: number
-	tierAmountList: IDepositPromotionTierAmountData[]
+	status: PromotionStatus
 	title: string
 	tpId: number
 	walletType: number

@@ -763,14 +763,14 @@ export const HOME_MENU_DATA: IMenuData[] = [
 				},
 			},
 			{
-				...PRODUCTS.PG2,
+				...PRODUCTS.PG,
 				h5: {
 					menuActionType: MenuActionEnum.Link,
 				},
 				desktop: { menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
-					tpId: PRODUCTS.PG2.tpId,
+					tpId: PRODUCTS.PG.tpId,
 				},
 			},
 		],

@@ -448,8 +448,8 @@ export const PRODUCTS: {
 		tpGameType: 68,
 		gameId: -1,
 	},
-	PG2: {
-		tpGameIdNo: 81,
+	PG: {
+		tpGameIdNo: 139,
 		tpId: 71,
 		tpGameType: 124,
 		gameId: -1,

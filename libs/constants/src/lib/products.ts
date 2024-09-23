@@ -448,6 +448,12 @@ export const PRODUCTS: {
 		tpGameType: 68,
 		gameId: -1,
 	},
+	PG2: {
+		tpGameIdNo: 81,
+		tpId: 71,
+		tpGameType: 124,
+		gameId: -1,
+	},
 	SBOBET: {
 		tpGameIdNo: 88,
 		tpId: 42,

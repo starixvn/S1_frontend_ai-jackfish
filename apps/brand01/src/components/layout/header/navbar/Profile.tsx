@@ -278,7 +278,7 @@ const Profile = () => {
 	return (
 		<>
 			<div
-				className='absolute h-14 w-14 cursor-pointer lg:relative'
+				className='absolute h-11 w-11 cursor-pointer lg:relative'
 				onClick={onOpen}
 			>
 				<img

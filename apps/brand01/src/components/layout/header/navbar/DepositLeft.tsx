@@ -17,7 +17,7 @@ const DepositLeft = () => {
 							href={pathname}
 							className={cn('whitespace-nowrap px-4 py-2')}
 						>
-							<div className='mx-auto my-0 h-14 w-14'>
+							<div className='mx-auto my-0 h-11 w-11'>
 								<img className='h-full w-full' src={icon} alt='' />
 							</div>
 							<div className=''>{t(displayKey)}</div>

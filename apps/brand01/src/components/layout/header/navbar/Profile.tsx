@@ -37,7 +37,14 @@ const Profile = () => {
 		wallet,
 		getWalletInfo,
 	} = useAuthStore()
-	const { mainWallet, bonusWallet, totalWallet, rollover, turnover } = wallet
+	const {
+		mainWallet,
+		bonusWallet,
+		totalWallet,
+		rollover,
+		turnover,
+		promoCategoryId,
+	} = wallet
 	const { isSpinActive, onIconSpin } = useIconSpin()
 
 	// 定義桌機和手機的media query
@@ -128,7 +135,7 @@ const Profile = () => {
 							/>
 						</div>
 
-						<div className='flex justify-center bg-black'>
+						<div className='flex justify-center'>
 							<p>{userName}</p>
 						</div>
 
@@ -180,7 +187,7 @@ const Profile = () => {
 									<div className='bg-tertiary-500 flex flex-col justify-between gap-2 rounded-md px-4 py-2'>
 										<div className='flex justify-between'>
 											<p className='text-primary-200'>
-												{t('Label_BonusWallet_0')}
+												{t(`Label_Wallet_BonusWallet_${promoCategoryId}`)}
 											</p>
 											<div className='flex flex-row'>
 												<p className='text-primary-200 mr-2'>

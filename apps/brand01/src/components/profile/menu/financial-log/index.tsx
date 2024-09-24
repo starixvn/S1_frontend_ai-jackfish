@@ -67,7 +67,7 @@ const FinancialLog = () => {
     }
 
     setStartDate(tempStartDate.toDate())
-    setEndDate(tempEndDate.toDate())
+    setEndDate(tempEndDate.endOf('day').toDate())
   }
 
   const handleQuickPickChange = (
@@ -79,74 +79,75 @@ const FinancialLog = () => {
     }
   }
 
-  const handleSearch = async () => {
-    if (startDate && endDate) {
-      setIsInitialLoading(true)
-      setHasSearched(false)
-      setPageNumber(1) // 搜尋時將頁碼重置為 1
-      setHasMoreData(true) // 重置是否有更多資料的狀態
-      try {
-        const startDateString = dayjs(startDate).format('YYYY-MM-DD')
-        const endDateString = dayjs(endDate).format('YYYY-MM-DD')
-        const financialLog = await getFinancialLog(
-          startDateString,
-          endDateString,
-          1, // 頁碼為 1
-        )
-        setFinancialLogs(financialLog)
-        setPageNumber(2) // 設定下一頁為 2
-        if (financialLog.length === 0) {
-          setHasMoreData(false)
-        }
-      } catch (error) {
-        console.error('Error fetching financial log:', error)
-      } finally {
-        setIsInitialLoading(false)
-        setHasSearched(true)
+ const handleSearch = async () => {
+  if (startDate && endDate) {
+    setFinancialLogs([]);  // 清空現有資料
+    setIsInitialLoading(true);
+    setHasSearched(false);
+    setPageNumber(1); // 搜尋時將頁碼重置為 1
+    setHasMoreData(true); // 重置是否有更多資料的狀態
+
+    try {
+      const startDateString = dayjs(startDate).format('YYYY-MM-DD');
+      const endDateString = dayjs(endDate).endOf('day').format('YYYY-MM-DD HH:mm:ss');
+      const financialLog = await getFinancialLog(
+        startDateString,
+        endDateString,
+        1, // 頁碼為 1
+      );
+      setFinancialLogs(financialLog);
+      setPageNumber(2); // 設定下一頁為 2
+      if (financialLog.length === 0) {
+        setHasMoreData(false);
       }
-    } else {
-      toast.error('Please select both start and end dates.')
+    } catch (error) {
+      console.error('Error fetching financial log:', error);
+    } finally {
+      setIsInitialLoading(false);
+      setHasSearched(true);
     }
+  } else {
+    toast.error('Please select both start and end dates.');
   }
+}
 
   useEffect(() => {
     const container = logContainerRef.current
     if (!container) return
 
     const handleScroll = async () => {
-      if (isLoadingMore || !hasMoreData) return
-
-      const { scrollTop, scrollHeight, clientHeight } = container
+      if (isInitialLoading || isLoadingMore || !hasMoreData) return;
+    
+      const { scrollTop, scrollHeight, clientHeight } = container;
       if (scrollTop + clientHeight >= scrollHeight - 50) {
-        // 滾動到接近底部，開始加載更多數據
-        setIsLoadingMore(true)
+        setIsLoadingMore(true);
         try {
           if (startDate && endDate) {
-            const startDateString = dayjs(startDate).format('YYYY-MM-DD')
-            const endDateString = dayjs(endDate).format('YYYY-MM-DD')
+            const startDateString = dayjs(startDate).format('YYYY-MM-DD');
+            const endDateString = dayjs(endDate).endOf('day').format('YYYY-MM-DD HH:mm:ss');
             const financialLogResponse = await getFinancialLog(
               startDateString,
               endDateString,
               pageNumber,
-            )
+            );
             if (financialLogResponse.length > 0) {
               setFinancialLogs(prevLogs => [
                 ...prevLogs,
                 ...financialLogResponse,
-              ])
-              setPageNumber(prevPage => prevPage + 1)
+              ]);
+              setPageNumber(prevPage => prevPage + 1);
             } else {
-              setHasMoreData(false)
+              setHasMoreData(false);
             }
           }
         } catch (error) {
-          console.error('Error fetching financial log:', error)
-          toast.error('Error fetching financial log.')
+          console.error('Error fetching financial log:', error);
+          toast.error('Error fetching financial log.');
         } finally {
-          setIsLoadingMore(false)
+          setIsLoadingMore(false);
         }
       }
-    }
+    };
 
     container.addEventListener('scroll', handleScroll)
 

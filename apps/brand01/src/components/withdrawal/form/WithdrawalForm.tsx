@@ -137,8 +137,8 @@ export const WithdrawalForm: React.FC = () => {
 	}
 
 	return (
-		<div className='bg-tertiary-500  grid grid-flow-row gap-4 rounded-2xl p-4 lg:p-6'>
-			<h4 className='text-center text-xl '>
+		<div className='bg-tertiary-500  grid grid-flow-row gap-4 rounded-2xl p-4 lg:p-6 '>
+			<h4 className='text-center text-base '>
 				{t('Label_Withdrawal_WithdrawalTo')}
 			</h4>
 			<BankInfo />

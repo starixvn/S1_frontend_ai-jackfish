@@ -15,12 +15,12 @@ export default function MaxWidthWrapper({
 	return (
 		<div
 			className={cn(
-				' grid min-h-full  grid-flow-row  content-start gap-5 py-6 px-8 lg:px-36',
+				'grid min-h-full  grid-flow-row  content-start gap-5 py-6 px-8 lg:px-[8rem] xl:px-[14rem]',
 				className,
 			)}
 		>
-			<h2 className='text-center text-2xl'>{title}</h2>
-			<div className=' text-center text-2xl'>{description}</div>
+			<h2 className='text-center text-xl'>{title}</h2>
+			<div className=' text-center text-xl'>{description}</div>
 			{children}
 		</div>
 	)

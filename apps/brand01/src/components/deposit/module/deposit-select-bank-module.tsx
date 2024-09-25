@@ -28,7 +28,7 @@ export default function DepositSelectBankModule({
 
 	return (
 		<ModuleWrapper>
-			<div className='mb-3 text-center text-sm font-medium'>
+			<div className='mb-3 text-center text-base font-medium'>
 				{t('Select Bank')}
 			</div>
 			<div className='grid grid-cols-1 gap-4 lg:grid-cols-2 '>

@@ -2,7 +2,7 @@ import Loading from '@brand01/src/components/loading'
 import { KycUpload } from '@brand01/src/components/withdrawal/kyc/KycUpload'
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import { KycStatusEnum } from 'JF-api/payment/type'
-import { cn, useGetPathname } from 'JF-core'
+import { useGetPathname } from 'JF-core'
 import { useWithdrawalStore } from 'JF-operations'
 import { useCallback, useEffect } from 'react'
 import { BalanceInfo } from './BalanceInfo'
@@ -42,13 +42,8 @@ const Withdrawal = () => {
 	if (!isInit) return <Loading className='h-[80vh] bg-transparent' />
 
 	return (
-		<div
-			className={cn(
-				' grid min-h-full  grid-flow-row  content-start gap-5 py-6 px-8',
-				'lg:px-48',
-			)}
-		>
-			<h2 className='text-center text-2xl '>{t('Label_General_Withdrawal')}</h2>
+		<div className='grid min-h-full grid-flow-row content-start gap-5 py-6 px-8 lg:px-[8rem] xl:px-[14rem]'>
+			<h2 className='text-center text-xl '>{t('Label_General_Withdrawal')}</h2>
 			{withdrawalContent()}
 		</div>
 	)

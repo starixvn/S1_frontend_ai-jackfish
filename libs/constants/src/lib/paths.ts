@@ -60,4 +60,7 @@ export const paths = {
 	slotLobby: {
 		root: '/slot-lobby',
 	},
+	blockIp: {
+		root: '/block-ip',
+	},
 } as const

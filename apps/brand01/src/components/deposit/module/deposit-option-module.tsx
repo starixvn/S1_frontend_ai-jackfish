@@ -67,7 +67,7 @@ export default function DepositOptionModule({
 							key={paymentOption.image}
 						>
 							<img src={paymentOption.image} alt='deposit-option' />
-							<div>{paymentOption.title}</div>
+							<div>{t(paymentOption.title)}</div>
 						</Button>
 					)
 				})}

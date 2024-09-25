@@ -34,12 +34,13 @@ export default function MobilePayForm({ payments }: MobilePayFormProps) {
 	const {
 		userInfo: { currencyId = CurrenciesEnum.THB, langId },
 	} = useAuthStore()
+	const { supportChannels = [] } = selectedPayment || {}
+	// Nova 的架構曬是從 selectedPayment 這裡拿 minAmount maxAmount，tuk555 要從 supportChannels 裡拿
 	const {
-		minAmount = 0,
+		channelId: firstChannelId,
 		maxAmount = 0,
-		supportChannels = [],
-	} = selectedPayment || {}
-	const firstChannelId = head(supportChannels)?.channelId
+		minAmount = 0,
+	} = head(supportChannels) || {}
 	const { onSubmitMobilePay, isLoading } = useDepositStore()
 
 	const mobilePayFormSchema = baseDepositFormSchema({

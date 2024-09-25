@@ -4,15 +4,14 @@ import ModuleWrapper from '@brand01/src/components/deposit/module/moudle-wrapper
 import Input from '@brand01/src/components/input'
 import Select from '@brand01/src/components/select'
 import { useClientTranslation } from '@brand01/src/i18n/client'
-import { useDepositPromotionList } from 'JF-api/promotion/client'
 import { isConvert, useGetPathname } from 'JF-core'
-import { useAuthStore } from 'JF-operations'
+import { useAuthStore, useDepositPromotionList } from 'JF-operations'
 import { useFormContext } from 'react-hook-form'
 
 export default function DepositChooseAvailablePromotion() {
 	const { locale } = useGetPathname()
 	const {
-		userInfo: { langId, currencyId },
+		userInfo: { currencyId },
 	} = useAuthStore()
 	const {
 		register,
@@ -21,7 +20,7 @@ export default function DepositChooseAvailablePromotion() {
 	} = useFormContext()
 	const { t } = useClientTranslation(locale)
 
-	const { depositPromotionList = [] } = useDepositPromotionList({ langId })
+	const { depositPromotionList = [] } = useDepositPromotionList()
 
 	const selectOptions = depositPromotionList.map(depositPromotion => ({
 		label: depositPromotion.title,

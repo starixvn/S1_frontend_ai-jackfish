@@ -32,7 +32,7 @@ export default function DepositOptionModule({
 
 	return (
 		<ModuleWrapper>
-			<div className='mb-3 text-center text-sm font-medium'>
+			<div className='mb-3 text-center text-base font-medium'>
 				{t('TopUp Option')}
 			</div>
 			<div className='bg-tertiary-500 grid  grid-cols-2 grid-rows-1 gap-4 rounded-2xl lg:grid-cols-3 '>

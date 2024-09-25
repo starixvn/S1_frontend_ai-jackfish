@@ -3,10 +3,18 @@
 import { envCookieNames } from '@brand01/src/i18n/settings'
 import { LANG_TO_CURRENCY } from 'JF-constants'
 import { useAuthStore, useSocialChannelStore } from 'JF-operations'
-import { useEffect, useRef } from 'react'
+import { debounce } from 'lodash-es'
+import { useEffect } from 'react'
 import { useCookies } from 'react-cookie'
 import { useGetPathname } from './useGetPathname'
 import { useLocaleRouter } from './useLocaleRouter'
+
+const debouncedGetSocialChannels = debounce(
+	(getSocialChannels, langId, currencyId) => {
+		getSocialChannels({ langId, currencyId })
+	},
+	300,
+)
 
 interface IUseInitEffectProps {
 	isSignedIn: boolean
@@ -30,9 +38,6 @@ const useInitEffect = ({ isSignedIn }: IUseInitEffectProps) => {
 		userInfo: { langId, currencyId },
 		getWalletInfo,
 	} = useAuthStore()
-	// 新增 ref 避免渲染多次觸發 effect
-	const prevLangId = useRef(langId)
-	const prevCurrencyId = useRef(currencyId)
 
 	const { getSocialChannels } = useSocialChannelStore()
 
@@ -84,15 +89,12 @@ const useInitEffect = ({ isSignedIn }: IUseInitEffectProps) => {
 		setCookie,
 	])
 
-	// 初始化 Store 放在判斷式裡面避免多次觸發 langId 以及 currencyId dependencies
+	// 初始化 Store 使用 Debounce 避免多次調用
 	useEffect(() => {
-		if (
-			prevLangId.current !== langId ||
-			prevCurrencyId.current !== currencyId
-		) {
-			prevLangId.current = langId
-			prevCurrencyId.current = currencyId
-			getSocialChannels({ langId, currencyId })
+		debouncedGetSocialChannels(getSocialChannels, langId, currencyId)
+		// 清理函數
+		return () => {
+			debouncedGetSocialChannels.cancel()
 		}
 	}, [currencyId, getSocialChannels, langId])
 }

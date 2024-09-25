@@ -67,7 +67,7 @@ const FinancialLog = () => {
 		}
 
 		setStartDate(tempStartDate.toDate())
-		setEndDate(tempEndDate.toDate())
+		setEndDate(tempEndDate.endOf('day').toDate())
 	}
 
 	const handleQuickPickChange = (
@@ -81,13 +81,17 @@ const FinancialLog = () => {
 
 	const handleSearch = async () => {
 		if (startDate && endDate) {
+			setFinancialLogs([]) // 清空現有資料
 			setIsInitialLoading(true)
 			setHasSearched(false)
 			setPageNumber(1) // 搜尋時將頁碼重置為 1
 			setHasMoreData(true) // 重置是否有更多資料的狀態
+
 			try {
 				const startDateString = dayjs(startDate).format('YYYY-MM-DD')
-				const endDateString = dayjs(endDate).format('YYYY-MM-DD')
+				const endDateString = dayjs(endDate)
+					.endOf('day')
+					.format('YYYY-MM-DD HH:mm:ss')
 				const financialLog = await getFinancialLog(
 					startDateString,
 					endDateString,
@@ -115,16 +119,17 @@ const FinancialLog = () => {
 		if (!container) return
 
 		const handleScroll = async () => {
-			if (isLoadingMore || !hasMoreData) return
+			if (isInitialLoading || isLoadingMore || !hasMoreData) return
 
 			const { scrollTop, scrollHeight, clientHeight } = container
 			if (scrollTop + clientHeight >= scrollHeight - 50) {
-				// 滾動到接近底部，開始加載更多數據
 				setIsLoadingMore(true)
 				try {
 					if (startDate && endDate) {
 						const startDateString = dayjs(startDate).format('YYYY-MM-DD')
-						const endDateString = dayjs(endDate).format('YYYY-MM-DD')
+						const endDateString = dayjs(endDate)
+							.endOf('day')
+							.format('YYYY-MM-DD HH:mm:ss')
 						const financialLogResponse = await getFinancialLog(
 							startDateString,
 							endDateString,
@@ -155,6 +160,7 @@ const FinancialLog = () => {
 		return () => {
 			container.removeEventListener('scroll', handleScroll)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [startDate, endDate, pageNumber, isLoadingMore, hasMoreData])
 
 	return (

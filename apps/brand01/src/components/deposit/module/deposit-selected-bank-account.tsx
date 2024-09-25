@@ -21,7 +21,7 @@ export default function DepositSelectedBankAccount({
 
 	return (
 		<ModuleWrapper>
-			<div className='mb-3 text-center text-sm font-medium'>
+			<div className='mb-3 text-center text-base font-medium'>
 				{t('Bank Account')}
 			</div>
 			<div className='mb-3 text-center text-sm font-medium'>

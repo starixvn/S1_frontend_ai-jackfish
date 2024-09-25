@@ -1,14 +1,3 @@
-export interface IDepositPromotionCanJoinTierAmountData {
-	requiredAmount: number
-	bonusAmount: number
-	lockedAmount: number
-}
-
-export interface IDepositPromotionTierAmountData {
-	requiredAmount: number
-	bonus: number
-	maxBonus: number
-}
 export enum PromotionType {
 	FirstDeposit = 1,
 	Redeposit = 2,

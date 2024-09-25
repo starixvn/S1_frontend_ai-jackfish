@@ -12,14 +12,14 @@ const Announcement: React.FC<IAnnouncementProps> = ({ announcementData }) => {
 	return (
 		<div className='flex h-8 items-center'>
 			<img
-				className='mx-2 h-4 w-4 lg:mx-4'
+				className='mx-2 h-5 w-5 lg:mx-4'
 				src={imageUrl('/img/icon/icon-megaphone.svg')}
 				alt=''
 			/>
 			<Marquee>
 				{announcementData?.map(({ id, subject }) => (
 					<div
-						className='text-secondary-300 ml-8 cursor-pointer py-1 text-xs font-medium'
+						className='text-secondary-300 ml-8 cursor-pointer py-1 text-base font-medium'
 						key={`announcement-${id}`}
 					>
 						{subject}

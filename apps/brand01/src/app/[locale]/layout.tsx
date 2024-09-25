@@ -1,5 +1,8 @@
 import { fallbackLng, languages } from '@brand01/src/i18n/settings'
+import { getIpCountry } from 'JF-api/site/server'
+import { paths } from 'JF-constants'
 import { toUpper } from 'lodash-es'
+import { redirect } from 'next/navigation'
 import { ReactNode } from 'react'
 import { ToastContainer } from 'react-toastify'
 
@@ -30,6 +33,10 @@ export default async function MainLayout({
 }: {
 	children: ReactNode
 }) {
+	const { isAccess } = (await getIpCountry()) || {}
+	if (!isAccess) {
+		redirect(paths.blockIp.root)
+	}
 	return (
 		<>
 			{children}

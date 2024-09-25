@@ -58,62 +58,6 @@ export type IMenuData = {
 	subMenuAllowCurrenciesWithAuth: boolean // * 決定是否需要登入後才過濾(暫時沒有用到)
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const HOT_GAME_DATA: IMenuData[] | any[] = [
-	// hot games
-	{
-		category: MenuKeyEnum.HotGame,
-		desktop: {
-			subMenuClassName: 'hotgame',
-		},
-		displayKey: 'Label_General_HotGames',
-		h5: {
-			icon: 'hotgame',
-			subMenuClassName: 'hotgame',
-		},
-		iconUrl: '/desktop/img/hotgame.png',
-		lobbyCategoryId: LobbyCategoryEnum.HotGame,
-		pathname: paths.home.root,
-		subMenu: [
-			{
-				...PRODUCTS.CryptoSports,
-				desktop: {
-					menuActionType: MenuActionEnum.EnterPage,
-				},
-				h5: {
-					menuActionType: MenuActionEnum.EnterPage,
-				},
-				currencyGameName: null,
-				gameId: '43',
-				iconEndTime: '2023-11-25T00:00:00',
-				iconStartTime: '2023-11-01T00:00:00',
-				iconType: 1,
-				lobbyCategory: 'esports',
-				mobileHeaderPicUrl:
-					'["https://banner.0814media.net/h5/img/Header/SBSW/esports/saba.png"]',
-				mobileLobbyPicUrl:
-					'["https://banner.0814media.net/h5/img/LobbyHeader/SBSW/esports/saba.png"]',
-				pathname: paths.home.root,
-				pcHeaderPicUrl:
-					'["https://banner.0814media.net/desktop/img/Header/SBSW/esports/saba.png"]',
-				pcLobbyPicUrl:
-					'["https://banner.0814media.net/desktop/img/LobbyHeader/SBSW/esports/saba.png"]',
-				productName: 'Saba',
-				rwdHeaderPicUrl:
-					'["https://imgs.tuk555.net/img/Header/SBSW/sports/virtual-sports.png"]',
-				rwdLobbyPicUrl:
-					'["https://imgs.tuk555.net/img/LobbyHeader/SBSW/sports/virtual-sports.png"]',
-				sort: 1,
-				tpGameIdNo: 6,
-				tpGameType: 69,
-				tpId: 41,
-				tpName: 'SBSW',
-			},
-		],
-		subMenuAllowCurrenciesWithAuth: false,
-	},
-]
-
 export const HOME_MENU_DATA: IMenuData[] = [
 	// sports
 	{

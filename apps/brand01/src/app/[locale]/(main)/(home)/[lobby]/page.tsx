@@ -17,7 +17,7 @@ const Lobby: React.FC<ILobbyProps> = ({ params: { locale, lobby } }) => {
 	return (
 		<div className='min-h-[80vh] w-full'>
 			<HomeBanner />
-			<HomeContent />
+			<HomeContent isHotGame={false} />
 		</div>
 	)
 }

@@ -38,15 +38,15 @@ const Wallet = () => {
 		<>
 			<div
 				ref={ref}
-				className='bg-tertiary-400 my-4 mr-8 rounded-xl pl-4 pr-8 lg:relative lg:my-auto lg:mr-0 lg:bg-transparent lg:px-0'
+				className='bg-tertiary-400 my-4 mr-8 w-fit rounded-xl pl-4 pr-8 lg:relative lg:my-auto lg:mr-0 lg:bg-transparent lg:px-0'
 			>
 				<div
-					className='cursor-pointer text-right lg:text-center'
+					className='cursor-pointer text-right text-sm lg:text-center lg:text-base'
 					onClick={toggle}
 				>
 					{userName}
 				</div>
-				<div className='bg-tertiary-400 flex items-center justify-end gap-2 rounded-3xl lg:justify-between lg:gap-4 lg:pr-2'>
+				<div className='bg-tertiary-400 flex items-center justify-end gap-2 rounded-3xl text-xs lg:justify-between lg:gap-4 lg:pr-2 lg:text-base'>
 					<img
 						className='hidden h-8 w-8 cursor-pointer lg:block'
 						src={imageUrl('/img/header/balance-money.png')}

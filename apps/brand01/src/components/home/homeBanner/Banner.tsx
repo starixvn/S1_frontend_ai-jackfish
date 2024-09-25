@@ -25,6 +25,7 @@ const Banner: React.FC<IBannerProps> = ({ bannerData, bannerIsLoading }) => {
 			{bannerData?.map((item: TBannerData) => (
 				<SwiperSlide key={item.itemKey}>
 					<div
+						className='h-[30vw] lg:h-[17vw]'
 						onClick={
 							item.redirectLink
 								? () => router.push(item.redirectLink ?? '/')
@@ -34,7 +35,7 @@ const Banner: React.FC<IBannerProps> = ({ bannerData, bannerIsLoading }) => {
 						<img
 							src={item.bannerPCUrl}
 							alt={item.bannerName}
-							className={cn('h-[30vw] w-full object-cover lg:h-[20vw]', {
+							className={cn('h-full w-full object-cover lg:h-full', {
 								'cursor-pointer': Boolean(item.redirectLink),
 							})}
 							loading='lazy'

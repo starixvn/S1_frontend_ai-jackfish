@@ -3,6 +3,8 @@ import { getIpCountry } from 'JF-api/site/server'
 import { paths } from 'JF-constants'
 import { redirect } from 'next/navigation'
 
+export const dynamic = 'force-dynamic'
+
 export default async function BlockIPPage({
 	params: { locale },
 }: {

@@ -3,7 +3,7 @@
 import { envCookieNames } from '@brand01/src/i18n/settings'
 import { paths } from 'JF-constants'
 import { isNumber } from 'lodash-es'
-import { cookies, headers } from 'next/headers'
+import { cookies } from 'next/headers'
 import { fetcher } from '../baseApi'
 import {
 	BannerActionEnum,
@@ -87,26 +87,28 @@ export const getTpMaintainList = async () => {
 	}
 }
 
-export async function getIpCountry() {
-	const clientHeaders = Object.fromEntries(headers())
-	try {
-		const response = await fetcher<{
-			countryCode: string
-			isAccess: boolean
-			forbidden: boolean
-			message: string
-			remoteIpAddress: string
-		}>(
-			`${siteApiUrl.getIpCountry}`,
-			undefined,
-			undefined,
-			undefined,
-			clientHeaders,
+export const getIpCountry = async (originHeader: Headers): Promise<any> => {
+	return (
+		fetch(
+			new URL(
+				`${process.env['NEXT_PUBLIC_REFERER_HOST']}/api/Site/GetIpCountry`,
+			),
+			{
+				headers: {
+					...originHeader,
+					'ai-host': `${process.env['NEXT_PUBLIC_REFERER_HOST']}`,
+				},
+				method: 'POST',
+			},
 		)
-
-		return response?.data
-	} catch (error) {
-		console.log(error)
-		return null
-	}
+			.then(res => res.json())
+			.then(response => {
+				return response?.data
+			})
+			// * 加入 catch 防止第一次渲染時 (cookie中沒有 langId、currencyId) 會因 api 錯誤引發畫面錯誤
+			.catch(error => {
+				console.log(error)
+				//
+			})
+	)
 }

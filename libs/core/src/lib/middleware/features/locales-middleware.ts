@@ -1,11 +1,16 @@
 import { envCookieNames } from '@brand01/src/i18n/settings'
 import acceptLanguage from 'accept-language'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextFetchEvent, NextRequest, NextResponse } from 'next/server'
+import type { CustomMiddleware } from '../chain'
 
-export const appMiddleware = ({
+export const localesMiddleware = ({
+	middleware,
+	event,
 	req,
 	configs,
 }: {
+	middleware: CustomMiddleware
+	event: NextFetchEvent
 	req: NextRequest
 	configs: {
 		fallbackLng: string
@@ -55,5 +60,5 @@ export const appMiddleware = ({
 		)
 	}
 
-	return res
+	return middleware(req, event, res)
 }

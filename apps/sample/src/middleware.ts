@@ -1,9 +1,15 @@
 import { NextRequest } from "next/server";
-import { appMiddleware, middlewareConfig as config } from "JF-core/middleware";
+import { localesMiddleware } from "JF-core/middleware";
 import { fallbackLng, languages, cookieName } from "./i18n/settings";
 
+const config = {
+  matcher: [
+    "/((?!api/|img/|_next/|health|favicon.ico|sw.js|site.webmanifest|[^/]+/Cashier/|block-ip).*)",
+  ],
+};
+
 export function middleware(req: NextRequest) {
-  return appMiddleware({
+  return localesMiddleware({
     req,
     configs: {
       fallbackLng,

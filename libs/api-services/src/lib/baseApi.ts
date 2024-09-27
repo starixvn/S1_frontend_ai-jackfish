@@ -26,18 +26,14 @@ export interface IAxiosError extends globalThis.Error {
 	rawMessage?: string
 }
 
-export interface CustomHeaders {
-	[key: string]: string | undefined // Allow additional headers
-}
-
 const isServer = typeof window === 'undefined'
 
 export const baseUrl = '/api/'
 
 const preHeaders = {
 	'ai-host': `${process.env['NEXT_PUBLIC_REFERER_HOST']}`,
-	// 'origin-host':
-	// 	typeof window !== 'undefined' ? window?.location?.origin : undefined,
+	'origin-host':
+		typeof window !== 'undefined' ? window?.location?.origin : undefined,
 }
 
 export const baseAxios = axios.create({
@@ -48,8 +44,8 @@ export const baseAxios = axios.create({
 	headers: {
 		common: {
 			'ai-host': `${process.env['NEXT_PUBLIC_REFERER_HOST']}`,
-			// 'origin-host':
-			// 	typeof window !== 'undefined' ? window?.location?.origin : undefined,
+			'origin-host':
+				typeof window !== 'undefined' ? window?.location?.origin : undefined,
 		},
 	},
 })
@@ -59,40 +55,13 @@ export const fetcher = async <Response = undefined, Data = any, Params = any>(
 	data?: Data,
 	method: 'GET' | 'POST' = 'POST',
 	params?: Params,
-	headers?: CustomHeaders,
+	headers?: object,
 ): Promise<IAxiosResponse<Response>> => {
-	const isClient = typeof window !== 'undefined'
-
-	const finalHeaders = {
-		'ai-host': `${process.env['NEXT_PUBLIC_REFERER_HOST']}`,
-		...headers,
-	}
-
-	if (isClient) {
-		finalHeaders['origin-host'] = window.location.origin
-	} else {
-		finalHeaders['origin-host'] = 'https://membersiteservice.nova88dev.com'
-	}
-
-	// Remove 'host' header if it's set
-	delete finalHeaders['host']
-
-	// Remove unnecessary headers that might cause conflicts
-	delete finalHeaders['referer']
-	delete finalHeaders['origin']
-	delete finalHeaders['x-forwarded-host']
-	delete finalHeaders['x-forwarded-port']
-	delete finalHeaders['x-forwarded-proto']
-	delete finalHeaders['x-forwarded-for']
-
 	try {
 		const response = await baseAxios({
 			url,
 			method,
-			headers: {
-				...preHeaders,
-				...headers,
-			},
+			headers: { ...preHeaders, ...headers },
 			...(data && { data }),
 			...(params && { params }),
 		})

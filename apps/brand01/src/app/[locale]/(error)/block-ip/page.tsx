@@ -1,7 +1,4 @@
 import { useServerTranslation } from '@brand01/src/i18n'
-import { getIpCountry } from 'JF-api/site/server'
-import { paths } from 'JF-constants'
-import { redirect } from 'next/navigation'
 
 export default async function BlockIPPage({
 	params: { locale },
@@ -10,11 +7,7 @@ export default async function BlockIPPage({
 		locale: string
 	}
 }) {
-	const { isAccess } = (await getIpCountry()) || {}
 	const { t } = await useServerTranslation(locale)
-	if (isAccess) {
-		redirect(paths.home.root)
-	}
 
 	// 底下是各國語言，不用翻譯，加上翻譯會變成預設英文
 	return (

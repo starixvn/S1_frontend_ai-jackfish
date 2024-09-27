@@ -29,10 +29,10 @@ const Modal: React.FC<ModalProps> = ({
 		'lg:rounded-xl relative transform bg-tertiary-500 shadow-xl transition-transform duration-300 ease-in-out'
 
 	const sizeClasses = {
-		xs: 'pb-14 w-full h-full lg:w-[500px] lg:h-[500px]',
-		sm: 'pb-14 w-full h-full lg:w-[600px] lg:h-[810px]',
-		md: 'pb-14 w-full h-full lg:w-[880px] lg:h-[561px]',
-		lg: 'pb-14 w-full h-full lg:w-[880px] lg:h-[810px]',
+		xs: 'w-full h-full lg:w-[500px] lg:h-[500px]',
+		sm: 'w-full h-full lg:w-[600px] lg:h-[810px]',
+		md: 'w-full h-full lg:w-[880px] lg:h-[561px]',
+		lg: 'w-full h-full lg:w-[880px] lg:h-[810px]',
 	}
 
 	const sizeClass = sizeClasses[size]
@@ -60,55 +60,51 @@ const Modal: React.FC<ModalProps> = ({
 	if (!isOpen) return null
 
 	return (
-		<>
+		<div
+			className='bg-primary-300/40 fixed inset-0 z-50 flex items-center justify-center'
+			aria-labelledby='modal-title'
+			role='dialog'
+			aria-modal='true'
+			onClick={() => closeOnOverlayClick && onClose()} // Closing on overlay click
+		>
 			<div
-				className='bg-primary-300/40 fixed inset-0 z-50 flex items-center justify-center'
-				aria-labelledby='modal-title'
-				role='dialog'
-				aria-modal='true'
-				onClick={() => closeOnOverlayClick && onClose()} // Closing on overlay click
+				className={cn(
+					baseClasses,
+					sizeClass,
+					additionalClasses,
+					'flex flex-col',
+				)}
+				onClick={e => e.stopPropagation()} // 防止點擊內容區域觸發關閉
 			>
-				<div
-					className={cn(
-						baseClasses,
-						sizeClass,
-						additionalClasses,
-						'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform',
-					)}
-					onClick={e => e.stopPropagation()} // 防止點擊內容區域觸發關閉
-				>
-					<div
-						className={`bg-tertiary-500 flex justify-end p-3 lg:rounded-tl-xl lg:rounded-tr-xl`}
-					>
-						{showCloseButton && (
-							<button
-								type='button'
-								onClick={onClose} // 只有點擊這個按鈕時才觸發 onClose
-								className='inline-flex items-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900'
+				<div className='bg-tertiary-500 flex justify-end p-3 lg:rounded-tl-xl lg:rounded-tr-xl'>
+					{showCloseButton && (
+						<button
+							type='button'
+							onClick={onClose} // 只有點擊這個按鈕時才觸發 onClose
+							className='inline-flex items-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900'
+						>
+							<svg
+								className='h-5 w-5'
+								fill='#afa9d6'
+								stroke='#afa9d6'
+								viewBox='0 0 20 20'
+								xmlns='http://www.w3.org/2000/svg'
+								strokeWidth='2'
 							>
-								<svg
-									className='h-5 w-5'
-									fill='#afa9d6'
-									stroke='#afa9d6'
-									viewBox='0 0 20 20'
-									xmlns='http://www.w3.org/2000/svg'
-									strokeWidth='2'
-								>
-									<path
-										fillRule='evenodd'
-										d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
-										clipRule='evenodd'
-									></path>
-								</svg>
-							</button>
-						)}
-					</div>
-					<div className='bg-tertiary-500 h-full px-4 py-3 lg:rounded-bl-xl lg:rounded-br-xl'>
-						{children}
-					</div>
+								<path
+									fillRule='evenodd'
+									d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+									clipRule='evenodd'
+								></path>
+							</svg>
+						</button>
+					)}
+				</div>
+				<div className='bg-tertiary-500 h-0 flex-grow px-4 py-3 lg:rounded-bl-xl lg:rounded-br-xl'>
+					{children}
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }
 

@@ -3,7 +3,7 @@
 import { envCookieNames } from '@brand01/src/i18n/settings'
 import { paths } from 'JF-constants'
 import { isNumber } from 'lodash-es'
-import { cookies } from 'next/headers'
+import { cookies, headers } from 'next/headers'
 import { fetcher } from '../baseApi'
 import {
 	BannerActionEnum,
@@ -88,6 +88,7 @@ export const getTpMaintainList = async () => {
 }
 
 export async function getIpCountry() {
+	const clientHeaders = Object.fromEntries(headers())
 	try {
 		const response = await fetcher<{
 			countryCode: string
@@ -95,10 +96,17 @@ export async function getIpCountry() {
 			forbidden: boolean
 			message: string
 			remoteIpAddress: string
-		}>(`${siteApiUrl.getIpCountry}`, undefined)
+		}>(
+			`${siteApiUrl.getIpCountry}`,
+			undefined,
+			undefined,
+			undefined,
+			clientHeaders,
+		)
 
 		return response?.data
 	} catch (error) {
+		console.log(error)
 		return null
 	}
 }

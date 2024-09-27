@@ -1,8 +1,7 @@
-import React from 'react'
-import { getIpCountry } from 'JF-api/site/server'
-import { redirect } from 'next/navigation'
-import { paths } from 'JF-constants'
 import { useServerTranslation } from '@brand01/src/i18n'
+import { getIpCountry } from 'JF-api/site/server'
+import { paths } from 'JF-constants'
+import { redirect } from 'next/navigation'
 
 export default async function BlockIPPage({
 	params: { locale },

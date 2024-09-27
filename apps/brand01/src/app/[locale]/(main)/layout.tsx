@@ -10,7 +10,7 @@ export default async function MainLayout({
 	children: React.ReactNode
 }) {
 	const isSignedIn = await checkSignIn()
-	const { isAccess } = (await getIpCountry()) || {}
+	const { isAccess = true } = (await getIpCountry()) || {}
 	if (!isSignedIn) {
 		redirect(paths.login.root)
 	}

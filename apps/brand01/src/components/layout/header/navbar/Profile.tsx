@@ -80,12 +80,19 @@ const Profile = () => {
 		[t('Label_Profile_ActivePromotion')]: <ActivePromotion />,
 	}
 
-	// 確保如果是手機的初始畫面 切回桌機時會顯示account info  （因為手機尺寸下activeButton是null）
+	// 確保如果是手機的初始畫面，切換到桌機時會顯示 "Account Info"（因為手機尺寸下 activeButton 為 null）
 	useEffect(() => {
 		if (isDesktop && !activeButton) {
 			setActiveButton(t('Label_Profile_AccountInfo'))
 		}
 	}, [isDesktop, activeButton, t])
+
+	// 關閉重啟時，根據設備類型重置 activeButton，桌機顯示 "Account Info"，手機顯示菜單列表
+	useEffect(() => {
+		if (!isOpen) {
+			setActiveButton(isDesktop ? t('Label_Profile_AccountInfo') : null)
+		}
+	}, [isOpen, isDesktop, t])
 
 	// 桌機跟手機的menuOptions不同
 	const displayedOptions = menuOptions.map(option => ({

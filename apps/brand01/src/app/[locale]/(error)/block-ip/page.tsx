@@ -1,18 +1,17 @@
-import React from 'react'
-import { getIpCountry } from 'JF-api/site/server'
-import { redirect } from 'next/navigation'
-import { paths } from 'JF-constants'
-import { useServerTranslation } from '@brand01/src/i18n'
+'use client'
 
-export default async function BlockIPPage({
-	params: { locale },
-}: {
-	params: {
-		locale: string
-	}
-}) {
-	const { isAccess } = (await getIpCountry()) || {}
-	const { t } = await useServerTranslation(locale)
+import { useClientTranslation } from '@brand01/src/i18n/client'
+import { getIpCountry } from 'JF-api/site/client'
+import { paths } from 'JF-constants'
+import { useGetPathname } from 'JF-core'
+import { redirect } from 'next/navigation'
+
+export default function BlockIPPage() {
+	const { locale } = useGetPathname()
+	const { t } = useClientTranslation(locale)
+	const ipCountry = getIpCountry()
+	const { isAccess } = ipCountry || {}
+
 	if (isAccess) {
 		redirect(paths.home.root)
 	}

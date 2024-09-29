@@ -1,3 +1,5 @@
+'use client'
+
 import { ChangeEvent, DragEvent, useState } from 'react'
 
 const useImageUploader = (submitImageCallback: (file: File) => void) => {

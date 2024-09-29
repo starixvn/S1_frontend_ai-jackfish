@@ -194,3 +194,24 @@ export const getSocialChannel = async ({ ...args }: ISocialChannelArgs) => {
 		return []
 	}
 }
+
+export const getIpCountry = () => {
+	const { data: { data: ipCountryData } = {} } = useSWR<
+		IAxiosResponse<{
+			countryCode: string
+			isAccess: boolean
+			forbidden: boolean
+			message: string
+			remoteIpAddress: string
+		}>
+	>(siteApiUrl.getIpCountry, (url: string) =>
+		fetcher<{
+			countryCode: string
+			isAccess: boolean
+			forbidden: boolean
+			message: string
+			remoteIpAddress: string
+		}>(url),
+	)
+	return ipCountryData
+}

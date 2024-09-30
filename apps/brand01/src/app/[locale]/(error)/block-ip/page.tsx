@@ -9,10 +9,11 @@ import { redirect } from 'next/navigation'
 export default function BlockIPPage() {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
-	const ipCountry = getIpCountry()
-	const { isAccess } = ipCountry || {}
+	const { ipCountryData, isLoading } = getIpCountry()
+	const { isAccess } = ipCountryData || {}
 
-	if (isAccess) {
+	// fetching 完成且可進入導回首頁
+	if (!isLoading && isAccess) {
 		redirect(paths.home.root)
 	}
 

@@ -17,10 +17,11 @@ interface BlockIpProviderProps {
 export const BlockIpProvider: React.FC<BlockIpProviderProps> = ({
 	children,
 }) => {
-	const ipCountry = getIpCountry()
-	const { isAccess } = ipCountry || {}
+	const { isLoading, ipCountryData } = getIpCountry()
+	const { isAccess } = ipCountryData || {}
 
-	if (!isAccess) {
+	// fetching 完成且不可進入導回首頁
+	if (!isLoading && !isAccess) {
 		redirect(paths.blockIp.root)
 	}
 

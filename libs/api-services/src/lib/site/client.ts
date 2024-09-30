@@ -14,6 +14,7 @@ import {
 	ISocialChannelArgs,
 	IVerifyOTPArgs,
 	TBannerData,
+	TIpCountryData,
 	TSocialChannelData,
 	type TTpMaintainData,
 } from './type'
@@ -196,22 +197,8 @@ export const getSocialChannel = async ({ ...args }: ISocialChannelArgs) => {
 }
 
 export const getIpCountry = () => {
-	const { data: { data: ipCountryData } = {} } = useSWR<
-		IAxiosResponse<{
-			countryCode: string
-			isAccess: boolean
-			forbidden: boolean
-			message: string
-			remoteIpAddress: string
-		}>
-	>(siteApiUrl.getIpCountry, (url: string) =>
-		fetcher<{
-			countryCode: string
-			isAccess: boolean
-			forbidden: boolean
-			message: string
-			remoteIpAddress: string
-		}>(url),
-	)
-	return ipCountryData
+	const { data: { data: ipCountryData } = {}, isLoading } = useSWR<
+		IAxiosResponse<TIpCountryData>
+	>(siteApiUrl.getIpCountry, (url: string) => fetcher<TIpCountryData>(url))
+	return { ipCountryData, isLoading }
 }

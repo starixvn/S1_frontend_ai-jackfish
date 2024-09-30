@@ -2,6 +2,7 @@
 // 統一導出 client components , 或其他 functions
 export * from './lib/components/localeLink'
 export * from './lib/hooks'
+export * from './lib/providers'
 export * from './lib/utils/cn'
 export * from './lib/utils/format'
 export * from './lib/utils/generator'

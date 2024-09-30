@@ -117,3 +117,11 @@ export type TpMaintainData = {
 	beginTime: null | string
 	endTime: null | string
 }
+
+export interface TIpCountryData {
+	countryCode: string
+	isAccess: boolean
+	forbidden: boolean
+	message: string
+	remoteIpAddress: string
+}

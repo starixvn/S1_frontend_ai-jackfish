@@ -1,20 +1,19 @@
-import { useServerTranslation } from '@brand01/src/i18n'
-import { getIpCountry } from 'JF-api/site/server'
+'use client'
+
+import { useClientTranslation } from '@brand01/src/i18n/client'
+import { getIpCountry } from 'JF-api/site/client'
 import { paths } from 'JF-constants'
+import { useGetPathname } from 'JF-core'
 import { redirect } from 'next/navigation'
 
-export const dynamic = 'force-dynamic'
+export default function BlockIPPage() {
+	const { locale } = useGetPathname()
+	const { t } = useClientTranslation(locale)
+	const { ipCountryData, isLoading } = getIpCountry()
+	const { isAccess } = ipCountryData || {}
 
-export default async function BlockIPPage({
-	params: { locale },
-}: {
-	params: {
-		locale: string
-	}
-}) {
-	const { isAccess } = (await getIpCountry()) || {}
-	const { t } = await useServerTranslation(locale)
-	if (isAccess) {
+	// fetching 完成且可進入導回首頁
+	if (!isLoading && isAccess) {
 		redirect(paths.home.root)
 	}
 

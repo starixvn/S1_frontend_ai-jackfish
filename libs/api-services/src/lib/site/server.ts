@@ -86,19 +86,3 @@ export const getTpMaintainList = async () => {
 		return []
 	}
 }
-
-export async function getIpCountry() {
-	try {
-		const response = await fetcher<{
-			countryCode: string
-			isAccess: boolean
-			forbidden: boolean
-			message: string
-			remoteIpAddress: string
-		}>(`${siteApiUrl.getIpCountry}`, undefined)
-
-		return response?.data
-	} catch (error) {
-		return null
-	}
-}

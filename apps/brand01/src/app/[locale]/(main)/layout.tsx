@@ -1,7 +1,6 @@
 import Layout from '@brand01/src/components/layout'
 import { checkSignIn } from 'JF-api/auth/server'
 import { paths } from 'JF-constants'
-import { BlockIpProvider } from 'JF-core'
 import { redirect } from 'next/navigation'
 
 export default async function MainLayout({
@@ -13,9 +12,5 @@ export default async function MainLayout({
 	if (!isSignedIn) {
 		redirect(paths.login.root)
 	}
-	return (
-		<Layout isSignedIn={isSignedIn}>
-			<BlockIpProvider>{children}</BlockIpProvider>
-		</Layout>
-	)
+	return <Layout isSignedIn={isSignedIn}>{children}</Layout>
 }

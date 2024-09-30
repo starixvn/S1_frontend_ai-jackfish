@@ -1,35 +1,19 @@
-import { fallbackLng, languages } from '@brand01/src/i18n/settings'
-import { toUpper } from 'lodash-es'
+'use client'
+
+import { getIpCountry } from 'JF-api/site/client'
+import { paths } from 'JF-constants'
+import { redirect } from 'next/navigation'
 import { ReactNode } from 'react'
 import { ToastContainer } from 'react-toastify'
 
-export async function generateMetadata({
-	params: { locale },
-}: {
-	params: {
-		locale: string
-	}
-}) {
-	if (languages.indexOf(locale) < 0) locale = fallbackLng
-	return {
-		title: `${toUpper(`${process.env.NEXT_PUBLIC_SITE_NAME}`)}`,
-		description: `Welcome to ${toUpper(`${process.env.NEXT_PUBLIC_SITE_NAME}`)}`,
-		icons: {
-			icon: [
-				{
-					url: `${process.env.NEXT_PUBLIC_IMAGE_HOST}/img/favicon.ico`,
-					href: `${process.env.NEXT_PUBLIC_IMAGE_HOST}/img/favicon.ico`,
-				},
-			],
-		},
-	}
-}
+export default function MainLayout({ children }: { children: ReactNode }) {
+	const { isLoading, ipCountryData } = getIpCountry()
+	const { isAccess } = ipCountryData || {}
 
-export default async function MainLayout({
-	children,
-}: {
-	children: ReactNode
-}) {
+	// fetching 完成且不可進入導回首頁
+	if (!isLoading && !isAccess) {
+		redirect(paths.blockIp.root)
+	}
 	return (
 		<>
 			{children}

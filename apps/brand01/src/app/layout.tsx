@@ -1,31 +1,12 @@
-import { fallbackLng, languages } from '@brand01/src/i18n/settings'
-import { toUpper } from 'lodash-es'
+'use client'
+
+import { getIpCountry } from 'JF-api/site/client'
+import { paths } from 'JF-constants'
+import { redirect } from 'next/navigation'
 import NextTopLoader from 'nextjs-toploader'
 import 'react-toastify/dist/ReactToastify.css'
 import 'swiper/css/bundle'
 import '../style/global.css'
-
-export async function generateMetadata({
-	params: { locale },
-}: {
-	params: {
-		locale: string
-	}
-}) {
-	if (languages.indexOf(locale) < 0) locale = fallbackLng
-	return {
-		title: `${toUpper(`${process.env.NEXT_PUBLIC_SITE_NAME}`)}`,
-		description: `Welcome to ${toUpper(`${process.env.NEXT_PUBLIC_SITE_NAME}`)}`,
-		icons: {
-			icon: [
-				{
-					url: `${process.env.NEXT_PUBLIC_IMAGE_HOST}/img/favicon.ico`,
-					href: `${process.env.NEXT_PUBLIC_IMAGE_HOST}/img/favicon.ico`,
-				},
-			],
-		},
-	}
-}
 
 export default function RootLayout({
 	children,
@@ -36,6 +17,13 @@ export default function RootLayout({
 		locale: string
 	}
 }) {
+	const { isLoading, ipCountryData } = getIpCountry()
+	const { isAccess } = ipCountryData || {}
+
+	// fetching 完成且不可進入導回首頁
+	if (!isLoading && !isAccess) {
+		redirect(paths.blockIp.root)
+	}
 	return (
 		<html lang={locale}>
 			<body className='bg-tertiary-500 mx-auto lg:bg-neutral-500'>

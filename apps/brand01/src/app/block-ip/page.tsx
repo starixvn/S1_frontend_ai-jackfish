@@ -5,9 +5,9 @@ import { getIpCountry } from 'JF-api/site/client'
 import { paths } from 'JF-constants'
 import { useGetPathname } from 'JF-core'
 import { redirect } from 'next/navigation'
+import { Suspense } from 'react'
 
-// 這頁不用 i18n 放在外層感覺比較適合
-export default function BlockIPPage() {
+function BlockIP() {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
 	const { ipCountryData, isLoading } = getIpCountry()
@@ -17,8 +17,6 @@ export default function BlockIPPage() {
 	if (!isLoading && isAccess) {
 		redirect(paths.home.root)
 	}
-
-	// 底下是各國語言，不用翻譯，加上翻譯會變成預設英文
 	return (
 		<main className='bg-tertiary-500 flex min-h-screen items-center justify-center'>
 			<div className='grid max-w-screen-2xl grid-cols-1 items-center gap-1 p-4 sm:gap-2 sm:p-5 md:grid-cols-5 md:gap-4 md:p-8'>
@@ -68,5 +66,14 @@ export default function BlockIPPage() {
 				</div>
 			</div>
 		</main>
+	)
+}
+
+// 這頁不用 i18n 放在外層感覺比較適合
+export default function BlockIPPage() {
+	return (
+		<Suspense>
+			<BlockIP />
+		</Suspense>
 	)
 }

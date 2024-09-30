@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TKU555</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="../Desktop/img/favicon.ico" type="image/x-icon">
+    <script src="js/moment.js"></script>
+    <script src="js/api.js"></script>
+</head>
+
+<body>
+    <!-- wrapper-->
+    <main class="wrapper">
+        <!-- container -->
+        <div class="container">
+            <!-- state-group -->
+            <div class="state-group">
+                <div class="icon upgrade"></div>
+
+                <!-- state-title -->
+                <div class="state-title">
+                    <h3>SimplePlay Fantasy Goddess</h3>
+                    <h2><span id="from"></span>SERVER UPGRADE</h2>
+                    <h4 class="subtitle">
+                        Performing maintenance<br>
+                        <span id="endTime"></span>
+                    </h4>
+                    <p>Dear Valued Customers,<br>
+                        to present a better experience for valued players,system is performing an upgrade.<br>
+                        Hence, it is inaccessible as for the moment.<br>
+                        Kindly bear with us, we will back on track as soon as maintenance is complete later.<br>
+                        Your kindest patience and utmost understanding is appreciate.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</body>
+
+<script>
+    window.onload = function () {
+        checkTpMaintain()
+        }
+</script>
+
+</html>

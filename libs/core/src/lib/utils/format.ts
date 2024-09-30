@@ -141,3 +141,13 @@ export const convertFileToBase64 = (file: File) => {
 		reader.onerror = error => reject(error)
 	})
 }
+
+/**
+ * @digits 取到小數點後第x位，預設為2
+ * @return number
+ *  */
+export const numberToDigitsByFixed = (value: number, digits = 2) => {
+	const result = value.toFixed(digits)
+	const floatResult = parseFloat(result)
+	return floatResult
+}

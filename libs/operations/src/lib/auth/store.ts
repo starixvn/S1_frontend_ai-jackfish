@@ -3,6 +3,7 @@ import { getWalletInfo } from 'JF-api/account/client'
 import { getUserInfo } from 'JF-api/accountStrict/client'
 import { signInPhone, signOut } from 'JF-api/auth/client'
 import { CURRENCY_NAME_BY_CURRENCY, CurrenciesEnum, langId } from 'JF-constants'
+import { numberToDigitsByFixed } from 'JF-core'
 import { create } from 'zustand'
 import { IAuthAction, IAuthState } from './type'
 
@@ -125,9 +126,9 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 
 		set({
 			wallet: {
-				mainWallet: balance,
-				bonusWallet: bonus,
-				totalWallet: balance + bonus,
+				mainWallet: numberToDigitsByFixed(balance),
+				bonusWallet: numberToDigitsByFixed(bonus),
+				totalWallet: numberToDigitsByFixed(balance + bonus),
 				rollover,
 				turnover,
 				promoCategoryId,

@@ -49,7 +49,7 @@ export const getBanner = () => {
 		) => {
 			let redirectLink = null
 			if (actionMode === BannerActionEnum.GoToBonus) {
-				redirectLink = `${paths.promotion.root}?BonusCode=${bonusCode}`
+				redirectLink = `${paths.promotion.root}?bonusCode=${bonusCode}`
 			} else if (actionMode === BannerActionEnum.RedirectPageOfThisSite) {
 				let params = `?tpId=${tpId}`
 				if (urlRouter === paths.slots.root) {

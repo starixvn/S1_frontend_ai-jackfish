@@ -74,7 +74,7 @@ const useMenuOpen = () => {
 			betType = '',
 			tpGameType = null,
 		}: IEnterPageArgs,
-		{ loginCallback }: { loginCallback: LoginCallbackType },
+		// { loginCallback }: { loginCallback?: LoginCallbackType },
 	) => {
 		const defaultEnterPageArgs: IEnterPageArgs = {
 			langId,
@@ -87,9 +87,9 @@ const useMenuOpen = () => {
 		const entPageUrl = onDefaultEnterPage(defaultEnterPageArgs)
 
 		// * 登入檢查
-		if (loginCallback && !isLogin) {
-			return loginCallback()
-		}
+		// if (loginCallback && !isLogin) {
+		// 	return loginCallback()
+		// }
 
 		onWindowOpenProduct({
 			pathname: entPageUrl,
@@ -264,7 +264,7 @@ const useMenuOpen = () => {
 					tpGameType,
 					betType: betType,
 				}
-				onEnterPage(enterPageArgs, { loginCallback })
+				onEnterPage(enterPageArgs)
 			}
 
 			const goToGameMethod = () => {

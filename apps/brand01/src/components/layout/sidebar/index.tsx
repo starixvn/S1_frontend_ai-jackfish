@@ -1,13 +1,19 @@
 'use client'
 import { useHomeStore, useSocialChannelStore } from 'JF-operations'
 import useMenu from 'libs/core/src/lib/hooks/useMenu'
+import { useEffect } from 'react'
 import SidebarData from './SidebarData'
+import SidebarHotGame from './SidebarHotGame'
 import SidebarSkeleton from './SidebarSkeleton'
 
 const Sidebar = () => {
 	const { menuList } = useMenu()
 	const { lineChannel } = useSocialChannelStore()
-	const { isInit } = useHomeStore()
+	const { isInit, fetchLobbyHeader } = useHomeStore()
+
+	useEffect(() => {
+		fetchLobbyHeader()
+	}, [fetchLobbyHeader])
 
 	if (!isInit) {
 		return [...Array(8)].map((_, index) => <SidebarSkeleton key={index} />)
@@ -15,6 +21,10 @@ const Sidebar = () => {
 
 	return (
 		<>
+			{/* 只有hot game的  */}
+			<SidebarHotGame />
+
+			{/* sports, lottery, slots...等sidebar lobby  */}
 			{menuList.map(
 				({ pathname, category, displayKey, subMenu, iconUrl, ...rest }) => {
 					return (

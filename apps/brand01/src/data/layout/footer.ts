@@ -14,33 +14,32 @@ export const FOOTER_PAYMENT_ICONS = [
 ]
 
 export interface IFooterNavProps {
-	displayKey: string
+	label: string
 	pathname: string
 	iconPath: string
 }
 
-export const FOOTER_NAV_LEFT_DATA = [
-	{
-		displayKey: 'Label_General_LinePay',
-		pathname: paths.promotion.root,
-		iconPath: '/img/mobile-footer/icon-line.png',
-	},
-	{
-		displayKey: 'Label_General_Promos',
-		pathname: paths.promotion.root,
-		iconPath: '/img/mobile-footer/icon-promos.png',
-	},
-] as const satisfies Array<IFooterNavProps>
-
-export const FOOTER_NAV_RIGHT_DATA = [
-	{
-		displayKey: 'Label_General_Deposit',
-		pathname: paths.deposit.root,
-		iconPath: '/img/mobile-footer/icon-deposit.png',
-	},
-	{
-		displayKey: 'Label_General_Withdrawal',
-		pathname: paths.withdrawal.root,
-		iconPath: '/img/mobile-footer/icon-withdraw.png',
-	},
-] as const satisfies Array<IFooterNavProps>
+export const FOOTER_NAV_DATA: {
+	left: IFooterNavProps[]
+	right: IFooterNavProps[]
+} = {
+	left: [
+		{
+			label: 'Label_General_Promos',
+			pathname: paths.promotion.root,
+			iconPath: '/img/mobile-footer/icon-promos.png',
+		},
+	],
+	right: [
+		{
+			label: 'Label_General_Deposit',
+			pathname: paths.deposit.root,
+			iconPath: '/img/mobile-footer/icon-deposit.png',
+		},
+		{
+			label: 'Label_General_Withdrawal',
+			pathname: paths.withdrawal.root,
+			iconPath: '/img/mobile-footer/icon-withdraw.png',
+		},
+	],
+} as const satisfies Record<'left' | 'right', Array<IFooterNavProps>>

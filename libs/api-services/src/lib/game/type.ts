@@ -118,3 +118,28 @@ export interface TLobbyHeaderData {
 	lobbyCategoryId: number
 	data: ISubMenuData[]
 }
+
+export type IHotGame = {
+	gameId: string
+	gameLogo: string
+	gameName: string
+	sort: number
+	tpCategory: number
+	tpGameType: number
+	tpId: number
+	tpLogo: string
+	tpName: string
+	isTpMaintain?: boolean
+}
+
+export interface THotGameData {
+	HotGame: IHotGame[]
+	NewGame?: IHotGame[]
+	Progressive?: IHotGame[]
+	TopCasino?: IHotGame[]
+}
+
+export interface IGetHotGameListPayload {
+	deviceType: number
+	currencyId: number
+}

@@ -5,9 +5,9 @@ export interface IAuthState {
 	isLoading: boolean
 	userInfo: TUserInfoData
 	wallet: {
-		mainWallet: number
-		bonusWallet: number
-		totalWallet: number
+		mainWallet?: string
+		bonusWallet?: string
+		totalWallet?: string
 		rollover: number
 		turnover: number
 		promoCategoryId: number // 用來判斷使用者獲得的bonus是哪類型的Live casino, saba......

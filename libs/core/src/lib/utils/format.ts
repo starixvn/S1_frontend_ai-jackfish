@@ -3,22 +3,19 @@ import { isNaN, replace } from 'lodash-es'
 import { FieldErrors } from 'react-hook-form'
 
 /**
- * @returns 數字 format 到特定小數點，預設為第二位
+ *
+ * @param value
+ * @param maximumFractionDigits 擷取到小數點後第n為，後面都捨棄掉
+ * @returns 經過格式化後有逗點的字串，ex:1,999.99
  */
-export const numFormatToDigits = (value: number, digits = 2): string => {
-	const formatter = new Intl.NumberFormat('en', {
-		minimumFractionDigits: digits,
-	})
-	formatter.format(Number(value.toFixed(digits)))
-
-	let formattedValue = formatter.format(Number(value.toFixed(digits)))
-
-	// 取到小數點後第一個非 0 數字後面捨棄
-	formattedValue = formattedValue.replace(/(\.\d*?[1-9])0+$/, '$1')
-	// 小數點為 0 則全捨棄
-	formattedValue = formattedValue.replace(/\.0+$/, '')
-
-	return formattedValue
+export const numFormatToDigits = (
+	value: number,
+	maximumFractionDigits = 2,
+): string => {
+	return value.toLocaleString('en', {
+		maximumFractionDigits,
+		roundingMode: 'trunc',
+	} as Intl.NumberFormatOptions)
 }
 
 export const isConvert = (currencyId: CurrenciesEnum) =>

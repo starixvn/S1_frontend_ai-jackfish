@@ -3,6 +3,7 @@ import { getWalletInfo } from 'JF-api/account/client'
 import { getUserInfo } from 'JF-api/accountStrict/client'
 import { signInPhone, signOut } from 'JF-api/auth/client'
 import { CURRENCY_NAME_BY_CURRENCY, CurrenciesEnum, langId } from 'JF-constants'
+import { numberFormat } from 'JF-core'
 import { create } from 'zustand'
 import { IAuthAction, IAuthState } from './type'
 
@@ -20,9 +21,9 @@ const defaultWalletInfo = {
 	bonusWallets: [],
 }
 const defaultWallet = {
-	mainWallet: 0,
-	bonusWallet: 0,
-	totalWallet: 0,
+	mainWallet: '0',
+	bonusWallet: '0',
+	totalWallet: '0',
 	rollover: 0,
 	turnover: 0,
 	promoCategoryId: 0,
@@ -122,12 +123,12 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 				{ bonus = 0, rollover = 0, turnover = 0, promoCategoryId = 0 } = {},
 			] = [],
 		} = data
-
+		const currencyId = get().userInfo.currencyId
 		set({
 			wallet: {
-				mainWallet: balance,
-				bonusWallet: bonus,
-				totalWallet: balance + bonus,
+				mainWallet: numberFormat(balance, currencyId),
+				bonusWallet: numberFormat(bonus, currencyId),
+				totalWallet: numberFormat(balance + bonus, currencyId),
 				rollover,
 				turnover,
 				promoCategoryId,

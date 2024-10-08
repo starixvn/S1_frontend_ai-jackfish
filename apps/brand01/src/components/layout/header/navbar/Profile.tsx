@@ -13,7 +13,6 @@ import {
 	cn,
 	getProgressPercentage,
 	imageUrl,
-	numFormatToDigits,
 	useDisclosure,
 	useIconSpin,
 	useLocaleRouter,
@@ -183,14 +182,12 @@ const Profile = () => {
 										<p className='text-primary-200 mr-2'>
 											{t(`Label_Currency_${currencyId}`)}
 										</p>
-										<p className='text-secondary-300'>
-											{numFormatToDigits(mainWallet)}
-										</p>
+										<p className='text-secondary-300'>{mainWallet}</p>
 									</div>
 								</div>
 
 								{/* 第三行 該玩家沒有bonus在手時，不會顯示bonus wallet這個區域 */}
-								{bonusWallet !== 0 && (
+								{bonusWallet !== '0' && (
 									<div className='bg-tertiary-500 flex flex-col justify-between gap-2 rounded-md px-4 py-2'>
 										<div className='flex justify-between'>
 											<p className='text-primary-200'>
@@ -200,9 +197,7 @@ const Profile = () => {
 												<p className='text-primary-200 mr-2'>
 													{t(`Label_Currency_${currencyId}`)}
 												</p>
-												<p className='text-secondary-300'>
-													{numFormatToDigits(bonusWallet)}
-												</p>
+												<p className='text-secondary-300'>{bonusWallet}</p>
 											</div>
 										</div>
 										<div className='flex flex-col gap-2'>

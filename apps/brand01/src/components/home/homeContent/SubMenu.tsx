@@ -72,7 +72,7 @@ const SubMenu = () => {
 								</div>
 							)}
 						</div>
-						<p>{productName}</p>
+						<p>{t(productName)}</p>
 					</div>
 				)
 			})}

@@ -1,9 +1,9 @@
 'use client'
 
-import ChangePasswordModal from './ChangePasswordModal'
 import DepositAndWithdrawalBtn from './DepositAndWithdrawalBtn'
 import DepositLeft from './DepositLeft'
 import Profile from './Profile'
+import ResetModal from './resetModal'
 import Wallet from './Wallet'
 
 const Navbar = () => {
@@ -21,8 +21,8 @@ const Navbar = () => {
 			{/* 個人資訊 */}
 			<Profile />
 
-			{/* 後台手動設定修改密碼彈窗 */}
-			<ChangePasswordModal />
+			{/* 後台手動 Reset 資料的彈窗 */}
+			<ResetModal />
 		</>
 	)
 }

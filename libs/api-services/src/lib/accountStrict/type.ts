@@ -44,3 +44,10 @@ export type TUserInfoData = {
 	actStatus?: UserInfoActStatusEnum
 	memberType?: UserInfoMemberType
 }
+
+export interface ISetLocalBankInfoArgs {
+	accountName: string
+	accountNo: string
+	sysId: number
+	IFSCCode?: string
+}

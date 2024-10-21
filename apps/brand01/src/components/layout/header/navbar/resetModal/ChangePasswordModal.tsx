@@ -2,15 +2,13 @@
 
 import Button from '@brand01/src/components/button'
 import Input from '@brand01/src/components/input'
-import Modal from '@brand01/src/components/modal'
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { TFunction } from 'i18next'
 import { changePassword } from 'JF-api/account/client'
-import { PASSWORD_REGEX, paths } from 'JF-constants'
-import { useDisclosure, useGetPathname, useLocaleRouter } from 'JF-core'
+import { PASSWORD_REGEX } from 'JF-constants'
+import { useGetPathname } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
-import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
@@ -36,14 +34,9 @@ const createFormSchema = (t: TFunction) => {
 }
 
 const ChangePasswordModal = () => {
-	const { locale, currentPath } = useGetPathname()
-	const router = useLocaleRouter()
+	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
-	const { isOpen, onOpen, onClose } = useDisclosure()
-	const {
-		userInfo: { isResetPwd },
-		getUserInfo,
-	} = useAuthStore()
+	const { getUserInfo } = useAuthStore()
 
 	const formSchema = createFormSchema(t)
 	const {
@@ -68,26 +61,8 @@ const ChangePasswordModal = () => {
 		}
 	}
 
-	// 後台手動 ResetPassword 時要開啟 Modal 不給做任何事直到修改完密碼
-	useEffect(() => {
-		if (isResetPwd) {
-			// 進入首頁以外地方導回首頁
-			currentPath !== paths.home.root && router.push(paths.home.root)
-			onOpen()
-		} else {
-			onClose()
-		}
-	}, [currentPath, isResetPwd, onClose, onOpen, router])
-
 	return (
-		<Modal
-			size='xs'
-			isOpen={isOpen}
-			onClose={onClose}
-			closeOnEsc={false}
-			closeOnOverlayClick={false}
-			showCloseButton={false}
-		>
+		<>
 			<div className='mt-4 text-center text-lg font-bold'>
 				{t('Label_General_ChangePassword')}
 			</div>
@@ -131,7 +106,7 @@ const ChangePasswordModal = () => {
 					{t('Label_General_Confirm')}
 				</Button>
 			</form>
-		</Modal>
+		</>
 	)
 }
 

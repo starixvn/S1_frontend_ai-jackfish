@@ -9,7 +9,7 @@ export const accountStrictApiUrl = {
 	// setCustCryptoWallet: 'AccountStrict/SetCustCryptoWallet',
 	// deleteBankCard: 'AccountStrict/DelCustBankInfo',
 	// deleteEWalletCard: 'AccountStrict/DelCustEWalletInfo',
-	// setLocalBankInfo: 'AccountStrict/SetCustBankInfo',
+	setLocalBankInfo: 'AccountStrict/SetCustBankInfo',
 	// setEWalletInfo: 'AccountStrict/SetCustEWalletInfo',
 	uploadCustPhoto: 'AccountStrict/UploadCustPhotoId',
 	// resetPassword: 'AccountStrict/ResetPassword',

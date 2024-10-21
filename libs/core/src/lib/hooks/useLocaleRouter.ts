@@ -1,3 +1,5 @@
+'use client'
+
 import { useGetPathname } from 'JF-core'
 import { NavigateOptions } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 import { useRouter } from 'next/navigation'

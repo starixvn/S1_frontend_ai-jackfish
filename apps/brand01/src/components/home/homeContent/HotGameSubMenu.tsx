@@ -22,7 +22,7 @@ const HotGameSubMenu = () => {
 					tpGameType,
 				}
 				return (
-					<div key={`subMenu-${tpId}`}>
+					<div key={`subMenu-${tpId}-${gameId}`}>
 						<div
 							className='group relative cursor-pointer object-left-top'
 							onClick={() => {

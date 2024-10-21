@@ -1,7 +1,7 @@
 'use client'
 
-import { fetcher } from '../baseApi'
-import { TUserInfoData } from './type'
+import { fetcher, IAxiosError } from '../baseApi'
+import { ISetLocalBankInfoArgs, TUserInfoData } from './type'
 import { accountStrictApiUrl } from './url'
 
 export const getUserInfo = async () => {
@@ -19,4 +19,16 @@ export const uploadCustPhoto = async (file: File) => {
 	const formData = new FormData()
 	formData.append('PhotoId', file)
 	await fetcher<null, FormData>(accountStrictApiUrl.uploadCustPhoto, formData)
+}
+
+export const setLocalBankInfo = async (args: ISetLocalBankInfoArgs) => {
+	try {
+		const data = await fetcher<null, ISetLocalBankInfoArgs>(
+			accountStrictApiUrl.setLocalBankInfo,
+			args,
+		)
+		return data
+	} catch (error) {
+		throw error as IAxiosError
+	}
 }

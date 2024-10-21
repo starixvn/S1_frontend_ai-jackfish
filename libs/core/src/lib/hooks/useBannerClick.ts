@@ -38,7 +38,7 @@ const useBannerClick = () => {
 					gameId: gameId as string,
 					tpGameType,
 				},
-				{ loginCallback: () => router.push(paths.login.root) },
+				// { loginCallback: () => router.push(paths.login.root) },
 			)
 		}
 	}

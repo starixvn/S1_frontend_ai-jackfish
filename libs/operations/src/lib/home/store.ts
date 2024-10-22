@@ -39,11 +39,12 @@ export const useHomeStore = create<IActiveHomeMenu>(set => ({
 	fetchLobbyHeader: async () => {
 		set({ isloading: true })
 		try {
-			const [lobbyHeaderData, tpMaintainList, hotGameData] = await Promise.all([
-				getLobbyHeader(),
-				getTpMaintainList(),
-				getHotGameList(),
-			])
+			const [lobbyHeaderData, tpMaintainList, hotGameData = []] =
+				await Promise.all([
+					getLobbyHeader(),
+					getTpMaintainList(),
+					getHotGameList(),
+				])
 			// 除了hot game之外的lobby games
 			const newLobbyHeaderList = lobbyHeaderData.map(mainMenuItem => {
 				const { lobbyCategoryId, data: menuData = [] } = mainMenuItem || {}

@@ -100,7 +100,7 @@ const Modal: React.FC<ModalProps> = ({
 						</button>
 					)}
 				</div>
-				<div className='bg-tertiary-500 h-0 flex-grow px-4 py-3 lg:rounded-bl-xl lg:rounded-br-xl'>
+				<div className='bg-tertiary-500 min-h-0 flex-grow px-4 py-3 lg:rounded-bl-xl lg:rounded-br-xl'>
 					{children}
 				</div>
 			</div>

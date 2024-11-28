@@ -11,9 +11,8 @@ import {
 import { PromotionType } from 'JF-api/promotion/type'
 import { promotionApiUrl } from 'JF-api/promotion/url'
 import { DeviceTypeEnum } from 'JF-constants'
-import { useAuthStore } from 'JF-operations'
 import dayjs from 'dayjs'
-import { concat, every, filter, includes } from 'lodash-es'
+import { concat, filter, includes } from 'lodash-es'
 import { useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useForm } from 'react-hook-form'
@@ -113,17 +112,6 @@ export const usePromotionDetail = ({
 		({ args }) => getPromotionDetail(args),
 	)
 
-	const {
-		userInfo: {
-			accountName,
-			phoneNo,
-			email,
-			birth_d: birthD,
-			birth_m: birthM,
-			birth_y: birthY,
-		},
-	} = useAuthStore()
-
 	/**
 	 * 領取該 Promotion
 	 * @param amount 領取的金額，若未提供且為特定類別會呼叫 amountCallback，否則預設使用該 Promotion 的最大金額 (maxAmount)
@@ -131,11 +119,6 @@ export const usePromotionDetail = ({
 	const claimPromotion = async (amount?: number) => {
 		try {
 			if (!data) throw new Error(t('Label_General_NoData'))
-
-			// 領取前需先完成個人資料
-			if (!every([accountName, phoneNo, email, birthD, birthM, birthY])) {
-				throw new Error(t('Label_General_UpdateProfileInfo'))
-			}
 
 			// 特定類別需要輸入金額
 			const isAmountRequired = includes(

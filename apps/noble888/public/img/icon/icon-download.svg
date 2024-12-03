@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_圖層_1" data-name="圖層 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #fff;
+        stroke: #fff;
+      }
+
+      .cls-2 {
+        stroke-linejoin: round;
+        stroke-width: 50px;
+      }
+    </style>
+  </defs>
+  <rect class="cls-1" x="211.75" y="37" width="81.06" height="217.79" rx="13.19" ry="13.19"/>
+  <path class="cls-1" d="M261.87,357.87l96.07-110.48c7.16-8.23,1.31-21.06-9.6-21.06h-192.13c-10.91,0-16.75,12.83-9.6,21.06l96.07,110.48c5.07,5.83,14.12,5.83,19.19,0Z"/>
+  <polyline class="cls-2" points="426.59 332.91 426.59 439.74 76.13 439.74 76.13 332.91"/>
+</svg>

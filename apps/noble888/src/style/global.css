@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* date picker都會內建wrapper 內建inline block 所以要蓋掉*/
+.react-datepicker-wrapper
+{
+	display: block !important;
+}
+
+
+/*  先註解 有時會影響佈局 改下方的隱藏樣式 */
+/* ::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: #010326; 
+}
+::-webkit-scrollbar-thumb {
+    background: #e9d3fe;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #afa9d6; 
+} */
+
+
+/* 隱藏scroll bar */
+
+* {
+    -ms-overflow-style: none;  /* IE 和 Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  *::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari 和 Opera */
+  }
+
+
+
+@layer base {
+	html {
+		--color-primary-100: 233 211 254; /* #e9d3fe */
+		--color-primary-200: 175 169 214; /* #afa9d6 */
+		--color-primary-300: 129 5 240; /* #8105f0 */
+		--color-primary-400: 89 15 156; /* #590f9c */
+		--color-primary-500: 70 20 114; /* #461472 */
+
+		--color-secondary-100: 253 179 241; /* #fdb3f1 */
+		--color-secondary-200: 252 115 230; /* #fc73e6 */
+		--color-secondary-300: 242 5 204; /* #f205cc */
+		--color-secondary-400: 200 10 169; /* #c80aa9 */
+		--color-secondary-500: 115 20 100; /* #731464 */
+
+		--color-tertiary-100: 67 128 250; /* #4380fa */
+		--color-tertiary-200: 4 69 199; /* #0445c7 */
+		--color-tertiary-300: 3 49 140; /* #03318c */
+		--color-tertiary-400: 44 36 94; /* #2c245e */
+		--color-tertiary-500: 1 3 38; /* #010326 */
+
+		--color-neutral-100: 255 255 255; /* #ffffff */
+		--color-neutral-200: 195 195 195; /* #c3c3c3 */
+		--color-neutral-300: 170 170 170; /* #aaaaaa */
+		--color-neutral-400: 114 114 114; /* #727272 */
+		--color-neutral-500: 0 0 0; /* #000000 */
+
+		--color-warning-200: 255 210 210; /* #ffd2d2 */
+		--color-warning-300: 255 65 65; /* #ff4141 */
+
+		--color-check-200: 89 200 129; /* #59c881 */
+		--color-check-300: 13 216 45; /* #0dd82d */
+
+		--toastify-color-error: rgb(var(--color-warning-300))  !important;
+		--toastify-color-light: rgb(var(--color-neutral-100)) !important;
+		--toastify-text-color-light: rgb(var(--color-tertiary-500)) !important;
+	}
+}
+
+body {
+	@apply font-chakra;
+	color: rgb(var(--color-neutral-100));
+}

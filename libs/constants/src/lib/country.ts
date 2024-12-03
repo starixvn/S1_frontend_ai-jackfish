@@ -1,9 +1,3 @@
-interface ILanguageGroupData {
-	displayText: string
-	value: keyof typeof langId
-	currencyId: number
-}
-
 export const langId = {
 	en: 'en',
 	th: 'th',
@@ -12,7 +6,21 @@ export const langId = {
 	kh: 'kh',
 	bd: 'bd',
 	id: 'id',
+	ar: 'ar',
 } as const
+
+export type LangId = (typeof langId)[keyof typeof langId]
+
+export const langLabel: Record<LangId, string> = {
+	en: 'English',
+	th: 'ภาษาไทย',
+	cs: '简体中文',
+	vn: 'Tiếng Việt',
+	kh: 'ខ្មែរ',
+	bd: 'বাংলা',
+	id: 'Bhs Indonesia',
+	ar: 'اَلْعَرَبِيَّةُ',
+}
 
 export enum CurrenciesEnum {
 	MYR = 2,
@@ -29,29 +37,20 @@ export enum CurrenciesEnum {
 	USDT = 96,
 }
 
-export const languageGroup = {
-	[langId.en]: [{ displayText: 'English', value: langId.en, currencyId: 4 }],
-	[langId.th]: [
-		{ displayText: 'ภาษาไทย', value: langId.th, currencyId: 4 },
-		{ displayText: 'English', value: langId.en, currencyId: 4 },
-	],
-	[langId.cs]: [
-		// { displayText: 'English', value: 'en', currencyId: 4 },
-		{ displayText: '简体中文', value: langId.cs, currencyId: 2 },
-	],
-	[langId.vn]: [
-		// { displayText: 'English', value: 'en', currencyId: 4 },
-		{ displayText: 'Tiếng Việt', value: langId.vn, currencyId: 51 },
-	],
-	[langId.kh]: [
-		// { displayText: 'English', value: 'en', currencyId: 4 },
-		{ displayText: 'ខ្មែរ', value: langId.kh, currencyId: 72 },
-	],
-	[langId.bd]: [{ displayText: 'বাংলা', value: langId.bd, currencyId: 74 }],
-	[langId.id]: [
-		{ displayText: 'Bhs Indonesia', value: langId.id, currencyId: 15 },
-	],
-} as const satisfies Record<keyof typeof langId, Array<ILanguageGroupData>>
+export const languageGroup: Record<CurrenciesEnum, LangId[]> = {
+	[CurrenciesEnum.MYR]: [langId.en],
+	[CurrenciesEnum.USD]: [langId.en],
+	[CurrenciesEnum.THB]: [langId.en, langId.th],
+	[CurrenciesEnum.CNY]: [langId.en, langId.cs],
+	[CurrenciesEnum.VND]: [langId.en, langId.vn],
+	[CurrenciesEnum.KHM]: [langId.en, langId.kh],
+	[CurrenciesEnum.BDT]: [langId.en, langId.bd],
+	[CurrenciesEnum.IDR]: [langId.en],
+	[CurrenciesEnum.INR]: [langId.en, langId.id],
+	[CurrenciesEnum.KRW]: [langId.en],
+	[CurrenciesEnum.BRL]: [langId.en],
+	[CurrenciesEnum.USDT]: [langId.en],
+}
 
 export const LANG_GROUP_COUNTRY: {
 	[key: string]: string

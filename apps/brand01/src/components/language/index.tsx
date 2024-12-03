@@ -2,7 +2,7 @@
 
 import { envCookieNames } from '@brand01/src/i18n/settings'
 import { setLanguage } from 'JF-api/account/client'
-import { langId, languageGroup } from 'JF-constants'
+import { CurrenciesEnum, langLabel, languageGroup } from 'JF-constants'
 import { cn, imageUrl, useGetPathname, useLocaleRouter } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
 import { useCookies } from 'react-cookie'
@@ -41,24 +41,24 @@ const Language = ({ className }: ILanguageProps) => {
 
 	return (
 		<div className={cn('flex items-center justify-center gap-3', className)}>
-			{languageGroup[langId.th].map(({ displayText, value }) => (
+			{languageGroup[CurrenciesEnum.THB].map(langId => (
 				<button
-					key={value}
+					key={langId}
 					className='flex items-center justify-center gap-1.5'
-					onClick={() => handleLangChange(value)}
+					onClick={() => handleLangChange(langId)}
 				>
 					<img
 						className='h-7 w-7 rounded-full'
-						src={imageUrl(`/img/flag/${value}.jpg`)}
-						alt={value}
+						src={imageUrl(`/img/flag/${langId}.jpg`)}
+						alt={langId}
 					/>
 					<span
 						className={cn('relative w-16 text-left', {
 							"after:bg-check-200 after:absolute after:-bottom-[7px] after:left-0 after:h-[2px] after:w-5 after:rounded-full after:content-['']":
-								locale === value,
+								locale === langId,
 						})}
 					>
-						{displayText}
+						{langLabel[langId]}
 					</span>
 				</button>
 			))}

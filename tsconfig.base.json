@@ -18,6 +18,7 @@
 		"baseUrl": ".",
 		"paths": {
 			"@brand01/*": ["apps/brand01/*"],
+			"@noble888/*": ["apps/noble888/*"],
 			"JF-api/*": ["libs/api-services/src/lib/*"],
 			"JF-constants": ["libs/constants/src/index.ts"],
 			"JF-core": ["libs/core/src/index.ts"],

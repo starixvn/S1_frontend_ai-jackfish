@@ -1,6 +1,6 @@
 #!/bin/sh
 # 目前既有品牌
-SITE_LIST=(common tuk555)
+SITE_LIST=(common tuk555 noble888)
 
 # READ
 echo "選擇品牌(單選、複選)"

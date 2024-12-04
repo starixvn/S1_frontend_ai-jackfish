@@ -5,6 +5,14 @@ import useSWR from 'swr'
 import { IAxiosError, IAxiosResponse, fetcher } from '../baseApi'
 import {
 	KycStatusEnum,
+	type ICustTpBetRecordDetailListbyGameTypeArgs,
+	type ICustTpBetRecordDetailListbyGameTypeData,
+	type ICustTpBetRecordListDateRangeArgs,
+	type ICustTpBetRecordListDateRangeData,
+	type ICustTpBetRecordListOneDayArgs,
+	type ICustTpBetRecordListOneDayData,
+	type ICustTpBetRecordListbyCategoryIdArgs,
+	type ICustTpBetRecordListbyCategoryIdData,
 	type IDepositBankTransferReqData,
 	type IDepositInfoRecentData,
 	type IGetBankInfoSysListByCurrencyIdArgs,
@@ -19,6 +27,105 @@ import {
 	type TWithdrawalSetting,
 } from './type'
 import { paymentApiUrl } from './url'
+
+export { IAxiosResponse }
+
+export const getCustTpBetRecordListbyCategoryId = async ({
+	selDate,
+	categoryId,
+	pageNumber,
+	pageSize,
+}: ICustTpBetRecordListbyCategoryIdArgs): Promise<
+	IAxiosResponse<ICustTpBetRecordListbyCategoryIdData[]>
+> => {
+	try {
+		const response = await fetcher<ICustTpBetRecordListbyCategoryIdData[]>(
+			paymentApiUrl.getCustTpBetRecordListbyCategoryId,
+			{
+				selDate,
+				categoryId,
+				pageNumber,
+				pageSize,
+			},
+		)
+
+		return response
+	} catch (error) {
+		throw error as IAxiosError
+	}
+}
+
+export const getCustTpBetRecordDetailListbyGameType = async ({
+	selDate,
+	gameTypeId,
+	pageNumber,
+	pageSize,
+}: ICustTpBetRecordDetailListbyGameTypeArgs): Promise<
+	IAxiosResponse<ICustTpBetRecordDetailListbyGameTypeData[]>
+> => {
+	try {
+		const response = await fetcher<ICustTpBetRecordDetailListbyGameTypeData[]>(
+			paymentApiUrl.getCustTpBetRecordDetailListbyGameType,
+			{
+				selDate,
+				gameTypeId,
+				pageNumber,
+				pageSize,
+			},
+		);
+		return response; 
+	} catch (error) {
+		throw error as IAxiosError; 
+	}
+};
+
+export const getCustTpBetRecordListOneDay = async ({
+	selDate,
+	pageNumber,
+	pageSize,
+}: ICustTpBetRecordListOneDayArgs): Promise<
+	IAxiosResponse<ICustTpBetRecordListOneDayData[]>
+> => {
+	try {
+		const response = await fetcher<ICustTpBetRecordListOneDayData[]>(
+			paymentApiUrl.getGetCustTpBetRecordListOneDay,
+			{
+				selDate,
+				pageNumber,
+				pageSize,
+			},
+		);
+		return response;
+	} catch (error) {
+		throw error as IAxiosError; 
+	}
+};
+
+export const getCustTpBetRecordListDateRange = async ({
+	startDate,
+	endDate,
+	pageNumber,
+	pageSize,
+}: ICustTpBetRecordListDateRangeArgs): Promise<
+	IAxiosResponse<ICustTpBetRecordListDateRangeData[]>
+> => {
+	try {
+		const response = await fetcher<ICustTpBetRecordListDateRangeData[]>(
+			paymentApiUrl.getCustTpBetRecordListDateRange,
+			{
+				startDate,
+				endDate,
+				pageNumber,
+				pageSize,
+			},
+		);
+		return response; // 返回整個 response
+	} catch (error) {
+		throw error as IAxiosError; // 捕捉並拋出錯誤
+	}
+};
+
+//------
 
 export const useBankInfoSysListByCurrencyId = ({
 	currencyId,

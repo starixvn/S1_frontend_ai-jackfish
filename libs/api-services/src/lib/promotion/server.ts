@@ -12,9 +12,15 @@ const getLangId = () =>
 const getCurrencyId = () =>
 	Number(cookies().get(ENV_COOKIE_NAMES.currencyId)?.value ?? 4)
 
-export const getPromotionListOnServer = () =>
-	getPromotionListV3({
-		langId: getLangId(),
-		currencyId: getCurrencyId(),
-		deviceType,
-	})
+export const getPromotionListOnServer = async () => {
+	try {
+		const data = await getPromotionListV3({
+			langId: getLangId(),
+			currencyId: getCurrencyId(),
+			deviceType,
+		})
+		return data?.data
+	} catch (error) {
+		return []
+	}
+}

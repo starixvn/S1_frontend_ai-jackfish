@@ -26,7 +26,7 @@ const HotGameSubMenu = () => {
 						<div
 							className='group relative cursor-pointer object-left-top'
 							onClick={() => {
-								onEnterPage(enterPageArgs)
+								onEnterPage(enterPageArgs, {})
 							}}
 						>
 							<img

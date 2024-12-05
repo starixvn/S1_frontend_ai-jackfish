@@ -46,7 +46,7 @@ export const getBanner = () => {
 				bannerType: BannerTypeEnum.Main,
 			}),
 	)
-	const newBennerData = data?.data.map(
+	const newBannerData = data?.data.map(
 		(
 			{ actionMode, bonusCode, urlRouter, tpId, tpGameType, gameId, ...rest },
 			index,
@@ -91,7 +91,7 @@ export const getBanner = () => {
 		},
 	) as TBannerData[]
 	return {
-		bannerData: newBennerData,
+		bannerData: newBannerData,
 		isLoading,
 	}
 }

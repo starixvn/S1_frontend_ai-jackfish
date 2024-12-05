@@ -3,6 +3,7 @@
 import Carousel from '@brand01/src/components/carousel'
 import Loading from '@brand01/src/components/loading'
 import { TBannerData } from 'JF-api/site/type'
+import { paths } from 'JF-constants'
 import { cn, useBannerClick, useLocaleRouter } from 'JF-core'
 import React from 'react'
 import { SwiperSlide } from 'swiper/react'
@@ -29,7 +30,10 @@ const Banner: React.FC<IBannerProps> = ({ bannerData, bannerIsLoading }) => {
 						onClick={
 							item.redirectLink
 								? () => router.push(item.redirectLink ?? '/')
-								: () => bannerClick(item)
+								: () =>
+										bannerClick(item, {
+											loginCallback: () => router.push(paths.login.root),
+										})
 						}
 					>
 						<img

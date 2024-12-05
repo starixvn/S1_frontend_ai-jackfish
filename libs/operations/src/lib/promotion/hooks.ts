@@ -18,6 +18,7 @@ import { useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useForm } from 'react-hook-form'
 import useSWR from 'swr'
+import { useAuthStore } from '../auth/store'
 
 const deviceType = DeviceTypeEnum.Desktop
 
@@ -34,6 +35,7 @@ const useLocale = () => {
 
 export const usePromotionList = () => {
 	const { langId, currencyId } = useLocale()
+	const { isLogin } = useAuthStore()
 	const {
 		data: { data: promotionList = [] } = {},
 		isLoading: isLoadingPromotionList,
@@ -49,10 +51,12 @@ export const usePromotionList = () => {
 		data: { data: specialPromotionList = [] } = {},
 		isLoading: isLoadingSpecialPromotionList,
 	} = useSWR(
-		{
-			url: promotionApiUrl.getSpecialPromotionList,
-			args: { langId, currencyId, deviceType },
-		},
+		isLogin
+			? {
+					url: promotionApiUrl.getSpecialPromotionList,
+					args: { langId, currencyId, deviceType },
+				}
+			: null,
 		({ args }) => getSpecialPromotionList(args),
 	)
 

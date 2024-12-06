@@ -3,62 +3,11 @@ import {
 	MenuActionEnum,
 	MenuKeyEnum,
 	PRODUCTS,
-	TProductProps,
+	TMenuData,
 	paths,
 } from 'JF-constants'
 
-export interface ISubMenu extends TProductProps {
-	currencyGameName?: string | null
-	iconEndTime?: string
-	iconStartTime?: string
-	iconType?: number
-	lobbyCategory?: string
-	pcHeaderPicUrl?: string
-	pcLobbyPicUrl?: string
-	mobileHeaderPicUrl?: string
-	mobileLobbyPicUrl?: string
-	productName?: string
-	rwdHeaderPicUrl?: string
-	rwdLobbyPicUrl?: string
-	sort?: number
-	tpName?: string
-	h5: {
-		menuActionType: keyof typeof MenuActionEnum
-		hasDesktopLink?: boolean
-	}
-	desktop: {
-		menuActionType: keyof typeof MenuActionEnum
-		subMenuImageClassName?: string
-	}
-	pathname?: string
-	query?: {
-		provider?: string
-		type?: string
-		tpId?: string | number
-	}
-	// needLogin?: boolean
-}
-
-export type IMenuData = {
-	category: MenuKeyEnum
-	desktop: {
-		subMenuClassName: string
-		menuType?: 'menu' | 'banner'
-	}
-	displayKey?: string
-	h5: {
-		icon: string
-		subMenuClassName?: string
-	}
-	iconUrl?: string
-	lobbyCategoryId: number
-	pathname?: string
-	query?: { provider: string }
-	subMenu: ISubMenu[]
-	subMenuAllowCurrenciesWithAuth: boolean // * 決定是否需要登入後才過濾(暫時沒有用到)
-}
-
-export const HOME_MENU_DATA: IMenuData[] = [
+export const HOME_MENU_DATA: TMenuData[] = [
 	// sports
 	{
 		iconUrl: '/desktop/img/sport.png',

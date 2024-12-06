@@ -652,7 +652,7 @@ export const PRODUCTS: {
 		tpGameIdNo: 120,
 		tpId: 5,
 		tpGameType: 7,
-		gameId: 1302,
+		gameId: 1301,
 	},
 	Crash: {
 		tpGameIdNo: 121,
@@ -720,6 +720,36 @@ export const PRODUCTS: {
 		tpId: 64,
 		tpGameType: 116,
 		gameId: 0,
+	},
+	SabaPlay: {
+		tpGameIdNo: 134,
+		tpId: 66,
+		tpGameType: 119,
+		gameId: 0,
+	},
+	UuSlots: {
+		tpGameIdNo: 135,
+		tpId: 67,
+		tpGameType: 120,
+		gameId: '-1',
+	},
+	Live22: {
+		tpGameIdNo: 136,
+		tpId: 68,
+		tpGameType: 121,
+		gameId: '-1',
+	},
+	FastSpin: {
+		tpGameIdNo: 137,
+		tpId: 69,
+		tpGameType: 122,
+		gameId: '-1',
+	},
+	DragonGaming: {
+		tpGameIdNo: 138,
+		tpId: 70,
+		tpGameType: 123,
+		gameId: -1,
 	},
 
 	// * Footer 靜態遊戲入口

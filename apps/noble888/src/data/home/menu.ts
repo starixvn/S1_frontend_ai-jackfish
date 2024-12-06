@@ -39,7 +39,7 @@ export interface ISubMenu extends TProductProps {
 	// needLogin?: boolean
 }
 
-export type IMenuData = {
+export type TMenuData = {
 	category: MenuKeyEnum
 	desktop: {
 		subMenuClassName: string
@@ -58,7 +58,7 @@ export type IMenuData = {
 	subMenuAllowCurrenciesWithAuth: boolean // * 決定是否需要登入後才過濾(暫時沒有用到)
 }
 
-export const HOME_MENU_DATA: IMenuData[] = [
+export const HOME_MENU_DATA: TMenuData[] = [
 	// sports
 	{
 		iconUrl: '/desktop/img/sport.png',

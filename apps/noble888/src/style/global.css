@@ -151,5 +151,5 @@
 
 body {
 	@apply font-chakra;
-	color: rgb(var(--color-neutral-100));
+	color: rgb(var(--color-primary-900));
 }

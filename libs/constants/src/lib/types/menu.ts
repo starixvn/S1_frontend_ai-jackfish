@@ -1,6 +1,14 @@
 import { ISubMenuData, ISubMenuDesktopData } from 'JF-api/game/type'
 import { TProductProps } from '../products'
 
+export const MenuActionTypeEnum = {
+	EnterPage: 'EnterPage',
+	Link: 'Link',
+	UseGoToGame: 'UseGoToGame',
+	WindowOpen: 'WindowOpen',
+	Null: 'Null',
+} as const
+
 export enum MenuKeyEnum {
 	HotGame = 'HotGame',
 	Sports = 'Sports',
@@ -10,6 +18,16 @@ export enum MenuKeyEnum {
 	Games = 'Games',
 	Fishing = 'Fishing',
 	Lottery = 'Lottery',
+	Exchange = 'Exchange',
+	Slot = 'Slot',
+	Game = 'Game',
+	FourD = 'FourD',
+	NumberGame = 'NumberGame',
+	Keno = 'Keno',
+	// 靜態 category
+	Promotion = 'Promotion',
+	VIP = 'VIP',
+	LeaderBoard = 'LeaderBoard',
 }
 
 export const LobbyCategoryEnum = {
@@ -18,9 +36,14 @@ export const LobbyCategoryEnum = {
 	ESports: 2,
 	Casino: 3,
 	SLOTS: 4,
+	Poker: 5,
 	Game: 6,
 	Fishing: 7,
 	Lottery: 8,
+	Exchange: 9,
+	FourD: 10,
+	NumberGame: 81,
+	Keno: 82,
 } as const
 
 export enum MenuActionEnum {
@@ -160,4 +183,58 @@ export type IMergedMenuData = {
 	}
 	// subMenu: TDynamicSubMenuItem[]
 	subMenu: ISubMenuData[]
+}
+
+export interface ISubMenu extends TProductProps {
+	currencyGameName?: string | null
+	iconEndTime?: string
+	iconStartTime?: string
+	iconType?: number
+	lobbyCategory?: string
+	pcHeaderPicUrl?: string
+	pcLobbyPicUrl?: string
+	mobileHeaderPicUrl?: string
+	mobileLobbyPicUrl?: string
+	productName?: string
+	rwdHeaderPicUrl?: string
+	rwdLobbyPicUrl?: string
+	sort?: number
+	tpName?: string
+	h5: {
+		hasLobby?: boolean
+		menuActionType: keyof typeof MenuActionEnum
+		hasDesktopLink?: boolean
+	}
+	desktop: {
+		hasLobby?: boolean
+		menuActionType: keyof typeof MenuActionEnum
+		subMenuImageClassName?: string
+	}
+	pathname?: string
+	query?: {
+		provider?: string
+		type?: string
+		tpId?: string | number
+	}
+	needLogin?: boolean
+}
+
+export type TMenuData = {
+	display?: 'h5' | 'desktop' | 'all'
+	displayKey?: string
+	category: MenuKeyEnum
+	desktop: {
+		subMenuClassName: string
+		menuType?: 'menu' | 'banner'
+	}
+	h5: {
+		icon: string
+		subMenuClassName?: string
+	}
+	iconUrl?: string
+	lobbyCategoryId: number
+	pathname?: string
+	query?: { provider: string }
+	subMenu: ISubMenu[]
+	subMenuAllowCurrenciesWithAuth: boolean // * 決定是否需要登入後才過濾(暫時沒有用到)
 }

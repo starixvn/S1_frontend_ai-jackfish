@@ -1,4 +1,6 @@
 export * from './allowedCurrencies'
+export * from './event'
+export * from './footer'
 export * from './langGroup'
 export * from './leftMenu'
 export * from './menu'

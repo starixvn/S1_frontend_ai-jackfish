@@ -1,4 +1,5 @@
 'use client'
+import { HOME_MENU_DATA } from '@brand01/src/data/home/menu'
 import { useHomeStore, useSocialChannelStore } from 'JF-operations'
 import useMenu from 'libs/core/src/lib/hooks/useMenu'
 import { useEffect } from 'react'
@@ -7,7 +8,7 @@ import SidebarHotGame from './SidebarHotGame'
 import SidebarSkeleton from './SidebarSkeleton'
 
 const Sidebar = () => {
-	const { menuList } = useMenu()
+	const { menuList } = useMenu({ homeMenuData: HOME_MENU_DATA })
 	const { lineChannel } = useSocialChannelStore()
 	const { isInit, fetchLobbyHeader } = useHomeStore()
 

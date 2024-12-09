@@ -11,9 +11,7 @@ export type TProductProps = {
  * 所有產品(包含所有品牌)
  * 按照 tpGameIdNo 排序
  */
-export const PRODUCTS: {
-	[key: string]: TProductProps
-} = {
+export const PRODUCTS = {
 	Soccer: {
 		tpGameIdNo: 1,
 		tpId: 41,
@@ -774,6 +772,19 @@ export const PRODUCTS: {
 		name: 'hockey',
 		tpGameType: 69,
 	},
+} as const
+
+/**
+ * 所有產品(包含所有品牌)
+ * 按照 tpGameIdNo 排序
+ */
+export interface IProduct {
+	tpGameIdNo: number | undefined
+	tpId: number
+	tpGameType: number
+	gameId?: number | string
+	betType?: number
+	name?: string
 }
 
-// export type TProducts = typeof PRODUCTS
+export type IProducts = typeof PRODUCTS

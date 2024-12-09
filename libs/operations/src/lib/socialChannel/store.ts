@@ -1,6 +1,7 @@
 // socialChannelStore.ts
 import { getSocialChannel } from 'JF-api/site/client'
 import { TSocialChannelData } from 'JF-api/site/type'
+import { SocialChannelEnum } from 'JF-constants'
 import { find } from 'lodash-es'
 import { create } from 'zustand'
 import { ISocialChannelAction, ISocialChannelState } from './type'
@@ -26,7 +27,7 @@ const useSocialChannelStore = create<
 		const data = await getSocialChannel({
 			langId,
 			currencyId,
-			displayPage: 1,
+			displayPage: SocialChannelEnum.FOOTER,
 		})
 		set({ socialChannels: data })
 		set({

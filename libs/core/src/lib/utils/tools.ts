@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { TpMaintainData } from 'JF-api/site/type'
 import { find } from 'lodash-es'
 
@@ -40,4 +41,31 @@ export const getIsTpMaintain = ({
 			tpMaintain?.tpGameType === tpGameType)
 
 	return Boolean(isTpMaintain)
+}
+
+/**
+ * 判斷f是否處於活動時間
+ */
+export const isEventPeriod = (period: {
+	start: null | string
+	end: null | string
+}) => {
+	const { start, end } = period
+
+	// * 如果只有 start，只判斷是否結束
+	if (start && !end) {
+		return dayjs().isAfter(dayjs(start))
+	}
+
+	// * 如果只有 end，只回傳是否結束
+	if (!start && end) {
+		return dayjs().isBefore(dayjs(end))
+	}
+
+	// * 如果兩者都有，兩個比較值都回傳
+	if (start && end) {
+		return dayjs().isAfter(dayjs(start)) && dayjs().isBefore(dayjs(end))
+	}
+
+	return true
 }

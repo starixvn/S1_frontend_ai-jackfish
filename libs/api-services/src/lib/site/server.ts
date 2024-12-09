@@ -2,6 +2,7 @@
 
 import { envCookieNames } from '@brand01/src/i18n/settings'
 import { paths } from 'JF-constants'
+import { ISeoData } from 'libs/operations/src/lib/seo/type'
 import { isNumber } from 'lodash-es'
 import { cookies } from 'next/headers'
 import { fetcher } from '../baseApi'
@@ -84,5 +85,14 @@ export const getTpMaintainList = async () => {
 		return data?.data
 	} catch (e) {
 		return []
+	}
+}
+
+export const getSeo = async () => {
+	try {
+		const data = await fetcher<ISeoData, null>(`${siteApiUrl.getSeo}`)
+		return data?.data
+	} catch (e) {
+		return {}
 	}
 }

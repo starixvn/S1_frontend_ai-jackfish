@@ -67,3 +67,19 @@ export const LANG_TO_CURRENCY: { [key: string]: number } = {
 	vn: CurrenciesEnum.VND,
 	br: CurrenciesEnum.BRL,
 }
+
+export const CURRENCY_TO_LANG_KEY: {
+	[key: string | number]: string
+} = {
+	2: 'ch',
+	3: 'gb',
+	4: 'th',
+	13: 'cs',
+	15: 'id',
+	45: 'ko',
+	51: 'vn',
+	61: 'in',
+	72: 'kh',
+	74: 'bd',
+	82: 'br',
+}

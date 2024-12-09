@@ -12,7 +12,6 @@ export async function AuthGuard({
 	children,
 }: AuthGuardProps): Promise<JSX.Element> {
 	const isSignedIn = await checkSignIn()
-
 	if (!isSignedIn) {
 		redirect(paths.home.root)
 	}

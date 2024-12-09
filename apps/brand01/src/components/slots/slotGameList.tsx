@@ -31,7 +31,7 @@ const SlotGameList = ({
 	const { isLogin } = useAuthStore()
 	const { slotsCategoryData, providerList, slotGamesData } = useSlotPageStore()
 	const { tpMaintainList, fetchTpMaintain } = useHomeStore()
-	const { onEnterSlotsPage } = useMenuOpen()
+	const { onEnterSlotsPage } = useMenuOpen({ isPathParams: true })
 	const { ref: gameListRef, isInView: isGameListInView } = useInView({})
 
 	const [slotsGameList, setSlotsGameList] = useState<IDisplayGameData[]>([])
@@ -147,7 +147,7 @@ const SlotGameList = ({
 								// 遮罩部分：桌機hover，手機點一下觸發
 								<div
 									className={cn(
-										'absolute inset-0 top-1/2 left-1/2 mx-auto hidden h-full w-full translate-y-[-50%] translate-x-[-50%] flex-col items-center justify-center gap-2 bg-black bg-opacity-50 text-center opacity-0 transition ease-in-out hover:opacity-100 lg:flex',
+										'absolute inset-0 left-1/2 top-1/2 mx-auto hidden h-full w-full translate-x-[-50%] translate-y-[-50%] flex-col items-center justify-center gap-2 bg-black bg-opacity-50 text-center opacity-0 transition ease-in-out hover:opacity-100 lg:flex',
 										{ 'flex opacity-100 lg:opacity-0': newGameId === gameId },
 									)}
 								>

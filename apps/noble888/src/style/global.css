@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.footer-plus::before,
+.footer-plus::after {
+	content: '';
+	@apply bg-primary-50 absolute left-1/2 h-[1vw] w-[6.5vw] translate-x-[-50%] rounded-[20px] transition-all duration-200 ease-out;
+}
+
+.footer-plus::after {
+	transform: translate(-50%, 0%) rotate(90deg);
+}

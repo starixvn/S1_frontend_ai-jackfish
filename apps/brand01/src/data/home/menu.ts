@@ -1,9 +1,9 @@
 import {
-	LobbyCategoryEnum,
 	MenuActionEnum,
 	MenuKeyEnum,
 	PRODUCTS,
 	TMenuData,
+	TUKLobbyCategoryEnum,
 	paths,
 } from 'JF-constants'
 
@@ -11,7 +11,7 @@ export const HOME_MENU_DATA: TMenuData[] = [
 	// sports
 	{
 		iconUrl: '/desktop/img/sport.png',
-		lobbyCategoryId: LobbyCategoryEnum.Sports,
+		lobbyCategoryId: TUKLobbyCategoryEnum.Sports,
 		category: MenuKeyEnum.Sports,
 		displayKey: 'Label_General_Sports',
 		pathname: paths.sports.root,
@@ -121,7 +121,7 @@ export const HOME_MENU_DATA: TMenuData[] = [
 		category: MenuKeyEnum.ESports,
 		pathname: paths.eSport.root,
 		subMenuAllowCurrenciesWithAuth: false,
-		lobbyCategoryId: LobbyCategoryEnum.ESports,
+		lobbyCategoryId: TUKLobbyCategoryEnum.ESports,
 		desktop: {
 			subMenuClassName: 'eSportsList',
 		},
@@ -175,7 +175,7 @@ export const HOME_MENU_DATA: TMenuData[] = [
 		displayKey: 'Label_General_LiveCasino',
 		pathname: paths.liveCasino.root,
 		subMenuAllowCurrenciesWithAuth: false,
-		lobbyCategoryId: LobbyCategoryEnum.Casino,
+		lobbyCategoryId: TUKLobbyCategoryEnum.Casino,
 		subMenu: [
 			{
 				...PRODUCTS.PragmaticPlayCasino,
@@ -354,7 +354,7 @@ export const HOME_MENU_DATA: TMenuData[] = [
 		displayKey: 'Label_General_Slots',
 		pathname: paths.slots.root,
 		subMenuAllowCurrenciesWithAuth: false,
-		lobbyCategoryId: LobbyCategoryEnum.SLOTS,
+		lobbyCategoryId: TUKLobbyCategoryEnum.SLOTS,
 		subMenu: [
 			{
 				...PRODUCTS.PragmaticPlaySlot,
@@ -669,7 +669,7 @@ export const HOME_MENU_DATA: TMenuData[] = [
 		displayKey: 'Label_General_Games',
 		pathname: paths.game.root,
 		subMenuAllowCurrenciesWithAuth: false,
-		lobbyCategoryId: LobbyCategoryEnum.Game,
+		lobbyCategoryId: TUKLobbyCategoryEnum.Game,
 		subMenu: [
 			{
 				...PRODUCTS.MPPoker,
@@ -826,7 +826,7 @@ export const HOME_MENU_DATA: TMenuData[] = [
 		category: MenuKeyEnum.Fishing,
 		displayKey: 'Label_General_Fishing',
 		pathname: paths.fishing.root,
-		lobbyCategoryId: LobbyCategoryEnum.Fishing,
+		lobbyCategoryId: TUKLobbyCategoryEnum.Fishing,
 		subMenu: [
 			{
 				...PRODUCTS.FishingGod,
@@ -932,7 +932,7 @@ export const HOME_MENU_DATA: TMenuData[] = [
 		displayKey: 'Label_General_Lottery',
 		pathname: paths.lottery.root,
 		category: MenuKeyEnum.Lottery,
-		lobbyCategoryId: LobbyCategoryEnum.Lottery,
+		lobbyCategoryId: TUKLobbyCategoryEnum.Lottery,
 		subMenu: [
 			{
 				...PRODUCTS.GPIKeno,

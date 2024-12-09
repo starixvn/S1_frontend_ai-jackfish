@@ -22,5 +22,6 @@ export default function MainLayout({ children }: { children: ReactNode }) {
 		document.documentElement.dir = locale === langId.ar ? 'rtl' : 'ltr'
 	}, [locale])
 
-	return <Layout>{children}</Layout>
+	// 	TODO: 有sign in功能之後再加上
+	return <Layout isSignedIn={false}>{children}</Layout>
 }

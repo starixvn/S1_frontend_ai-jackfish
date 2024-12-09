@@ -13,6 +13,7 @@ export const appMiddleware = ({
 		cookieName: string
 	}
 }) => {
+	// const { languages, cookieName } = configs
 	const { fallbackLng, languages, cookieName } = configs
 	const res = NextResponse.next()
 	// 提供 acceptLanguage 支援的語言

@@ -9,7 +9,7 @@ const SubMenu = () => {
 	const router = useLocaleRouter()
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
-	const { onMenuOpen } = useMenuOpen()
+	const { onMenuOpen } = useMenuOpen({ isPathParams: true })
 	const { subMenuData } = useHomeStore()
 	return (
 		<>

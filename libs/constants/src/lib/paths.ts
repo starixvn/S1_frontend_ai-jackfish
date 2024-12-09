@@ -174,4 +174,9 @@ export const paths = {
 	blockIp: {
 		root: '/block-ip',
 	},
+	predictionChallenge: {
+		root: '/prediction-challenge',
+	},
 } as const
+
+export type IRootpath = (typeof paths)[keyof typeof paths]['root']

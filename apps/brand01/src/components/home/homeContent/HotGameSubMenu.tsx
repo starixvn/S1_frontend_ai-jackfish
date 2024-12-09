@@ -8,7 +8,7 @@ const HotGameSubMenu = () => {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
 	const { hotGameList } = useHomeStore()
-	const { onEnterPage } = useMenuOpen()
+	const { onEnterPage } = useMenuOpen({})
 
 	return (
 		<>

@@ -51,4 +51,5 @@ export const LANG_GROUP_COUNTRY: {
 	bd: 'Bangladesh',
 	kh: 'Cambodia',
 	vn: 'Vietnam',
+	ar: 'Arab',
 }

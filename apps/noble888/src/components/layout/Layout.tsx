@@ -8,8 +8,9 @@ import {
 	META_DATA,
 	VIP_CLUB_IMAGES,
 } from '@noble888/src/data/static'
+import { useInitEffect } from 'JF-core'
 import { useStaticDataStore } from 'JF-operations'
-import { ReactNode, useEffect } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import TemporarySwitch from './TemporarySwitch'
 import Footer from './footer'
 import Header from './header'
@@ -19,9 +20,10 @@ export default function Layout({
 	isSignedIn,
 }: {
 	children: ReactNode
-	isSignedIn?: boolean
+	isSignedIn: boolean
 }) {
 	// TODO: to be removed
+	const [isLogin, setIsLogin] = useState(false)
 	// eslint-disable-next-line no-console
 	console.log({ isSignedIn })
 
@@ -38,15 +40,17 @@ export default function Layout({
 		})
 	}, [initStaticData])
 
+	// 初始化
+	useInitEffect({ isSignedIn })
 	return (
-		<div className='flex h-screen flex-col bg-white'>
+		<div className='flex h-full w-full flex-col bg-white'>
 			{/* TODO: to be removed */}
-			<div className='absolute top-2 right-2'>
+			<div className='absolute right-2 top-2'>
 				<TemporarySwitch />
 			</div>
-			<Header />
-			<main className='flex-grow overflow-auto'>{children}</main>
-			<Footer />
+			<Header isLogin={isLogin} setIsLogin={setIsLogin} />
+			<main className='flex-grow'>{children}</main>
+			<Footer isLogin={isLogin} />
 		</div>
 	)
 }

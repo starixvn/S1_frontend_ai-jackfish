@@ -1,5 +1,6 @@
 import { ISubMenuData, ISubMenuDesktopData } from 'JF-api/game/type'
-import { TProductProps } from '../products'
+import { IRootpath } from '../paths'
+import { IProduct, TProductProps } from '../products'
 
 export const MenuActionTypeEnum = {
 	EnterPage: 'EnterPage',
@@ -30,7 +31,25 @@ export enum MenuKeyEnum {
 	LeaderBoard = 'LeaderBoard',
 }
 
-export const LobbyCategoryEnum = {
+export enum NovaMenuKeyEnum {
+	'Sports' = 'Sports',
+	'Casino' = 'Casino',
+	'Exchange' = 'Exchange',
+	'ESports' = 'ESports',
+	'Slot' = 'Slot',
+	'Game' = 'Game',
+	'Fishing' = 'Fishing',
+	'FourD' = 'FourD',
+	'Lottery' = 'Lottery',
+	'NumberGame' = 'NumberGame',
+	'Keno' = 'Keno',
+	// 靜態 category
+	'Promotion' = 'Promotion',
+	'VIP' = 'VIP',
+	'LeaderBoard' = 'LeaderBoard',
+}
+
+export const TUKLobbyCategoryEnum = {
 	HotGame: 0,
 	Sports: 1,
 	ESports: 2,
@@ -185,6 +204,62 @@ export type IMergedMenuData = {
 	subMenu: ISubMenuData[]
 }
 
+export enum MainMenuIcon {
+	newTag = 'newTag',
+	hotTag = 'hotTag',
+}
+
+export enum MenuIconTypeEnum {
+	NO_ICON,
+	New,
+}
+
+export const LobbyCategoryEnum = {
+	Sports: 1,
+	ESports: 2,
+	Casino: 3,
+	SLOTS: 4,
+	Poker: 5,
+	Game: 6,
+	Fishing: 7,
+	Lottery: 8,
+	Exchange: 9,
+	FourD: 10,
+	NumberGame: 81,
+	Keno: 82,
+} as const
+
+export type IMenuActionLinkType = Extract<
+	keyof typeof MenuActionTypeEnum,
+	'Link' | 'WindowOpen'
+>
+
+export type IMenuActionOtherType = Exclude<
+	keyof typeof MenuActionTypeEnum,
+	'Link' | 'WindowOpen'
+>
+export interface IStaticSubMenuItemLinkType extends IProduct {
+	desktop?: {
+		menuActionType: IMenuActionLinkType
+	}
+	h5?: {
+		menuActionType: IMenuActionLinkType
+	}
+	pathname: IRootpath
+	query?: { provider: string } | { tpId: number }
+	needLogin?: boolean
+}
+export interface IStaticSubMenuItemOtherType extends IProduct {
+	desktop?: {
+		menuActionType: IMenuActionOtherType
+	}
+	h5?: {
+		menuActionType: IMenuActionOtherType
+	}
+	needLogin?: boolean
+}
+
+// HOME_MENU_DATA 的 type:
 export interface ISubMenu extends TProductProps {
 	currencyGameName?: string | null
 	iconEndTime?: string
@@ -220,13 +295,13 @@ export interface ISubMenu extends TProductProps {
 }
 
 export type TMenuData = {
-	display?: 'h5' | 'desktop' | 'all'
-	displayKey?: string
-	category: MenuKeyEnum
+	display?: string
+	category: MenuKeyEnum | NovaMenuKeyEnum
 	desktop: {
 		subMenuClassName: string
 		menuType?: 'menu' | 'banner'
 	}
+	displayKey?: string
 	h5: {
 		icon: string
 		subMenuClassName?: string
@@ -238,3 +313,23 @@ export type TMenuData = {
 	subMenu: ISubMenu[]
 	subMenuAllowCurrenciesWithAuth: boolean // * 決定是否需要登入後才過濾(暫時沒有用到)
 }
+
+// interface IDynamicSubMenuOtherType
+// 	extends IStaticSubMenuItemOtherType,
+// 		ISubMenuData,
+// 		IProduct,
+// 		IAddLiveStreamingProps {}
+
+// export interface IDynamicSubMenuLinkType
+// 	extends IStaticSubMenuItemLinkType,
+// 		ISubMenuData,
+// 		IProduct,
+// 		IAddLiveStreamingProps {}
+
+// // * 點擊 menu 遊戲產品的參數(Lobby Header Api)
+// export type IDynamicSubMenuItem =
+// 	| IDynamicSubMenuLinkType
+// 	| IDynamicSubMenuOtherType
+// export type IStaticSubMenuItem =
+// 	| IStaticSubMenuItemLinkType
+// 	| IStaticSubMenuItemOtherType

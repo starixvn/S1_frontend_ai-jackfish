@@ -1,3 +1,4 @@
+'use client'
 import { langId } from 'JF-constants'
 import { useGetPathname, useLocaleRouter } from 'JF-core'
 

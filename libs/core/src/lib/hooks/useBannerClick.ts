@@ -8,7 +8,7 @@ import { useMenuOpen } from './useMenuOpen'
 
 const useBannerClick = () => {
 	const router = useLocaleRouter()
-	const { onGoToGame, onEnterPage } = useMenuOpen()
+	const { onGoToGame, onEnterPage } = useMenuOpen({})
 	const { locale } = useGetPathname()
 
 	const bannerClick = (item: TBannerData) => {

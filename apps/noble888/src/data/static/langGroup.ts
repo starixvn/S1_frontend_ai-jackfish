@@ -1,6 +1,19 @@
 import { CurrenciesEnum, TLangGroupsData } from 'JF-constants'
 
 export const LANG_GROUPS: TLangGroupsData = {
+	ar: [
+		{
+			displayText: 'English',
+			value: 'en',
+			currencyId: CurrenciesEnum.USD,
+		},
+		{
+			displayText: 'اَلْعَرَبِيَّةُ',
+			value: 'ar',
+			currencyId: CurrenciesEnum.USD,
+			mainLanguage: true,
+		},
+	],
 	ch: [
 		{
 			displayText: 'English',

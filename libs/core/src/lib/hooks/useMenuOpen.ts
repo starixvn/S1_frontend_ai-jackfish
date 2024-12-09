@@ -15,8 +15,9 @@ import {
 	type TDynamicSubMenuLinkType,
 	type TStaticSubMenuItem,
 } from 'JF-constants'
-import { onWindowOpenProduct, useGetPathname } from 'JF-core'
+import { onWindowOpenProduct, useGetPathname, useLocaleRouter } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
+import { NewRouterPush } from '../utils/routerQuery'
 
 type LoginCallbackType = () => void
 type MessageCallbackType = (message: string) => void
@@ -26,9 +27,14 @@ enum LoginGameTypeEnum {
 	returnHtml,
 }
 
-const useMenuOpen = () => {
+interface IUseMenuOpenProps {
+	isPathParams?: boolean
+}
+
+const useMenuOpen = ({ isPathParams = false }: IUseMenuOpenProps) => {
 	const { isLogin } = useAuthStore()
 	const { locale } = useGetPathname()
+	const router = useLocaleRouter()
 
 	const onDefaultEnterPage = ({
 		langId,
@@ -244,15 +250,21 @@ const useMenuOpen = () => {
 				desktop,
 				lobbyCategory,
 				pathname = '/',
+				query,
 			} = product || {}
-
 			const { menuActionType } = desktop || {}
+
 			const linkMethod = () => {
-				if (lobbyCategory === 'slots') {
+				if (lobbyCategory === 'slots' && isPathParams) {
 					window.open(`${pathname}/${tpId}`, '_blank')
-				} else {
+				} else if (process.env.NEXT_PUBLIC_SITE_ID === '7') {
 					// nova88 如果menuActionType是link的話會導轉頁面，不過TUK555需求是都另開分頁，所以像sports就另開
 					enterPageMethod()
+				} else {
+					// 如果不是TUK的站，ex: nova88, noble888就用此link導轉頁面
+					const removeFrontSlash = (path: string) => path.replace(/^\//, '')
+					const resultPath = removeFrontSlash(pathname)
+					router.push(NewRouterPush(resultPath, query))
 				}
 			}
 
@@ -338,6 +350,7 @@ const useMenuOpen = () => {
 		const signupUrl = `${host}${paths.join.root}`
 		const loginUrl = `${host}${paths.login.root}`
 		const errorUrl = `${dbHost}/404/index_${locale}.html`
+		const lobbyUrl = `${host}${paths.slots.root}?tpId=${tpId}`
 
 		const searchParams = new URLSearchParams({
 			tpId,
@@ -349,6 +362,9 @@ const useMenuOpen = () => {
 		}
 		if (gameId) {
 			searchParams.set('gameId', String(gameId))
+		}
+		if (Number(tpId) === PRODUCTS.PragmaticPlaySlot.tpId) {
+			searchParams.set('LobbyUrl', lobbyUrl)
 		}
 
 		const entPageUrl = `${dbHost}/${locale}/entPage?homeUrl=${host}&signupUrl=${signupUrl}&LoginUrl=${loginUrl}&errorUrl=${errorUrl}&${searchParams.toString()}`

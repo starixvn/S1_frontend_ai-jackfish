@@ -1,16 +1,19 @@
 'use client'
-import { HOME_MENU_DATA } from '@brand01/src/data/home/menu'
 import { ISubMenuData } from 'JF-api/game/type'
-import { IMergedMenuData } from 'JF-constants'
+import { IMenuData, IMergedMenuData } from 'JF-constants'
 import { useHomeStore } from 'JF-operations'
 import { find } from 'lodash-es'
 
-const useMenu = () => {
+interface IUseMenuProps {
+	homeMenuData: IMenuData[]
+}
+
+const useMenu = ({ homeMenuData }: IUseMenuProps) => {
 	const { lobbyHeaderList } = useHomeStore()
 
 	const mergedMenus = (): IMergedMenuData[] => {
 		const mainLobbyHeaderList = lobbyHeaderList?.map(mainMenuItem => {
-			const defMainMenuItem = find(HOME_MENU_DATA, {
+			const defMainMenuItem = find(homeMenuData, {
 				lobbyCategoryId: mainMenuItem.lobbyCategoryId,
 			})
 			const {

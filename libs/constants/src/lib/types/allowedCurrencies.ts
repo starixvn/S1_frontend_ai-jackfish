@@ -6,6 +6,7 @@ export type TAllowedCurrenciesData = {
 	EXCHANGE?: CurrenciesEnum[]
 	REWARDS?: CurrenciesEnum[]
 	LEADER_BOARD?: CurrenciesEnum[]
+	PREDICTION_CHALLENGE?: CurrenciesEnum[]
 	APP_DOWNLOAD?: CurrenciesEnum[]
 
 	TRANSFER?: CurrenciesEnum[]

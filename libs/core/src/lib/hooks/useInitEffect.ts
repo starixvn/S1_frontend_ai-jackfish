@@ -22,7 +22,7 @@ interface IUseInitEffectProps {
 
 const useInitEffect = ({ isSignedIn }: IUseInitEffectProps) => {
 	const router = useLocaleRouter()
-	const { locale, currentPath } = useGetPathname()
+	const { locale, currentPathWithParams } = useGetPathname()
 	const [cookies, setCookie] = useCookies([
 		envCookieNames.langId,
 		envCookieNames.currencyId,
@@ -76,12 +76,12 @@ const useInitEffect = ({ isSignedIn }: IUseInitEffectProps) => {
 			// 登入狀態且 userInfo langId 改變
 			setCookie(envCookieNames.langId, langId, { path: '/' })
 			setCookie(envCookieNames.currencyId, currencyId, { path: '/' })
-			router.push(currentPath, { locale: langId })
+			router.push(currentPathWithParams, { locale: langId })
 		}
 	}, [
 		cookieLangId,
 		currencyId,
-		currentPath,
+		currentPathWithParams,
 		isLogin,
 		langId,
 		locale,

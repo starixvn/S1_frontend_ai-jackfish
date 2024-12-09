@@ -14,10 +14,11 @@ const useGetPathname = () => {
 	const routeName = pathArray[2] ? pathArray.slice(2).join('/') : ''
 
 	// 用來實際和 path 匹配
-	const currentPath =
-		params.size > 0 ? `/${routeName}?${params.toString()}` : `/${routeName}`
+	const currentPath = `/${routeName}`
+	const currentPathWithParams =
+		params.size > 0 ? `/${routeName}?${params.toString()}` : currentPath
 
-	return { locale, currentPath }
+	return { locale, currentPath, currentPathWithParams }
 }
 
 export { useGetPathname }

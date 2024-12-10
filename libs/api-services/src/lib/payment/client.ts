@@ -13,10 +13,10 @@ import {
 	type ISubmitWithdrawalArgs,
 	type IUploadReceiptArgs,
 	type TBankInfoSysData,
+	type TStatementData,
 	type TWithdrawalLimitData,
 	type TWithdrawalRecentInfoData,
 	type TWithdrawalSetting,
-	type TStatementData,
 } from './type'
 import { paymentApiUrl } from './url'
 

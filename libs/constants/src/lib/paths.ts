@@ -2,20 +2,44 @@ export const paths = {
 	home: {
 		root: '/',
 	},
-	login: {
-		root: '/login',
+	promotion: {
+		root: '/promotion',
 	},
-	forgetPassword: {
-		root: '/forget-password',
+	transferFunds: {
+		root: '/transfer-funds',
 	},
 	join: {
 		root: '/join',
 	},
-	deposit: {
-		root: '/deposit',
-	},
 	history: {
 		root: '/history',
+	},
+	login: {
+		root: '/login',
+	},
+	statement: {
+		root: '/statement',
+	},
+	bankInfo: {
+		root: '/bank-info',
+	},
+	cryptoWallet: {
+		root: '/crypto-wallet',
+	},
+	changePassword: {
+		root: '/change-password',
+	},
+	message: {
+		root: '/message',
+	},
+	announcement: {
+		root: '/announcement',
+	},
+	forgetPassword: {
+		root: '/forget-password',
+	},
+	deposit: {
+		root: '/deposit',
 	},
 	referralHistory: {
 		root: '/referral-history',
@@ -32,9 +56,6 @@ export const paths = {
 	financialLog: {
 		root: '/financial-log',
 	},
-	transferFunds: {
-		root: '/transfer-funds',
-	},
 	withdrawal: {
 		root: '/withdrawal',
 	},
@@ -50,14 +71,8 @@ export const paths = {
 	kyc: {
 		root: '/kyc',
 	},
-	message: {
-		root: '/message',
-	},
 	profile: {
 		root: '/profile',
-	},
-	statement: {
-		root: '/statement',
 	},
 	wallet: {
 		root: '/wallet',
@@ -65,26 +80,14 @@ export const paths = {
 	eWallet: {
 		root: '/eWallet',
 	},
-	cryptoWallet: {
-		root: '/crypto-wallet',
-	},
 	referral: {
 		root: '/referral',
-	},
-	changePassword: {
-		root: '/change-password',
 	},
 	selfExclusion: {
 		root: '/self-exclusion',
 	},
-	bankInfo: {
-		root: '/bank-info',
-	},
 	appDownload: {
 		root: '/app-download',
-	},
-	promotion: {
-		root: '/promotion',
 	},
 	vip: {
 		root: '/vip',
@@ -133,9 +136,6 @@ export const paths = {
 	},
 	leaderBoard: {
 		root: '/leaderBoard',
-	},
-	announcement: {
-		root: '/announcement',
 	},
 	rewards: {
 		root: '/rewards',

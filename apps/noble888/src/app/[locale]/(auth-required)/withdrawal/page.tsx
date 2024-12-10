@@ -1,3 +1,3 @@
 export default function WithdrawalPage() {
-	return <></>
+	return <div className='w-full bg-red-900 text-white'>WithdrawalPage</div>
 }

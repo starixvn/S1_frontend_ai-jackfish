@@ -1,12 +1,11 @@
 'use client'
 
 import Layout from '@noble888/src/components/layout'
-import { langId } from '@noble888/src/data/country'
 import { getIpCountry } from 'JF-api/site/client'
 import { paths } from 'JF-constants'
 import { useGetPathname } from 'JF-core'
 import { redirect } from 'next/navigation'
-import { ReactNode, useEffect } from 'react'
+import { ReactNode } from 'react'
 
 export default function MainLayout({ children }: { children: ReactNode }) {
 	const { isLoading, ipCountryData } = getIpCountry()
@@ -18,11 +17,12 @@ export default function MainLayout({ children }: { children: ReactNode }) {
 		redirect(paths.blockIp.root)
 	}
 
-	// 根據語系更新 dir
-	useEffect(() => {
-		document.documentElement.dir = locale === langId.ar ? 'rtl' : 'ltr'
-	}, [locale])
-
 	// 	TODO: 有sign in功能之後再加上
-	return <Layout isSignedIn={false}>{children}</Layout>
+	return (
+		<html dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+			<body>
+				<Layout isSignedIn={false}>{children}</Layout>
+			</body>
+		</html>
+	)
 }

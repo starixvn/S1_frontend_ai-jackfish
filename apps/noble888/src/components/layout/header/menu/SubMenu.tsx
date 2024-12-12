@@ -110,13 +110,15 @@ const SubMenu = ({
 								className={cn(
 									'relative max-w-36 transition-transform hover:-translate-x-[-4px] hover:duration-300',
 									{
-										active: subMenuItem?.isTpMaintain,
+										grayscale: subMenuItem?.isTpMaintain,
 									},
 								)}
 								onMouseEnter={() => setMenuKey(debouncedMenuKey)}
 								onClick={() => {
 									onMenuOpen(subMenuItem, {
-										loginCallback: () => <></>,
+										loginCallback: () => {
+											router.push('/')
+										},
 										// messageCallBack: (message: string) => <></>,
 										liveStreamingCallback: () => <></>,
 										// TODO: 等modal做好後回復
@@ -137,7 +139,7 @@ const SubMenu = ({
 									{displayName || subMenuItem?.productName}
 								</span>
 								{subMenuItem?.isTpMaintain && (
-									<div className='under'>
+									<div className='disabled absolute top-1/2 translate-y-[-50%] rounded-md bg-gray-800 px-2 py-1 text-center text-sm text-white'>
 										{t('Label_General_UnderMaintenance')}
 									</div>
 								)}

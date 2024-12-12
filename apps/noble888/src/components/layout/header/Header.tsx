@@ -3,7 +3,7 @@ import { cn } from 'JF-core'
 import TemporarySwitch from '../TemporarySwitch'
 import LoginForm from './LoginForm'
 import Logo from './Logo'
-import MemberInfo from './MemberInfo'
+import MemberInfo from './memberInfo/MemberInfo'
 import Menu from './menu'
 
 interface HeaderProps {

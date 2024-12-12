@@ -1,12 +1,9 @@
 'use client'
 
-import { IAxiosError } from 'JF-api/baseApi'
-import { useGoToGame } from 'JF-api/tp/client'
 import {
 	IEnterPageArgs,
 	IEnterSlotsPageArgs,
 	IGoToGameArgs,
-	IOpen9WSportsArgs,
 	ISubMenu,
 	MenuActionEnum,
 	PRODUCTS,
@@ -117,7 +114,6 @@ const useMenuOpen = ({ isPathParams = false }: IUseMenuOpenProps) => {
 		}: IGoToGameArgs,
 		{
 			loginCallback,
-			messageCallBack,
 		}: {
 			loginCallback: LoginCallbackType
 			messageCallBack?: MessageCallbackType
@@ -127,50 +123,21 @@ const useMenuOpen = ({ isPathParams = false }: IUseMenuOpenProps) => {
 			loginCallback()
 			return
 		}
-		try {
-			const goToGameArgs: IGoToGameArgs = {
-				tpId,
-				langId,
-				inputs: {
-					gameId,
-					fun,
-					gameType,
-					tpGameType: String(tpGameType),
-					loginGameType,
-				},
-			}
-			const { message } = await useGoToGame(goToGameArgs)
+		const params = new URLSearchParams({
+			tpId: String(tpId),
+			langId: String(langId),
+			gameId: String(gameId),
+			gameType: String(gameType),
+			tpGameType: String(tpGameType),
+			loginGameType: String(loginGameType),
+			fun: String(fun),
+		}).toString()
 
-			if (
-				// * SPORT 9W 的開啟方式來自於代理商給的文件，因此需拉出單獨處理
-				tpId === PRODUCTS.Nova88Exchange.tpId
-			) {
-				const result = JSON.parse(message)
-				const { url, key, userId } = result ?? {}
-				open9WSports({ url, key, userId })
-			} else if (loginGameType !== '') {
-				if (Number(loginGameType) === LoginGameTypeEnum.returnHtml) {
-					const newWindow = window.open()
-					newWindow?.document.write(message)
-				} else {
-					window.open(message)
-				}
-			} else {
-				window.open(
-					message,
-					`${tpId}_${gameId}`,
-					'toolbar=no, menubar=no,scrollbars=no,resizable=no,location=no,directories=no,status=no, top=0, left=0',
-				)
-			}
-		} catch (error) {
-			const { message, errorCode } = error as IAxiosError
-			if (errorCode === 3000) {
-				// eslint-disable-next-line no-console
-				console.error('Under Maintenance')
-			} else if (messageCallBack) {
-				messageCallBack(message)
-			}
-		}
+		/**
+		 *
+		 * GotoGame的遊戲打開時會因為加載時間偏長，讓使用者以為沒反應，所以多做launcher來開新頁面讓UX更直覺（Nova88已改）
+		 */
+		window.open(`/launcher?${params}`, 'launcher')
 	}
 
 	// TODO 待確認是否需要留著
@@ -227,17 +194,16 @@ const useMenuOpen = ({ isPathParams = false }: IUseMenuOpenProps) => {
 		},
 	) => {
 		if (!item) return
-
-		// const isDynamic = (
-		// 	item: TDynamicSubMenuItem | TStaticSubMenuItem,
-		// ): item is TDynamicSubMenuItem => {
-		// 	return (item as TDynamicSubMenuItem)?.isTpMaintain !== undefined
-		// }
-		// // 靜態 (isTpMaintain noPlay 會在 onStaticMenuOpen 擋掉)
-		// if (isDynamic(item)) {
-		// 	const { isTpMaintain } = item || {}
-		// 	if (isTpMaintain) return
-		// }
+		const isDynamic = (
+			item: (TDynamicSubMenuItem & TStaticSubMenuItem) | ISubMenu,
+		): item is TDynamicSubMenuItem => {
+			return (item as TDynamicSubMenuItem)?.isTpMaintain !== undefined
+		}
+		// isTpMaintain的遊戲會無法點擊，而靜態 (isTpMaintain noPlay 會在 onStaticMenuOpen 擋掉)
+		if (isDynamic(item)) {
+			const { isTpMaintain } = item || {}
+			if (isTpMaintain) return
+		}
 
 		const redirectAction = (
 			product: (TDynamicSubMenuItem & TStaticSubMenuItem) | ISubMenu,
@@ -378,32 +344,32 @@ const useMenuOpen = ({ isPathParams = false }: IUseMenuOpenProps) => {
 	/**
 	 * SPORT 9W 的開啟方式來自於代理商給的文件，因此需拉出單獨處理
 	 */
-	const open9WSports = ({ url, userId, key }: IOpen9WSportsArgs) => {
-		const windowName = `w_9WSportsForm`
-		const form = document.createElement('form')
-		form.setAttribute('method', 'post')
-		form.setAttribute('action', url)
-		form.setAttribute('target', windowName)
+	// const open9WSports = ({ url, userId, key }: IOpen9WSportsArgs) => {
+	// 	const windowName = `w_9WSportsForm`
+	// 	const form = document.createElement('form')
+	// 	form.setAttribute('method', 'post')
+	// 	form.setAttribute('action', url)
+	// 	form.setAttribute('target', windowName)
 
-		const addIptField = ({ name, value }: { name: string; value: string }) => {
-			const hiddenField = document.createElement('input')
-			hiddenField.setAttribute('type', 'hidden')
-			hiddenField.setAttribute('name', name)
-			hiddenField.setAttribute('value', value)
-			form.appendChild(hiddenField)
-		}
+	// 	const addIptField = ({ name, value }: { name: string; value: string }) => {
+	// 		const hiddenField = document.createElement('input')
+	// 		hiddenField.setAttribute('type', 'hidden')
+	// 		hiddenField.setAttribute('name', name)
+	// 		hiddenField.setAttribute('value', value)
+	// 		form.appendChild(hiddenField)
+	// 	}
 
-		addIptField({ name: 'userId', value: userId })
-		addIptField({ name: 'key', value: decodeURIComponent(key) })
-		document.body.appendChild(form)
-		window.open(
-			'',
-			windowName,
-			'toolbar=no, menubar=no,scrollbars=no,resizable=no,location=no,directories=no,status=no, top=0, left=0',
-		)
-		form.submit()
-		form.remove()
-	}
+	// 	addIptField({ name: 'userId', value: userId })
+	// 	addIptField({ name: 'key', value: decodeURIComponent(key) })
+	// 	document.body.appendChild(form)
+	// 	window.open(
+	// 		'',
+	// 		windowName,
+	// 		'toolbar=no, menubar=no,scrollbars=no,resizable=no,location=no,directories=no,status=no, top=0, left=0',
+	// 	)
+	// 	form.submit()
+	// 	form.remove()
+	// }
 
 	return {
 		onMenuOpen,
@@ -417,3 +383,77 @@ const useMenuOpen = ({ isPathParams = false }: IUseMenuOpenProps) => {
 }
 
 export { useMenuOpen }
+
+/**
+ * 使用 launcher開遊戲以前的 goToGame 方法:
+ * 
+ * const onGoToGame = async (
+		{
+			tpId,
+			langId,
+			inputs: {
+				gameId = null,
+				fun = '0',
+				gameType = '',
+				tpGameType = '',
+				loginGameType = '',
+			},
+		}: IGoToGameArgs,
+		{
+			loginCallback,
+			messageCallBack,
+		}: {
+			loginCallback: LoginCallbackType
+			messageCallBack?: MessageCallbackType
+		},
+	) => {
+		if (loginCallback && !isLogin) {
+			loginCallback()
+			return
+		}
+		try {
+			const goToGameArgs: IGoToGameArgs = {
+				tpId,
+				langId,
+				inputs: {
+					gameId,
+					fun,
+					gameType,
+					tpGameType: String(tpGameType),
+					loginGameType,
+				},
+			}
+
+			const { message } = await useGoToGame(goToGameArgs)
+			if (
+				// * SPORT 9W 的開啟方式來自於代理商給的文件，因此需拉出單獨處理
+				tpId === PRODUCTS.Nova88Exchange.tpId
+			) {
+				const result = JSON.parse(message)
+				const { url, key, userId } = result ?? {}
+				open9WSports({ url, key, userId })
+			} else if (loginGameType !== '') {
+				if (Number(loginGameType) === LoginGameTypeEnum.returnHtml) {
+					const newWindow = window.open()
+					newWindow?.document.write(message)
+				} else {
+					window.open(message)
+				}
+			} else {
+				window.open(
+					message,
+					`${tpId}_${gameId}`,
+					'toolbar=no, menubar=no,scrollbars=no,resizable=no,location=no,directories=no,status=no, top=0, left=0',
+				)
+			}
+		} catch (error) {
+			const { message, errorCode } = error as IAxiosError
+			if (errorCode === 3000) {
+				// eslint-disable-next-line no-console
+				console.error('Under Maintenance')
+			} else if (messageCallBack) {
+				messageCallBack(message)
+			}
+		}
+	}
+ */

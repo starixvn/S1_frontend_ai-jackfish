@@ -142,7 +142,9 @@ const Menu = () => {
 				<a
 					className={headerMenuCss}
 					key={lobbyCategoryId}
-					onMouseEnter={() => setMenuKey(category)}
+					onMouseEnter={() => {
+						setMenuKey(category)
+					}}
 				>
 					{icon}
 					{menuText}

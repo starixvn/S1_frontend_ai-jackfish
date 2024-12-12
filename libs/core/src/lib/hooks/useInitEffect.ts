@@ -1,7 +1,6 @@
 'use client'
 
-import { envCookieNames } from '@brand01/src/i18n/settings'
-import { LANG_TO_CURRENCY } from 'JF-constants'
+import { ENV_COOKIE_NAMES } from 'JF-constants'
 import { useAuthStore, useSocialChannelStore } from 'JF-operations'
 import { debounce } from 'lodash-es'
 import { useEffect } from 'react'
@@ -18,19 +17,19 @@ const debouncedGetSocialChannels = debounce(
 
 interface IUseInitEffectProps {
 	isSignedIn: boolean
+	langToCurrency: { [key: string]: number } // 因為不同品牌有不同的LANG_TO_CURRENCY，所以用傳入的方式
 }
 
-const useInitEffect = ({ isSignedIn }: IUseInitEffectProps) => {
+const useInitEffect = ({ isSignedIn, langToCurrency }: IUseInitEffectProps) => {
 	const router = useLocaleRouter()
 	const { locale, currentPath } = useGetPathname()
 	const [cookies, setCookie] = useCookies([
-		envCookieNames.langId,
-		envCookieNames.currencyId,
+		ENV_COOKIE_NAMES.langId,
+		ENV_COOKIE_NAMES.currencyId,
 	])
 
-	const cookieLangId = cookies[envCookieNames.langId]
-	const cookieCurrencyId = cookies[envCookieNames.currencyId]
-
+	const cookieLangId = cookies[ENV_COOKIE_NAMES.langId]
+	const cookieCurrencyId = cookies[ENV_COOKIE_NAMES.currencyId]
 	const {
 		isLogin,
 		getUserInfo,
@@ -38,7 +37,6 @@ const useInitEffect = ({ isSignedIn }: IUseInitEffectProps) => {
 		userInfo: { langId, currencyId },
 		getWalletInfo,
 	} = useAuthStore()
-
 	const { getSocialChannels } = useSocialChannelStore()
 
 	// 初始化 AuthStore，未登入就直接 set cookie 資料，若登入則初始化 userInfo
@@ -61,21 +59,20 @@ const useInitEffect = ({ isSignedIn }: IUseInitEffectProps) => {
 		isSignedIn,
 		setUserInfo,
 	])
-
 	// 初始化 cookie landgId & currencyId，
 	// 已登入設定成 userInfo 資料，並且判斷 locale 是否符合帳號資料，不符合則倒轉
 	// 未登入設定成 locale 以及對應的 currencyId
 	useEffect(() => {
 		if (!isLogin && locale !== cookieLangId) {
 			// 未登入判斷 url 語系是否與 cookieLangId 符合
-			setCookie(envCookieNames.langId, locale, { path: '/' })
-			setCookie(envCookieNames.currencyId, LANG_TO_CURRENCY[locale], {
+			setCookie(ENV_COOKIE_NAMES.langId, locale, { path: '/' })
+			setCookie(ENV_COOKIE_NAMES.currencyId, langToCurrency[locale], {
 				path: '/',
 			})
 		} else if (isLogin && locale !== langId) {
 			// 登入狀態且 userInfo langId 改變
-			setCookie(envCookieNames.langId, langId, { path: '/' })
-			setCookie(envCookieNames.currencyId, currencyId, { path: '/' })
+			setCookie(ENV_COOKIE_NAMES.langId, langId, { path: '/' })
+			setCookie(ENV_COOKIE_NAMES.currencyId, currencyId, { path: '/' })
 			router.push(currentPath, { locale: langId })
 		}
 	}, [
@@ -84,6 +81,7 @@ const useInitEffect = ({ isSignedIn }: IUseInitEffectProps) => {
 		currentPath,
 		isLogin,
 		langId,
+		langToCurrency,
 		locale,
 		router,
 		setCookie,

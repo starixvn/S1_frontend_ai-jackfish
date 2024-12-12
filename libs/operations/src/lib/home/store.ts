@@ -1,12 +1,9 @@
 import { getHotGameList, getLobbyHeader } from 'JF-api/game/server'
 import { getTpMaintainList } from 'JF-api/site/server'
 import { TpMaintainData } from 'JF-api/site/type'
+import { ISubMenu } from 'JF-constants'
 import { getIsTpMaintain } from 'JF-core'
-import {
-	IHotGame,
-	ISubMenuData,
-	TLobbyHeaderData,
-} from 'libs/api-services/src/lib/game/type'
+import { IHotGame, TLobbyHeaderData } from 'libs/api-services/src/lib/game/type'
 import { create } from 'zustand'
 
 interface IActiveHomeMenu {
@@ -17,8 +14,8 @@ interface IActiveHomeMenu {
 	tpMaintainList: TpMaintainData[]
 	fetchTpMaintain: () => Promise<void>
 	fetchLobbyHeader: () => Promise<void>
-	subMenuData: ISubMenuData[]
-	setSubMenuData: (subMenu: ISubMenuData[]) => void
+	subMenuData: ISubMenu[]
+	setSubMenuData: (subMenu: ISubMenu[]) => void
 }
 
 export const useHomeStore = create<IActiveHomeMenu>(set => ({

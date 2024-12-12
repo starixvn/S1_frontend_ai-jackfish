@@ -1,7 +1,6 @@
 'use server'
 
-import { envCookieNames } from '@brand01/src/i18n/settings'
-import { paths } from 'JF-constants'
+import { ENV_COOKIE_NAMES, paths } from 'JF-constants'
 import { ISeoData } from 'libs/operations/src/lib/seo/type'
 import { isNumber } from 'lodash-es'
 import { cookies } from 'next/headers'
@@ -18,8 +17,8 @@ import { siteApiUrl } from './url'
 export const getBanner = async () => {
 	try {
 		const cookieStore = cookies()
-		const langId = cookieStore.get(envCookieNames.langId)?.value
-		const currencyId = cookieStore.get(envCookieNames.currencyId)?.value
+		const langId = cookieStore.get(ENV_COOKIE_NAMES.langId)?.value
+		const currencyId = cookieStore.get(ENV_COOKIE_NAMES.currencyId)?.value
 		const data = await fetcher<TBannerData[], IGetBannerPayload>(
 			`${siteApiUrl.getBanner}/${langId}`,
 			{

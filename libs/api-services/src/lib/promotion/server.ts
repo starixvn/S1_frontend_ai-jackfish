@@ -1,17 +1,16 @@
 'use server'
 
-import { envCookieNames } from '@brand01/src/i18n/settings'
-import { DeviceTypeEnum } from 'JF-constants'
+import { DeviceTypeEnum, ENV_COOKIE_NAMES } from 'JF-constants'
 import { cookies } from 'next/headers'
 import { getPromotionListV3 } from './client'
 
 const deviceType = DeviceTypeEnum.Desktop
 
 const getLangId = () =>
-	String(cookies().get(envCookieNames.langId)?.value ?? 'en')
+	String(cookies().get(ENV_COOKIE_NAMES.langId)?.value ?? 'en')
 
 const getCurrencyId = () =>
-	Number(cookies().get(envCookieNames.currencyId)?.value ?? 4)
+	Number(cookies().get(ENV_COOKIE_NAMES.currencyId)?.value ?? 4)
 
 export const getPromotionListOnServer = () =>
 	getPromotionListV3({

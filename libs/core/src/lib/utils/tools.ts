@@ -47,8 +47,8 @@ export const getIsTpMaintain = ({
  * 判斷f是否處於活動時間
  */
 export const isEventPeriod = (period: {
-	start: null | string
-	end: null | string
+	start: null | string | undefined
+	end: null | string | undefined
 }) => {
 	const { start, end } = period
 

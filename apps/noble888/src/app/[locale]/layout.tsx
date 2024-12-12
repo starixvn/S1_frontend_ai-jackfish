@@ -1,8 +1,9 @@
 'use client'
 
 import Layout from '@noble888/src/components/layout'
+import { langId } from '@noble888/src/data/country'
 import { getIpCountry } from 'JF-api/site/client'
-import { langId, paths } from 'JF-constants'
+import { paths } from 'JF-constants'
 import { useGetPathname } from 'JF-core'
 import { redirect } from 'next/navigation'
 import { ReactNode, useEffect } from 'react'

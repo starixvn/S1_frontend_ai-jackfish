@@ -1,8 +1,9 @@
 // authStore.ts
+import { langId } from '@noble888/src/data/country'
 import { getWalletInfo } from 'JF-api/account/client'
 import { getUserInfo } from 'JF-api/accountStrict/client'
 import { signInPhone, signOut } from 'JF-api/auth/client'
-import { CURRENCY_NAME_BY_CURRENCY, CurrenciesEnum, langId } from 'JF-constants'
+import { CURRENCY_NAME_BY_CURRENCY, CurrenciesEnum } from 'JF-constants'
 import { numberFormat } from 'JF-core'
 import { create } from 'zustand'
 import { IAuthAction, IAuthState } from './type'
@@ -10,7 +11,7 @@ import { IAuthAction, IAuthState } from './type'
 const defaultUserInfo = {
 	userName: 'guest',
 	langId: langId.en,
-	currencyId: CurrenciesEnum.THB,
+	currencyId: CurrenciesEnum.USD,
 }
 const defaultWalletInfo = {
 	balance: 0,

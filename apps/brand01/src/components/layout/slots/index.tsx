@@ -1,4 +1,5 @@
 'use client'
+import { LANG_TO_CURRENCY } from '@brand01/src/data/country'
 import { useInitEffect, useOnlineCheckInterval } from 'JF-core'
 import { useSlotPageStore } from 'JF-operations'
 import { ReactNode, useEffect } from 'react'
@@ -16,7 +17,7 @@ const SlotLayout = ({ children, tpId, isSignedIn }: ISlotLayoutProps) => {
 		fetchSlotGameData()
 	}, [fetchSlotGameData])
 	// 初始化
-	useInitEffect({ isSignedIn })
+	useInitEffect({ isSignedIn, langToCurrency: LANG_TO_CURRENCY })
 	// check login interval
 	useOnlineCheckInterval()
 

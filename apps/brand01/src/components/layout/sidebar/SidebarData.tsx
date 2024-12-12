@@ -1,12 +1,12 @@
 'use client'
 
 import { useClientTranslation } from '@brand01/src/i18n/client'
-import { IMergedMenuData } from 'JF-constants'
+import { IMergedMenuData, TMenuData } from 'JF-constants'
 import { LocaleLink, cn, imageUrl, useGetPathname } from 'JF-core'
 import { useHomeStore } from 'JF-operations'
 import { useEffect } from 'react'
 
-const SidebarData: React.FC<IMergedMenuData> = ({
+const SidebarData: React.FC<IMergedMenuData | TMenuData> = ({
 	pathname = '',
 	category,
 	displayKey = '',

@@ -1,5 +1,5 @@
-import { envCookieNames } from '@brand01/src/i18n/settings'
 import acceptLanguage from 'accept-language'
+import { ENV_COOKIE_NAMES } from 'JF-constants'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const appMiddleware = ({
@@ -23,15 +23,14 @@ export const appMiddleware = ({
 	if (req.nextUrl.pathname.indexOf('chrome') > -1) {
 		return res
 	}
-
 	// 初始化 cookie，設定 env default value
 	if (!req.cookies.has(cookieName)) {
 		res.cookies.set(
-			envCookieNames.langId,
+			ENV_COOKIE_NAMES.langId,
 			String(process.env.NEXT_PUBLIC_DEFAULT_LANG),
 		)
 		res.cookies.set(
-			envCookieNames.currencyId,
+			ENV_COOKIE_NAMES.currencyId,
 			String(process.env.NEXT_PUBLIC_DEFAULT_CURRENCY),
 		)
 	}

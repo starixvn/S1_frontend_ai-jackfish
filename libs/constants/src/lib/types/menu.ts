@@ -2,14 +2,7 @@ import { ISubMenuData, ISubMenuDesktopData } from 'JF-api/game/type'
 import { IRootpath } from '../paths'
 import { IProduct, TProductProps } from '../products'
 
-export const MenuActionTypeEnum = {
-	EnterPage: 'EnterPage',
-	Link: 'Link',
-	UseGoToGame: 'UseGoToGame',
-	WindowOpen: 'WindowOpen',
-	Null: 'Null',
-} as const
-
+// === Menu Category Enums ===
 export enum MenuKeyEnum {
 	HotGame = 'HotGame',
 	Sports = 'Sports',
@@ -73,6 +66,7 @@ export enum MenuActionEnum {
 	Null = 'Null',
 }
 
+// === Core Action Interfaces ===
 export interface IGoToGameArgs {
 	tpId: number
 	langId: string
@@ -107,25 +101,7 @@ export interface IOpen9WSportsArgs {
 	key: string
 }
 
-// export type TSubMenuData = {
-// 	lobbyCategory: string
-// 	tpId: number
-// 	tpName: string
-// 	productName: string
-// 	tpGameIdNo: number | undefined
-// 	gameId?: number | string
-// 	tpGameType: number
-// 	currencyGameName: Record<string, string> | null
-// 	pcHeaderPicUrl: string
-// 	pcLobbyPicUrl: string
-// 	mobileHeaderPicUrl: string
-// 	mobileLobbyPicUrl: string
-// 	sort: number
-// 	iconEndTime: string
-// 	iconStartTime: string
-// 	iconType: number
-// }
-
+// === Action Type Definitions ===
 type TMenuActionLinkType = Extract<
 	keyof typeof MenuActionEnum,
 	'Link' | 'WindowOpen'
@@ -136,6 +112,7 @@ type TMenuActionOtherType = Exclude<
 	'Link' | 'WindowOpen'
 >
 
+// === Menu Item Interfaces ===
 export interface TStaticSubMenuItemLinkType extends TProductProps {
 	imgUrl: string
 	displayKey: string
@@ -163,10 +140,10 @@ export interface IAddLiveStreamingProps {
 	noPlay?: boolean
 	noShow?: boolean
 }
+
 export interface TDynamicSubMenuLinkType
 	extends TStaticSubMenuItemLinkType,
 		ISubMenuData,
-		// TProductProps,
 		IAddLiveStreamingProps {}
 
 export type TDynamicSubMenuOtherType = TStaticSubMenuItemOtherType &
@@ -185,25 +162,25 @@ export type TStaticSubMenuItem =
 	| TStaticSubMenuItemOtherType
 
 export type IMergedMenuData = {
+	category?: MenuKeyEnum | undefined
+	desktop?: {
+		subMenuClassName?: string | undefined
+	}
 	display?: 'h5' | 'desktop' | 'all'
 	displayKey?: string
-	iconUrl?: string
-	pathname?: string
-	lobbyCategoryId?: number | undefined
-	subMenuAllowCurrenciesWithAuth?: boolean | undefined // * 決定是否需要登入後才過濾(暫時沒有用到)
-	query?: { provider: string }
-	category?: MenuKeyEnum | undefined
 	h5?: {
 		subMenuClassName?: string
 		icon: string
 	}
-	desktop?: {
-		subMenuClassName?: string | undefined
-	}
-	// subMenu: TDynamicSubMenuItem[]
-	subMenu: ISubMenuData[]
+	lobbyCategoryId?: number | undefined
+	pathname?: string
+	iconUrl?: string
+	subMenu: ISubMenu[]
+	subMenuAllowCurrenciesWithAuth?: boolean | undefined
+	query?: { provider: string }
 }
 
+// === Icon Related Enums ===
 export enum MainMenuIcon {
 	newTag = 'newTag',
 	hotTag = 'hotTag',
@@ -230,14 +207,15 @@ export const LobbyCategoryEnum = {
 } as const
 
 export type IMenuActionLinkType = Extract<
-	keyof typeof MenuActionTypeEnum,
+	keyof typeof MenuActionEnum,
 	'Link' | 'WindowOpen'
 >
 
 export type IMenuActionOtherType = Exclude<
-	keyof typeof MenuActionTypeEnum,
+	keyof typeof MenuActionEnum,
 	'Link' | 'WindowOpen'
 >
+
 export interface IStaticSubMenuItemLinkType extends IProduct {
 	desktop?: {
 		menuActionType: IMenuActionLinkType
@@ -249,6 +227,7 @@ export interface IStaticSubMenuItemLinkType extends IProduct {
 	query?: { provider: string } | { tpId: number }
 	needLogin?: boolean
 }
+
 export interface IStaticSubMenuItemOtherType extends IProduct {
 	desktop?: {
 		menuActionType: IMenuActionOtherType
@@ -259,12 +238,11 @@ export interface IStaticSubMenuItemOtherType extends IProduct {
 	needLogin?: boolean
 }
 
-// HOME_MENU_DATA 的 type:
 export interface ISubMenu extends TProductProps {
-	currencyGameName?: string | null
+	currencyGameName?: Record<string, string> | null
 	iconEndTime?: string
 	iconStartTime?: string
-	iconType?: number
+	iconType?: MenuIconTypeEnum
 	lobbyCategory?: string
 	pcHeaderPicUrl?: string
 	pcLobbyPicUrl?: string
@@ -292,11 +270,13 @@ export interface ISubMenu extends TProductProps {
 		tpId?: string | number
 	}
 	needLogin?: boolean
+	isTpMaintain?: boolean
+	gameId?: number | string
 }
 
 export type TMenuData = {
 	display?: string
-	category: MenuKeyEnum | NovaMenuKeyEnum
+	category: MenuKeyEnum | NovaMenuKeyEnum | undefined
 	desktop: {
 		subMenuClassName: string
 		menuType?: 'menu' | 'banner'
@@ -311,25 +291,5 @@ export type TMenuData = {
 	pathname?: string
 	query?: { provider: string }
 	subMenu: ISubMenu[]
-	subMenuAllowCurrenciesWithAuth: boolean // * 決定是否需要登入後才過濾(暫時沒有用到)
+	subMenuAllowCurrenciesWithAuth: boolean
 }
-
-// interface IDynamicSubMenuOtherType
-// 	extends IStaticSubMenuItemOtherType,
-// 		ISubMenuData,
-// 		IProduct,
-// 		IAddLiveStreamingProps {}
-
-// export interface IDynamicSubMenuLinkType
-// 	extends IStaticSubMenuItemLinkType,
-// 		ISubMenuData,
-// 		IProduct,
-// 		IAddLiveStreamingProps {}
-
-// // * 點擊 menu 遊戲產品的參數(Lobby Header Api)
-// export type IDynamicSubMenuItem =
-// 	| IDynamicSubMenuLinkType
-// 	| IDynamicSubMenuOtherType
-// export type IStaticSubMenuItem =
-// 	| IStaticSubMenuItemLinkType
-// 	| IStaticSubMenuItemOtherType

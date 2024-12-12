@@ -1,13 +1,13 @@
 'use client'
 
 import { IAxiosError } from 'JF-api/baseApi'
-import { ISubMenuData } from 'JF-api/game/type'
 import { useGoToGame } from 'JF-api/tp/client'
 import {
 	IEnterPageArgs,
 	IEnterSlotsPageArgs,
 	IGoToGameArgs,
 	IOpen9WSportsArgs,
+	ISubMenu,
 	MenuActionEnum,
 	PRODUCTS,
 	paths,
@@ -217,7 +217,7 @@ const useMenuOpen = ({ isPathParams = false }: IUseMenuOpenProps) => {
 	 */
 	const onMenuOpen = (
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		item: (TDynamicSubMenuItem & TStaticSubMenuItem) | ISubMenuData,
+		item: (TDynamicSubMenuItem & TStaticSubMenuItem) | ISubMenu,
 		{
 			loginCallback,
 			messageCallBack,
@@ -240,7 +240,7 @@ const useMenuOpen = ({ isPathParams = false }: IUseMenuOpenProps) => {
 		// }
 
 		const redirectAction = (
-			product: (TDynamicSubMenuItem & TStaticSubMenuItem) | ISubMenuData,
+			product: (TDynamicSubMenuItem & TStaticSubMenuItem) | ISubMenu,
 		) => {
 			const {
 				tpId,

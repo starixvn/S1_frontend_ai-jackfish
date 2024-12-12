@@ -1,8 +1,7 @@
 'use client'
 
-import { imageUrl } from 'JF-core'
+import { bannerUrl } from 'JF-core'
 import { ISeoData } from 'libs/operations/src/lib/seo/type'
-import { includes } from 'lodash-es'
 import Script from 'next/script'
 import { useEffect, useState } from 'react'
 
@@ -12,6 +11,7 @@ interface LicenseProps {
 }
 
 const License = ({ seoData, defaultScript }: LicenseProps) => {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [currentDomain, setCurrentDomain] = useState('')
 
 	useEffect(() => {
@@ -31,8 +31,8 @@ const License = ({ seoData, defaultScript }: LicenseProps) => {
 				{/* Add gaming license icons here */}
 				{showLicenseLogo && (
 					<div className='flex items-center justify-center gap-x-2 lg:justify-start'>
-						{/* PM hotfix 需求，此 license 需排除 kr site */}
-						{typeof window !== 'undefined' &&
+						{/* TODO: 有hydration問題 先註解 */}
+						{/* {typeof window !== 'undefined' &&
 							!includes(currentDomain, 'nova88kr.com') && (
 								<div
 									className='w-12 lg:w-16'
@@ -41,7 +41,7 @@ const License = ({ seoData, defaultScript }: LicenseProps) => {
 									data-dlag-image-size='128'
 									data-dlag-image-type='basic-small'
 								/>
-							)}
+							)} */}
 
 						<a
 							href='https://www.begambleaware.org/'
@@ -49,7 +49,7 @@ const License = ({ seoData, defaultScript }: LicenseProps) => {
 							rel='noreferrer'
 						>
 							<img
-								src={imageUrl('/desktop/img/aware.png')}
+								src={bannerUrl('/desktop/img/aware.png')}
 								alt=''
 								style={{ width: '115px', height: '23px' }}
 							/>

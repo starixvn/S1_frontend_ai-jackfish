@@ -2,7 +2,7 @@
 
 import { useClientTranslation } from '@noble888/src/i18n/client'
 import { footerImgName, IFooterData } from 'JF-constants'
-import { imageUrl } from 'JF-core'
+import { bannerUrl } from 'JF-core'
 import { useAuthStore, useSocialChannelStore } from 'JF-operations'
 import { ISeoData } from 'libs/operations/src/lib/seo/type'
 import { debounce, upperFirst } from 'lodash-es'
@@ -103,7 +103,7 @@ const FooterCenter = ({
 								<Link key={channelName} href={link} className='h-10 w-10'>
 									<img
 										className='h-full w-full'
-										src={imageUrl(
+										src={bannerUrl(
 											`/desktop/img/4.0/${footerImgName[channelName]}`,
 										)}
 										alt={title}

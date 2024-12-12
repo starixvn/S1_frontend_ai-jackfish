@@ -54,19 +54,19 @@ export const PHONE_DIGITS_LIMIT: { [key: string]: string } = {
 	[AREA_CODE_BY_CURRENCY[CurrenciesEnum.BRL]]: '10-11',
 }
 
-export const LANG_TO_CURRENCY: { [key: string]: number } = {
-	th: CurrenciesEnum.THB,
-	en: CurrenciesEnum.THB,
-	cs: CurrenciesEnum.MYR,
-	my: CurrenciesEnum.MYR,
-	id: CurrenciesEnum.IDR,
-	ko: CurrenciesEnum.KRW,
-	hi: CurrenciesEnum.INR,
-	kh: CurrenciesEnum.KHM,
-	bd: CurrenciesEnum.BDT,
-	vn: CurrenciesEnum.VND,
-	br: CurrenciesEnum.BRL,
-}
+// export const LANG_TO_CURRENCY: { [key: string]: number } = {
+// 	th: CurrenciesEnum.THB,
+// 	en: CurrenciesEnum.USD,
+// 	cs: CurrenciesEnum.MYR,
+// 	my: CurrenciesEnum.MYR,
+// 	id: CurrenciesEnum.IDR,
+// 	ko: CurrenciesEnum.KRW,
+// 	hi: CurrenciesEnum.INR,
+// 	kh: CurrenciesEnum.KHM,
+// 	bd: CurrenciesEnum.BDT,
+// 	vn: CurrenciesEnum.VND,
+// 	br: CurrenciesEnum.BRL,
+// }
 
 export const CURRENCY_TO_LANG_KEY: {
 	[key: string | number]: string

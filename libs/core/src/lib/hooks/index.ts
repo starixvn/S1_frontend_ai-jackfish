@@ -1,5 +1,4 @@
 export * from './useBannerClick'
-export * from './useDevice'
 export * from './useDisclosure'
 export * from './useGetBankInfo'
 export * from './useGetPathname'

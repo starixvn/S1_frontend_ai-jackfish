@@ -14,7 +14,12 @@ const SubMenu = () => {
 	return (
 		<>
 			{subMenuData?.map(item => {
-				const { tpGameIdNo, rwdLobbyPicUrl, productName, isTpMaintain } = item
+				const {
+					tpGameIdNo,
+					rwdLobbyPicUrl,
+					productName = '',
+					isTpMaintain,
+				} = item
 				let imgUrl
 				if (rwdLobbyPicUrl) {
 					try {

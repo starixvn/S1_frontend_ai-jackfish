@@ -11,10 +11,6 @@ export const languages = [
 	// 'kh',
 	// 'vn',
 ]
-export const envCookieNames = {
-	langId: `${process.env['NEXT_PUBLIC_SITE_NAME']}LangId`,
-	currencyId: `${process.env['NEXT_PUBLIC_SITE_NAME']}_currencyId`,
-}
 
 const defaultNS = process.env.NEXT_PUBLIC_SITE_NAME
 const commonNS = 'common'

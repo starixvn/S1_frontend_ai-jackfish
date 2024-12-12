@@ -1,5 +1,4 @@
 import { useClientTranslation } from '@brand01/src/i18n/client'
-import { envCookieNames } from '@brand01/src/i18n/settings'
 import {
 	getDepositPromotionList,
 	getPromotionDetail,
@@ -10,7 +9,7 @@ import {
 } from 'JF-api/promotion/client'
 import { PromotionType } from 'JF-api/promotion/type'
 import { promotionApiUrl } from 'JF-api/promotion/url'
-import { DeviceTypeEnum } from 'JF-constants'
+import { DeviceTypeEnum, ENV_COOKIE_NAMES } from 'JF-constants'
 import dayjs from 'dayjs'
 import { concat, filter, includes } from 'lodash-es'
 import { useState } from 'react'
@@ -22,12 +21,12 @@ const deviceType = DeviceTypeEnum.Desktop
 
 const useLocale = () => {
 	const [cookies] = useCookies([
-		envCookieNames.langId,
-		envCookieNames.currencyId,
+		ENV_COOKIE_NAMES.langId,
+		ENV_COOKIE_NAMES.currencyId,
 	])
 	return {
-		langId: String(cookies[envCookieNames.langId]),
-		currencyId: Number(cookies[envCookieNames.currencyId]),
+		langId: String(cookies[ENV_COOKIE_NAMES.langId]),
+		currencyId: Number(cookies[ENV_COOKIE_NAMES.currencyId]),
 	}
 }
 

@@ -1,15 +1,8 @@
-import { LangId, langId } from 'JF-constants'
+import { langId, LangId } from '../data/country'
 
-export const languages: LangId[] = [langId.en, langId.ar]
+export const languages: LangId[] = [langId.en, langId.ar, langId.th, langId.vn]
 
 export const fallbackLng = languages[0]
-
-export const envCookieNames = {
-	langId: `${process.env['NEXT_PUBLIC_SITE_NAME']}LangId`,
-	currencyId: `${process.env['NEXT_PUBLIC_SITE_NAME']}_currencyId`,
-	LineUserId: `${process.env['NEXT_PUBLIC_SITE_NAME']}_lineUserId`,
-	AppDownloadHint: `${process.env['NEXT_PUBLIC_SITE_NAME']}_AppDownloadHint`,
-}
 
 const defaultNS = process.env.NEXT_PUBLIC_SITE_NAME
 const commonNS = 'common'

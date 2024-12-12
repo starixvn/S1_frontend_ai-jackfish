@@ -1,22 +1,22 @@
 'use client'
 import { useClientTranslation } from '@noble888/src/i18n/client'
 import { paths } from 'JF-constants'
-import { cn, imageUrl, LocaleLink, useGetPathname } from 'JF-core'
+import { LocaleLink, bannerUrl, cn, useGetPathname } from 'JF-core'
 import { useBoolean } from 'usehooks-ts'
-const footerNavH5 = () => {
+const FooterNavMobile = () => {
 	const { t } = useClientTranslation()
 	const { value: isActive, toggle } = useBoolean(false)
 	const { currentPath } = useGetPathname()
 
 	return (
-		<>
+		<div className='block lg:hidden'>
 			<div className='fixed bottom-0 z-10 mx-auto h-[21.5vw] w-full bg-[url("/img/footer/footer-bg.png")] bg-cover bg-center bg-no-repeat' />
 
 			<div className='fixed bottom-0 z-20 grid w-full grid-cols-5 place-content-center place-items-center  text-sm'>
 				<LocaleLink href={paths.home.root} className='w-fit text-center'>
 					<img
 						className='mx-auto w-[6vw]'
-						src={`${imageUrl(`/h5/img/4.0/footer/home${currentPath === paths.home.root ? '-dark' : ''}.png`)}`}
+						src={`${bannerUrl(`/h5/img/4.0/footer/home${currentPath === paths.home.root ? '-dark' : ''}.png`)}`}
 						alt=''
 					/>
 					<p
@@ -31,7 +31,7 @@ const footerNavH5 = () => {
 				<LocaleLink href={paths.promotion.root} className='w-fit text-center'>
 					<img
 						className='mx-auto w-[6vw]'
-						src={`${imageUrl(`/h5/img/4.0/footer/gift${currentPath === paths.promotion.root ? '-dark' : ''}.png`)}`}
+						src={`${bannerUrl(`/h5/img/4.0/footer/gift${currentPath === paths.promotion.root ? '-dark' : ''}.png`)}`}
 						alt=''
 					/>
 					<p
@@ -62,7 +62,7 @@ const footerNavH5 = () => {
 				>
 					<img
 						className='mx-auto w-[6vw]'
-						src={`${imageUrl('/h5/img/4.0/footer/livechat.png')}`}
+						src={`${bannerUrl('/h5/img/4.0/footer/livechat.png')}`}
 						alt=''
 					/>
 					<p className='text-xs text-[#d1d1d1]'>Live Chat</p>
@@ -70,7 +70,7 @@ const footerNavH5 = () => {
 				<LocaleLink href={paths.menu.root} className='w-fit text-center'>
 					<img
 						className='mx-auto w-[6vw]'
-						src={`${imageUrl(`/h5/img/4.0/footer/me${currentPath === paths.menu.root ? '-dark' : ''}.png`)}`}
+						src={`${bannerUrl(`/h5/img/4.0/footer/me${currentPath === paths.menu.root ? '-dark' : ''}.png`)}`}
 						alt=''
 					/>
 					<p
@@ -99,7 +99,7 @@ const footerNavH5 = () => {
 					<LocaleLink href={paths.deposit.root}>
 						<div className='mx-auto h-12 w-12 rounded-full bg-[#ffffff] p-2'>
 							<img
-								src={`${imageUrl('/h5/img/4.0/footer/deposit.png')}`}
+								src={`${bannerUrl('/h5/img/4.0/footer/deposit.png')}`}
 								alt=''
 							/>
 						</div>
@@ -108,7 +108,7 @@ const footerNavH5 = () => {
 					<LocaleLink href={paths.withdrawal.root}>
 						<div className='mx-auto h-12 w-12 rounded-full bg-[#ffffff] p-2'>
 							<img
-								src={`${imageUrl('/h5/img/4.0/footer/withdrawal.png')}`}
+								src={`${bannerUrl('/h5/img/4.0/footer/withdrawal.png')}`}
 								alt=''
 							/>
 						</div>
@@ -119,7 +119,7 @@ const footerNavH5 = () => {
 					<LocaleLink href={paths.transferFunds.root}>
 						<div className='mx-auto h-12 w-12 rounded-full bg-[#ffffff] p-2'>
 							<img
-								src={`${imageUrl('/h5/img/4.0/footer/transfer.png')}`}
+								src={`${bannerUrl('/h5/img/4.0/footer/transfer.png')}`}
 								alt=''
 							/>
 						</div>
@@ -130,8 +130,8 @@ const footerNavH5 = () => {
 					</LocaleLink>
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }
 
-export default footerNavH5
+export default FooterNavMobile

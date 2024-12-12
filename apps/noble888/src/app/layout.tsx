@@ -1,9 +1,9 @@
 import { fallbackLng, languages } from '@noble888/src/i18n/settings'
-import { LangId } from 'JF-constants'
 import { toUpper } from 'lodash-es'
 import { ReactNode } from 'react'
 import 'react-toastify/dist/ReactToastify.css'
 import 'swiper/css/bundle'
+import { LangId } from '../data/country'
 import '../style/global.css'
 
 export async function generateMetadata({

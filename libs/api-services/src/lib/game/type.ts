@@ -93,7 +93,7 @@ export interface ISubMenuDesktopData {
 
 /** @ISubMenuData 使用'Game/GetLobbyHeader' api取回的資料格式 */
 export interface ISubMenuData extends TProductProps {
-	currencyGameName: Record<string, string> | null
+	currencyGameName?: Record<string, string> | null
 	desktop?: ISubMenuDesktopData
 	gameId?: number | string
 	h5?: ISubMenuDesktopData

@@ -1,4 +1,4 @@
-import { CurrenciesEnum } from './currency'
+import { CurrenciesEnum } from 'JF-constants'
 
 export const langId = {
 	en: 'en',
@@ -27,7 +27,7 @@ export const langLabel: Record<LangId, string> = {
 export const languageGroup: Record<CurrenciesEnum, LangId[]> = {
 	[CurrenciesEnum.MYR]: [langId.en],
 	[CurrenciesEnum.USD]: [langId.en],
-	[CurrenciesEnum.THB]: [langId.en, langId.th],
+	[CurrenciesEnum.THB]: [langId.th, langId.en],
 	[CurrenciesEnum.CNY]: [langId.en, langId.cs],
 	[CurrenciesEnum.VND]: [langId.en, langId.vn],
 	[CurrenciesEnum.KHM]: [langId.en, langId.kh],
@@ -39,17 +39,16 @@ export const languageGroup: Record<CurrenciesEnum, LangId[]> = {
 	[CurrenciesEnum.USDT]: [langId.en],
 }
 
-export const LANG_GROUP_COUNTRY: {
-	[key: string]: string
-} = {
-	ch: 'Malaysia',
-	th: 'Thailand',
-	id: 'Indonesia',
-	in: 'India',
-	cs: 'China',
-	gb: 'Global',
-	bd: 'Bangladesh',
-	kh: 'Cambodia',
-	vn: 'Vietnam',
-	ar: 'Arab',
+export const LANG_TO_CURRENCY: { [key: string]: number } = {
+	th: CurrenciesEnum.THB,
+	en: CurrenciesEnum.THB,
+	cs: CurrenciesEnum.MYR,
+	my: CurrenciesEnum.MYR,
+	id: CurrenciesEnum.IDR,
+	ko: CurrenciesEnum.KRW,
+	hi: CurrenciesEnum.INR,
+	kh: CurrenciesEnum.KHM,
+	bd: CurrenciesEnum.BDT,
+	vn: CurrenciesEnum.VND,
+	br: CurrenciesEnum.BRL,
 }

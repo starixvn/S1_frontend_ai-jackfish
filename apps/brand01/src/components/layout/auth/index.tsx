@@ -1,5 +1,6 @@
 'use client'
 
+import { LANG_TO_CURRENCY } from '@brand01/src/data/country'
 import { useInitEffect } from 'JF-core'
 import { ReactNode } from 'react'
 
@@ -10,7 +11,7 @@ interface IAuthLayoutProps {
 
 const AuthLayout = ({ children, isSignedIn }: IAuthLayoutProps) => {
 	// 初始化
-	useInitEffect({ isSignedIn })
+	useInitEffect({ isSignedIn, langToCurrency: LANG_TO_CURRENCY })
 	return <>{children}</>
 }
 

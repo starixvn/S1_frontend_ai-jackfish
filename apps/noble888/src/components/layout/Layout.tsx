@@ -3,6 +3,7 @@
 import {
 	ALLOWED_CURRENCIES,
 	LANG_GROUPS,
+	LANG_TO_CURRENCY,
 	LEFT_MENU_DATA,
 	MENU_DATA,
 	META_DATA,
@@ -11,7 +12,6 @@ import {
 import { useInitEffect } from 'JF-core'
 import { useStaticDataStore } from 'JF-operations'
 import { ReactNode, useEffect, useState } from 'react'
-import TemporarySwitch from './TemporarySwitch'
 import Footer from './footer'
 import Header from './header'
 
@@ -41,15 +41,11 @@ export default function Layout({
 	}, [initStaticData])
 
 	// 初始化
-	useInitEffect({ isSignedIn })
+	useInitEffect({ isSignedIn, langToCurrency: LANG_TO_CURRENCY })
 	return (
 		<div className='flex h-full w-full flex-col bg-white'>
-			{/* TODO: to be removed */}
-			<div className='absolute right-2 top-2'>
-				<TemporarySwitch />
-			</div>
 			<Header isLogin={isLogin} setIsLogin={setIsLogin} />
-			<main className='flex-grow'>{children}</main>
+			<main className='h-fit flex-grow'>{children}</main>
 			<Footer isLogin={isLogin} />
 		</div>
 	)

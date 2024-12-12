@@ -1,5 +1,5 @@
 import { paths } from 'JF-constants'
-import { imageUrl } from 'JF-core'
+import { bannerUrl } from 'JF-core'
 
 export interface INavMenuProps {
 	displayKey: string
@@ -31,13 +31,13 @@ export const Nav_Links = [
 	{
 		displayKey: 'Label_General_Referral',
 		pathname: paths.referral.root, // TODO: 待確認要導到哪頁
-		icon: `${imageUrl('/img/header/referral.png')}`,
+		icon: `${bannerUrl('/img/header/referral.png')}`,
 		active: 'referral',
 	},
 	{
 		displayKey: 'Label_General_Promotion',
 		pathname: paths.promotion.root,
-		icon: `${imageUrl('/img/mobile-footer/icon-promos.png')}`,
+		icon: `${bannerUrl('/img/mobile-footer/icon-promos.png')}`,
 		active: 'promotion',
 	},
 ] as const satisfies Array<INavMenuProps>

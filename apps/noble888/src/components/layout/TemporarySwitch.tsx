@@ -1,5 +1,5 @@
 'use client'
-import { langId } from 'JF-constants'
+import { langId } from '@noble888/src/data/country'
 import { useGetPathname, useLocaleRouter } from 'JF-core'
 
 export default function TemporarySwitch() {

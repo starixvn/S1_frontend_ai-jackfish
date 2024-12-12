@@ -1,12 +1,12 @@
 'use client'
 
-import { HOME_MENU_DATA } from '@noble888/src/data/home/menu'
 import { ALLOWED_CURRENCIES } from '@noble888/src/data/static/allowedCurrencies'
+import { MENU_DATA } from '@noble888/src/data/static/menu'
 import { useClientTranslation } from '@noble888/src/i18n/client'
 import {
 	LobbyCategoryEnum,
 	MainMenuIcon,
-	MenuActionTypeEnum,
+	MenuActionEnum,
 	MenuIconTypeEnum,
 	paths,
 	PRODUCTS,
@@ -22,7 +22,7 @@ import { useDebounceValue } from 'usehooks-ts'
 import SubMenu from './SubMenu'
 
 const headerMenuCss =
-	'text-base font-semibold hover:text-secondary-500 hover:border-b-4 hover:border-b-secondary-500 py-4 relative'
+	'text-base font-semibold hover:text-secondary-500 hover:border-b-4 hover:border-b-secondary-500 py-4 relative cursor-pointer'
 
 const mainMenuIcon = {
 	// * 舊的版本沒有 i18n 後來說要支援再加
@@ -48,7 +48,7 @@ const Menu = () => {
 	const {
 		userInfo: { currencyId },
 	} = useAuthStore()
-	const { menuList } = useMenu({ homeMenuData: HOME_MENU_DATA })
+	const { menuList } = useMenu({ homeMenuData: MENU_DATA })
 	const { onMenuOpen } = useMenuOpen({})
 	const { fetchLobbyHeader } = useHomeStore()
 	const [menuKey, setMenuKey] = useState<string>()
@@ -78,7 +78,6 @@ const Menu = () => {
 		} = mainMenuItem || {}
 
 		if (display === 'h5') return null
-		const active = debouncedMenuKey === String(category)
 
 		const switchMainMenuIcon = (iconType: MainMenuIcon) => {
 			return mainMenuIcon[iconType] || null
@@ -104,7 +103,6 @@ const Menu = () => {
 			const soccerItem = subMenu?.find(
 				sportSubItem => sportSubItem.tpGameIdNo === PRODUCTS.Soccer.tpGameIdNo,
 			)
-
 			return (
 				<button
 					className={headerMenuCss}
@@ -115,7 +113,7 @@ const Menu = () => {
 						onMenuOpen(
 							{
 								...soccerItem,
-								desktop: { menuActionType: MenuActionTypeEnum.EnterPage },
+								desktop: { menuActionType: MenuActionEnum.EnterPage },
 							} as TDynamicSubMenuItem,
 							{
 								loginCallback: () => <></>,
@@ -142,7 +140,7 @@ const Menu = () => {
 		if (lobbyCategoryId === LobbyCategoryEnum.Exchange) {
 			return (
 				<a
-					className={cn({ active })}
+					className={headerMenuCss}
 					key={lobbyCategoryId}
 					onMouseEnter={() => setMenuKey(category)}
 				>

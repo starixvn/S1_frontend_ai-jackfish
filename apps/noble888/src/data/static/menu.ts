@@ -1,6 +1,6 @@
 import {
 	LobbyCategoryEnum,
-	MenuActionTypeEnum,
+	MenuActionEnum,
 	MenuKeyEnum,
 	PRODUCTS,
 	TMenuData,
@@ -27,11 +27,11 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.CryptoSports,
 				desktop: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -40,11 +40,11 @@ export const MENU_DATA: TMenuData[] = [
 				query: { provider: 'Soccer' },
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -53,11 +53,11 @@ export const MENU_DATA: TMenuData[] = [
 				query: { provider: 'SabaSoccer' },
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -66,11 +66,11 @@ export const MENU_DATA: TMenuData[] = [
 				query: { provider: 'Basketball' },
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -79,11 +79,11 @@ export const MENU_DATA: TMenuData[] = [
 				query: { provider: 'Cricket' },
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -92,11 +92,11 @@ export const MENU_DATA: TMenuData[] = [
 				query: { provider: 'Badminton' },
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -105,11 +105,11 @@ export const MENU_DATA: TMenuData[] = [
 				query: { provider: 'Volleyball' },
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -118,11 +118,11 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.VirtualSports,
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 		],
@@ -146,11 +146,11 @@ export const MENU_DATA: TMenuData[] = [
 				needLogin: true,
 				desktop: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.UseGoToGame,
+					menuActionType: MenuActionEnum.UseGoToGame,
 				},
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.UseGoToGame,
+					menuActionType: MenuActionEnum.UseGoToGame,
 				},
 			},
 		],
@@ -174,11 +174,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.eSport.root,
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -186,11 +186,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.eSport.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -198,11 +198,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.eSport.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 		],
@@ -226,11 +226,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.liveCasino.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -238,11 +238,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.liveCasino.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 
@@ -251,11 +251,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.liveCasino.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -263,11 +263,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.liveCasino.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -275,11 +275,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.liveCasino.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -287,11 +287,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.liveCasino.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -299,11 +299,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.liveCasino.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -311,11 +311,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.liveCasino.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.UseGoToGame,
+					menuActionType: MenuActionEnum.UseGoToGame,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.UseGoToGame,
+					menuActionType: MenuActionEnum.UseGoToGame,
 				},
 			},
 			{
@@ -323,11 +323,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.liveCasino.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -335,11 +335,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.liveCasino.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -347,11 +347,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.liveCasino.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -359,11 +359,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.liveCasino.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -371,11 +371,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.liveCasino.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -383,11 +383,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.liveCasino.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -395,11 +395,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.liveCasino.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -407,11 +407,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.liveCasino.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 		],
@@ -434,9 +434,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.PragmaticPlaySlot,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.PragmaticPlaySlot.tpId,
@@ -446,9 +446,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.Spadegaming,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.Spadegaming.tpId,
@@ -458,9 +458,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.AdvantPlay,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.AdvantPlay.tpId,
@@ -470,9 +470,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.AmigoGaming,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.AmigoGaming.tpId,
@@ -482,9 +482,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.ES,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.ES.tpId,
@@ -494,9 +494,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.Nextspin,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.Nextspin.tpId,
@@ -506,9 +506,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.PGSoft,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.PGSoft.tpId,
@@ -518,9 +518,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.BNG,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.BNG.tpId,
@@ -529,9 +529,9 @@ export const MENU_DATA: TMenuData[] = [
 			{
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.FaChai.tpId,
@@ -542,9 +542,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.MicrogamingSlot,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.MicrogamingSlot.tpId,
@@ -554,9 +554,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.JILI,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.JILI.tpId,
@@ -566,9 +566,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.SPRIBE,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.SPRIBE.tpId,
@@ -578,9 +578,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.Joker,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.Joker.tpId,
@@ -590,9 +590,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.DragonGaming,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.DragonGaming.tpId,
@@ -602,9 +602,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.Pegasus,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.Pegasus.tpId,
@@ -614,11 +614,11 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.NoLimitCity,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
 				pathname: paths.slots.root,
 				query: {
@@ -629,9 +629,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.RedTiger,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.RedTiger.tpId,
@@ -641,9 +641,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.NetEnt,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.NetEnt.tpId,
@@ -653,9 +653,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.CQ9,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.CQ9.tpId,
@@ -665,9 +665,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.PlaynGO,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.PlaynGO.tpId,
@@ -677,9 +677,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.GamePlay,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.GamePlay.tpId,
@@ -689,9 +689,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.YGGDrassil,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.YGGDrassil.tpId,
@@ -701,9 +701,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.AMBPoker,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.AMBPoker.tpId,
@@ -713,9 +713,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.Habanero,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.Habanero.tpId,
@@ -725,9 +725,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.SimplePlay,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.SimplePlay.tpId,
@@ -737,9 +737,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.SkywindSlot,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.SkywindSlot.tpId,
@@ -749,9 +749,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.NewPlayTechSlot,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.NewPlayTechSlot.tpId,
@@ -761,9 +761,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.AskmeSlot,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.AskmeSlot.tpId,
@@ -773,9 +773,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.UuSlots,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.UuSlots.tpId,
@@ -785,9 +785,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.Live22,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.Live22.tpId,
@@ -797,9 +797,9 @@ export const MENU_DATA: TMenuData[] = [
 				...PRODUCTS.FastSpin,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.Link,
+					menuActionType: MenuActionEnum.Link,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 				pathname: paths.slots.root,
 				query: {
 					tpId: PRODUCTS.FastSpin.tpId,
@@ -824,11 +824,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.game.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -836,11 +836,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.game.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -848,11 +848,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.game.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -860,11 +860,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.game.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -872,11 +872,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.game.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -884,11 +884,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.game.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -896,11 +896,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.game.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -908,11 +908,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.game.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -920,11 +920,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.game.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -932,11 +932,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.game.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -944,11 +944,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.game.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -956,11 +956,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.game.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -968,11 +968,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.game.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -980,11 +980,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.game.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -992,11 +992,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.game.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 		],
@@ -1019,11 +1019,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.fishing.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -1031,11 +1031,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.fishing.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -1043,11 +1043,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.fishing.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -1055,11 +1055,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.fishing.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -1067,11 +1067,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.fishing.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -1079,11 +1079,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.fishing.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -1091,11 +1091,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.fishing.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -1103,11 +1103,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.fishing.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -1115,11 +1115,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.fishing.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 		],
@@ -1143,11 +1143,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.fourD.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.UseGoToGame,
+					menuActionType: MenuActionEnum.UseGoToGame,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.UseGoToGame,
+					menuActionType: MenuActionEnum.UseGoToGame,
 				},
 			},
 		],
@@ -1169,11 +1169,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.lottery.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -1181,11 +1181,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.lottery.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -1193,11 +1193,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.lottery.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -1205,11 +1205,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.lottery.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -1217,11 +1217,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.lottery.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -1229,11 +1229,11 @@ export const MENU_DATA: TMenuData[] = [
 				pathname: paths.lottery.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 			{
@@ -1242,20 +1242,20 @@ export const MENU_DATA: TMenuData[] = [
 				query: { provider: 'NumberGame' },
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
-				desktop: { hasLobby: true, menuActionType: MenuActionTypeEnum.Link },
+				desktop: { hasLobby: true, menuActionType: MenuActionEnum.Link },
 			},
 			{
 				...PRODUCTS.TableGame,
 				pathname: paths.lottery.root,
 				h5: {
 					hasLobby: false,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 				desktop: {
 					hasLobby: true,
-					menuActionType: MenuActionTypeEnum.EnterPage,
+					menuActionType: MenuActionEnum.EnterPage,
 				},
 			},
 		],

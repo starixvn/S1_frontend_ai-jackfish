@@ -5,5 +5,5 @@ export default async function MainLayout({
 }: {
 	children: ReactNode
 }) {
-	return <div className='h-screen'>{children}</div>
+	return <div>{children}</div>
 }

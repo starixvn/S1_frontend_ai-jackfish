@@ -1,8 +1,8 @@
 'use client'
 
-import { envCookieNames } from '@brand01/src/i18n/settings'
+import { langLabel, languageGroup } from '@brand01/src/data/country'
 import { setLanguage } from 'JF-api/account/client'
-import { CurrenciesEnum, langLabel, languageGroup } from 'JF-constants'
+import { CurrenciesEnum, ENV_COOKIE_NAMES } from 'JF-constants'
 import { cn, imageUrl, useGetPathname, useLocaleRouter } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
 import { useCookies } from 'react-cookie'
@@ -17,14 +17,14 @@ const Language = ({ className }: ILanguageProps) => {
 	const router = useLocaleRouter()
 	const { locale, currentPath } = useGetPathname()
 	const [cookies] = useCookies([
-		envCookieNames.langId,
-		envCookieNames.currencyId,
+		ENV_COOKIE_NAMES.langId,
+		ENV_COOKIE_NAMES.currencyId,
 	])
 
 	// 切換語系 func.
 	// 已登入呼叫 setLanguage api，未登入 push 觸發 effect 更新 cookie userInfo 資料
 	const handleLangChange = async (langId: string) => {
-		if (cookies[envCookieNames.langId] !== langId) {
+		if (cookies[ENV_COOKIE_NAMES.langId] !== langId) {
 			try {
 				if (isLogin) {
 					// 設定語系後重撈 custProfile

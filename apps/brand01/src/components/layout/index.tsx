@@ -1,5 +1,6 @@
 'use client'
 import { IovationScript } from '@brand01/src/components/thirdPartyScript/thirdPartyJS'
+import { LANG_TO_CURRENCY } from '@brand01/src/data/country'
 import { lobbyRoutes } from '@brand01/src/data/home/lobbyRoutes'
 import { FOOTER_PAYMENT_ICONS } from '@brand01/src/data/layout/footer'
 import {
@@ -23,7 +24,7 @@ interface ILayoutProps {
 const Layout = ({ children, isSignedIn }: ILayoutProps) => {
 	const { currentPath } = useGetPathname()
 	// 初始化
-	useInitEffect({ isSignedIn })
+	useInitEffect({ isSignedIn, langToCurrency: LANG_TO_CURRENCY })
 	// check login interval
 	useOnlineCheckInterval()
 

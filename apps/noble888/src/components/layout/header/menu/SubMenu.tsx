@@ -3,28 +3,27 @@
 import { ALLOWED_CURRENCIES } from '@noble888/src/data/static'
 import { EVENT_DATA } from '@noble888/src/data/static/event'
 import { useClientTranslation } from '@noble888/src/i18n/client'
-import { ISubMenuData } from 'JF-api/game/type'
 import { paths } from 'JF-constants'
 import {
-	cn,
-	imageUrl,
-	isEventPeriod,
 	LocaleLink,
+	bannerUrl,
+	cn,
+	isEventPeriod,
 	useLocaleRouter,
 } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
 import {
-	IMergedMenuData,
+	ISubMenu,
 	MenuIconTypeEnum,
-	TDynamicSubMenuItem,
+	TMenuData,
 } from 'libs/constants/src/lib/types/menu'
 import { includes } from 'lodash-es'
 import { Dispatch, ReactNode, SetStateAction } from 'react'
 
 interface ISubMenuProps {
-	menuList: IMergedMenuData[]
+	menuList: TMenuData[]
 	onMenuOpen: (
-		item: TDynamicSubMenuItem | ISubMenuData,
+		item: ISubMenu,
 		{
 			loginCallback,
 			messageCallBack,
@@ -83,10 +82,18 @@ const SubMenu = ({
 
 						const displayName =
 							subMenuItem?.currencyGameName &&
-							subMenuItem?.currencyGameName[langId] &&
-							subMenuItem?.currencyGameName[langId]
+							subMenuItem?.currencyGameName[
+								langId as keyof typeof subMenuItem.currencyGameName
+							] &&
+							subMenuItem?.currencyGameName[
+								langId as keyof typeof subMenuItem.currencyGameName
+							]
 
-						const { iconType, iconStartTime, iconEndTime } = subMenuItem || {}
+						const {
+							iconType = 0,
+							iconStartTime,
+							iconEndTime,
+						} = subMenuItem || {}
 
 						const switchSubMenuIcon = (iconType: MenuIconTypeEnum) => {
 							return subMenuIcon[iconType] || null
@@ -96,6 +103,7 @@ const SubMenu = ({
 							(isEventPeriod({ start: iconStartTime, end: iconEndTime }) &&
 								switchSubMenuIcon(iconType)) ||
 							null
+
 						return (
 							<button
 								key={subMenuItem?.tpGameIdNo}
@@ -218,7 +226,7 @@ const SubMenu = ({
 			>
 				<img
 					className='bg-center bg-no-repeat'
-					src={imageUrl('/desktop/img/4.0/pomobanner-en.jpg')}
+					src={bannerUrl('/desktop/img/4.0/pomobanner-en.jpg')}
 					alt='promotion banner'
 				/>
 			</LocaleLink>
@@ -230,7 +238,7 @@ const SubMenu = ({
 			>
 				<img
 					className='bg-center bg-no-repeat'
-					src={imageUrl('/desktop/img/4.0/vipdropdown-en-v1.png')}
+					src={bannerUrl('/desktop/img/4.0/vipdropdown-en-v1.png')}
 					alt='vip banner'
 				/>
 			</div>

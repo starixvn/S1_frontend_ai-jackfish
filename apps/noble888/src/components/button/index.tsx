@@ -34,7 +34,7 @@ const btnMobileWidth = {
 	xl: 'w-full',
 }
 
-const buttonHeightClassese = {
+const buttonHeightClass = {
 	sm: 'h-[40px]',
 	md: 'h-[50px]',
 	lg: 'h-[60px]',
@@ -70,7 +70,7 @@ const Button: React.FC<ButtonProps> = ({
 
 	const desktopWidthClass = `lg: ${btnDesktopWidth[size]}`
 	const mobileWidthClass = btnMobileWidth[desktopSize]
-	const btnHeightClass = buttonHeightClassese[h]
+	const btnHeightClass = buttonHeightClass[h]
 
 	const variantClass = isDisabled
 		? variantClasses['disabled']

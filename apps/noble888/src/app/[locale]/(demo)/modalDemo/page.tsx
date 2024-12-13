@@ -45,20 +45,17 @@ const ModalPage = () => {
 	return (
 		<>
 			<Button onClick={onOpen}>Click to Open Modal</Button>
-
 			<Modal
-				size='md'
-				type='confirm'
+				size='popup' // 自訂義尺寸
+				type='default' // popup樣式
 				isOpen={isOpen}
 				onClose={onClose}
 				showCloseButton={true}
-				confirmText='HEHE'       // 自訂義確認按鈕文字
-				onConfirm={handleConfirm} // 自訂義確認行為
+				confirmText='自定義文字跟功能'       // popup type = confirm 自訂義確認按鈕文字
+				onConfirm={handleConfirm} // popup type = confirm 自訂義確認行為
 			>
 				{joke}
 			</Modal>
-
-
 		</>
 	)
 }

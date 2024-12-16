@@ -1,6 +1,6 @@
 'use client'
-import { cn } from 'JF-core'
-import React, { useEffect, useMemo } from 'react'
+import { cn, useGetPathname } from 'JF-core'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbBellRinging2Filled } from 'react-icons/tb'
 import Button from '../button'
@@ -30,27 +30,20 @@ const Modal: React.FC<ModalProps> = ({
 	className,
 	onClose,
 	blockScrollOnMount = true,
-	closeOnEsc = true,
+	closeOnEsc = false,
 	closeOnOverlayClick = false,
 	showCloseButton = true,
-	type,
+	type = 'default',
 	title,
 	icon,
 	confirmText,
 	onConfirm,
 }) => {
 	const { t } = useTranslation()
+	const { locale } = useGetPathname()
 
 	const baseClasses =
 		'relative transform bg-blue-100 shadow-xl transition-transform duration-300 ease-in-out lg:rounded-xl overflow-hidden'
-
-	// const sizeClasses = {
-	// 	popup: 'lg:max-w-[500px] lg:min-h-[230px] mx-6',
-	// 	xs: 'w-full h-full lg:w-[500px] lg:h-[530px]',
-	// 	sm: 'lg:w-[600px] lg:h-[810px] w-[90%] h-auto',
-	// 	md: 'lg:w-[880px] lg:h-[560px] w-[90%] h-auto',
-	// 	lg: 'lg:w-[880px] lg:h-[810px] w-[90%] h-auto',
-	// }
 
 	const sizeClasses = {
 		popup: 'lg:max-w-[500px] lg:min-h-[230px] mx-6',
@@ -59,46 +52,39 @@ const Modal: React.FC<ModalProps> = ({
 		md: 'w-full h-full lg:w-[880px] lg:h-[560px]',
 		lg: 'w-full h-full lg:w-[880px] lg:h-[810px]',
 	}
-	
+
 	const sizeClass = sizeClasses[size]
 
-	const { mergedIcon, mergedTitle } = useMemo(() => {
-		let defaultIcon: React.ReactNode = icon
-		let defaultTitle: string | null = title || null
+	let finalIcon: React.ReactNode = icon
+	let finalTitle: string | null = title || null
+	const bellColor = 'text-yellow-500'
+	const defaultConfirmText = confirmText || t('Label_General_Yes')
 
-		const bellColor = 'text-yellow-500'
-
-		switch (type) {
-			case 'info':
-				defaultIcon = icon ?? (
-					<TbBellRinging2Filled className={bellColor} size={40} />
-				)
-				defaultTitle = title || t('Label_General_Information')
-				break
-			case 'error':
-				defaultIcon = icon ?? (
-					<TbBellRinging2Filled className={bellColor} size={40} />
-				)
-				defaultTitle = title || t('Label_Error_Oops')
-				break
-			case 'confirm':
-				defaultIcon = icon ?? (
-					<TbBellRinging2Filled className={bellColor} size={40} />
-				)
-				defaultTitle = title || t('Label_General_Oh')
-				break
-			case 'default':
-			default:
-				defaultIcon = icon || null
-				defaultTitle = title || null
-				break
-		}
-
-		return {
-			mergedIcon: defaultIcon,
-			mergedTitle: defaultTitle,
-		}
-	}, [type, title, icon, t])
+	switch (type) {
+		case 'info':
+			finalIcon = icon ?? (
+				<TbBellRinging2Filled className={bellColor} size={40} />
+			)
+			finalTitle = title || t('Label_General_Information')
+			break
+		case 'error':
+			finalIcon = icon ?? (
+				<TbBellRinging2Filled className={bellColor} size={40} />
+			)
+			finalTitle = title || t('Label_Error_Oops')
+			break
+		case 'confirm':
+			finalIcon = icon ?? (
+				<TbBellRinging2Filled className={bellColor} size={40} />
+			)
+			finalTitle = title || t('Label_General_Oh')
+			break
+		case 'default':
+		default:
+			finalIcon = icon || null
+			finalTitle = title || null
+			break
+	}
 
 	useEffect(() => {
 		if (blockScrollOnMount && isOpen) {
@@ -121,8 +107,6 @@ const Modal: React.FC<ModalProps> = ({
 
 	if (!isOpen) return null
 
-	const defaultConfirmText = confirmText || t('Label_General_Yes')
-
 	return (
 		<div
 			className='bg-primary-900/40 fixed inset-0 z-50 flex items-center justify-center'
@@ -135,16 +119,16 @@ const Modal: React.FC<ModalProps> = ({
 				className={cn(baseClasses, sizeClass, className, 'flex flex-col')}
 				onClick={e => e.stopPropagation()}
 			>
-				{(mergedIcon || mergedTitle) && (
+				{(finalIcon || finalTitle) && (
 					<div className='relative flex items-center justify-between bg-blue-100 p-3'>
 						<div className='flex w-full flex-col items-center justify-center'>
-							{mergedIcon && <div className='mt-4'>{mergedIcon}</div>}
-							{mergedTitle && (
+							{finalIcon && <div className='mt-4'>{finalIcon}</div>}
+							{finalTitle && (
 								<div
 									id='modal-title'
 									className='mt-3 text-center text-lg font-extrabold'
 								>
-									{mergedTitle}
+									{finalTitle}
 								</div>
 							)}
 						</div>
@@ -156,7 +140,10 @@ const Modal: React.FC<ModalProps> = ({
 						type='button'
 						onClick={onClose}
 						className={cn(
-							'absolute right-3 top-3 inline-flex items-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900',
+							locale === 'ar'
+								? 'absolute left-3 top-3'
+								: 'absolute right-3 top-3',
+							'inline-flex items-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900',
 							type === 'error' || type === 'info' || type === 'confirm'
 								? 'lg:hidden'
 								: '',
@@ -182,7 +169,7 @@ const Modal: React.FC<ModalProps> = ({
 					<div
 						className={cn(
 							'text-center',
-							!mergedTitle && !mergedIcon && 'mt-8', // 當沒有 title 和 icon 時，加入 mt-8
+							!finalTitle && !finalIcon && 'mt-8', // 當沒有 title 和 icon 時，加入 mt-8
 						)}
 					>
 						{children}
@@ -190,20 +177,16 @@ const Modal: React.FC<ModalProps> = ({
 				</div>
 
 				{type === 'confirm' && (
-					<div className='flex justify-center space-x-4 p-4'>
+					<div className='flex justify-center gap-4 p-4'>
 						<Button
-							className={cn(
-								'bg-primary-600 font-bold text-blue-100 hover:bg-red-600',
-							)}
+							className='bg-primary-600 font-bold text-blue-100 hover:bg-red-600'
 							onClick={onConfirm}
 						>
 							{defaultConfirmText}
 						</Button>
 						<Button
 							onClick={onClose}
-							className={cn(
-								'text-black-100 bg-gray-500 font-bold text-gray-700 hover:bg-gray-800 hover:text-gray-100',
-							)}
+							className='text-black-100 bg-gray-500 font-bold text-gray-700 hover:bg-gray-800 hover:text-gray-100'
 						>
 							{t('Label_General_No')}
 						</Button>
@@ -211,7 +194,7 @@ const Modal: React.FC<ModalProps> = ({
 				)}
 
 				{type === 'error' && (
-					<div className='flex justify-center space-x-4 p-4'>
+					<div className='flex justify-center gap-4 p-4'>
 						<Button
 							className={cn(
 								'bg-primary-600 font-bold text-blue-100 hover:bg-red-600',
@@ -224,7 +207,7 @@ const Modal: React.FC<ModalProps> = ({
 				)}
 
 				{type === 'info' && (
-					<div className='flex justify-center space-x-4 p-4'>
+					<div className='flex justify-center gap-4 p-4'>
 						<Button
 							className={cn(
 								'bg-primary-600 font-bold text-blue-100 hover:bg-red-600',

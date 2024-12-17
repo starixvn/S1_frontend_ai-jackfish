@@ -1,8 +1,8 @@
 'use client'
 
 import { useClientTranslation } from '@noble888/src/i18n/client'
-import { footerImgName, IFooterData } from 'JF-constants'
-import { bannerUrl } from 'JF-core'
+import { footerImgName, IFooterData, paths } from 'JF-constants'
+import { bannerUrl, cn, useGetPathname } from 'JF-core'
 import { useAuthStore, useSocialChannelStore } from 'JF-operations'
 import { ISeoData } from 'libs/operations/src/lib/seo/type'
 import { debounce, upperFirst } from 'lodash-es'
@@ -52,6 +52,7 @@ const FooterCenter = ({
 	paymentMethodsByCurrencyId,
 }: FooterCenterProps) => {
 	const { t } = useClientTranslation()
+	const { currentPath } = useGetPathname()
 	const {
 		userInfo: { currencyId, langId },
 	} = useAuthStore()
@@ -73,7 +74,11 @@ const FooterCenter = ({
 	}
 
 	return (
-		<div className='bg-primary-900 text-primary-50 px-10 pt-6 lg:px-28'>
+		<div
+			className={cn('bg-primary-900 text-primary-50 px-10 pt-6 lg:px-28', {
+				'hidden lg:block': paths.home.root !== currentPath,
+			})}
+		>
 			{/* footer-top */}
 			<div className='grid grid-cols-1 lg:grid-cols-4 lg:border-b lg:border-gray-500 lg:border-opacity-50 lg:pb-6'>
 				<div className='col-span-3 hidden gap-20 text-sm font-semibold lg:flex'>

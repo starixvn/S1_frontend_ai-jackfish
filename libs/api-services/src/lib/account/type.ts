@@ -107,3 +107,10 @@ export interface ISetChangePasswordArgs {
 	oldPassword: string
 	newPassword: string
 }
+
+export interface IMainWalletInfoData {
+	balance: number
+	lastLoginTime: string
+	lastTransaction: string
+	isHideBalance: boolean
+}

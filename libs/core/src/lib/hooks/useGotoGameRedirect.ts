@@ -8,7 +8,6 @@ import { useEffect } from 'react'
 import { getDeviceType } from '../utils/client'
 
 export const useGotoGameRedirect = () => {
-	// const searchParams = useSearchParams()
 	const pathname = usePathname()
 	const router = useRouter()
 

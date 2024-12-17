@@ -21,7 +21,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
 	return (
 		<html dir={locale === 'ar' ? 'rtl' : 'ltr'}>
 			<body>
-				<Layout isSignedIn={false}>{children}</Layout>
+				<Layout isSignedIn={true}>{children}</Layout>
 			</body>
 		</html>
 	)

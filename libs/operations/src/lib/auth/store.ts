@@ -36,7 +36,7 @@ const defaultWallet = {
  */
 const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 	isLoading: false,
-	isLogin: false,
+	isLogin: true,
 	userInfo: defaultUserInfo,
 	wallet: defaultWallet,
 	setUserInfo: newUserInfo => set({ userInfo: newUserInfo }),
@@ -135,6 +135,14 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 				promoCategoryId,
 			},
 		})
+
+		set({ isLoading: false })
+	},
+
+	getNobleWalletInfo: async () => {
+		set({ isLoading: true })
+
+		// const data = await getMainWalletInfo()
 
 		set({ isLoading: false })
 	},

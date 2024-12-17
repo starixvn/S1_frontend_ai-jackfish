@@ -1,5 +1,6 @@
 'use client'
 
+import { useClientTranslation } from '@noble888/src/i18n/client'
 import { bannerUrl } from 'JF-core'
 import { ISeoData } from 'libs/operations/src/lib/seo/type'
 import Script from 'next/script'
@@ -11,6 +12,7 @@ interface LicenseProps {
 }
 
 const License = ({ seoData, defaultScript }: LicenseProps) => {
+	const { t } = useClientTranslation()
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [currentDomain, setCurrentDomain] = useState('')
 
@@ -19,15 +21,15 @@ const License = ({ seoData, defaultScript }: LicenseProps) => {
 			setCurrentDomain(window.location.href)
 		}
 	}, [])
-	const showLicenseLogo = true
-	// TODO:
-	// const showLicenseLogo = seoData?.activeDomain ?? false
+	const showLicenseLogo = seoData?.activeDomain ?? false
 	const tobiqueSealId = seoData?.script ?? defaultScript
 
 	return (
 		<>
 			<div className='flex flex-col justify-center pb-4 lg:justify-start lg:pb-0'>
-				<h3 className='mx-auto font-bold lg:mx-0 lg:mb-2'>Gaming License</h3>
+				<h3 className='mx-auto font-bold lg:mx-0 lg:mb-2'>
+					{t('Label_Gaming_License')}
+				</h3>
 				{/* Add gaming license icons here */}
 				{showLicenseLogo && (
 					<div className='flex items-center justify-center gap-x-2 lg:justify-start'>

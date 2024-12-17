@@ -1,8 +1,8 @@
 'use client'
 
 import { useClientTranslation } from '@noble888/src/i18n/client'
-import { IFooterData } from 'JF-constants'
-import { cn } from 'JF-core'
+import { IFooterData, paths } from 'JF-constants'
+import { cn, useGetPathname } from 'JF-core'
 import { useAuthStore } from 'libs/operations/src/lib/auth/store'
 import { Fragment, useState } from 'react'
 
@@ -13,6 +13,7 @@ interface FooterBottomProps {
 
 const FooterBottom = ({ isLogin, promotionTextList }: FooterBottomProps) => {
 	const { t } = useClientTranslation()
+	const { currentPath } = useGetPathname()
 	const {
 		userInfo: { currencyId },
 	} = useAuthStore()
@@ -24,6 +25,7 @@ const FooterBottom = ({ isLogin, promotionTextList }: FooterBottomProps) => {
 				'bg-info-900 text-primary-50 px-3 py-6 text-start lg:px-28',
 				{
 					'pb-28': isLogin,
+					'hidden lg:block': paths.home.root !== currentPath,
 				},
 			)}
 		>

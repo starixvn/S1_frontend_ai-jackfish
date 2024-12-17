@@ -29,4 +29,5 @@ export interface IAuthAction {
 	getUserInfo: () => Promise<void>
 	resetAuth: () => void
 	getWalletInfo: () => Promise<void>
+	getNobleWalletInfo: () => Promise<void>
 }

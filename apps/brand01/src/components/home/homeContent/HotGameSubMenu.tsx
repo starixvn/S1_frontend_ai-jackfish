@@ -10,6 +10,11 @@ const HotGameSubMenu = () => {
 	const { hotGameList } = useHomeStore()
 	const { onEnterPage } = useMenuOpen({})
 
+
+	console.log(hotGameList)
+	console.log('123')
+
+
 	return (
 		<>
 			{hotGameList?.map(hotGameItem => {

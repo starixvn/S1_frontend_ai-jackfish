@@ -11,6 +11,11 @@ const SubMenu = () => {
 	const { t } = useClientTranslation(locale)
 	const { onMenuOpen } = useMenuOpen({ isPathParams: true })
 	const { subMenuData } = useHomeStore()
+
+
+	console.log(subMenuData)
+
+	
 	return (
 		<>
 			{subMenuData?.map(item => {

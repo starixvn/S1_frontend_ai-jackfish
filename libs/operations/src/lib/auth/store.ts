@@ -1,17 +1,16 @@
 // authStore.ts
-import { langId } from '@noble888/src/data/country'
 import { getWalletInfo } from 'JF-api/account/client'
 import { getUserInfo } from 'JF-api/accountStrict/client'
-import { signInPhone, signOut } from 'JF-api/auth/client'
-import { CURRENCY_NAME_BY_CURRENCY, CurrenciesEnum } from 'JF-constants'
+import { signInPhone, signInUserName, signOut } from 'JF-api/auth/client'
+import { CURRENCY_NAME_BY_CURRENCY } from 'JF-constants'
 import { numberFormat } from 'JF-core'
 import { create } from 'zustand'
 import { IAuthAction, IAuthState } from './type'
 
 const defaultUserInfo = {
 	userName: 'guest',
-	langId: langId.en,
-	currencyId: CurrenciesEnum.USD,
+	langId: String(process.env.NEXT_PUBLIC_DEFAULT_LANG),
+	currencyId: Number(process.env.NEXT_PUBLIC_DEFAULT_CURRENCY),
 }
 const defaultWalletInfo = {
 	balance: 0,
@@ -40,6 +39,32 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 	userInfo: defaultUserInfo,
 	wallet: defaultWallet,
 	setUserInfo: newUserInfo => set({ userInfo: newUserInfo }),
+	onSignInUserName: async ({ userName, password }) => {
+		if (typeof window === 'undefined') return
+
+		const url = window.location.origin
+		const { platform, userAgent } = navigator
+		const screen = `${window.screen.width}:${window.screen.height}:${window.screen.colorDepth}`
+		const args = {
+			userName,
+			userpwd: password,
+			isPersistent: false,
+			url,
+			platform,
+			userAgent,
+			screen,
+		}
+
+		set({ isLoading: true })
+
+		try {
+			await signInUserName(args)
+			await get().getUserInfo()
+		} finally {
+			set({ isLoading: false })
+		}
+		return { langId: get().userInfo.langId }
+	},
 	onSignInPhone: async ({ areaCode, phoneNo, password }) => {
 		if (typeof window === 'undefined') return
 

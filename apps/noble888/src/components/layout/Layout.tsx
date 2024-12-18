@@ -9,9 +9,9 @@ import {
 	META_DATA,
 	VIP_CLUB_IMAGES,
 } from '@noble888/src/data/static'
-import { useInitEffect } from 'JF-core'
+import { useGetPathname, useInitEffect } from 'JF-core'
 import { useStaticDataStore } from 'JF-operations'
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useEffect } from 'react'
 import Footer from './footer'
 import Header from './header'
 
@@ -22,10 +22,7 @@ export default function Layout({
 	children: ReactNode
 	isSignedIn: boolean
 }) {
-	// TODO: to be removed
-	const [isLogin, setIsLogin] = useState(false)
-	// eslint-disable-next-line no-console
-	console.log({ isSignedIn })
+	const { locale } = useGetPathname()
 
 	// init 靜態檔案
 	const { initStaticData } = useStaticDataStore()
@@ -42,11 +39,16 @@ export default function Layout({
 
 	// 初始化
 	useInitEffect({ isSignedIn, langToCurrency: LANG_TO_CURRENCY })
+
 	return (
-		<div className='flex h-full w-full flex-col bg-white'>
-			<Header isLogin={isLogin} setIsLogin={setIsLogin} />
-			<main className='h-fit flex-grow'>{children}</main>
-			<Footer isLogin={isLogin} />
-		</div>
+		<html dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+			<body>
+				<div className='flex h-full w-full flex-col bg-white'>
+					<Header isLogin={isSignedIn} />
+					<main className='h-fit flex-grow'>{children}</main>
+					<Footer isLogin={isSignedIn} />
+				</div>
+			</body>
+		</html>
 	)
 }

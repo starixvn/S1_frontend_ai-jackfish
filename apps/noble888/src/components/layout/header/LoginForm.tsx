@@ -30,7 +30,11 @@ const LoginForm = () => {
 
 	// 定義 Zod schema
 	const formSchema = z.object({
-		userName: z.string().min(1, { message: t('Label_General_UsernameReq') }),
+		userName: z
+			.string()
+			.min(1, { message: t('Label_General_UsernameReq') })
+			.min(6, { message: t('Label_General_UserNameLength') })
+			.max(18, { message: t('Label_General_UserNameLength') }),
 		password: z
 			.string()
 			.min(1, { message: t('Label_General_PasswordRequired') }),

@@ -11,21 +11,12 @@ import {
 	useLocaleRouter,
 } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
-import { TFunction } from 'i18next'
 import { useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { useBoolean, useOnClickOutside } from 'usehooks-ts'
 import { z } from 'zod'
 import Button from '../../button'
 import Country from './Country'
-
-const createFormSchema = (t: TFunction<string, undefined>) =>
-	z.object({
-		userName: z.string().min(1, { message: t('Label_General_UsernameReq') }),
-		password: z
-			.string()
-			.min(1, { message: t('Label_General_PasswordRequired') }),
-	})
 
 const LoginForm = () => {
 	const { t } = useClientTranslation()
@@ -36,8 +27,15 @@ const LoginForm = () => {
 	const { value: isActive, toggle, setFalse } = useBoolean(false)
 
 	const { onSignInUserName } = useAuthStore()
+
 	// 定義 Zod schema
-	const formSchema = createFormSchema(t)
+	const formSchema = z.object({
+		userName: z.string().min(1, { message: t('Label_General_UsernameReq') }),
+		password: z
+			.string()
+			.min(1, { message: t('Label_General_PasswordRequired') }),
+	})
+
 	const {
 		formState: { errors },
 		register,

@@ -1,24 +1,34 @@
 'use client'
 import Button from '@noble888/src/components/button'
-import { useModalStore } from 'JF-operations'
+import useModalStore from 'libs/operations/src/lib/modal/store'
+
+const TestContent = () => {
+  return <div>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quis, earum nemo ex corrupti minus aliquid cum quo odio, dolorum perspiciatis! Voluptatibus, iusto. Labore debitis explicabo sapiente nisi nobis. Consequatur.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quis, earum nemo ex corrupti minus aliquid cum quo odio, dolorum perspiciatis! Voluptatibus, iusto. Labore debitis explicabo sapiente nisi nobis. Consequatur.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quis, earum nemo ex corrupti minus aliquid cum quo odio, dolorum perspiciatis! Voluptatibus, iusto. Labore debitis explicabo sapiente nisi nobis. Consequatur.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quis, earum nemo ex corrupti minus aliquid cum quo odio, dolorum perspiciatis! Voluptatibus, iusto. Labore debitis explicabo sapiente nisi nobis. Consequatur.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quis, earum nemo ex corrupti minus aliquid cum quo odio, dolorum perspiciatis! Voluptatibus, iusto. Labore debitis explicabo sapiente nisi nobis. Consequatur.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quis, earum nemo ex corrupti minus aliquid cum quo odio, dolorum perspiciatis! Voluptatibus, iusto. Labore debitis explicabo sapiente nisi nobis. Consequatur.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quis, earum nemo ex corrupti minus aliquid cum quo odio, dolorum perspiciatis! Voluptatibus, iusto. Labore debitis explicabo sapiente nisi nobis. Consequatur.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quis, earum nemo ex corrupti minus aliquid cum quo odio, dolorum perspiciatis! Voluptatibus, iusto. Labore debitis explicabo sapiente nisi nobis. Consequatur.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quis, earum nemo ex corrupti minus aliquid cum quo odio, dolorum perspiciatis! Voluptatibus, iusto. Labore debitis explicabo sapiente nisi nobis. Consequatur.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quis, earum nemo ex corrupti minus aliquid cum quo odio, dolorum perspiciatis! Voluptatibus, iusto. Labore debitis explicabo sapiente nisi nobis. Consequatur.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quis, earum nemo ex corrupti minus aliquid cum quo odio, dolorum perspiciatis! Voluptatibus, iusto. Labore debitis explicabo sapiente nisi nobis. Consequatur.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quis, earum nemo ex corrupti minus aliquid cum quo odio, dolorum perspiciatis! Voluptatibus, iusto. Labore debitis explicabo sapiente nisi nobis. Consequatur.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quis, earum nemo ex corrupti minus aliquid cum quo odio, dolorum perspiciatis! Voluptatibus, iusto. Labore debitis explicabo sapiente nisi nobis. Consequatur.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quis, earum nemo ex corrupti minus aliquid cum quo odio, dolorum perspiciatis! Voluptatibus, iusto. Labore debitis explicabo sapiente nisi nobis. Consequatur.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quis, earum nemo ex corrupti minus aliquid cum quo odio, dolorum perspiciatis! Voluptatibus, iusto. Labore debitis explicabo sapiente nisi nobis. Consequatur.
+  </div>
+}
 
 const ModalPage = () => {
   const { openModal, closeModal } = useModalStore()
 
   const handleOpen = async () => {
-    let joke = '載入中...'
-    try {
-      const response = await fetch('https://v2.jokeapi.dev/joke/Any')
-      const data = await response.json()
-      joke = data.type === 'single' ? data.joke : `${data.setup} - ${data.delivery}`
-    } catch {
-      joke = '無法載入笑話，請稍後再試！'
-    }
-
     openModal({
-      type: 'confirm',
-      size: 'popup',
-      content: '123123',
+      size:'xs',
+      content: <TestContent />,
       confirmText: '自定義文字與功能',
       onConfirm: () => {
         alert('test')

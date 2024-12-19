@@ -1,6 +1,6 @@
 'use client'
-import Modal from '@noble888/src/components/modal' // 引用你剛剛修改後的 Modal
-import { useModalStore } from 'JF-operations'
+import Modal from '@noble888/src/components/modal'
+import useModalStore from 'libs/operations/src/lib/modal/store'
 
 const GlobalModal = () => {
 	const {

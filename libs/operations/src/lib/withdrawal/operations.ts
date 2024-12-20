@@ -5,7 +5,7 @@ import {
 	useSubmitLocalBankWithdrawalMutation,
 } from 'JF-api/payment/queries'
 import { isConvert } from 'JF-core'
-import { useAuthStore } from '../auth/store'
+import { useAuthStore } from '../auth'
 import { useWithdrawalStore } from './store'
 
 export const useWithdrawalOperations = () => {

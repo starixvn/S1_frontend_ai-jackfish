@@ -1,11 +1,11 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { IAxiosError, IAxiosResponse, fetcher } from 'JF-api/baseApi'
 import {
-	ISubmitWithdrawalArgs,
 	KycStatusEnum,
-	TWithdrawalLimitData,
-	TWithdrawalRecentInfoData,
-	TWithdrawalSetting,
+	type ISubmitWithdrawalArgs,
+	type TWithdrawalLimitData,
+	type TWithdrawalRecentInfoData,
+	type TWithdrawalSetting,
 } from './type'
 import { paymentApiUrl } from './url'
 
@@ -19,6 +19,9 @@ const useWithdrawalLimitQuery = () => {
 	})
 }
 
+/**
+ * 用來撈取當前帳戶可用的出金方式選項，從後台可以手動關閉特定出金方式。
+ */
 const useWithdrawalBlockSettingQuery = () => {
 	return useQuery({
 		queryKey: ['withdrawal', 'blockSetting'],
@@ -27,6 +30,9 @@ const useWithdrawalBlockSettingQuery = () => {
 	})
 }
 
+/**
+ * 取得近期提款資料，檢視是否有進行中的存款
+ */
 const useWithdrawalRecentInfoQuery = () => {
 	return useQuery({
 		queryKey: ['withdrawal', 'recentInfo'],
@@ -71,6 +77,9 @@ const useKycStatusQuery = () => {
 	})
 }
 
+/**
+ * 送Local bank 單
+ */
 const useSubmitLocalBankWithdrawalMutation = () => {
 	return useMutation({
 		mutationFn: (args: ISubmitWithdrawalArgs) =>
@@ -78,6 +87,9 @@ const useSubmitLocalBankWithdrawalMutation = () => {
 	})
 }
 
+/**
+ * 取消
+ */
 const useCancelWithdrawalMutation = () => {
 	return useMutation({
 		mutationFn: (transId: string) =>

@@ -12,6 +12,7 @@ import {
 import { useInitEffect } from 'JF-core'
 import { useStaticDataStore } from 'JF-operations'
 import { ReactNode, useEffect, useState } from 'react'
+import GlobalModal from '../modal/GlobalModal'
 import Footer from './footer'
 import Header from './header'
 
@@ -43,10 +44,13 @@ export default function Layout({
 	// 初始化
 	useInitEffect({ isSignedIn, langToCurrency: LANG_TO_CURRENCY })
 	return (
-		<div className='flex h-full w-full flex-col bg-white'>
-			<Header isLogin={isLogin} setIsLogin={setIsLogin} />
-			<main className='h-fit flex-grow'>{children}</main>
-			<Footer isLogin={isLogin} />
-		</div>
+		<>
+			<GlobalModal />
+			<div className='flex h-full w-full flex-col bg-white'>
+				<Header isLogin={isLogin} setIsLogin={setIsLogin} />
+				<main className='h-fit flex-grow'>{children}</main>
+				<Footer isLogin={isLogin} />
+			</div>
+		</>
 	)
 }

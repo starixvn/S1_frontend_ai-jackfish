@@ -204,6 +204,7 @@ const Input = ({
 							'placeholder:text-primary-700',
 							'focus:outline-none',
 							'disabled:bg-neutral-200',
+							'read-only:cursor-default',
 							className,
 						)}
 						type={password ? passwordType() : type}

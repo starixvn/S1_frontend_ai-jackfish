@@ -38,7 +38,7 @@ const DateSelector: React.FC<IDateSelectorProps> = ({
 	return (
 		<div
 			className={cn(
-				'flex w-full items-center justify-between rounded-[5px] px-2.5 py-1.5',
+				'flex h-full w-full items-center justify-between rounded-[5px] px-2.5 py-1.5',
 				'border-primary-500 border border-solid',
 				className,
 			)}

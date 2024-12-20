@@ -57,33 +57,29 @@ export const fetcher = async <Response = undefined, Data = any, Params = any>(
 	params?: Params,
 	headers?: object,
 ): Promise<IAxiosResponse<Response>> => {
-	try {
-		const response = await baseAxios({
-			url,
-			method,
-			headers: { ...preHeaders, ...headers },
-			...(data && { data }),
-			...(params && { params }),
-		})
-		const axiosData: IAxiosResponse<Response> = response.data
+	const response = await baseAxios({
+		url,
+		method,
+		headers: { ...preHeaders, ...headers },
+		...(data && { data }),
+		...(params && { params }),
+	})
+	const axiosData: IAxiosResponse<Response> = response.data
 
-		// 非 0 就視為錯誤
-		if (axiosData?.errorCode !== 0) {
-			const error: IAxiosError = new Error()
-			error.message = axiosData?.message
-			error.status = response.status
-			error.statusText = response.statusText
-			error.errorCode = axiosData?.errorCode
-			error.data = axiosData?.data
-			error.rawMessage = axiosData?.rawMessage
+	// 非 0 就視為錯誤
+	if (axiosData?.errorCode !== 0) {
+		const error: IAxiosError = new Error()
+		error.message = axiosData?.message
+		error.status = response.status
+		error.statusText = response.statusText
+		error.errorCode = axiosData?.errorCode
+		error.data = axiosData?.data
+		error.rawMessage = axiosData?.rawMessage
 
-			throw error
-		}
-
-		return axiosData
-	} catch (axiosError) {
-		throw axiosError as IAxiosError
+		throw error
 	}
+
+	return axiosData
 }
 
 export function setServerSideHeaders(context: GetServerSidePropsContext): void {

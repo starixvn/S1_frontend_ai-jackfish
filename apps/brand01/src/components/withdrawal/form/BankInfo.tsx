@@ -1,15 +1,11 @@
 import { cn } from 'JF-core'
-import { useWithdrawalStore } from 'JF-operations'
-import { head } from 'lodash-es'
+import { useWithdrawalInfo, useWithdrawalStore } from 'JF-operations'
 import React from 'react'
 
-// 顯示銀行戶頭資料，因不可刪減銀行卡，僅顯示第一筆
+// 顯示已選擇的卡片
 export const BankInfo: React.FC = () => {
-	const {
-		bankData: { bankInfoDetail },
-		accountName,
-	} = useWithdrawalStore()
-	const bankItem = head(bankInfoDetail)
+	const { accountName } = useWithdrawalInfo()
+	const { selectedBankItem: bankItem } = useWithdrawalStore()
 
 	if (!bankItem) return null
 

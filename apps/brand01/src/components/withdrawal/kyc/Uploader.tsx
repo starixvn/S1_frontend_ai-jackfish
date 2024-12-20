@@ -1,20 +1,22 @@
 import Button from '@brand01/src/components/button'
 import { useClientTranslation } from '@brand01/src/i18n/client'
+import { useQueryClient } from '@tanstack/react-query'
 import { uploadCustPhoto } from 'JF-api/accountStrict/client'
 import { useGetPathname, useImageUploader } from 'JF-core'
-import { useWithdrawalStore } from 'JF-operations'
 import { toast } from 'react-toastify'
 
 export const Uploader = () => {
 	const { locale } = useGetPathname()
+	const queryClient = useQueryClient()
 	const { t } = useClientTranslation(locale)
-	const { fetchWithdrawalInfo } = useWithdrawalStore()
 	const { onSubmit, file, onChangeInput } = useImageUploader(uploadCustPhoto)
 
 	const handleKycSubmit = async () => {
 		try {
 			await onSubmit()
-			await fetchWithdrawalInfo()
+			await queryClient.invalidateQueries({
+				queryKey: [['withdrawal'], ['payment']],
+			})
 			toast.success(t('Label_General_UpdateSuccessful'))
 		} catch (error) {
 			toast.error((error as Error).message)

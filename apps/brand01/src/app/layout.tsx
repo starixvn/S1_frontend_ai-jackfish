@@ -1,4 +1,5 @@
 import { fallbackLng, languages } from '@brand01/src/i18n/settings'
+import { QueryProvider } from 'JF-core'
 import { toUpper } from 'lodash-es'
 import NextTopLoader from 'nextjs-toploader'
 import 'react-toastify/dist/ReactToastify.css'
@@ -43,7 +44,7 @@ export default function RootLayout({
 					color='rgb(var(--color-primary-300))'
 					showSpinner={false}
 				/>
-				{children}
+				<QueryProvider>{children}</QueryProvider>
 			</body>
 		</html>
 	)

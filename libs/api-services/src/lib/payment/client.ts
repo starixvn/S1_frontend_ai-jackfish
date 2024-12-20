@@ -95,7 +95,7 @@ export const getWithdrawalRecentInfo = async (): Promise<
 }
 
 export const cancelWithdrawalReq = async (transId: string) => {
-	await fetcher<{ transId: string }>(paymentApiUrl.setWithdrawalCancel, {
+	await fetcher<null, { transId: string }>(paymentApiUrl.setWithdrawalCancel, {
 		transId,
 	})
 }

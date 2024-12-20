@@ -1,5 +1,9 @@
-import { cn, imageUrl, useGetBankInfo } from 'JF-core'
-import { useAuthStore, useSocialChannelStore } from 'JF-operations'
+import { cn, imageUrl } from 'JF-core'
+import {
+	useAuthStore,
+	useGetBankInfo,
+	useSocialChannelStore,
+} from 'JF-operations'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SyncLoader } from 'react-spinners'

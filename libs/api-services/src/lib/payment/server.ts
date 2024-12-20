@@ -1,13 +1,13 @@
 'use server'
 
 import { baseAxios } from 'JF-api/baseApi'
+import { IPayInfoListAllData } from 'JF-api/payment/type'
 import { paymentApiUrl } from 'JF-api/payment/url'
 import { AxiosRequestConfig } from 'axios'
 import { cookies } from 'next/headers'
-import { PayInfoListAllData } from 'JF-api/payment/type'
 export async function getPayInfoListAll(
 	config?: AxiosRequestConfig,
-): Promise<PayInfoListAllData | null> {
+): Promise<IPayInfoListAllData | null> {
 	const cookieStore = cookies()
 	const allCookies = cookieStore.getAll()
 	const cookieHeader = allCookies

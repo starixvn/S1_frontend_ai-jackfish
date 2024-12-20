@@ -114,3 +114,13 @@ export interface IMainWalletInfoData {
 	lastTransaction: string
 	isHideBalance: boolean
 }
+
+export interface TCustVIPProgress {
+	currentVipLevel: number
+	upDeposit: null | number
+	actualDeposit: number
+	downDeposit: null | number
+	downTurnover: null | number
+	upTurnover: null | number
+	turnoverSummary: null | number
+}

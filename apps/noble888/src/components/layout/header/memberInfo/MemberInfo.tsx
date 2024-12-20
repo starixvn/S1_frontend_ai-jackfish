@@ -45,14 +45,6 @@ const MemberInfo = () => {
 
 			{/* desktop */}
 			<div className='hidden gap-4 lg:flex'>
-				<div className='h-10 w-10'>
-					<img
-						src={bannerUrl('/desktop/img/4.0/header-vintage.png')}
-						alt='VIP Badge'
-						className='h-full w-full'
-					/>
-				</div>
-
 				<Profile />
 
 				<Link href={paths.message.root} className='h-7 w-7'>

@@ -6,13 +6,13 @@ import {
 	ISetChangePasswordArgs,
 	IWalletInfoData,
 	TCustBankInfoData,
+	TCustVIPProgress,
 	TEWalletData,
 	TReferralSettingDetailData,
 	TReferralSummaryData,
 	TWithdrawalAvailableBalanceData,
 } from './type'
 import { accountApiUrl } from './url'
-
 
 export const onlineCheck = async () => {
 	try {
@@ -132,5 +132,19 @@ export const changePassword = async (args: ISetChangePasswordArgs) => {
 		)
 	} catch (error) {
 		throw error as IAxiosError
+	}
+}
+
+/**
+ * 撈取用戶VIP等級資料
+ */
+export const getCustVIPProgress = async (): Promise<TCustVIPProgress> => {
+	try {
+		const { data } = await fetcher<TCustVIPProgress>(
+			accountApiUrl.getCustVIPProgress,
+		)
+		return data
+	} catch (e) {
+		return {} as TCustVIPProgress
 	}
 }

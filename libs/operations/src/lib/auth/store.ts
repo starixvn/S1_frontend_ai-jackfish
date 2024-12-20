@@ -1,10 +1,11 @@
 // authStore.ts
 import { langId } from '@noble888/src/data/country'
-import { getWalletInfo } from 'JF-api/account/client'
+import { getCustVIPProgress, getWalletInfo } from 'JF-api/account/client'
 import { getUserInfo } from 'JF-api/accountStrict/client'
 import { signInPhone, signOut } from 'JF-api/auth/client'
 import { CURRENCY_NAME_BY_CURRENCY, CurrenciesEnum } from 'JF-constants'
 import { numberFormat } from 'JF-core'
+import { toast } from 'react-toastify'
 import { create } from 'zustand'
 import { IAuthAction, IAuthState } from './type'
 
@@ -29,6 +30,15 @@ const defaultWallet = {
 	turnover: 0,
 	promoCategoryId: 0,
 }
+const defaultVIPProgress = {
+	actualDeposit: 0,
+	currentVipLevel: 1,
+	downDeposit: null,
+	downTurnover: null,
+	turnoverSummary: 0,
+	upDeposit: 0,
+	upTurnover: 0,
+}
 
 /**
  * @defaultWalletInfo api取回的資料格式
@@ -39,6 +49,7 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 	isLogin: true,
 	userInfo: defaultUserInfo,
 	wallet: defaultWallet,
+	custVIPProgress: defaultVIPProgress,
 	setUserInfo: newUserInfo => set({ userInfo: newUserInfo }),
 	onSignInPhone: async ({ areaCode, phoneNo, password }) => {
 		if (typeof window === 'undefined') return
@@ -143,6 +154,21 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 		set({ isLoading: true })
 
 		// const data = await getMainWalletInfo()
+
+		set({ isLoading: false })
+	},
+
+	/**
+	 * 取得玩家目前ＶＩＰ等級資料
+	 */
+	getCustVIPProgress: async () => {
+		set({ isLoading: true })
+		try {
+			const data = (await getCustVIPProgress()) ?? defaultVIPProgress
+			set({ custVIPProgress: data })
+		} catch (err) {
+			toast.error((err as Error).message)
+		}
 
 		set({ isLoading: false })
 	},

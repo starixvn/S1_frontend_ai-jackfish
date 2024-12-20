@@ -36,6 +36,7 @@ const useInitEffect = ({ isSignedIn, langToCurrency }: IUseInitEffectProps) => {
 		setUserInfo,
 		userInfo: { langId, currencyId },
 		getWalletInfo,
+		getCustVIPProgress,
 	} = useAuthStore()
 	const { getSocialChannels } = useSocialChannelStore()
 
@@ -44,6 +45,7 @@ const useInitEffect = ({ isSignedIn, langToCurrency }: IUseInitEffectProps) => {
 		if (isSignedIn) {
 			getUserInfo()
 			getWalletInfo()
+			getCustVIPProgress()
 		} else {
 			setUserInfo({
 				userName: 'guest',
@@ -54,6 +56,7 @@ const useInitEffect = ({ isSignedIn, langToCurrency }: IUseInitEffectProps) => {
 	}, [
 		cookieCurrencyId,
 		cookieLangId,
+		getCustVIPProgress,
 		getUserInfo,
 		getWalletInfo,
 		isSignedIn,

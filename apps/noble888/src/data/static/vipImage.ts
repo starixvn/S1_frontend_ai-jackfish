@@ -22,6 +22,7 @@ export const VIP_CLUB_IMAGES: TVipImageData[] = [
 		levelTabsName: 'vintage',
 		level: VipLevelEnum.VINTAGE,
 		alt: 'vip01',
+		levelColor: 'bg-[#c8600b]',
 	},
 	{
 		url: `${process.env['NEXT_PUBLIC_BANNER_HOST']}/${
@@ -33,6 +34,7 @@ export const VIP_CLUB_IMAGES: TVipImageData[] = [
 		levelTabsName: 'silver',
 		level: VipLevelEnum.SILVER,
 		alt: 'vip02',
+		levelColor: 'bg-[#cacaca]',
 	},
 	{
 		url: `${process.env['NEXT_PUBLIC_BANNER_HOST']}/${
@@ -44,6 +46,7 @@ export const VIP_CLUB_IMAGES: TVipImageData[] = [
 		levelTabsName: 'gold',
 		level: VipLevelEnum.GOLD,
 		alt: 'vip03',
+		levelColor: 'bg-[#ce9b0a]',
 	},
 	{
 		url: `${process.env['NEXT_PUBLIC_BANNER_HOST']}/${
@@ -55,6 +58,7 @@ export const VIP_CLUB_IMAGES: TVipImageData[] = [
 		levelTabsName: 'titanium',
 		level: VipLevelEnum.TITANIUM,
 		alt: 'vip04',
+		levelColor: 'bg-[#828282]',
 	},
 	{
 		url: `${process.env['NEXT_PUBLIC_BANNER_HOST']}/${
@@ -66,6 +70,7 @@ export const VIP_CLUB_IMAGES: TVipImageData[] = [
 		levelTabsName: 'diamond',
 		level: VipLevelEnum.DIAMOND,
 		alt: 'vip05',
+		levelColor: 'bg-[#63cde0]',
 	},
 	{
 		url: `${process.env['NEXT_PUBLIC_BANNER_HOST']}/${
@@ -77,5 +82,6 @@ export const VIP_CLUB_IMAGES: TVipImageData[] = [
 		levelTabsName: 'nova',
 		level: VipLevelEnum.Highest,
 		alt: 'vip06',
+		levelColor: 'bg-[#d4d4d4]',
 	},
 ]

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { TbBellRinging2Filled } from 'react-icons/tb'
 import Button from '../button'
 
-interface ModalProps {
+interface IModalProps {
 	children?: React.ReactNode
 	size: 'popup' | 'xs' | 'sm' | 'md' | 'lg'
 	isOpen: boolean
@@ -18,12 +18,11 @@ interface ModalProps {
 	type?: 'info' | 'error' | 'confirm' | 'default'
 	title?: string
 	icon?: React.ReactNode
-	okText?: string
 	confirmText?: string
 	onConfirm?: () => void
 }
 
-const Modal: React.FC<ModalProps> = ({
+const Modal: React.FC<IModalProps> = ({
 	size,
 	isOpen,
 	children,
@@ -42,9 +41,7 @@ const Modal: React.FC<ModalProps> = ({
 	const { t } = useTranslation()
 	const { locale } = useGetPathname()
 
-	const baseClasses =
-		'relative transform bg-blue-100 shadow-xl transition-transform duration-300 ease-in-out lg:rounded-xl overflow-hidden'
-
+	const baseClasses = `relative transform bg-blue-100 shadow-xl transition-transform duration-300 ease-in-out lg:rounded-xl overflow-hidden`
 	const sizeClasses = {
 		popup: 'lg:max-w-[500px] lg:min-h-[230px] mx-6',
 		xs: 'w-full h-full lg:w-[500px] lg:h-[530px]',
@@ -116,9 +113,11 @@ const Modal: React.FC<ModalProps> = ({
 			onClick={() => closeOnOverlayClick && onClose()}
 		>
 			<div
-				className={cn(baseClasses, sizeClass, className, 'flex flex-col')}
+				className={`${baseClasses} ${sizeClass} ${className} flex flex-col`}
 				onClick={e => e.stopPropagation()}
 			>
+				{/* icon and title  */}
+
 				{(finalIcon || finalTitle) && (
 					<div className='relative flex items-center justify-between bg-blue-100 p-3'>
 						<div className='flex w-full flex-col items-center justify-center'>
@@ -135,6 +134,8 @@ const Modal: React.FC<ModalProps> = ({
 					</div>
 				)}
 
+				{/* close button */}
+
 				{showCloseButton && (
 					<button
 						type='button'
@@ -143,38 +144,39 @@ const Modal: React.FC<ModalProps> = ({
 							locale === 'ar'
 								? 'absolute left-3 top-3'
 								: 'absolute right-3 top-3',
-							'inline-flex items-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900',
-							type === 'error' || type === 'info' || type === 'confirm'
-								? 'lg:hidden'
-								: '',
+							'inline-flex items-center rounded-lg bg-transparent text-sm text-gray-400',
+							'hover:bg-gray-200 hover:text-gray-900',
 						)}
 					>
 						<svg
 							className='h-5 w-5'
-							fill='#afa9d6'
-							stroke='#afa9d6'
-							viewBox='0 0 20 20'
+							fill='none'
+							stroke='currentColor'
+							viewBox='0 0 24 24'
 							xmlns='http://www.w3.org/2000/svg'
-							strokeWidth='2'
 						>
 							<path
-								fillRule='evenodd'
-								d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
-								clipRule='evenodd'
+								strokeLinecap='round'
+								strokeLinejoin='round'
+								strokeWidth='2'
+								d='M6 18L18 6M6 6l12 12'
 							></path>
 						</svg>
 					</button>
 				)}
-				<div className='flex-grow overflow-y-auto bg-blue-100 px-4 py-3 lg:rounded-bl-xl lg:rounded-br-xl'>
+				<div className='flex-grow bg-blue-100 px-4 py-3 overflow-y-auto '>
 					<div
-						className={cn(
-							'text-center',
-							!finalTitle && !finalIcon && 'mt-8', // 當沒有 title 和 icon 時，加入 mt-8
-						)}
+						className={
+							!title && !icon
+								? 'mt-8 overflow-y-auto text-center '
+								: 'overflow-y-auto '
+						}
 					>
 						{children}
 					</div>
 				</div>
+
+				{/* modal buttons for type: 'confirm', 'info', 'error' */}
 
 				{type === 'confirm' && (
 					<div className='flex justify-center gap-4 p-4'>

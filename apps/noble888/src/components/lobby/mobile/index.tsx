@@ -1,182 +1,167 @@
 'use client'
 
-import { useClientTranslation } from '@brand01/src/i18n/client'
-import { MENU_DATA } from '@noble888/src/data/static'
-import { CurrenciesEnum, MenuIconTypeEnum, MenuKeyEnum } from 'JF-constants'
-import { cn, isEventPeriod, useGetPathname, useMenuOpen } from 'JF-core'
-import { useAuthStore, useHomeStore } from 'JF-operations'
-import useMenu from 'libs/core/src/lib/hooks/useMenu'
 import { useEffect, useState } from 'react'
+
+// Utilities
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { cn, isEventPeriod, useGetPathname, useMenuOpen } from 'JF-core'
+import { useClientTranslation } from '@brand01/src/i18n/client'
+import { MENU_DATA } from '@noble888/src/data/static'
+import { useHomeStore } from 'JF-operations'
+import useMenu from 'libs/core/src/lib/hooks/useMenu'
+import { MenuIconTypeEnum } from 'JF-constants'
 
-const mockHotGameData = [
-	{
-		gameLogo: 'https://dogecoin.com/assets/images/doge.webp',
-		gameName: 'Game 1',
-		gameList: Array.from({ length: 10 }, (_, i) => `Game 1-${i + 1}`),
-	},
-	{
-		gameLogo: 'https://dogecoin.com/assets/images/doge.webp',
-		gameName: 'Game 2',
-		gameList: Array.from({ length: 10 }, (_, i) => `Game 2-${i + 1}`),
-	},
-	{
-		gameLogo: 'https://dogecoin.com/assets/images/doge.webp',
-		gameName: 'Game 3',
-		gameList: Array.from({ length: 10 }, (_, i) => `Game 3-${i + 1}`),
-	},
-	{
-		gameLogo: 'https://dogecoin.com/assets/images/doge.webp',
-		gameName: 'Game 4',
-		gameList: Array.from({ length: 10 }, (_, i) => `Game 4-${i + 1}`),
-	},
-]
+// Mock Images
+const mockImgUrl = 'https://dogecoin.com/assets/images/doge.webp'
+const mockIcon = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFdOlgFXvlHaVni4jFIK1QKteSBJfKzX0s_Q&s'
 
 const config = {
-	slidesPerView: 3.2,
-	spaceBetween: 10,
-	pagination: { clickable: true },
+  slidesPerView: 3.2,
+  spaceBetween: 10,
+  pagination: { clickable: true },
 }
 
 export default function HotGameSwiper() {
-	const [selectedGame, setSelectedGame] = useState(mockHotGameData[0])
+  const defaultMenuKey = 'Sports'
+  const { locale } = useGetPathname()
+  const { t } = useClientTranslation(locale)
+  const { onMenuOpen } = useMenuOpen({})
+  const { menuList } = useMenu({ homeMenuData: MENU_DATA })
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    defaultMenuKey,
+  )
 
-	const {
-		userInfo: { currencyId },
-	} = useAuthStore()
+  const {  fetchLobbyHeader } = useHomeStore(state => ({
+    fetchLobbyHeader: state.fetchLobbyHeader,
+  }))
 
-	const defaultMenuKey =
-		currencyId === CurrenciesEnum.USD || currencyId === CurrenciesEnum.CNY
-			? 'Casino'
-			: 'Sports'
+  useEffect(() => {
+    fetchLobbyHeader()
+  }, [fetchLobbyHeader])
 
-	const [menuKey, setMenuKey] = useState<keyof typeof MenuKeyEnum | undefined>(
-		defaultMenuKey,
-	)
+  const renderMenuSlides = () => {
+    return menuList
+      .filter(menuItem => menuItem?.display !== 'desktop')
+      .map(menuItem => {
+        const { category, h5, displayKey, subMenu } = menuItem
+        const { icon } = h5 || {}
 
-	// i18n
-	const { locale } = useGetPathname()
-	const { t } = useClientTranslation(locale)
-	const { onMenuOpen } = useMenuOpen({})
+        const hasNewIcon = subMenu?.some(({ iconType, iconStartTime, iconEndTime }) =>
+          isEventPeriod({ start: iconStartTime, end: iconEndTime }) &&
+          iconType === MenuIconTypeEnum.New
+        )
 
-	// 取得 hotGameList 和 fetchLobbyHeader 方法
-	const { hotGameList, fetchLobbyHeader } = useHomeStore(state => ({
-		hotGameList: state.hotGameList,
-		fetchLobbyHeader: state.fetchLobbyHeader,
-	}))
+        return (
+          <SwiperSlide key={category}>
+            <button
+              className={cn(`btn-${icon}`, {
+                active: selectedCategory === category,
+              })}
+              onClick={() => {
+                if (category) {
+                  setSelectedCategory(category)
+                }
+              }}
+            >
+              {hasNewIcon && <div className="new-icon"><img src={mockIcon} /></div>}
+              <div className="btn-circle w-full overflow-hidden rounded-full bg-blue-500">
+                <img src={mockImgUrl} alt={icon ?? ''} className="rounded-full" />
+              </div>
+              <div>{displayKey ? t(displayKey) : ''}</div>
+            </button>
+          </SwiperSlide>
+        )
+      })
+  }
 
-	// 在組件掛載時，執行 fetchLobbyHeader 方法來獲取資料
-	useEffect(() => {
-		fetchLobbyHeader()
-	}, [fetchLobbyHeader])
+  const subMenu = menuList.find(item => item.category === selectedCategory)?.subMenu
 
-	const { menuList } = useMenu({ homeMenuData: MENU_DATA })
+  const handleMenuOpen = (item: any) => {
+    onMenuOpen(item, {
+      loginCallback: () => {
+        console.log('尚未登入 => 開啟登入彈窗 (示例)')
+      },
+    })
+  }
 
-	console.log(menuList)
+  return (
+    <div className="wrapper overflow-x-auto scrollbar scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-400">
+      <div
+        style={{
+          overflowX: 'auto',
+          whiteSpace: 'nowrap',
+          scrollbarWidth: 'thin',
+        }}
+		
+      >
+        <Swiper className="swiper-container" {...config} >{renderMenuSlides()}</Swiper>
+      </div>
+      <div className="home-hotgame-list mt-4">
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '10px',
+          }}
+        >
+          {subMenu?.map(item => {
+            const { tpGameIdNo, isTpMaintain, productName = '', pcLobbyPicUrl } =
+              item
+            let imgUrl = ''
+            if (pcLobbyPicUrl) {
+              try {
+                imgUrl = JSON.parse(pcLobbyPicUrl)[0]
+              } catch (e) {
+                console.error('Failed to parse pcLobbyPicUrl', e)
+              }
+            }
 
-	console.log(hotGameList)
-
-	const handleHotGameClick = (game: any) => {
-		setSelectedGame(game)
-	}
-
-	const gameSlides = mockHotGameData.map(game => {
-		const { gameLogo, gameName } = game
-		return (
-			<SwiperSlide key={gameName} onClick={() => handleHotGameClick(game)}>
-				<div className='hotgame-item'>
-					<a>
-						<div>
-							<img src={gameLogo} alt={gameName} />
-							<span>{gameName}</span>
-						</div>
-					</a>
-				</div>
-			</SwiperSlide>
-		)
-	})
-
-	return (
-		<>
-			<div className='home-hotgame'>
-				{menuList.map(mainMenuItem => {
-					const { display, category, h5, displayKey, subMenu } =
-						mainMenuItem || {}
-					if (display === 'desktop') return null
-					const { icon } = h5 || {}
-
-					console.log('icon', h5)
-					// * 查看 subMenu 是否有在顯示範圍的 New Icon( 手機貌似只有 New Tag )
-					const hasNewIcon = subMenu.some(subMenuItem => {
-						const { iconType, iconStartTime, iconEndTime } = subMenuItem || {}
-
-						return (
-							isEventPeriod({ start: iconStartTime, end: iconEndTime }) &&
-							iconType === MenuIconTypeEnum.New
-						)
-					})
-
-					const menuText = (displayKey && t(displayKey)) || ''
-
-					return (
-						<button
-							className={cn(`btn-${icon}`, {
-								active: menuKey === category,
-							})}                           
-							key={category}
-						>
-							{hasNewIcon && <div className='new-icon'>New</div>}
-							<div className='btn-circle btn-circle bg-blue-500 rounded-full overflow-hidden w-full' >
-								<img
-									src={`${process.env['NEXT_PUBLIC_BANNER_HOST']}/h5/img/4.0/${icon}-icon.png`}
-									alt={icon ?? ''}
-                                    className="rounded-full"
-								/>
-							</div>
-							<div>{menuText}</div>
-						</button>
-					)
-				})}
-
-				<div
-					style={{
-						overflowX: 'auto', // 水平滾動
-						whiteSpace: 'nowrap', // 禁止換行
-						scrollbarWidth: 'thin', // Firefox 滾動條樣式
-					}}
-				>
-					<Swiper {...config}>{gameSlides}</Swiper>
-				</div>
-				<div className='home-hotgame-list'>
-					<h3>{selectedGame.gameName} 的遊戲列表:</h3>
-					<div
-						style={{
-							display: 'grid',
-							gridTemplateColumns: 'repeat(4, 1fr)',
-							gap: '10px',
-						}}
-					>
-						{selectedGame.gameList.map((game, index) => (
-							<div
-								key={index}
-								style={{
-									padding: '10px',
-									textAlign: 'center',
-									backgroundColor: '#f8f8f8',
-									border: '1px solid #ddd',
-									borderRadius: '8px',
-									boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-								}}
-							>
-								{game}
-							</div>
-						))}
-					</div>
-				</div>
-			</div>
-		</>
-	)
+            return (
+              <div key={`subMenu-${tpGameIdNo}`}>
+                <div
+                  className="group relative cursor-pointer object-left-top"
+                  onClick={() => {
+                    if (!isTpMaintain) {
+                      handleMenuOpen(item)
+                    }
+                  }}
+                >
+                  <img
+                    src={imgUrl}
+                    alt=""
+                    className={cn('w-full rounded-xl object-cover', {
+                      'transition ease-in-out group-hover:scale-105': !isTpMaintain,
+                    })}
+                  />
+                  {isTpMaintain ? (
+                    <div className="absolute inset-0 grid w-full cursor-not-allowed place-items-center rounded-xl backdrop-grayscale">
+                      <div className="w-full rounded-md bg-neutral-300 py-1 text-center text-neutral-500">
+                        {t('Label_General_UnderMaintenance')}
+                      </div>
+                    </div>
+                  ) : (
+                    <div
+                      className={cn(
+                        'absolute inset-0 grid place-items-center rounded-xl bg-gradient-to-t from-neutral-500 to-neutral-500/10 opacity-0 transition ease-in-out group-hover:scale-105 group-hover:hover:opacity-100'
+                      )}
+                    >
+                      <div className="truncate text-center text-sm font-medium leading-8 text-neutral-100">
+                        {t(productName)}
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <p className="mt-2 text-center text-sm font-medium text-neutral-700">
+                  {t(productName)}
+                </p>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </div>
+  )
 }

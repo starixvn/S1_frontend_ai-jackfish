@@ -12,7 +12,7 @@ const GlobalModal = () => {
 		content,
 		confirmText,
 		onConfirm,
-		closeModal
+		closeModal,
 	} = useModalStore()
 
 	return (

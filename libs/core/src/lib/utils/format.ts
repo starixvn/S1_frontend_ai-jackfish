@@ -1,6 +1,12 @@
 import { CurrenciesEnum, INTEGER_ONLY_REGEX } from 'JF-constants'
+import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+import utc from 'dayjs/plugin/utc'
 import { isNaN, replace } from 'lodash-es'
 import { FieldErrors } from 'react-hook-form'
+
+dayjs.extend(utc)
+dayjs.extend(customParseFormat)
 
 /**
  *
@@ -50,6 +56,19 @@ export const numberFormat = (
 	}
 
 	return numFormatToDigits(Number(value), digits)
+}
+
+/**
+ * 處理後端 API 傳送的時間字串，統一移除時區資訊並轉換為標準時間格式。
+ * 適用於兩種時間格式：
+ * 1. 不含時區的日期字串，例如：'2024-05-12'，會補上時間 '00:00:00'。
+ * 2. 含完整時區的時間字串，例如：'2024-04-29T00:00:00+07:00'。
+ *
+ * 使用 dayjs 進行解析，並強制設定 UTC 時區偏移為 0，避免自動判斷本地時區導致時間錯誤。
+ * 回傳 dayjs 物件，後續可根據需求進行 format。
+ */
+export const revertTimeZone = (time: string) => {
+	return dayjs(`${time} 00:00:00`, 'YYYY-MM-DD HH:mm:ss').utcOffset(0, true)
 }
 
 /**

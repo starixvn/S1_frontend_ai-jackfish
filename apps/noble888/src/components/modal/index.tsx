@@ -164,7 +164,7 @@ const Modal: React.FC<IModalProps> = ({
 						</svg>
 					</button>
 				)}
-				<div className='flex-grow bg-blue-100 px-4 py-3 overflow-y-auto '>
+				<div className='flex-grow overflow-y-auto bg-blue-100 px-4 py-3 '>
 					<div
 						className={
 							!title && !icon

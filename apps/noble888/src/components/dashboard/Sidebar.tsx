@@ -27,8 +27,8 @@ export default function Sidebar() {
 										key={pathname}
 										href={pathname}
 										className={cn(
-											' block border-b border-b-white bg-gray-100 px-4 py-2 text-blue-900 hover:bg-blue-300 hover:text-white ',
-											isActive && 'bg-blue-300 text-white',
+											' text-primary-900 hover:bg-primary-300 block border-b border-b-white bg-gray-100 px-4 py-2 hover:text-white ',
+											isActive && 'bg-primary-300 text-white',
 										)}
 										onClick={() => handleMenuClick(pathname)}
 									>

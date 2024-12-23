@@ -26,7 +26,7 @@ export default function Layout({
 	// TODO: to be removed
 	const [isLogin, setIsLogin] = useState(false)
 	// eslint-disable-next-line no-console
-	console.log({ isSignedIn })
+	// console.log({ isSignedIn })
 
 	// init 靜態檔案
 	const { initStaticData } = useStaticDataStore()

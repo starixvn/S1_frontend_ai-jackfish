@@ -20,7 +20,7 @@ const Page = () => {
 					<div className='h-64'>
 						<div className='h-full overflow-y-scroll'>
 							<h3 className='border-top mb-6 text-xl font-normal'>
-							 modal contents
+								modal contents
 							</h3>
 							<h3 className='border-top mb-6 text-xl font-normal'>
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,

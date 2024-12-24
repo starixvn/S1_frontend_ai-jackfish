@@ -1,7 +1,7 @@
 'use client'
 
 import { useClientTranslation } from '@brand01/src/i18n/client'
-import { getIpCountry } from 'JF-api/site/client'
+import { useGetIpCountry } from 'JF-api/site/client'
 import { paths } from 'JF-constants'
 import { useGetPathname } from 'JF-core'
 import { redirect } from 'next/navigation'
@@ -10,7 +10,7 @@ import { redirect } from 'next/navigation'
 export default function BlockIPPage() {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
-	const { ipCountryData, isLoading } = getIpCountry()
+	const { ipCountryData, isLoading } = useGetIpCountry()
 	const { isAccess } = ipCountryData || {}
 
 	// fetching 完成且可進入導回首頁
@@ -26,7 +26,7 @@ export default function BlockIPPage() {
 				<div className='flex w-full flex-1 flex-col items-center gap-4 text-center md:col-span-3'>
 					<div className="h-[20rem] w-full bg-[url('/img/errorpage/lock.png')] bg-contain bg-center bg-no-repeat sm:h-[25rem] md:h-[30rem] lg:h-[35rem]"></div>
 					<div className='flex flex-col items-center'>
-						<h1 className='mb-4 -mt-[6rem] text-5xl font-black text-neutral-100 sm:-mt-[8rem] md:-mt-[12rem] lg:text-6xl xl:text-7xl'>
+						<h1 className='-mt-[6rem] mb-4 text-5xl font-black text-neutral-100 sm:-mt-[8rem] md:-mt-[12rem] lg:text-6xl xl:text-7xl'>
 							{t('Label_Access')}
 							<br />
 							{t('Label_Restricted')}

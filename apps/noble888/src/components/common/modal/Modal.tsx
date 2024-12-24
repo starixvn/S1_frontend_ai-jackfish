@@ -1,5 +1,6 @@
 'use client'
-import { cn, useGetPathname } from 'JF-core'
+
+import { cn } from 'JF-core'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbBellRinging2Filled } from 'react-icons/tb'
@@ -39,12 +40,11 @@ const Modal: React.FC<IModalProps> = ({
 	onConfirm,
 }) => {
 	const { t } = useTranslation()
-	const { locale } = useGetPathname()
 
 	const baseClasses = `relative transform bg-blue-100 shadow-xl transition-transform duration-300 ease-in-out lg:rounded-xl overflow-hidden`
 	const sizeClasses = {
 		popup: 'lg:max-w-[500px] lg:min-h-[230px] mx-6',
-		xs: 'w-full h-full lg:w-[500px] lg:h-[530px]',
+		xs: 'w-full h-full lg:w-[880px] lg:h-[450px]',
 		sm: 'w-full h-full lg:w-[600px] lg:h-[810px]',
 		md: 'w-full h-full lg:w-[880px] lg:h-[560px]',
 		lg: 'w-full h-full lg:w-[880px] lg:h-[810px]',
@@ -106,14 +106,14 @@ const Modal: React.FC<IModalProps> = ({
 
 	return (
 		<div
-			className='bg-primary-900/40 fixed inset-0 z-50 flex items-center justify-center'
+			className='bg-primary-900/40 fixed inset-0 z-50 flex h-full w-full items-center justify-center'
 			aria-labelledby='modal-title'
 			role='dialog'
 			aria-modal='true'
 			onClick={() => closeOnOverlayClick && onClose()}
 		>
 			<div
-				className={`${baseClasses} ${sizeClass} ${className} flex flex-col`}
+				className={cn(`${baseClasses} ${sizeClass} ${className} flex flex-col`)}
 				onClick={e => e.stopPropagation()}
 			>
 				{/* icon and title  */}
@@ -141,9 +141,7 @@ const Modal: React.FC<IModalProps> = ({
 						type='button'
 						onClick={onClose}
 						className={cn(
-							locale === 'ar'
-								? 'absolute left-3 top-3'
-								: 'absolute right-3 top-3',
+							'absolute end-3 top-3',
 							'inline-flex items-center rounded-lg bg-transparent text-sm text-gray-400',
 							'hover:bg-gray-200 hover:text-gray-900',
 						)}
@@ -164,16 +162,14 @@ const Modal: React.FC<IModalProps> = ({
 						</svg>
 					</button>
 				)}
-				<div className='flex-grow bg-blue-100 px-4 py-3 overflow-y-auto '>
-					<div
+				<div className='flex-grow  bg-blue-100 px-4 py-3 '>
+					{/* <div
 						className={
-							!title && !icon
-								? 'mt-8 overflow-y-auto text-center '
-								: 'overflow-y-auto '
+							!title && !icon ? 'overflow-y-auto ' : 'overflow-y-auto '
 						}
-					>
-						{children}
-					</div>
+					> */}
+					{children}
+					{/* </div> */}
 				</div>
 
 				{/* modal buttons for type: 'confirm', 'info', 'error' */}

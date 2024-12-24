@@ -3,11 +3,17 @@
 import { ALLOWED_CURRENCIES } from '@noble888/src/data/static'
 import { useClientTranslation } from '@noble888/src/i18n/client'
 import { paths } from 'JF-constants'
-import { LocaleLink, bannerUrl, cn, useGetPathname, useIconSpin } from 'JF-core'
+import {
+	LocaleLink,
+	bannerUrl,
+	cn,
+	useGetPathname,
+	useIconSpin,
+	useLocaleRouter,
+} from 'JF-core'
 import { useAuthStore } from 'JF-operations'
 import { includes } from 'lodash-es'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useRef } from 'react'
 import { IoIosArrowDown } from 'react-icons/io'
 import { IoMailSharp } from 'react-icons/io5'
@@ -17,7 +23,7 @@ import Country from './Country'
 
 const MemberInfo = () => {
 	const { t } = useClientTranslation()
-	const router = useRouter()
+	const router = useLocaleRouter()
 	const { currentPath } = useGetPathname()
 	const ref = useRef(null)
 	const { isSpinActive, onIconSpin } = useIconSpin()
@@ -40,7 +46,7 @@ const MemberInfo = () => {
 		try {
 			setFalse()
 			await onSignOut()
-			await router.push(paths.home.root)
+			router.push(paths.home.root)
 			router.refresh()
 		} catch (error) {
 			// 因為會有已登出但畫面還未登出的情況，所以這裡不開彈窗接出錯誤訊息

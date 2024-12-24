@@ -9,12 +9,20 @@ import {
 	META_DATA,
 	VIP_CLUB_IMAGES,
 } from '@noble888/src/data/static'
-import { useInitEffect } from 'JF-core'
+import { QueryProvider, useGetPathname, useInitEffect } from 'JF-core'
 import { useStaticDataStore } from 'JF-operations'
-import { ReactNode, useEffect, useState } from 'react'
-import GlobalModal from '../modal/GlobalModal'
+import dayjs from 'dayjs'
+import localeData from 'dayjs/plugin/localeData'
+import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc'
+import { ReactNode, useEffect } from 'react'
+import { GlobalModal } from '../customModals'
 import Footer from './footer'
 import Header from './header'
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
+dayjs.extend(localeData)
 
 export default function Layout({
 	children,
@@ -23,10 +31,7 @@ export default function Layout({
 	children: ReactNode
 	isSignedIn: boolean
 }) {
-	// TODO: to be removed
-	const [isLogin, setIsLogin] = useState(false)
-	// eslint-disable-next-line no-console
-	console.log({ isSignedIn })
+	const { locale } = useGetPathname()
 
 	// init 靜態檔案
 	const { initStaticData } = useStaticDataStore()
@@ -43,14 +48,19 @@ export default function Layout({
 
 	// 初始化
 	useInitEffect({ isSignedIn, langToCurrency: LANG_TO_CURRENCY })
+
 	return (
-		<>
-			<GlobalModal />
-			<div className='flex h-full w-full flex-col bg-white'>
-				<Header isLogin={isLogin} setIsLogin={setIsLogin} />
-				<main className='h-fit flex-grow'>{children}</main>
-				<Footer isLogin={isLogin} />
-			</div>
-		</>
+		<html dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+			<body>
+				<QueryProvider>
+					<GlobalModal />
+					<div className='flex h-full w-full flex-col bg-white'>
+						<Header isLogin={isSignedIn} />
+						<main className='h-fit flex-grow'>{children}</main>
+						<Footer isLogin={isSignedIn} />
+					</div>
+				</QueryProvider>
+			</body>
+		</html>
 	)
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import { ElementType } from 'react'
 
 interface IDashboardTagProps {

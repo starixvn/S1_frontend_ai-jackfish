@@ -1,6 +1,7 @@
 import { fallbackLng, languages } from '@noble888/src/i18n/settings'
 import { toUpper } from 'lodash-es'
 import { ReactNode } from 'react'
+import 'react-datepicker/dist/react-datepicker.css'
 import 'react-toastify/dist/ReactToastify.css'
 import 'swiper/css/bundle'
 import { LangId } from '../data/country'

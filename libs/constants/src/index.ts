@@ -1,4 +1,6 @@
 // 從這裡統一導出
+export * from './lib/areaCode'
+export * from './lib/bonus'
 export * from './lib/constants'
 export * from './lib/currency'
 export * from './lib/deposit'

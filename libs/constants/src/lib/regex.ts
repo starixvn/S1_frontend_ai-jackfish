@@ -9,3 +9,5 @@ export const REALNAME_REGEX =
 export const THAI_BANK_ACCOUNT_REGEX = /^\d{10}$/
 
 export const INTEGER_ONLY_REGEX = /(\..*)|[^0-9]/g
+
+export const USERNAME_REGEX = /^[A-Za-z0-9]{6,18}$/

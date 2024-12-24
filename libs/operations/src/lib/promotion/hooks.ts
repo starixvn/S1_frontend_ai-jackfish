@@ -1,3 +1,5 @@
+'use client'
+
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import {
 	getDepositPromotionList,

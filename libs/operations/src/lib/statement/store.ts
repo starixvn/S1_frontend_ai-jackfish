@@ -33,6 +33,7 @@ export interface IStatementState {
 	gameTypeID: number
 	pageNumber: number
 	totalPages: number
+	activeTablePageNumber: Record<string, number>
 
 	updateQueryParams: (newParams: Record<string, string | number>) => void | null
 	getQueryParams: () => Record<string, string | number> | null
@@ -89,6 +90,14 @@ export const useStatementStore = create<IStatementState & IStatementAction>(
 		/** 當前選中的 "頁碼" */
 		pageNumber: 1,
 
+		activeTablePageNumber: {
+			ByDateRangePageNumber: 1,
+			ByDayPagePageNumber: 1,
+			ByCategoryPageNumber: 1,
+			ByDetailPageNumber: 1,
+		},
+
+		/** 總頁數 */
 		totalPages: 1,
 
 		// ====== api ======
@@ -216,6 +225,7 @@ export const useStatementStore = create<IStatementState & IStatementAction>(
 				categoryId,
 				gameTypeID,
 				dateRangesArg,
+				activeTablePageNumber,
 				currentDateRangeIndex,
 				updateQueryParams,
 				getCustTpBetRecordListDateRange,
@@ -223,11 +233,19 @@ export const useStatementStore = create<IStatementState & IStatementAction>(
 				getCustTpBetRecordListbyCategoryId,
 				getCustTpBetRecordDetailListbyGameType,
 			} = get()
+
+			const {
+				ByDateRangePageNumber,
+				ByDayPagePageNumber,
+				ByCategoryPageNumber,
+				ByDetailPageNumber,
+			} = activeTablePageNumber
 			set({ activeTable: currentTable })
 
 			switch (currentTable) {
 				case TableTypeEnum.DateRangeStatementTable:
 					getCustTpBetRecordListDateRange()
+					set({ pageNumber: ByDateRangePageNumber })
 					updateQueryParams({
 						currentDateRangeIndex,
 						startDate: dateRangesArg[DateIndexEnum.StartDate],
@@ -239,6 +257,7 @@ export const useStatementStore = create<IStatementState & IStatementAction>(
 
 				case TableTypeEnum.ByDayStatementTable:
 					getCustTpBetRecordListOneDay()
+					set({ pageNumber: ByDayPagePageNumber })
 					updateQueryParams({
 						currentDateRangeIndex,
 						selDate,
@@ -249,6 +268,7 @@ export const useStatementStore = create<IStatementState & IStatementAction>(
 
 				case TableTypeEnum.ByCategoryStatementTable:
 					getCustTpBetRecordListbyCategoryId()
+					set({ pageNumber: ByCategoryPageNumber })
 					updateQueryParams({
 						currentDateRangeIndex,
 						selDate,
@@ -260,6 +280,7 @@ export const useStatementStore = create<IStatementState & IStatementAction>(
 
 				case TableTypeEnum.ByDetailStatementTable:
 					getCustTpBetRecordDetailListbyGameType()
+					set({ pageNumber: ByDetailPageNumber })
 					updateQueryParams({
 						currentDateRangeIndex,
 						selDate,

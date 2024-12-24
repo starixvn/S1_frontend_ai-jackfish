@@ -119,7 +119,43 @@ const Statement = () => {
 	 * @param selected 選中的頁碼索引
 	 */
 	const onPageChange = ({ selected }: { selected: number }) => {
-		useStatementStore.setState({ pageNumber: selected + 1 })
+		const pageNumber = selected + 1
+		useStatementStore.setState({ pageNumber })
+
+		switch (activeTable) {
+			case TableTypeEnum.DateRangeStatementTable:
+				useStatementStore.setState(state => ({
+					activeTablePageNumber: {
+						...state.activeTablePageNumber,
+						ByDateRangePageNumber: pageNumber,
+					},
+				}))
+				break
+			case TableTypeEnum.ByDayStatementTable:
+				useStatementStore.setState(state => ({
+					activeTablePageNumber: {
+						...state.activeTablePageNumber,
+						ByDayPagePageNumber: pageNumber,
+					},
+				}))
+				break
+			case TableTypeEnum.ByCategoryStatementTable:
+				useStatementStore.setState(state => ({
+					activeTablePageNumber: {
+						...state.activeTablePageNumber,
+						ByCategoryPageNumber: pageNumber,
+					},
+				}))
+				break
+			case TableTypeEnum.ByDetailStatementTable:
+				useStatementStore.setState(state => ({
+					activeTablePageNumber: {
+						...state.activeTablePageNumber,
+						ByDetailPageNumber: pageNumber,
+					},
+				}))
+				break
+		}
 		fetchDataByTableType(activeTable)
 	}
 

@@ -1,15 +1,19 @@
+'use client'
 import { paths } from 'JF-constants'
-import { useGetPathname, useWalletAllowed } from 'JF-core'
-import { useAuthStore, useStaticDataStore } from 'JF-operations'
+import { useGetPathname } from 'JF-core'
+import {
+	useAuthStore,
+	useStaticDataStore,
+	useWalletAllowed,
+} from 'JF-operations'
 import { includes, isArray } from 'lodash-es'
 import { usePathname, useRouter } from 'next/navigation'
-import { UseSidebarProps } from './type'
 
 /**
  * 自定義 hook 用於處理 SideBar 的邏輯。
  * @param {IWithdrawalSetting[]} withdrawalBlockSetting - 提款設定數據。
  * @returns {Object} 菜單列和菜單點擊事件函數。 */
-export const useSidebar = ({ withdrawalBlockSetting }: UseSidebarProps) => {
+export const useSidebar = () => {
 	const pathname = usePathname() // 獲取當前路徑
 	const router = useRouter()
 
@@ -21,7 +25,7 @@ export const useSidebar = ({ withdrawalBlockSetting }: UseSidebarProps) => {
 
 	const {
 		cardAllowed: { bankCardAllowed, cryptoCardAllowed },
-	} = useWalletAllowed({ withdrawalBlockSetting })
+	} = useWalletAllowed()
 
 	/** 菜單列表 */
 	const menuList =

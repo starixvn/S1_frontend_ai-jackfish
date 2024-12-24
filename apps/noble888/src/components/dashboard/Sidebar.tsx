@@ -1,14 +1,11 @@
 import { useClientTranslation } from '@noble888/src/i18n/client'
 import { cn, useSidebar } from 'JF-core'
-import { useWithdrawalStore } from 'JF-operations'
 import Link from 'next/link'
 
 export default function Sidebar() {
 	const { t } = useClientTranslation()
-	const { withdrawalBlockSetting } = useWithdrawalStore()
-	const { menuList, handleMenuClick } = useSidebar({
-		withdrawalBlockSetting,
-	})
+
+	const { menuList, handleMenuClick } = useSidebar()
 
 	return (
 		<div className='flex flex-col gap-2 '>

@@ -12,8 +12,10 @@ import {
 } from 'JF-core'
 import {
 	useAuthStore,
+	useRunningRequest,
 	useSocialChannelStore,
-	useWithdrawalStore,
+	useWithdrawalInfo,
+	useWithdrawalOperations,
 } from 'JF-operations'
 import { Trans } from 'react-i18next'
 import { toast } from 'react-toastify'
@@ -24,14 +26,11 @@ export const ProcessingInfo = () => {
 	const {
 		userInfo: { currencyId = CurrenciesEnum.THB },
 	} = useAuthStore()
-
-	const {
-		runningWithdrawalRequest,
-		cancelWithdrawalRequest,
-		kycStatus,
-		isLoading,
-	} = useWithdrawalStore()
 	const { lineChannel } = useSocialChannelStore()
+
+	const { kycStatus, isLoading } = useWithdrawalInfo()
+	const runningWithdrawalRequest = useRunningRequest()
+	const { cancelWithdrawalRequest } = useWithdrawalOperations()
 
 	const { transId, amount } = runningWithdrawalRequest ?? {}
 	// kyc processing 跟 withdrawal processing 共用同一個 component , 用 status 判斷
@@ -40,7 +39,7 @@ export const ProcessingInfo = () => {
 	const onCancelClick = async () => {
 		if (!transId) return
 		try {
-			await cancelWithdrawalRequest({ transId })
+			await cancelWithdrawalRequest(transId)
 			// 取消之後會回出款頁面，須退回頂部否則 pageView 位置不對
 			scrollToTop()
 		} catch (error) {

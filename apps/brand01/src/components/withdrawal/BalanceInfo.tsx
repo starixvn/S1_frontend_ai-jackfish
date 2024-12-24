@@ -2,7 +2,7 @@
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import { CurrenciesEnum } from 'JF-constants'
 import { cn, numberFormat, useGetPathname } from 'JF-core'
-import { useAuthStore, useWithdrawalStore } from 'JF-operations'
+import { useAuthStore, useWithdrawalInfo } from 'JF-operations'
 
 export const BalanceInfo = () => {
 	const { locale } = useGetPathname()
@@ -10,7 +10,7 @@ export const BalanceInfo = () => {
 	const {
 		userInfo: { currencyId = CurrenciesEnum.THB },
 	} = useAuthStore()
-	const { withdrawalBalance } = useWithdrawalStore()
+	const { withdrawalBalance } = useWithdrawalInfo()
 
 	const {
 		availableBalance = 0,

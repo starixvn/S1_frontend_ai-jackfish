@@ -8,13 +8,17 @@ import {
 	BannerActionEnum,
 	BannerTypeEnum,
 	IExistsPhoneNoArgs,
+	IGetNumberCaptchaArgs,
 	IResetPwdByOTPArgs,
 	IResetPwdByPhoneArgs,
 	ISignUpPhoneArgs,
+	ISignUpUserNameArgs,
 	ISocialChannelArgs,
 	IVerifyOTPArgs,
 	TBannerData,
+	TGetNumberCaptchaData,
 	TIpCountryData,
+	TRecaptchaInfoData,
 	TSocialChannelData,
 	type TTpMaintainData,
 } from './type'
@@ -196,9 +200,85 @@ export const getSocialChannel = async ({ ...args }: ISocialChannelArgs) => {
 	}
 }
 
-export const getIpCountry = () => {
+export const useGetIpCountry = () => {
 	const { data: { data: ipCountryData } = {}, isLoading } = useSWR<
 		IAxiosResponse<TIpCountryData>
 	>(siteApiUrl.getIpCountry, (url: string) => fetcher<TIpCountryData>(url))
 	return { ipCountryData, isLoading }
 }
+
+export const signUpUserName = async ({
+	langId,
+	...args
+}: ISignUpUserNameArgs) => {
+	try {
+		const data = await fetcher<void>(`${siteApiUrl.signup}/${langId}`, args)
+		return data
+	} catch (error) {
+		throw error as IAxiosError
+	}
+}
+
+export const existsUserName = async ({
+	userName,
+	langId,
+}: {
+	userName: string
+	langId: string
+}) => {
+	try {
+		const data = await fetcher<boolean, { userName: string }>(
+			`${siteApiUrl.existsUserName}/${langId}`,
+			{ userName },
+		)
+		return data
+	} catch (error) {
+		return { data: true, message: (error as Error).message }
+	}
+}
+
+export const existsEmail = async ({ email }: { email: string }) => {
+	try {
+		const data = await fetcher<boolean, { email: string }>(
+			siteApiUrl.existsEmail,
+			{ email },
+		)
+		return data
+	} catch (error) {
+		return { data: true, message: (error as Error).message }
+	}
+}
+
+export const useGetSiteCurrencyList = () => {
+	const { data: { data: siteCurrencyList } = {}, isLoading } = useSWR<
+		IAxiosResponse<number[]>
+	>(siteApiUrl.getSiteCurrencyList, (url: string) => fetcher<number[]>(url))
+	return {
+		siteCurrencyList,
+		isLoading,
+	}
+}
+
+export const getRecaptchaInfo = async () => {
+	try {
+		const data = await fetcher<TRecaptchaInfoData, null>(
+			siteApiUrl.getRecaptchaInfo,
+		)
+		return data?.data
+	} catch (error) {
+		return null
+	}
+}
+
+export const getNumberCaptcha = async (args: IGetNumberCaptchaArgs) => {
+	try {
+		const data = await fetcher<TGetNumberCaptchaData, IGetNumberCaptchaArgs>(
+			siteApiUrl.getNumberCaptcha,
+			args,
+		)
+		return data?.data
+	} catch (error) {
+		return null
+	}
+}
+// TODO signUpUserName 時要 getNumberCaptcha

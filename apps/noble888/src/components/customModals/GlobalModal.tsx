@@ -1,18 +1,21 @@
 'use client'
-import Modal from '@noble888/src/components/modal'
-import useModalStore from 'libs/operations/src/lib/modal/store'
+
+import { useModalStore } from 'JF-operations'
+import { Modal } from '../common'
 
 const GlobalModal = () => {
 	const {
 		isOpen,
-		size = 'md',
+		showCloseButton,
+		size = 'xs',
 		type = 'default',
 		icon,
 		title,
 		content,
 		confirmText,
+		className,
 		onConfirm,
-		closeModal
+		closeModal,
 	} = useModalStore()
 
 	return (
@@ -20,11 +23,12 @@ const GlobalModal = () => {
 			size={size}
 			isOpen={isOpen}
 			onClose={closeModal}
-			showCloseButton={true}
+			showCloseButton={showCloseButton}
 			type={type}
 			icon={icon}
 			title={title}
 			confirmText={confirmText}
+			className={className}
 			onConfirm={onConfirm}
 		>
 			{content}

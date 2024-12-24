@@ -119,14 +119,39 @@ module.exports = {
 					'0%': { transform: 'rotate(0deg)' },
 					'100%': { transform: 'rotate(360deg)' },
 				},
+				'animation-logo': {
+					from: { 'inset-inline-start': '0', opacity: '0' },
+					to: { 'inset-inline-start': '28px', opacity: '1' },
+				},
+				npc1: {
+					from: { 'inset-inline-start': '144px', top: '48px', opacity: '0' },
+					to: { 'inset-inline-start': '40px', top: '0', opacity: '1' },
+				},
+				npc2: {
+					from: { 'inset-inline-end': '-200px', opacity: '0' },
+					to: { 'inset-inline-end': '-96px', opacity: '1' },
+				},
+				welcome: {
+					from: { bottom: '208px', opacity: '0' },
+					to: { bottom: '0', opacity: '1' },
+				},
+				back: {
+					from: { bottom: '-48px', opacity: '0' },
+					to: { bottom: '0', opacity: '1' },
+				},
 			},
 			animation: {
 				'spin-once': 'spin-once 1s ease-in-out forwards', // Adjust duration and timing function as needed
+				'animation-logo': 'animation-logo 1s ease-in-out',
+				npc1: 'npc1 1s ease-in-out',
+				npc2: 'npc2 1s ease-in-out',
+				welcome: 'welcome 1s ease-in-out',
+				back: 'back 1s ease-in-out',
 			},
 		},
 	},
 	plugins: [
-		function ({ addBase }) {
+		function ({ addBase, theme }) {
 			addBase({
 				'input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button':
 					{
@@ -135,6 +160,11 @@ module.exports = {
 				'input[type="number"]': {
 					'@apply appearance-none': {}, // 適用於 Firefox
 				},
+				'input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active':
+					{
+						boxShadow: '0 0 0px 1000px #fff inset',
+						WebkitTextFillColor: theme('colors.primary.700'),
+					},
 			})
 		},
 		require('tailwind-scrollbar'),

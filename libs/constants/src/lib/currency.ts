@@ -83,3 +83,17 @@ export const CURRENCY_TO_LANG_KEY: {
 	74: 'bd',
 	82: 'br',
 }
+
+export const FLAG_PREFIX_ICON_BY_CURRENCIES: { [key: number]: string } = {
+	[CurrenciesEnum.MYR]: 'ch',
+	[CurrenciesEnum.USD]: 'gb',
+	[CurrenciesEnum.THB]: 'th',
+	[CurrenciesEnum.CNY]: 'cs',
+	[CurrenciesEnum.IDR]: 'id',
+	[CurrenciesEnum.INR]: 'in',
+	[CurrenciesEnum.KHM]: 'kh',
+	[CurrenciesEnum.BDT]: 'bd',
+	[CurrenciesEnum.VND]: 'vn',
+	[CurrenciesEnum.KRW]: 'ko',
+	[CurrenciesEnum.BRL]: 'br',
+}

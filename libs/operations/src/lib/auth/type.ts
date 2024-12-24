@@ -16,6 +16,13 @@ export interface IAuthState {
 
 export interface IAuthAction {
 	setUserInfo: (newUserInfo: TUserInfoData) => void
+	onSignInUserName: ({
+		userName,
+		password,
+	}: {
+		userName: string
+		password: string
+	}) => Promise<{ langId: string } | undefined>
 	onSignInPhone: ({
 		areaCode,
 		phoneNo,

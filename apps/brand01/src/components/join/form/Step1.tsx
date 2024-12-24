@@ -7,7 +7,6 @@ import { imageUrl } from 'JF-core'
 import { useAuthStore } from 'JF-operations'
 import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
-import { toast } from 'react-toastify'
 
 interface IStep1Props {
 	goToNextStep: () => void
@@ -30,29 +29,24 @@ const Step1: React.FC<IStep1Props> = ({ goToNextStep, t }) => {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	const handlePhoneConfirm = async () => {
-		const isPhoneVaild = await trigger('phoneNo')
-		if (isPhoneVaild) {
+		const isPhoneValid = await trigger('phoneNo')
+		if (isPhoneValid) {
 			const { areaCode, phoneNo } = getValues()
-			try {
-				setIsLoading(true)
-				const isExistsPhoneNo = await existsPhoneNo({
-					areaCode,
-					phoneNo,
+			setIsLoading(true)
+			const isExistsPhoneNo = await existsPhoneNo({
+				areaCode,
+				phoneNo,
+			})
+			if (isExistsPhoneNo) {
+				setError('phoneNo', {
+					type: 'duplicate',
+					message: t('Label_Join_Phone_Exists'),
 				})
-				if (isExistsPhoneNo) {
-					setError('phoneNo', {
-						type: 'duplicate',
-						message: t('Label_Join_Phone_Exists'),
-					})
-				} else {
-					clearErrors('phoneNo')
-					goToNextStep()
-				}
-			} catch (error) {
-				toast.error((error as Error).message)
-			} finally {
-				setIsLoading(false)
+			} else {
+				clearErrors('phoneNo')
+				goToNextStep()
 			}
+			setIsLoading(false)
 		}
 	}
 

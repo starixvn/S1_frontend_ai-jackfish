@@ -11,4 +11,10 @@ export const siteApiUrl = {
 	verifyOTP: 'Site/VerifyOTP',
 	getIpCountry: 'Site/GetIpCountry',
 	getSeo: 'Site/seo',
+	signup: 'Site/Signup',
+	existsUserName: 'Site/ExistsUserName',
+	existsEmail: 'Site/ExistsEmail',
+	getSiteCurrencyList: 'Site/GetSiteCurrencyList',
+	getRecaptchaInfo: 'Site/GetRecaptchaInfo',
+	getNumberCaptcha: 'Site/GetNumberCaptcha',
 }

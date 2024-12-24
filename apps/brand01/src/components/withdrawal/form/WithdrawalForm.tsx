@@ -12,7 +12,11 @@ import {
 	scrollToTop,
 	useGetPathname,
 } from 'JF-core'
-import { useAuthStore, useWithdrawalStore } from 'JF-operations'
+import {
+	useAuthStore,
+	useWithdrawalInfo,
+	useWithdrawalOperations,
+} from 'JF-operations'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
@@ -25,10 +29,10 @@ export const WithdrawalForm: React.FC = () => {
 	const {
 		userInfo: { currencyId = CurrenciesEnum.THB },
 	} = useAuthStore()
-	const { submitWithdrawalRequest, isLoading } = useWithdrawalStore()
+	const { submitWithdrawalRequest, isMutating } = useWithdrawalOperations()
 	const converted = isConvert(currencyId)
 
-	const { withdrawalLimit, withdrawalBalance } = useWithdrawalStore()
+	const { withdrawalLimit, withdrawalBalance } = useWithdrawalInfo()
 
 	const {
 		withdrawalMin = 0,
@@ -104,7 +108,7 @@ export const WithdrawalForm: React.FC = () => {
 				`${t('Label_Withdrawal_WithdrawalSuccess')} ${t('Label_Withdrawal_WithdrawalSuccessNotify')}`,
 			)
 		try {
-			await submitWithdrawalRequest({ amount, currencyId })
+			await submitWithdrawalRequest(amount)
 			// 成功之後會跳到 Processing 畫面，手機版需要退到最頂，否則 pageView 位置不對
 			scrollToTop()
 			successToast()
@@ -177,7 +181,7 @@ export const WithdrawalForm: React.FC = () => {
 					type='secondary'
 					className='w-full'
 					htmlType='submit'
-					loading={isLoading}
+					loading={isMutating}
 				>
 					{t('Label_General_Submit')}
 				</Button>

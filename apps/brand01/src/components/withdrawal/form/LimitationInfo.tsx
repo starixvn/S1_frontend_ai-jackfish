@@ -1,13 +1,13 @@
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import { CurrenciesEnum } from 'JF-constants'
 import { cn, numberFormat, useGetPathname } from 'JF-core'
-import { useAuthStore, useWithdrawalStore } from 'JF-operations'
+import { useAuthStore, useWithdrawalInfo } from 'JF-operations'
 
 // 顯示提款上下限，因 Tuk555 只有先做 localBank , 僅先移植 local bank 邏輯
 export const LimitationInfo: React.FC = () => {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
-	const { withdrawalLimit } = useWithdrawalStore()
+	const { withdrawalLimit } = useWithdrawalInfo()
 	const {
 		userInfo: { currencyId = CurrenciesEnum.THB },
 	} = useAuthStore()

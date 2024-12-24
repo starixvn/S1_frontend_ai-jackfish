@@ -3,7 +3,12 @@ import { KycUpload } from '@brand01/src/components/withdrawal/kyc/KycUpload'
 import { useClientTranslation } from '@brand01/src/i18n/client'
 import { KycStatusEnum } from 'JF-api/payment/type'
 import { useGetPathname } from 'JF-core'
-import { useWithdrawalStore } from 'JF-operations'
+import {
+	useRunningRequest,
+	useWithdrawalInfo,
+	useWithdrawalStore,
+} from 'JF-operations'
+import { head } from 'lodash-es'
 import { useCallback, useEffect } from 'react'
 import { BalanceInfo } from './BalanceInfo'
 import { ProcessingInfo } from './ProcessingInfo'
@@ -12,9 +17,13 @@ import { WithdrawalForm } from './form/WithdrawalForm'
 const Withdrawal = () => {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
-
-	const { fetchWithdrawalInfo, isInit, runningWithdrawalRequest, kycStatus } =
-		useWithdrawalStore()
+	const {
+		kycStatus,
+		isLoading,
+		bankData: { bankInfoDetail },
+	} = useWithdrawalInfo()
+	const runningWithdrawalRequest = useRunningRequest()
+	const { setSelectedBankItem } = useWithdrawalStore()
 
 	const withdrawalContent = useCallback(() => {
 		// kyc upload 的觸發權重最高
@@ -35,14 +44,20 @@ const Withdrawal = () => {
 		)
 	}, [runningWithdrawalRequest, kycStatus])
 
+	// 尋常邏輯可以選擇卡片，因為 brand01 固定顯示第一筆，所以在初始化時候就直接選好
 	useEffect(() => {
-		fetchWithdrawalInfo()
-	}, [fetchWithdrawalInfo])
+		if (bankInfoDetail.length !== 0) {
+			const bankItem = head(bankInfoDetail)
+			if (bankItem) {
+				setSelectedBankItem(bankItem)
+			}
+		}
+	}, [isLoading, bankInfoDetail, setSelectedBankItem])
 
-	if (!isInit) return <Loading className='h-[80vh] bg-transparent' />
+	if (isLoading) return <Loading className='h-[80vh] bg-transparent' />
 
 	return (
-		<div className='grid min-h-full grid-flow-row content-start gap-5 py-6 px-8 lg:px-[8rem] xl:px-[14rem]'>
+		<div className='grid min-h-full grid-flow-row content-start gap-5 px-8 py-6 lg:px-[8rem] xl:px-[14rem]'>
 			<h2 className='text-center text-xl '>{t('Label_General_Withdrawal')}</h2>
 			{withdrawalContent()}
 		</div>

@@ -23,7 +23,7 @@ interface ISelectProps {
 	showSearch?: boolean
 	isTranslation?: boolean
 	title?: string
-	isMessageHide?: boolean
+	showMessage?: boolean
 	errorMessage?: string
 	successMessage?: string
 	showValue?: boolean
@@ -44,7 +44,7 @@ const Select: React.FC<ISelectProps> = props => {
 		showSearch,
 		isTranslation,
 		title,
-		isMessageHide,
+		showMessage = false,
 		errorMessage,
 		successMessage,
 		showValue,
@@ -77,7 +77,7 @@ const Select: React.FC<ISelectProps> = props => {
 	})
 
 	const renderMessages = () => {
-		if (isMessageHide) return null
+		if (!showMessage) return null
 		if (errorMessage) {
 			return (
 				<div className='text-danger-400 ms-2 text-sm font-medium'>

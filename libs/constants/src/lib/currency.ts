@@ -41,6 +41,21 @@ export const AREA_CODE_BY_CURRENCY: { [key: number]: string } = {
 	[CurrenciesEnum.BRL]: '+55',
 }
 
+export const CURRENCY_TO_TIMEZONE: { [key: number]: string } = {
+	2: '+08:00',
+	4: '+07:00',
+	15: '+07:00',
+	3: '+00:00',
+	72: '+07:00',
+	74: '+06:00',
+	61: '+05:30',
+	13: '+08:00',
+	51: '+07:00',
+	82: '-03:00',
+	45: '+09:00',
+	32: '+09:00',
+}
+
 export const PHONE_DIGITS_LIMIT: { [key: string]: string } = {
 	[AREA_CODE_BY_CURRENCY[CurrenciesEnum.MYR]]: '9-10',
 	[AREA_CODE_BY_CURRENCY[CurrenciesEnum.THB]]: '9',

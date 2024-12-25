@@ -112,7 +112,7 @@ const Select: React.FC<ISelectProps> = props => {
 	return (
 		<div
 			className={cn(
-				'relative mx-5 lg:mx-0 lg:h-full lg:w-full',
+				'relative lg:h-full lg:w-full',
 				{
 					'mb-[1px]': isActive,
 				},

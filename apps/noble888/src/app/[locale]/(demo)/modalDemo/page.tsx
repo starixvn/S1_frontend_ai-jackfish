@@ -85,14 +85,13 @@ const ModalPage = () => {
 	const handleOpenErrorModal = async () => {
 		openModal({
 			type: 'error',
-			content: 'test info',
+			content: 'test error',
 		})
 	}
 	const handleOpenConfirmModal = async () => {
 		openModal({
 			type: 'confirm',
 			content: 'test confirm',
-			confirmText: '自定義文字與功能',
 			onConfirm: () => {
 				alert('test')
 				closeModal()

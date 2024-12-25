@@ -1,14 +1,14 @@
 'use client'
 
 import { cn } from 'JF-core'
-import React, { useEffect } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbBellRinging2Filled } from 'react-icons/tb'
 import Button from './Button'
 
 interface IModalProps {
 	children?: React.ReactNode
-	size: 'popup' | 'xs' | 'sm' | 'md' | 'lg'
+	size: 'xs' | 'sm' | 'md' | 'lg'
 	isOpen: boolean
 	onClose: () => void
 	className?: string
@@ -41,45 +41,41 @@ const Modal: React.FC<IModalProps> = ({
 }) => {
 	const { t } = useTranslation()
 
-	const baseClasses = `relative transform bg-blue-100 shadow-xl transition-transform duration-300 ease-in-out lg:rounded-xl overflow-hidden`
 	const sizeClasses = {
-		popup: 'lg:max-w-[500px] lg:min-h-[230px] mx-6',
-		xs: 'w-full h-full lg:w-[880px] lg:h-[450px]',
-		sm: 'w-full h-full lg:w-[600px] lg:h-[810px]',
-		md: 'w-full h-full lg:w-[880px] lg:h-[560px]',
-		lg: 'w-full h-full lg:w-[880px] lg:h-[810px]',
+		xs: 'w-full h-full lg:max-w-[880px] lg:max-h-[450px]',
+		sm: 'w-full h-full lg:max-w-[880px] lg:max-h-[560px]',
+		md: 'w-full h-full lg:max-w-[880px] lg:max-h-[680px]',
+		lg: 'w-full h-full lg:max-w-[880px] lg:max-h-[810px]',
 	}
 
 	const sizeClass = sizeClasses[size]
 
-	let finalIcon: React.ReactNode = icon
-	let finalTitle: string | null = title || null
-	const bellColor = 'text-yellow-500'
-	const defaultConfirmText = confirmText || t('Label_General_Yes')
+	let finalIcon = null
+	let finalTitle = ''
+	let finalConfirmText = ''
+
+	const Bell: ReactNode = (
+		<TbBellRinging2Filled className='text-yellow-500' size={40} />
+	)
 
 	switch (type) {
 		case 'info':
-			finalIcon = icon ?? (
-				<TbBellRinging2Filled className={bellColor} size={40} />
-			)
+			finalIcon = icon ?? Bell
 			finalTitle = title || t('Label_General_Information')
+			finalConfirmText = confirmText || t('Label_General_OK')
 			break
 		case 'error':
-			finalIcon = icon ?? (
-				<TbBellRinging2Filled className={bellColor} size={40} />
-			)
+			finalIcon = icon ?? Bell
 			finalTitle = title || t('Label_Error_Oops')
+			finalConfirmText = confirmText || t('Label_General_Close')
 			break
 		case 'confirm':
-			finalIcon = icon ?? (
-				<TbBellRinging2Filled className={bellColor} size={40} />
-			)
+			finalIcon = icon ?? Bell
 			finalTitle = title || t('Label_General_Oh')
+			finalConfirmText = confirmText || t('Label_General_Yes')
 			break
 		case 'default':
 		default:
-			finalIcon = icon || null
-			finalTitle = title || null
 			break
 	}
 
@@ -106,26 +102,34 @@ const Modal: React.FC<IModalProps> = ({
 
 	return (
 		<div
-			className='bg-primary-900/40 fixed inset-0 z-50 flex h-full w-full items-center justify-center'
+			className={cn(
+				'bg-primary-900/40 fixed inset-0 z-50 flex h-full w-full items-start justify-center lg:items-center',
+				type === 'default' ? 'p-0' : 'p-9',
+			)}
 			aria-labelledby='modal-title'
 			role='dialog'
 			aria-modal='true'
 			onClick={() => closeOnOverlayClick && onClose()}
 		>
 			<div
-				className={cn(`${baseClasses} ${sizeClass} ${className} flex flex-col`)}
+				className={cn(
+					'relative transform overflow-hidden bg-white p-5 shadow-xl transition-transform duration-300 ease-in-out lg:rounded-xl lg:bg-blue-100',
+					type === 'default'
+						? sizeClass
+						: 'w-full lg:max-h-[60vw] lg:w-[460px]',
+					className,
+				)}
 				onClick={e => e.stopPropagation()}
 			>
 				{/* icon and title  */}
-
 				{(finalIcon || finalTitle) && (
-					<div className='relative flex items-center justify-between bg-blue-100 p-3'>
-						<div className='flex w-full flex-col items-center justify-center'>
-							{finalIcon && <div className='mt-4'>{finalIcon}</div>}
+					<div className='relative flex items-center justify-between bg-white lg:bg-blue-100'>
+						<div className='flex w-full flex-col items-center justify-center gap-1 lg:gap-3'>
+							{finalIcon && <div className='lg:mt-4'>{finalIcon}</div>}
 							{finalTitle && (
 								<div
 									id='modal-title'
-									className='mt-3 text-center text-lg font-extrabold'
+									className='text-primary-900 text-center text-lg font-extrabold'
 								>
 									{finalTitle}
 								</div>
@@ -135,7 +139,6 @@ const Modal: React.FC<IModalProps> = ({
 				)}
 
 				{/* close button */}
-
 				{showCloseButton && (
 					<button
 						type='button'
@@ -162,59 +165,36 @@ const Modal: React.FC<IModalProps> = ({
 						</svg>
 					</button>
 				)}
-				<div className='flex-grow  bg-blue-100 px-4 py-3 '>
-					{/* <div
-						className={
-							!title && !icon ? 'overflow-y-auto ' : 'overflow-y-auto '
-						}
-					> */}
-					{children}
-					{/* </div> */}
-				</div>
 
-				{/* modal buttons for type: 'confirm', 'info', 'error' */}
-
-				{type === 'confirm' && (
-					<div className='flex justify-center gap-4 p-4'>
-						<Button
-							className='bg-primary-600 font-bold text-blue-100 hover:bg-red-600'
-							onClick={onConfirm}
-						>
-							{defaultConfirmText}
-						</Button>
-						<Button
-							onClick={onClose}
-							className='text-black-100 bg-gray-500 font-bold text-gray-700 hover:bg-gray-800 hover:text-gray-100'
-						>
-							{t('Label_General_No')}
-						</Button>
-					</div>
-				)}
-
-				{type === 'error' && (
-					<div className='flex justify-center gap-4 p-4'>
-						<Button
-							className={cn(
-								'bg-primary-600 font-bold text-blue-100 hover:bg-red-600',
+				{type === 'default' ? (
+					children
+				) : (
+					<>
+						<div className='text-primary-700 flex-grow overflow-y-auto bg-white py-1 text-center lg:bg-blue-100 lg:py-3'>
+							{children}
+						</div>
+						<div className='flex justify-center gap-4 p-2 lg:p-4'>
+							<Button
+								className={cn(
+									'bg-primary-600 w-full font-bold text-blue-100 hover:bg-red-600 lg:w-auto lg:min-w-32',
+								)}
+								onClick={() => {
+									onClose()
+									onConfirm && onConfirm()
+								}}
+							>
+								{finalConfirmText}
+							</Button>
+							{type === 'confirm' && (
+								<Button
+									className='text-black-100 w-full bg-gray-500 font-bold text-gray-700 hover:bg-gray-800 hover:text-gray-100 lg:w-auto lg:min-w-32'
+									onClick={onClose}
+								>
+									{t('Label_General_No')}
+								</Button>
 							)}
-							onClick={onClose}
-						>
-							{t('Label_General_Close')}
-						</Button>
-					</div>
-				)}
-
-				{type === 'info' && (
-					<div className='flex justify-center gap-4 p-4'>
-						<Button
-							className={cn(
-								'bg-primary-600 font-bold text-blue-100 hover:bg-red-600',
-							)}
-							onClick={onClose}
-						>
-							{t('Label_General_Close')}
-						</Button>
-					</div>
+						</div>
+					</>
 				)}
 			</div>
 		</div>

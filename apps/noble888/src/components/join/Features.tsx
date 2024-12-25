@@ -11,7 +11,7 @@ const Features: React.FC = () => {
 	} = useAuthStore()
 
 	return (
-		<div className='grid w-full grid-cols-1 place-content-between rounded bg-gray-200 text-gray-700'>
+		<div className='order-2 grid w-full grid-cols-1 place-content-between rounded bg-gray-200 text-gray-700 lg:order-1'>
 			<div>
 				<div className='bg-primary-600 flex w-full items-center gap-1 rounded-t p-2.5 text-xs font-bold text-white'>
 					<ImStarFull />
@@ -40,7 +40,7 @@ const Features: React.FC = () => {
 					<li>{t('Label_Join_SpeedyDepositAndWithdrawal')}</li>
 				</ul>
 			</div>
-			<div className='relative h-96 w-full scale-90 p-2.5'>
+			<div className='relative hidden h-96 w-full scale-90 p-2.5 lg:block'>
 				<img
 					className='absolute bottom-0 z-[3]'
 					src={bannerUrl('/desktop/img/logo_en_w.png')}

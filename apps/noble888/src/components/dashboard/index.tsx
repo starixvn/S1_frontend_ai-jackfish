@@ -3,14 +3,14 @@ import Sidebar from './Sidebar'
 
 export default function Dashboard({ children }: { children: React.ReactNode }) {
 	return (
-		<div className='mt-md-10 mt-lg-10 mt-xl-10 grid grid-cols-12 gap-6 lg:px-[8rem] xl:px-[15rem]'>
-			{/* 桌機側邊欄 */}
-			<div className='col-span-3 hidden lg:block xl:block'>
+		<div className='mt-md-10 mt-lg-10 mt-xl-10 grid grid-cols-12 gap-6 lg:mb-2 lg:mt-8 lg:px-32 xl:px-64'>
+			{/* 僅有桌機才會顯示的側邊欄 */}
+			<div className='col-span-2 hidden lg:block'>
 				<Sidebar />
 			</div>
 
-			{/* 主內容 */}
-			<div className='bg-black-50 col-span-12 overflow-hidden lg:col-span-9 lg:rounded-md xl:col-span-9  xl:rounded-md'>
+			{/* 需要登入才能看到的頁面主內容 */}
+			<div className='bg-black-50 col-span-12 overflow-hidden lg:col-span-10 lg:rounded-md'>
 				{children}
 			</div>
 		</div>

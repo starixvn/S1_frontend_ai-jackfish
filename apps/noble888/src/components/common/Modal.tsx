@@ -4,7 +4,7 @@ import { cn } from 'JF-core'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbBellRinging2Filled } from 'react-icons/tb'
-import Button from '../button'
+import Button from './Button'
 
 interface IModalProps {
 	children?: React.ReactNode

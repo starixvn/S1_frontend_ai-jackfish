@@ -1,3 +1,5 @@
+import { Statement } from '@noble888/src/components'
+
 export default function StatementPage() {
-	return <div className='w-full bg-red-900 text-white'></div>
+	return <Statement />
 }

@@ -52,13 +52,13 @@ const Pagination = (props: IPaginationProps) => {
 		onPageChange,
 		className: 'flex items-center justify-center gap-1 mt-4',
 		pageLinkClassName:
-			'flex items-center justify-center w-8 h-8 text-lg rounded-full text-blue-600 hover:bg-blue-500 hover:text-white transition',
+			'flex items-center justify-center w-8 h-8 text-lg rounded-full text-secondary-500 hover:bg-secondary-500 hover:text-white transition',
 		activeLinkClassName:
-			'flex items-center justify-center w-8 h-8 text-lg rounded-full bg-blue-500 text-white',
+			'flex items-center justify-center w-8 h-8 text-lg rounded-full bg-secondary-500 text-white',
 		previousLinkClassName:
-			'flex items-center justify-center w-8 h-8 text-lg rounded-full text-blue-600 hover:bg-blue-500 hover:text-white transition',
+			'flex items-center justify-center w-8 h-8 text-lg rounded-full text-secondary-500 hover:bg-secondary-500 hover:text-white transition',
 		nextLinkClassName:
-			'flex items-center justify-center w-8 h-8 text-lg rounded-full text-blue-600 hover:bg-blue-500 hover:text-white transition',
+			'flex items-center justify-center w-8 h-8 text-lg rounded-full text-secondary-500 hover:bg-secondary-500 hover:text-white transition',
 		disabledLinkClassName: 'opacity-50 cursor-not-allowed',
 		previousLabel: <FiChevronLeft size={isLgScreen ? 16 : 25} />,
 		nextLabel: <FiChevronRight size={isLgScreen ? 16 : 25} />,

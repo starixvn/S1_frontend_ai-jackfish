@@ -10,7 +10,7 @@ const NoInformation = () => {
 			<div className=' flex w-full flex-col items-center px-4 lg:hidden'>
 				<FaBoxOpen size={64} className='text-gray-100' />
 				<div className='mt-4 min-w-64 rounded bg-gray-100 py-2 shadow-sm'>
-					<p className='text-sm text-white'>{t('Label_General_NoData')}</p>
+					<p className='text-sm text-gray-1000'>{t('Label_General_NoData')}</p>
 				</div>
 			</div>
 

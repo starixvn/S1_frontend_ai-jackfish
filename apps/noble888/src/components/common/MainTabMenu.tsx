@@ -21,8 +21,8 @@ const MainTabMenu = ({ tagsData }: MainTabMenuProps) => {
 			{tagsData.map((tag, index) => {
 				const activeClass =
 					index === currentTagIndex
-						? 'bg-primary-300 text-white'
-						: 'bg-gray-100 text-primary-900 hover:bg-primary-200'
+						? 'bg-secondary-500 text-gray-0'
+						: 'bg-gray-800 text-gray-500 '
 
 				return (
 					<Link

@@ -88,7 +88,7 @@ const Table = <T,>({ dataSource, columns, footer }: ITableProps<T>) => {
 			<table className='w-full border-separate border-spacing-0'>
 				{/* 表格標題 */}
 				<thead>
-					<tr className='bg-primary-500 text-white'>
+					<tr className='bg-secondary-500 text-white'>
 						{columns.map(column => (
 							<th
 								key={column.key}
@@ -106,7 +106,7 @@ const Table = <T,>({ dataSource, columns, footer }: ITableProps<T>) => {
 						<tr
 							key={index}
 							className={
-								index % 2 === 0 ? 'bg-white' : 'bg-gray-50' // 偶數行不同背景顏色
+								index % 2 === 0 ? 'bg-white' : 'bg-gray-200' // 偶數行不同背景顏色
 							}
 						>
 							{renderColumns(item, index)}

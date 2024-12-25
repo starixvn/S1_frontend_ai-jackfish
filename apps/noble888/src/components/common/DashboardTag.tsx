@@ -19,12 +19,12 @@ interface IDashboardTagProps {
 const DashboardTag = ({ Icon, title, iconSize = 25 }: IDashboardTagProps) => {
 	return (
 		<div className='flex'>
-			<div className='bg-primary-900 flex flex-col items-end rounded-b-xl px-10 pb-5 pt-3 text-white'>
+			<div className='bg-secondary-500 flex flex-col items-end rounded-b-xl px-10 pb-5 pt-3 text-white'>
 				<div className='flex items-center gap-1'>
 					<Icon size={iconSize} />
 					<div className='ms-2 text-lg font-bold'>{title}</div>
 				</div>
-				<div className='from-secondary-600 h-1 w-20 bg-gradient-to-l rtl:bg-gradient-to-r' />
+				<div className='from-gray-0 h-1 w-20 bg-gradient-to-l rtl:bg-gradient-to-r' />
 			</div>
 		</div>
 	)

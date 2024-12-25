@@ -39,17 +39,12 @@ const StatementItem = (props: IStatementvalueProps) => {
 	// 渲染單一項目
 	const renderValue = (
 		label: string,
-		value?: string | number | React.ReactNode,
+		value?: string | number | null | undefined,
 	) => {
-		const isNode = typeof value !== 'string' || typeof value !== 'number'
-
 		return (
 			<div className='flex flex-col'>
-				<span className='text-primary-700 mb-2 text-sm font-bold'>{label}</span>
-				{isNode && value}
-				{!isNode && (
-					<span className='mt-1 text-sm text-gray-700'>{value ?? '-'}</span>
-				)}
+				<span className='text-gray-0 mb-2 text-sm font-bold'>{label}</span>
+				<span className='text-gray-0 mt-1 text-sm'>{value ?? '-'}</span>
 			</div>
 		)
 	}
@@ -62,9 +57,7 @@ const StatementItem = (props: IStatementvalueProps) => {
 					<>
 						{renderValue(
 							`${t('Label_General_SettledDate')} (${CURRENCY_TO_TIMEZONE[currencyId]})`,
-							revertTimeZone(props.settledTime ?? '').format(
-								'YYYY-MM-DD HH:mm:ss',
-							),
+							revertTimeZone(props.settledDate ?? '').format('YYYY-MM-DD'),
 						)}
 						{renderValue(
 							t('Label_General_Turnover'),
@@ -82,8 +75,10 @@ const StatementItem = (props: IStatementvalueProps) => {
 							t('Label_General_WinlostAmount'),
 							numberFormat(props.winlostAmount ?? 0, currencyId, 2),
 						)}
-						{renderValue(
-							t('Label_History_Action'),
+						<div className='flex flex-col'>
+							<span className='text-gray-0 mb-2 text-sm font-bold'>
+								{t('Label_History_Action')}
+							</span>
 							<button
 								className='rounded bg-orange-500 px-4 py-2 text-sm font-bold text-white hover:bg-orange-600'
 								onClick={() => {
@@ -96,8 +91,8 @@ const StatementItem = (props: IStatementvalueProps) => {
 								}}
 							>
 								{t('Label_General_Details')}
-							</button>,
-						)}
+							</button>
+						</div>
 					</>
 				)
 			case TableTypeEnum.ByDayStatementTable:
@@ -105,9 +100,7 @@ const StatementItem = (props: IStatementvalueProps) => {
 					<>
 						{renderValue(
 							`${t('Label_General_SettledDate')} (${CURRENCY_TO_TIMEZONE[currencyId]})`,
-							revertTimeZone(props.settledTime ?? '').format(
-								'YYYY-MM-DD HH:mm:ss',
-							),
+							revertTimeZone(props.settledDate ?? '').format('YYYY-MM-DD'),
 						)}
 						{renderValue(t('Label_General_CategoryName'), props.categoryName)}
 						{renderValue(
@@ -122,8 +115,10 @@ const StatementItem = (props: IStatementvalueProps) => {
 							t('Label_General_WinlostAmount'),
 							numberFormat(props.winlostAmount ?? 0, currencyId, 2),
 						)}
-						{renderValue(
-							t('Label_History_Action'),
+						<div className='flex flex-col'>
+							<span className='text-gray-0 mb-2 text-sm font-bold'>
+								{t('Label_History_Action')}
+							</span>
 							<button
 								className='rounded bg-orange-500 px-4 py-2 text-sm font-bold text-white hover:bg-orange-600'
 								onClick={() => {
@@ -137,8 +132,8 @@ const StatementItem = (props: IStatementvalueProps) => {
 								}}
 							>
 								{t('Label_General_Details')}
-							</button>,
-						)}
+							</button>
+						</div>
 					</>
 				)
 
@@ -147,9 +142,7 @@ const StatementItem = (props: IStatementvalueProps) => {
 					<>
 						{renderValue(
 							`${t('Label_General_SettledDate')} (${CURRENCY_TO_TIMEZONE[currencyId]})`,
-							revertTimeZone(props.settledTime ?? '').format(
-								'YYYY-MM-DD HH:mm:ss',
-							),
+							revertTimeZone(props.settledDate ?? '').format('YYYY-MM-DD'),
 						)}
 						{renderValue(t('Label_General_GameTypeName'), props.gameTypeName)}
 						{renderValue(
@@ -164,8 +157,10 @@ const StatementItem = (props: IStatementvalueProps) => {
 							t('Label_General_WinlostAmount'),
 							numberFormat(props.winlostAmount ?? 0, currencyId, 2),
 						)}
-						{renderValue(
-							t('Label_History_Action'),
+						<div className='flex flex-col'>
+							<span className='text-gray-0 mb-2 text-sm font-bold'>
+								{t('Label_History_Action')}
+							</span>
 							<button
 								className='rounded bg-orange-500 px-4 py-2 text-sm font-bold text-white hover:bg-orange-600'
 								onClick={() => {
@@ -179,8 +174,8 @@ const StatementItem = (props: IStatementvalueProps) => {
 								}}
 							>
 								{t('Label_General_Details')}
-							</button>,
-						)}
+							</button>
+						</div>
 					</>
 				)
 
@@ -215,9 +210,9 @@ const StatementItem = (props: IStatementvalueProps) => {
 
 	return isPad ? (
 		<div
-			className={cn(' grid grid-cols-2 gap-4 rounded-md p-4 shadow', {
-				'bg-primary-50': isEvenRow,
-				'bg-primary-100': !isEvenRow,
+			className={cn(' grid grid-cols-2 gap-4 rounded-md p-4 shadow ', {
+				'bg-gray-900': isEvenRow,
+				'bg-gray-800': !isEvenRow,
 			})}
 		>
 			{getStatementData()}
@@ -225,8 +220,8 @@ const StatementItem = (props: IStatementvalueProps) => {
 	) : (
 		<div
 			className={cn(' grid grid-cols-2 gap-4 rounded-md p-4 shadow', {
-				'bg-primary-50': isEvenItem,
-				'bg-primary-100': !isEvenItem,
+				'bg-gray-900': isEvenItem,
+				'bg-gray-800': !isEvenItem,
 			})}
 		>
 			{getStatementData()}

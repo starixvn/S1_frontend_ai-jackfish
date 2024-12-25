@@ -74,7 +74,7 @@ const DateRangeStatementTable = () => {
 						})
 						fetchDataByTableType(TableTypeEnum.ByDayStatementTable)
 					}}
-					className=' bg-primary-500 rounded px-5 py-1 text-sm font-bold text-white'
+					className=' bg-secondary-500 rounded px-5 py-1 text-sm font-bold text-white'
 				>
 					{t('Label_General_Details')}
 				</button>

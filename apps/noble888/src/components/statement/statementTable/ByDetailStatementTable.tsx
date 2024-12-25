@@ -76,11 +76,11 @@ const ByDetailStatementTable = () => {
 			}
 			footer={() => (
 				<>
-					<p className='text-sm font-bold '>
+					<p className='text-sm font-bold text-info-600'>
 						{t('Label_General_TurnOverTotal')}：<span>{totalTurnOver}</span>
 					</p>
 					&nbsp;&nbsp;
-					<p className='text-sm font-bold'>
+					<p className='text-sm font-bold text-info-600'>
 						{t('Label_General_WinlostAmountTotal')}：
 						<span>{totalWinlostAmount}</span>
 					</p>

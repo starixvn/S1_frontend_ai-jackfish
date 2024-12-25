@@ -25,7 +25,7 @@ const Breadcrumb = ({
 	const visibleItems = breadcrumbData.slice(0, activeIndex + 1)
 
 	return (
-		<ul className='text-primary-300 ms-4 flex flex-wrap items-center lg:text-white'>
+		<ul className='text-gray-300  ms-4 flex flex-wrap items-center lg:text-white'>
 			{visibleItems.map((item, index) => {
 				/** 是否為最後一個 item */
 				const isLastItem = index === visibleItems.length - 1

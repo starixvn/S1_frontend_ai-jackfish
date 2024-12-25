@@ -12,3 +12,8 @@ export { default as Select } from './Select'
 export { default as SubTabMenu } from './SubTabMenu'
 export { default as Table } from './Table'
 export type { ITableColumns } from './Table'
+export {
+	default as Tooltip,
+	TooltipPlacementEnum,
+	TooltipTriggerEnum,
+} from './Tooltip'

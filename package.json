@@ -61,6 +61,7 @@
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.0",
 		"@tanstack/react-query": "^5.62.8",
+		"@tippyjs/react": "^4.2.6",
 		"accept-language": "^3.0.18",
 		"axios": "^1.7.2",
 		"clsx": "^2.1.1",

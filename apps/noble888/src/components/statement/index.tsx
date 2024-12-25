@@ -236,7 +236,7 @@ const Statement = () => {
 
 				{/* 頁碼 */}
 				{isShowPagination && (
-					<div className='my-10'>
+					<div className='my-10 px-5'>
 						<Pagination
 							totalPage={totalPages}
 							currentPage={pageNumber}
@@ -246,27 +246,25 @@ const Statement = () => {
 				)}
 				{/* 顯示內容 */}
 				<div className='m-5 grid grid-cols-1 gap-4 md:mb-10 md:ml-10 md:mr-10 md:grid-cols-2'>
-					{loading ? (
-						<Loading />
-					) : getStatementData().length > 0 ? (
+					{loading && <Loading />}
+					{!loading && getStatementData().length === 0 && <NoInformation />}
+					{!loading &&
+						getStatementData().length > 0 &&
 						getStatementData().map((item, index) => (
 							<StatementItem
 								key={`statement-item-${index}`}
 								{...item}
 								index={index}
 							/>
-						))
-					) : (
-						<NoInformation />
-					)}
+						))}
 				</div>
 			</div>
 
 			{/* Desktop View */}
-			<div className='hidden lg:block'>
-				<div className='bg-primary-50 w-full px-5 pb-10'>
+			<div className='hidden lg:block '>
+				<div className='w-full bg-gray-900 px-5 pb-10'>
 					<DashboardTag title='Statement' Icon={MdOutlineManageHistory} />
-					<div className='bg-primary-200 mt-10 flex h-5 items-center rounded-3xl py-5'>
+					<div className='bg-gray-1000 mt-10 flex h-5 items-center rounded-3xl py-5'>
 						<Breadcrumb
 							activeIndex={activeTable}
 							breadcrumbData={breadcrumbI18nKeys}
@@ -289,7 +287,7 @@ const Statement = () => {
 						{/* 提交按鈕 */}
 						<button
 							onClick={onSubmit}
-							className='bg-primary-500 col-span-2  rounded px-4 py-2 text-sm font-bold text-white'
+							className='bg-secondary-500 col-span-2  rounded px-4 py-2 text-sm font-bold text-white'
 						>
 							{t('Label_General_Submit')}
 						</button>

@@ -8,7 +8,7 @@ const LobbyBanner = ({bannerImgSrc}:ILobbyBannerArgs) => {
 			<div className='swiper-container'>
 				<div className='swiper-wrapper'>
 					<div className='swiper-slide'>
-						<img alt='fish-banner-img' src={bannerImgSrc} />
+						<img alt='banner-img' src={bannerImgSrc} />
 					</div>
 				</div>
 			</div>

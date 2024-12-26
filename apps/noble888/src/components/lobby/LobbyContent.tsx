@@ -22,8 +22,9 @@ export default function LobbyContent({ category }: { category: string }) {
     })
   }
 
+
   return (
-    <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5'>
+    <div className='grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-5'>
       {subMenu?.map(item => {
         const { tpGameIdNo, isTpMaintain, productName = '', pcLobbyPicUrl } = item
         let imgUrl = ''
@@ -48,28 +49,28 @@ export default function LobbyContent({ category }: { category: string }) {
                 src={imgUrl}
                 alt=''
                 className={cn('w-full rounded-xl object-cover', {
-                  'transition ease-in-out group-hover:scale-105': !isTpMaintain,
+                  'transition ease-in-out': !isTpMaintain,
                 })}
               />
               {isTpMaintain ? (
-                <div className='absolute inset-0 grid w-full cursor-not-allowed place-items-center rounded-xl backdrop-grayscale'>
-                  <div className='w-full rounded-md bg-neutral-300 py-1 text-center text-neutral-500'>
+                <div className='absolute inset-0 grid w-full cursor-not-allowed place-items-center rounded-xl backdrop-grayscale bg-gradient-to-t from-gray-1000 to-gray-900/10 font-bold'>
                     {t('Label_General_UnderMaintenance')}
-                  </div>
                 </div>
               ) : (
                 <div
                   className={cn(
-                    'absolute inset-0 grid place-items-center rounded-xl bg-gradient-to-t from-neutral-500 to-neutral-500/10 opacity-0 transition ease-in-out group-hover:scale-105 group-hover:hover:opacity-100'
+                    'absolute inset-0 grid place-items-center rounded-xl bg-gradient-to-t from-gray-900 to-gray-900/10 opacity-0 transition ease-in-out group-hover:opacity-100'
                   )}
                 >
-                  <div className='truncate text-center text-sm font-medium leading-8 text-neutral-100'>
-                    {t(productName)}
-                  </div>
+<button
+  className='px-4 py-2 text-gray-100 border-2 border-white rounded-full bg-transparent transition-all duration-300 ease-in-out'
+>
+  Play Now
+</button>
                 </div>
               )}
             </div>
-            <p className='mt-2 text-center text-sm font-medium text-neutral-700'>
+            <p className='mt-2 text-center text-sm font-medium text-gray-100'>
               {t(productName)}
             </p>
           </div>

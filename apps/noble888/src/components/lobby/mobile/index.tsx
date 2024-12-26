@@ -6,16 +6,18 @@ import { useClientTranslation } from '@brand01/src/i18n/client'
 import { MENU_DATA } from '@noble888/src/data/static'
 import { MenuIconTypeEnum } from 'JF-constants'
 import { cn, isEventPeriod, useGetPathname, useMenuOpen } from 'JF-core'
-import { useHomeStore } from 'JF-operations'
+import { useHomeStore, useModalStore } from 'JF-operations'
 import useMenu from 'libs/core/src/lib/hooks/useMenu'
 import { useMediaQuery } from 'usehooks-ts'
 import { activeCategoryColors } from './staticData'
+import { LoginModal } from '../../customModals'
 
 export default function HotGameSwiper() {
 	const defaultMenuKey = 'Sports'
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
 	const { onMenuOpen } = useMenuOpen({})
+  const { openModal, closeModal } = useModalStore()
 	const { menuList } = useMenu({ homeMenuData: MENU_DATA })
 	const [selectedCategory, setSelectedCategory] =
 		useState<string>(defaultMenuKey)
@@ -36,13 +38,16 @@ export default function HotGameSwiper() {
 	)?.subMenu
 
 	// 點擊遊戲後打開菜單 or 顯示登入視窗
-	const handleMenuOpen = (item: any) => {
-		onMenuOpen(item, {
-			loginCallback: () => {
-				console.log('尚未登入')
-			},
-		})
-	}
+const handleMenuOpen = (item: any) => {
+  onMenuOpen(item, {
+    loginCallback: () => {
+      openModal({
+        content: <LoginModal />,
+      });
+    },
+    messageCallBack: (message: string) => console.error(message),
+  });
+};
 
 	// ========== 以下是「可拖動」的核心邏輯 ==========
 	const containerRef = useRef<HTMLDivElement>(null)
@@ -76,10 +81,10 @@ export default function HotGameSwiper() {
 		containerRef.current.scrollLeft = scrollLeft - walk
 	}
 
-	if (isLargeScreen) {
-		// 若寬度大於 1024px，整個元件隱藏
-		return null
-	}
+	// if (isLargeScreen) {
+	// 	// 若寬度大於 1024px，整個元件隱藏
+	// 	return null
+	// }
 
 	return (
 		<div className='wrapper'>
@@ -143,7 +148,7 @@ export default function HotGameSwiper() {
                        rounded-full bg-[#ff7600] text-[10px] text-white
                         '
 											>
-												NEW
+											{t('Label_General_New')}
 											</div>
 										)}
 
@@ -218,7 +223,7 @@ export default function HotGameSwiper() {
 										src={subMenuImage}
 										alt=''
 										className={cn('w-full rounded-xl object-cover', {
-											'transition ease-in-out group-hover:scale-105':
+											'transition ease-in-out':
 												!isTpMaintain,
 										})}
 									/>
@@ -231,7 +236,7 @@ export default function HotGameSwiper() {
 									) : (
 										<div
 											className={cn(
-												'absolute inset-0 grid place-items-center rounded-xl bg-gradient-to-t from-neutral-500 to-neutral-500/10 opacity-0 transition ease-in-out group-hover:scale-105 group-hover:hover:opacity-100',
+												'absolute inset-0 grid place-items-center rounded-xl bg-gradient-to-t from-neutral-500 to-neutral-500/10 opacity-0 transition ease-in-out',
 											)}
 										>
 											<div className='truncate text-center text-sm font-medium leading-8 text-neutral-100'>
@@ -240,7 +245,7 @@ export default function HotGameSwiper() {
 										</div>
 									)}
 								</div>
-								<p className='mt-2 text-center text-sm font-bold text-neutral-700'>
+								<p className='mt-2 text-center text-sm font-bold text-gray-100'>
 									{t(productName)}
 								</p>
 							</div>
@@ -251,3 +256,4 @@ export default function HotGameSwiper() {
 		</div>
 	)
 }
+

@@ -54,7 +54,7 @@ export default function Layout({
 			<body>
 				<QueryProvider>
 					<GlobalModal />
-					<div className='flex h-full w-full flex-col bg-white'>
+					<div className='flex h-full w-full flex-col'>
 						<Header isLogin={isSignedIn} />
 						<main className='h-fit flex-grow'>{children}</main>
 						<Footer isLogin={isSignedIn} />

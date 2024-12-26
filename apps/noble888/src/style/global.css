@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+	html {
+		@apply text-gray-0 bg-black;
+	}
+}
+
 /* date picker都會內建wrapper 內建inline block 所以要蓋掉*/
 .react-datepicker-wrapper {
 	display: block !important;

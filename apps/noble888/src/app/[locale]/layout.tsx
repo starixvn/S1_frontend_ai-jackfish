@@ -1,5 +1,6 @@
 import { Layout } from '@noble888/src/components'
 import { checkSignIn } from 'JF-api/auth/server'
+import { QueryProvider } from 'JF-core'
 import { ReactNode } from 'react'
 
 export default async function MainLayout({
@@ -8,5 +9,9 @@ export default async function MainLayout({
 	children: ReactNode
 }) {
 	const isSignedIn = await checkSignIn()
-	return <Layout isSignedIn={isSignedIn}>{children}</Layout>
+	return (
+		<QueryProvider>
+			<Layout isSignedIn={isSignedIn}>{children}</Layout>
+		</QueryProvider>
+	)
 }

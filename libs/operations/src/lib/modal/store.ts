@@ -6,7 +6,7 @@ interface IModalState {
 	isOpen: boolean
 	showCloseButton?: boolean
 	type?: 'default' | 'info' | 'error' | 'confirm'
-	size?: 'xs' | 'sm' | 'md' | 'lg' | 'popup'
+	size?: 'xs' | 'sm' | 'md' | 'lg'
 	// react-icons
 	icon?: ReactNode
 	title?: string

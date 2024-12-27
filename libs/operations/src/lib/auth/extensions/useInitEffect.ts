@@ -1,12 +1,11 @@
 'use client'
 
 import { ENV_COOKIE_NAMES } from 'JF-constants'
+import { useGetPathname, useLocaleRouter } from 'JF-core'
 import { useAuthStore, useSocialChannelStore } from 'JF-operations'
 import { debounce } from 'lodash-es'
 import { useEffect } from 'react'
 import { useCookies } from 'react-cookie'
-import { useGetPathname } from './useGetPathname'
-import { useLocaleRouter } from './useLocaleRouter'
 
 const debouncedGetSocialChannels = debounce(
 	(getSocialChannels, langId, currencyId) => {

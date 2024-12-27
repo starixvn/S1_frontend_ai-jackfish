@@ -1,4 +1,4 @@
-import { IWithdrawalSetting } from '../useWalletAllowed/type'
+import { IWithdrawalSetting } from 'JF-operations'
 
 export interface UseSidebarProps {
 	withdrawalBlockSetting: IWithdrawalSetting[]

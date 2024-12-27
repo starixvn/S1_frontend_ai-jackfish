@@ -24,19 +24,36 @@ import {
 	USERNAME_REGEX,
 	paths,
 } from 'JF-constants'
-import { bannerUrl, useJoinAff, useJoinCountry, useLocaleRouter } from 'JF-core'
-import { useAuthStore } from 'JF-operations'
+import { bannerUrl, useLocaleRouter } from 'JF-core'
+import {
+	useAuthStore,
+	useJoinAff,
+	useJoinCountry,
+	useModalStore,
+} from 'JF-operations'
 import dayjs from 'dayjs'
 import { TFunction } from 'i18next'
 import { includes, isNumber } from 'lodash-es'
+import dynamic from 'next/dynamic'
 import { useCookies } from 'react-cookie'
 import { useForm } from 'react-hook-form'
 import { FaUserCircle } from 'react-icons/fa'
 import { GoMail } from 'react-icons/go'
-import { ImCoinDollar, ImKey, ImPhone, ImSphere, ImUsers } from 'react-icons/im'
+import {
+	ImCoinDollar,
+	ImKey,
+	ImPencil,
+	ImPhone,
+	ImSphere,
+	ImUsers,
+} from 'react-icons/im'
 import { z } from 'zod'
 import { Button, DateSelector, Input, Select } from '../common'
 import { LineRegister } from './LineRegister'
+
+const LoginModal = dynamic(() => import('../customModals/LoginModal'), {
+	ssr: false,
+})
 
 const createFormSchema = (t: TFunction) => {
 	return z
@@ -81,6 +98,7 @@ const JoinForm: React.FC = () => {
 	const {
 		userInfo: { langId, currencyId },
 	} = useAuthStore()
+	const { openModal } = useModalStore()
 	const router = useLocaleRouter()
 	const formSchema = createFormSchema(t)
 	const formMethods = useForm<z.infer<typeof formSchema>>({
@@ -288,7 +306,10 @@ const JoinForm: React.FC = () => {
 			// tracking('CompleteRegistration', username)
 			router.push(paths.deposit.root, { locale: userLang })
 		} catch (error) {
-			// TODO error handler
+			openModal({
+				type: 'error',
+				content: (error as Error).message,
+			})
 		}
 	}
 
@@ -313,29 +334,30 @@ const JoinForm: React.FC = () => {
 
 	return (
 		<form
-			className='text-primary-700 w-full text-sm'
+			className='order-1 w-full text-sm lg:order-2'
 			onSubmit={handleSubmit(handleRegister)}
 		>
-			<span className='text-primary-900 font-bold'>
-				{t('Label_General_Join')}
-			</span>
-			<div className='font-semibold'>
+			<span className='font-bold leading-6'>{t('Label_General_Join')}</span>
+			<div className='font-semibold leading-6'>
 				<span>{t('Label_Join_LoginMsg')}</span>
 				<span
-					className='ms-1 cursor-pointer text-xs underline'
-					// TODO login modal open
-					// onClick={handleOpenLoginModal}
+					className='text-secondary-500 ms-1 cursor-pointer underline'
+					onClick={() =>
+						openModal({
+							content: <LoginModal />,
+						})
+					}
 				>
 					{t('Label_Join_LoginHere')}
 				</span>
 			</div>
 			{/* TODO Line Callback Page */}
-			{currencyId === CurrenciesEnum.THB && <LineRegister />}
-			<div className='mt-5'>
+			<div className='mt-4'>
+				{currencyId === CurrenciesEnum.THB && <LineRegister />}
 				<Input
 					register={register('userName')}
 					placeholder={t('Label_General_Username') || ''}
-					icon={<FaUserCircle size={14} />}
+					icon={<ImPencil size={14} />}
 					error={!!errors['userName']}
 					errorMessage={errors['userName']?.message as string}
 					dirty={!!dirtyFields['userName']}
@@ -381,7 +403,7 @@ const JoinForm: React.FC = () => {
 					successMessage={t('Label_Join_CantChangeEmail') || ''}
 					onBlur={checkEmail}
 				/>
-				<div className='flex gap-1'>
+				<div className='flex flex-col gap-6 lg:flex-row lg:gap-1'>
 					<DateSelector
 						selected={watch('birth')}
 						onChange={date => date !== null && setValue('birth', date)}
@@ -399,10 +421,11 @@ const JoinForm: React.FC = () => {
 						defaultValue={initNationality}
 						value={getValues('nationality')}
 						placeholder={t('Label_Join_Nationality') as string}
-						icon={<ImSphere size={14} />}
+						icon={<ImSphere size={16} />}
 						onChange={nationality =>
 							setValue('nationality', nationality as string)
 						}
+						showMessage
 						errorMessage={errors['nationality']?.message as string}
 					/>
 				</div>
@@ -412,6 +435,7 @@ const JoinForm: React.FC = () => {
 					placeholder={t('Label_Join_PrefferedCurrency') as string}
 					icon={<ImCoinDollar size={14} />}
 					onChange={currencyId => selectCurrency(currencyId as number)}
+					showMessage
 					errorMessage={errors['currencyId']?.message as string}
 					successMessage={t('Label_Join_CantChangePreferredCurrency') || ''}
 				/>
@@ -422,13 +446,12 @@ const JoinForm: React.FC = () => {
 								showSearch
 								showValue
 								options={areaCodeSelectOptions}
-								isMessageHide
 								placeholder=''
 								icon={<ImPhone size={14} />}
 								onChange={areaCode => selectAreaCode(areaCode as string)}
 								value={getValues('areaCode')}
 								errorMessage={errors['phoneNo']?.message as string}
-								className='lg:max-w-40'
+								className='w-full max-w-28 lg:max-w-40'
 							/>
 							<Input
 								register={register('phoneNo')}
@@ -466,10 +489,10 @@ const JoinForm: React.FC = () => {
 					/>
 				)}
 			</div>
-			<div className='text-xs font-semibold leading-6'>
+			<div className='font-semibold leading-6'>
 				<span>{t('Label_Join_SignUpTerms1')}</span>
 				<a
-					className='ms-1 underline'
+					className='text-secondary-500 ms-1 underline'
 					target='_blank'
 					rel='noreferrer'
 					href={TERMS_CONDITIONS({ langId })['TermsConditions']}
@@ -487,7 +510,7 @@ const JoinForm: React.FC = () => {
 				>
 					{t('Label_General_Cancel')}
 				</Button>
-				<Button type='primary' htmlType='submit' desktopSize='xl'>
+				<Button type='secondary' htmlType='submit' desktopSize='xl'>
 					{t('Label_General_Submit')}
 				</Button>
 			</div>

@@ -5,5 +5,5 @@ export default async function MainLayout({
 }: {
 	children: ReactNode
 }) {
-	return <div>{children}</div>
+	return <>{children}</>
 }

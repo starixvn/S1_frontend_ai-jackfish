@@ -10,7 +10,8 @@ import {
 	useGetPathname,
 	useLocaleRouter,
 } from 'JF-core'
-import { useAuthStore } from 'JF-operations'
+import { useAuthStore, useModalStore } from 'JF-operations'
+import dynamic from 'next/dynamic'
 import { useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { useBoolean, useOnClickOutside } from 'usehooks-ts'
@@ -18,12 +19,16 @@ import { z } from 'zod'
 import { Button } from '../../common'
 import Country from './Country'
 
+const LoginModal = dynamic(() => import('../../customModals/LoginModal'), {
+	ssr: false,
+})
+
 const LoginForm = () => {
 	const { t } = useClientTranslation()
 	const ref = useRef<HTMLDivElement>(null)
 	const { locale } = useGetPathname()
 	const router = useLocaleRouter()
-
+	const { openModal } = useModalStore()
 	const { value: isActive, toggle, setFalse } = useBoolean(false)
 
 	const { onSignInUserName } = useAuthStore()
@@ -60,8 +65,10 @@ const LoginForm = () => {
 			router.push(paths.home.root, { locale: langId })
 			router.refresh()
 		} catch (error) {
-			// TODO 彈窗跳 api 錯誤訊息
-			// toast.error((error as Error).message)
+			openModal({
+				type: 'error',
+				content: (error as Error).message,
+			})
 		}
 	}
 
@@ -69,11 +76,12 @@ const LoginForm = () => {
 
 	useEffect(() => {
 		if (!!errors['userName'] || !!errors['password']) {
-			// TODO 彈窗驗證跳錯誤訊息
-			// eslint-disable-next-line no-console
-			console.log(errors['userName'] || errors['password'])
+			openModal({
+				type: 'error',
+				content: (errors['userName'] || errors['password'])?.message,
+			})
 		}
-	}, [errors])
+	}, [errors, openModal])
 
 	return (
 		<form className='flex gap-4' onSubmit={handleSubmit(handleSignIn)}>
@@ -113,7 +121,11 @@ const LoginForm = () => {
 						'border-secondary-500 text-secondary-500 w-20 whitespace-nowrap rounded-full border bg-transparent py-2 lg:hidden',
 					)}
 					htmlType='button'
-					onClick={() => router.push(paths.login.root)}
+					onClick={() =>
+						openModal({
+							content: <LoginModal />,
+						})
+					}
 				>
 					{t('Label_General_LogIn')}
 				</Button>

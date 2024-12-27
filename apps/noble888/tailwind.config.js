@@ -173,8 +173,8 @@ module.exports = {
 				},
 				'input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active':
 					{
-						boxShadow: '0 0 0px 1000px #fff inset',
-						WebkitTextFillColor: theme('colors.primary.700'),
+						boxShadow: '0 0 0px 1000px #0C0C0D inset',
+						WebkitTextFillColor: theme('colors.white'),
 					},
 			})
 		},

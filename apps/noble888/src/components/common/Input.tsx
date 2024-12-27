@@ -111,50 +111,50 @@ const Input = ({
 		if (password) {
 			return showPassword ? (
 				<ImEye
-					className='cursor-pointer'
+					className='text-secondary-500 cursor-pointer'
 					onClick={() => setShowPassword(prev => !prev)}
-					size={12}
+					size={16}
 				/>
 			) : (
 				<ImEyeBlocked
-					className='cursor-pointer'
+					className='text-secondary-500 cursor-pointer'
 					onClick={() => setShowPassword(prev => !prev)}
-					size={12}
+					size={16}
 				/>
 			)
 		}
 		// copy 只顯示複製 icon
 		if (copy) {
 			return isCopied ? (
-				<ImCheckmark className='text-success-500 cursor-default' size={12} />
+				<ImCheckmark className='text-success-500 cursor-default' size={16} />
 			) : (
 				<ImCopy
 					className='hover:text-secondary-500 cursor-pointer'
-					size={12}
+					size={16}
 					onClick={onCopyClick}
 				/>
 			)
 		}
 		// error 次之
 		if (error) {
-			return <ImCross className='text-danger-400 cursor-default' size={12} />
+			return <ImCross className='text-danger-500 cursor-default' size={16} />
 		}
 		// dirty 後顯示 valid icon
 		if (dirty && !error && (!!successMessage || error !== undefined)) {
 			return (
-				<ImCheckmark className='cursor-default' color='#42ac5e' size={12} />
+				<ImCheckmark className='text-success-500 cursor-default' size={16} />
 			)
 		}
 		// 無 error 顯示 info icon
 		if (infoMessage || onInfoClick) {
 			return (
 				<ImNotification
-					className='cursor-pointer'
+					className='text-secondary-500 cursor-pointer'
 					onClick={() => {
 						setShowInfo(prev => !prev)
 						onInfoClick && onInfoClick()
 					}}
-					size={12}
+					size={16}
 				/>
 			)
 		}
@@ -165,22 +165,34 @@ const Input = ({
 		// 隱藏就全部不顯示
 		if (isMessagesHide) return null
 
+		const baseMessageClass = 'ms-2 py-1 text-xs'
+
 		// errorMessage 權重最高
 		if (type !== 'date' && !!errorMessage) {
-			return <div className='text-danger-400 ms-2 text-sm'>{errorMessage}</div>
+			return (
+				<div className={cn(baseMessageClass, 'text-danger-500')}>
+					{errorMessage}
+				</div>
+			)
 		}
 		// successMessage 權重次之
 		if (dirty && !loading && !!successMessage) {
 			// 成功 message 應在輸入資料驗證後才會顯示
 			return (
-				<div className='text-primary-600 ms-2 text-sm'>{successMessage}</div>
+				<div className={cn(baseMessageClass, 'text-primary-500')}>
+					{successMessage}
+				</div>
 			)
 		}
 		// infoMessage 權重最低，沒驗證 or 尚未驗證過才會觸發
 		if (infoMessage && showInfo && (error === undefined || !dirty)) {
-			return <div className='text-primary-600 ms-2 text-sm'>{infoMessage}</div>
+			return (
+				<div className={cn(baseMessageClass, 'text-primary-500')}>
+					{infoMessage}
+				</div>
+			)
 		}
-		return <div className='my-2.5' />
+		return <div className='my-3' />
 	}
 
 	return (
@@ -188,22 +200,27 @@ const Input = ({
 			<div className={cn('grid w-full text-sm font-medium', divClassName)}>
 				<div
 					className={cn(
-						'relative flex w-full appearance-none items-center gap-2 rounded-[5px] bg-white px-2.5 py-1.5',
-						'border-primary-500 border border-solid',
-						{ 'border-danger-400': error },
+						'relative flex w-full appearance-none items-center gap-3 rounded px-4 py-2',
+						'border-primary-500 border',
+						{ 'border-danger-500': error },
 					)}
 				>
 					{/* left - icon & title */}
-					<div className='flex cursor-default items-center gap-2'>
+					<div
+						className={cn(
+							'text-primary-500 flex cursor-default items-center gap-2',
+							{ 'text-danger-500': error },
+						)}
+					>
 						{icon && icon}
 						{title && <span>{title}</span>}
 					</div>
 					<input
 						className={cn(
-							'w-full text-start',
+							'w-full bg-black text-start',
 							'placeholder:text-primary-700',
+							{ 'placeholder:text-danger-500': error },
 							'focus:outline-none',
-							'disabled:bg-neutral-200',
 							'read-only:cursor-default',
 							className,
 						)}

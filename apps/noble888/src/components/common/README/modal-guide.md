@@ -13,7 +13,7 @@
 ### 基本屬性
 
 - `children`: `React.ReactNode` - 彈窗的內容，您可以在這裡傳入自定義的組件或文字。
-- `size`: `'popup' | 'xs' | 'sm' | 'md' | 'lg'` - 設定彈窗的大小，例如小尺寸（`xs`）、中尺寸（`md`）等。`popup`是專門給操作或錯誤用的彈窗所用的，會有預設的按鈕。
+- `size`: `'xs' | 'sm' | 'md' | 'lg'` - 設定彈窗的大小，例如小尺寸（`xs`）、中尺寸（`md`）等。
 - `className`: `string` - 用於傳入自定義的 CSS 樣式類別。
 - `isOpen`: `boolean` - 控制彈窗是否開啟，必填。
 - `onClose`: `() => void` - 彈窗關閉時觸發的回調函數，必填。
@@ -23,7 +23,7 @@
 - `blockScrollOnMount`: `boolean` - 是否在彈窗開啟時阻止背景滾動，預設為 `true`。
 - `closeOnEsc`: `boolean` - 是否允許按下 `ESC` 鍵來關閉彈窗，預設為 `false`。
 - `closeOnOverlayClick`: `boolean` - 是否允許點擊彈窗外的遮罩來關閉，預設為 `false`。
-- `showCloseButton`: `boolean` - 是否顯示右上角的關閉按鈕，預設為 `true`。
+- `showCloseButton`: `boolean` - 是否顯示右上角的關閉按鈕，預設為 `false`。
 
 ### 類型相關屬性
 
@@ -35,7 +35,6 @@
 
 - `confirmText`: `string` - 確認按鈕的文字，預設為「確認」。
 - `onConfirm`: `() => void` - 確認按鈕點擊時的回調函數。
-  - 當 `type` 為 `confirm` 時，您可以自定義確認按鈕的行為以及文字內容。例如，顯示「執行」或其他自定義操作。
 
 ---
 

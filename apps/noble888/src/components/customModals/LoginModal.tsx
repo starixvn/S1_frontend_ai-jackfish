@@ -1,3 +1,5 @@
+'use client'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useClientTranslation } from '@noble888/src/i18n/client'
 import { IAxiosError } from 'JF-api/baseApi'
@@ -73,8 +75,8 @@ const LoginModal: React.FC<ILoginModalProps> = ({
 	}
 
 	return (
-		<div className='flex h-full w-full items-center justify-center gap-11'>
-			<div className='group relative h-96 w-full'>
+		<div className='grid h-full w-full grid-cols-1 place-content-start gap-11 lg:grid-cols-2 lg:place-items-center'>
+			<div className='group hidden h-96 w-full lg:relative lg:block'>
 				<img
 					className='animate-animation-logo absolute bottom-0 start-7 z-[3] duration-700 group-hover:start-0'
 					src={bannerUrl('/desktop/img/logo_en_w.png')}
@@ -101,14 +103,21 @@ const LoginModal: React.FC<ILoginModalProps> = ({
 					alt='back'
 				/>
 			</div>
+			<div className='mx-auto mt-5 lg:hidden'>
+				<img
+					className='w-[40vw]'
+					src={bannerUrl('/h5/img/logo_en_w.png')}
+					alt='logo_en_w'
+				/>
+			</div>
 			<form
-				className='grid w-full grid-cols-1 gap-5'
+				className='grid w-full grid-cols-1 gap-3 lg:gap-5'
 				onSubmit={handleSubmit(handleSignIn)}
 			>
-				<div className='text-primary-900 font-bold'>
+				<div className='lg:text-md text-center text-xl font-bold lg:text-start'>
 					{t('Label_General_LogIn')}
 				</div>
-				<div className='text-primary-700 text-xs'>
+				<div className='text-md text-center lg:text-start lg:text-xs'>
 					<span>{t('Label_Join_DontHaveAccount')}</span>
 					<Link
 						className='text-secondary-500 ms-1 underline'
@@ -118,7 +127,7 @@ const LoginModal: React.FC<ILoginModalProps> = ({
 						{t('Label_General_Join')}
 					</Link>
 				</div>
-				<div className='text-primary-700'>
+				<div>
 					<Input
 						register={register('userName')}
 						placeholder={t('Label_General_Username') || ''}
@@ -138,7 +147,7 @@ const LoginModal: React.FC<ILoginModalProps> = ({
 						errorMessage={errors['password']?.message as string}
 						dirty={!!dirtyFields['password']}
 					/>
-					<div className='text-end text-xs underline'>
+					<div className='text-md text-center underline lg:text-end lg:text-xs'>
 						<Link href={paths.forgetPassword.root} onClick={closeModal}>
 							{t('Label_Header_ForgetPassword')}
 						</Link>
@@ -153,7 +162,7 @@ const LoginModal: React.FC<ILoginModalProps> = ({
 					>
 						{t('Label_General_Cancel')}
 					</Button>
-					<Button type='primary' htmlType='submit' desktopSize='xl'>
+					<Button type='secondary' htmlType='submit' desktopSize='xl'>
 						{t('Label_General_LogIn')}
 					</Button>
 				</div>

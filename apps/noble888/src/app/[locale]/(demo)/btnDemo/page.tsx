@@ -8,6 +8,14 @@ const Page = () => {
 	return (
 		<>
 			<div className=''>
+				<Button type='primary'>primary</Button>
+				<Button type='secondary'>secondary</Button>
+				<Button type='tertiary'>tertiary</Button>
+				<Button type='disabled'>disabled</Button>
+				<Button type='outlinedPri'>Outlined Primary</Button>
+				<Button type='outlinedSec'>Outlined Secondary</Button>
+				<Button type='outlinedTer'>Outlined Tertiary</Button>
+
 				<Button onClick={onOpen}>Click to Open Modal</Button>
 				<Modal
 					size='xs'

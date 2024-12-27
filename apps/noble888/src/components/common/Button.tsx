@@ -11,7 +11,15 @@ interface ButtonProps
 	desktopSize?: 'sm' | 'md' | 'lg' | 'xl' | 'default'
 	// button height
 	h?: 'sm' | 'md' | 'lg'
-	type?: 'primary' | 'secondary' | 'ghost' | 'cancel' | 'disabled'
+	type?:
+		| 'primary'
+		| 'secondary'
+		| 'tertiary'
+		| 'cancel'
+		| 'disabled'
+		| 'outlinedPri'
+		| 'outlinedSec'
+		| 'outlinedTer'
 	children: React.ReactNode
 	isDisabled?: boolean
 	htmlType?: 'button' | 'submit'
@@ -21,7 +29,7 @@ interface ButtonProps
 
 const btnDesktopWidth = {
 	default: '',
-	sm: 'lg:w-[94px]',
+	sm: 'lg:w-[110px]',
 	md: 'lg:w-[147px]',
 	lg: 'lg:w-[313px]',
 	xl: 'lg:w-full',
@@ -29,7 +37,7 @@ const btnDesktopWidth = {
 
 const btnMobileWidth = {
 	default: '',
-	sm: 'w-[94px]',
+	sm: 'w-[65px]',
 	md: 'w-[147px]',
 	lg: 'w-[313px]',
 	xl: 'w-full',
@@ -42,16 +50,35 @@ const buttonHeightClass = {
 }
 
 const variantClasses = {
-	primary:
-		'bg-primary-300 hover:bg-primary-400 active:bg-primary-500 transition',
+	primary: 'bg-gray-400 hover:bg-gray-600 active:bg-gray-700 transition',
 	secondary:
-		'bg-secondary-300 hover:bg-secondary-400 active:bg-secondary-500 transition',
+		'bg-secondary-400 hover:bg-secondary-600 active:bg-secondary-700 transition',
+
+	tertiary:
+		'bg-tertiary-400 hover:bg-tertiary-600 active:bg-tertiary-700 transition',
+
 	cancel:
-		'bg-primary-200 text-tertiary-500, hover:bg-primary-100 hover:text-tertiary-400 active:bg-primary-200  active:text-tertiary-500 transition ',
-	ghost:
-		'border border-white hover:border-secondary-200  hover:text-secondary-200 active:border-secondary-300  active:text-secondary-300 transition',
-	disabled:
-		'bg-neutral-300 text-neutral-400 cursor-default pointer-events-none',
+		'bg-primary-200 text-gray-00, hover:bg-primary-100 hover:text-tertiary-400 active:bg-primary-200  active:text-tertiary-500 transition ',
+
+	disabled: 'bg-gray-300 text-gray-600 cursor-default pointer-events-none',
+
+	outlinedPri: `
+    border border-gray-400 text-gray-400 bg-transparent
+    hover:bg-gray-600 hover:text-gray-100 active:text-gray-100 active:bg-gray-700 transition
+    hover:border-transparent active:border-transparent
+  `,
+
+	outlinedSec: `
+    border border-secondary-400 text-secondary-400 bg-transparent
+    hover:bg-secondary-600 hover:text-secondary-100 active:text-secondary-100 active:bg-secondary-700 transition
+    hover:border-transparent active:border-transparent
+  `,
+
+	outlinedTer: `
+    border border-tertiary-400 text-tertiary-400 bg-transparent
+    hover:bg-tertiary-600 hover:text-tertiary-100 active:text-tertiary-100 active:bg-tertiary-700 transition
+    hover:border-transparent active:border-transparent
+  `,
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -67,7 +94,7 @@ const Button: React.FC<ButtonProps> = ({
 	...props
 }) => {
 	const baseClasses =
-		'inline-flex rounded-lg items-center justify-center px-6 py-2 text-center'
+		'inline-flex rounded-2xl items-center justify-center px-6 py-2 text-center'
 
 	const desktopWidthClass = `lg: ${btnDesktopWidth[size]}`
 	const mobileWidthClass = btnMobileWidth[desktopSize]

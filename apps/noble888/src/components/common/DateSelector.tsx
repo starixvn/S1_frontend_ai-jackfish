@@ -44,7 +44,7 @@ const DateSelector: React.FC<IDateSelectorProps> = ({
 				className,
 			)}
 		>
-			<ImCalendar className='text-primary-500' size={16} />
+			<ImCalendar className='text-gray-500' size={16} />
 			<div className='w-full'>
 				{title && <span className='me-2 font-semibold'>{title}</span>}
 				<DatePicker

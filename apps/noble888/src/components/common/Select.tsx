@@ -123,7 +123,7 @@ const Select: React.FC<ISelectProps> = props => {
 				)}
 				onClick={toggle}
 			>
-				<div className='text-primary-500 flex items-center gap-2 truncate'>
+				<div className='flex items-center gap-2 truncate text-gray-500'>
 					{icon && icon}
 					{title && <span>{t(title)}</span>}
 					{currentOption?.optionIcon}

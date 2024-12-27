@@ -208,7 +208,7 @@ const Input = ({
 					{/* left - icon & title */}
 					<div
 						className={cn(
-							'text-primary-500 flex cursor-default items-center gap-2',
+							'flex cursor-default items-center gap-2 text-gray-500',
 							{ 'text-danger-500': error },
 						)}
 					>
@@ -218,7 +218,7 @@ const Input = ({
 					<input
 						className={cn(
 							'w-full bg-black text-start',
-							'placeholder:text-primary-700',
+							'placeholder:text-gray-700',
 							{ 'placeholder:text-danger-500': error },
 							'focus:outline-none',
 							'read-only:cursor-default',

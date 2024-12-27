@@ -19,10 +19,10 @@ const LineRegister = () => {
 
 	return (
 		<>
-			<div className='my-5 flex items-center justify-between font-semibold'>
+			<div className='my-4 flex items-center justify-between font-semibold'>
 				{t('Label_Join_RegisterWithLine')} ID
 				<Button
-					className='h-8 bg-green-500 text-white'
+					className='h-8 bg-green-500'
 					htmlType='button'
 					onClick={handleLineRegister}
 				>
@@ -30,8 +30,8 @@ const LineRegister = () => {
 					<span className='ms-1'>{t('Label_Join_RegisterWithLine')}</span>
 				</Button>
 			</div>
-			<div className='border-primary-700 mb-5 mt-2.5 border-b text-center leading-[.08]'>
-				<span className='bg-white px-2.5 py-[5px]'>OR</span>
+			<div className='border-primary-500 mb-5 mt-2 border-b text-center leading-[.08]'>
+				<span className='bg-black px-2.5 py-[5px]'>OR</span>
 			</div>
 		</>
 	)

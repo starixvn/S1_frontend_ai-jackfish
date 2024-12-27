@@ -3,13 +3,8 @@ import { IovationScript } from '@brand01/src/components/thirdPartyScript/thirdPa
 import { LANG_TO_CURRENCY } from '@brand01/src/data/country'
 import { lobbyRoutes } from '@brand01/src/data/home/lobbyRoutes'
 import { FOOTER_PAYMENT_ICONS } from '@brand01/src/data/layout/footer'
-import {
-	cn,
-	imageUrl,
-	useGetPathname,
-	useInitEffect,
-	useOnlineCheckInterval,
-} from 'JF-core'
+import { cn, imageUrl, useGetPathname, useOnlineCheckInterval } from 'JF-core'
+import { useInitEffect } from 'JF-operations'
 import { ReactNode, Suspense } from 'react'
 import Loading from '../loading'
 import Footer from './footer'

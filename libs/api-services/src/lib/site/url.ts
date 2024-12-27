@@ -17,4 +17,5 @@ export const siteApiUrl = {
 	getSiteCurrencyList: 'Site/GetSiteCurrencyList',
 	getRecaptchaInfo: 'Site/GetRecaptchaInfo',
 	getNumberCaptcha: 'Site/GetNumberCaptcha',
+	forgetPassword: 'Site/ForgetPwdV2',
 }

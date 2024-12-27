@@ -175,3 +175,17 @@ export type TGetNumberCaptchaData = {
 	picture: string
 	seconds: number
 }
+
+// url 有帶 langId , flag 給 1 其餘給 2
+// 目前 nova 帶 1 其餘帶 2
+export enum FlagEnum {
+	hasLang = 1,
+	unSetLang = 2,
+}
+
+export interface ISetForgetPasswordArgs {
+	langId: string
+	email: string
+	flag: FlagEnum
+	username?: string
+}

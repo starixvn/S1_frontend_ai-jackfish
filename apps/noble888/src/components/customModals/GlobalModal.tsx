@@ -7,7 +7,7 @@ const GlobalModal = () => {
 	const {
 		isOpen,
 		showCloseButton,
-		size = 'xs',
+		size = 'sm',
 		type = 'default',
 		icon,
 		title,

@@ -56,10 +56,10 @@ const Select: React.FC<ISelectProps> = props => {
 
 	// 顯示的 label
 	const label = isTranslation
-		? t(currentOption?.label as string) || t(placeholder || '')
+		? t(currentOption?.label as string) || ''
 		: showValue
 			? (currentOption?.value as string)
-			: currentOption?.label ?? placeholder
+			: currentOption?.label ?? ''
 
 	const handleOptionClick = (option: TSelectOption) => {
 		setCurrentOption(option)
@@ -78,16 +78,19 @@ const Select: React.FC<ISelectProps> = props => {
 
 	const renderMessages = () => {
 		if (!showMessage) return null
+
+		const baseMessageClass = 'ms-2 py-1 text-xs'
+
 		if (errorMessage) {
 			return (
-				<div className='text-danger-400 ms-2 text-sm font-medium'>
+				<div className={cn(baseMessageClass, 'text-danger-500')}>
 					{errorMessage}
 				</div>
 			)
 		}
 		if (successMessage && currentOption) {
 			return (
-				<div className='text-primary-600 ms-2 text-sm font-medium'>
+				<div className={cn(baseMessageClass, 'text-primary-500')}>
 					{successMessage}
 				</div>
 			)
@@ -110,56 +113,46 @@ const Select: React.FC<ISelectProps> = props => {
 	}, [defaultValue, options, value])
 
 	return (
-		<div
-			className={cn(
-				'relative mx-5 lg:mx-0 lg:h-full lg:w-full',
-				{
-					'mb-[1px]': isActive,
-				},
-				className,
-			)}
-			ref={ref}
-		>
+		<div className={cn('relative lg:h-full lg:w-full', className)} ref={ref}>
 			{/* 輸入框 */}
 			<div
 				className={cn(
-					'flex cursor-pointer items-center justify-between rounded-md px-2.5 py-1.5',
+					'flex cursor-pointer items-center justify-between gap-3 rounded px-4 py-2',
 					'border-primary-500 border',
-					{
-						'rounded-b-none border-b-0': isActive,
-					},
 					{ 'border-danger-400': !isActive && errorMessage },
 				)}
 				onClick={toggle}
 			>
-				<div className='text-primary-700 flex items-center gap-2 truncate'>
+				<div className='text-primary-500 flex items-center gap-2 truncate'>
 					{icon && icon}
 					{title && <span>{t(title)}</span>}
 					{currentOption?.optionIcon}
-					<span className='min-h-5'>{label}</span>
+					<span className={cn('min-h-5', { 'text-white': label })}>
+						{label || placeholder}
+					</span>
 				</div>
-				<GoTriangleDown className='text-primary-700' size={14} />
+				<GoTriangleDown className='text-secondary-500' size={14} />
 			</div>
 			{/* 下拉選單 */}
 			{isActive && (
-				<div className='border-primary-500 bg-primary-100 absolute top-[33px] z-10 w-full rounded-b-md border-b border-l border-r shadow-lg lg:bg-white'>
+				<div className='border-primary-500 absolute top-[33px] z-10 w-full rounded-b border-b border-l border-r bg-black shadow-lg'>
 					{showSearch && (
-						<div className='my-2.5'>
+						<div className='mt-1'>
 							<input
 								type='text'
 								placeholder='Search'
-								className='border-primary-500 w-full rounded border px-2.5 py-1.5 focus:outline-none'
+								className='border-primary-500 w-full rounded border bg-black px-10 py-2 focus:outline-none'
 								onChange={e => setFilterValue(e.target.value.toLowerCase())}
 							/>
 						</div>
 					)}
-					<div className='max-h-60 overflow-auto'>
+					<div className='scrollbar-thin scrollbar-track-black scrollbar-thumb-secondary-500 max-h-60 overflow-auto'>
 						{(showSearch ? filterOptions : options).map(option => (
 							<div
 								key={uniqueId()}
 								className={cn(
-									'text-primary-700 flex cursor-pointer items-center gap-1 py-[5px] ps-5',
-									'hover:bg-primary-100',
+									'text-primary-500 flex cursor-pointer items-center gap-1 px-10 py-2',
+									'hover:bg-secondary-500 hover:text-white',
 									{
 										'cursor-not-allowed text-gray-400 hover:bg-inherit':
 											option.disabled,

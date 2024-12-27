@@ -24,8 +24,6 @@ import {
 } from './type'
 import { paymentApiUrl } from './url'
 
-export { IAxiosResponse }
-
 export const getCustTpBetRecordListDateRange = async ({
 	startDate,
 	endDate,

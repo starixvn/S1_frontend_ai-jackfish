@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { fetcher } from 'JF-api/baseApi'
 import {
 	TCustBankInfoData,
@@ -21,6 +21,13 @@ const useEWalletInfoQuery = () => {
 	})
 }
 
+const useSetLanguageMutation = () => {
+	return useMutation({
+		mutationFn: (langId: string) =>
+			fetcher<null, { langId: string }>(accountApiUrl.setLang, { langId }),
+	})
+}
+
 const useWithdrawalAvailableBalanceQuery = () => {
 	return useQuery({
 		queryKey: ['withdrawal', 'balance'],
@@ -34,5 +41,6 @@ const useWithdrawalAvailableBalanceQuery = () => {
 export {
 	useBankInfoQuery,
 	useEWalletInfoQuery,
+	useSetLanguageMutation,
 	useWithdrawalAvailableBalanceQuery,
 }

@@ -25,6 +25,7 @@ interface IDateSelectorProps {
 const DateSelector: React.FC<IDateSelectorProps> = ({
 	className,
 	title,
+	selected,
 	...datePickerProps
 }) => {
 	const startYear = new Date().getFullYear() - 100
@@ -38,16 +39,27 @@ const DateSelector: React.FC<IDateSelectorProps> = ({
 	return (
 		<div
 			className={cn(
-				'flex h-full w-full items-center justify-between rounded-[5px] px-2.5 py-1.5',
-				'border-primary-500 border border-solid',
+				'flex h-full w-full items-center justify-between gap-3 px-4 py-2',
+				'border-primary-500 rounded border',
 				className,
 			)}
 		>
+			<ImCalendar className='text-primary-500' size={16} />
 			<div className='w-full'>
 				{title && <span className='me-2 font-semibold'>{title}</span>}
 				<DatePicker
-					className='w-full cursor-pointer focus:outline-none'
+					className='w-full cursor-pointer bg-black focus:outline-none'
 					{...datePickerProps}
+					selected={selected}
+					wrapperClassName='!block'
+					calendarClassName='!bg-black'
+					dayClassName={date =>
+						cn('!text-white hover:!bg-secondary-500', {
+							'!bg-secondary-500':
+								date.toDateString() === selected?.toDateString(),
+						})
+					}
+					weekDayClassName={() => '!text-white'}
 					renderCustomHeader={({
 						date,
 						changeYear,
@@ -59,7 +71,7 @@ const DateSelector: React.FC<IDateSelectorProps> = ({
 					}) => (
 						<div className='m-2.5 flex justify-center'>
 							<button
-								className='px-2.5 font-bold text-black'
+								className='px-2.5 font-bold'
 								onClick={decreaseMonth}
 								disabled={prevMonthButtonDisabled}
 								type='button'
@@ -67,6 +79,7 @@ const DateSelector: React.FC<IDateSelectorProps> = ({
 								{'<'}
 							</button>
 							<select
+								className='bg-black'
 								value={date.getFullYear()}
 								onChange={({ target: { value } }) => changeYear(Number(value))}
 							>
@@ -76,8 +89,8 @@ const DateSelector: React.FC<IDateSelectorProps> = ({
 									</option>
 								))}
 							</select>
-
 							<select
+								className='bg-black'
 								value={months[date.getUTCMonth()]}
 								onChange={({ target: { value } }) =>
 									changeMonth(months.indexOf(value))
@@ -91,7 +104,7 @@ const DateSelector: React.FC<IDateSelectorProps> = ({
 							</select>
 
 							<button
-								className='px-2.5 font-bold text-black'
+								className='px-2.5 font-bold'
 								onClick={increaseMonth}
 								disabled={nextMonthButtonDisabled}
 								type='button'
@@ -102,7 +115,6 @@ const DateSelector: React.FC<IDateSelectorProps> = ({
 					)}
 				/>
 			</div>
-			<ImCalendar size={14} />
 		</div>
 	)
 }

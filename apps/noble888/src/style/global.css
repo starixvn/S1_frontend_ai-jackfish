@@ -10,10 +10,16 @@
 	}
 }
 
-/* date picker都會內建wrapper 內建inline block 所以要蓋掉*/
-.react-datepicker-wrapper {
-	display: block !important;
+/**
+ * datePicker 調整樣式
+ */
+ .react-datepicker__header {
+	@apply bg-primary-800 text-white !important;
 }
+ .react-datepicker__day--keyboard-selected {
+	@apply bg-secondary-300 !important;
+}
+
 .footer-plus::before,
 .footer-plus::after {
 	content: '';

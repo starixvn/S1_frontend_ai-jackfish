@@ -11,36 +11,40 @@ const Features: React.FC = () => {
 	} = useAuthStore()
 
 	return (
-		<div className='grid w-full grid-cols-1 place-content-between rounded bg-gray-200 text-gray-700'>
+		<div className='order-2 grid w-full grid-cols-1 place-content-between bg-gray-800 text-xs lg:order-1'>
 			<div>
-				<div className='bg-primary-600 flex w-full items-center gap-1 rounded-t p-2.5 text-xs font-bold text-white'>
-					<ImStarFull />
-					<span>{t('Label_Join_Features').toUpperCase()}</span>
+				<div className='bg-primary-500 flex w-full items-center gap-1 px-3 py-2 font-semibold'>
+					<ImStarFull size={16} />
+					<span className='leading-6'>
+						{t('Label_Join_Features').toUpperCase()}
+					</span>
 				</div>
-				<div className='p-2.5 text-xs font-bold text-gray-800'>
-					{t('Label_Join_Memeber_Benefits').toUpperCase()}
+				<div className='p-3'>
+					<div className='font-semibold leading-6 text-gray-200'>
+						{t('Label_Join_Memeber_Benefits').toUpperCase()}
+					</div>
+					<ul className='ms-6 mt-3 list-disc font-normal leading-6 text-gray-400'>
+						<li>{t('Label_Join_MemberBenefits_1')}</li>
+						<li>{t('Label_Join_MemberBenefits_2')}</li>
+						<li>{t('Label_Join_MemberBenefits_3')}</li>
+						{FEATURE_BONUS[currencyId] && (
+							<li>
+								{t(`Label_Join_MemberBenefits_4`, {
+									rebate: FEATURE_BONUS[currencyId],
+								})}
+							</li>
+						)}
+					</ul>
+					<div className='mt-4 font-semibold leading-6 text-gray-200'>
+						{t('Label_Join_EnjoyVipExclusiveBonus').toUpperCase()}
+					</div>
+					<ul className='ms-6 mt-3 list-disc font-normal leading-6 text-gray-400'>
+						<li>{t('Label_Join_MultipleProductPlatforms')}</li>
+						<li>{t('Label_Join_SpeedyDepositAndWithdrawal')}</li>
+					</ul>
 				</div>
-				<ul className='ms-6 list-disc p-2.5 text-xs font-medium leading-6'>
-					<li>{t('Label_Join_MemberBenefits_1')}</li>
-					<li>{t('Label_Join_MemberBenefits_2')}</li>
-					<li>{t('Label_Join_MemberBenefits_3')}</li>
-					{FEATURE_BONUS[currencyId] && (
-						<li>
-							{t(`Label_Join_MemberBenefits_4`, {
-								rebate: FEATURE_BONUS[currencyId],
-							})}
-						</li>
-					)}
-				</ul>
-				<div className='p-2.5 text-xs font-bold text-gray-800'>
-					{t('Label_Join_EnjoyVipExclusiveBonus').toUpperCase()}
-				</div>
-				<ul className='ms-6 list-disc p-2.5 text-xs font-medium leading-6'>
-					<li>{t('Label_Join_MultipleProductPlatforms')}</li>
-					<li>{t('Label_Join_SpeedyDepositAndWithdrawal')}</li>
-				</ul>
 			</div>
-			<div className='relative h-96 w-full scale-90 p-2.5'>
+			<div className='relative hidden h-96 w-full scale-90 p-2.5 lg:block'>
 				<img
 					className='absolute bottom-0 z-[3]'
 					src={bannerUrl('/desktop/img/logo_en_w.png')}

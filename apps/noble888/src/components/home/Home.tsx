@@ -13,11 +13,15 @@ const Home: React.FC = async () => {
 	])
 	return (
 		<>
-			<Announcement />
-			<Banner />
-			<WelcomeInfo />
-			<PromotionSwiper promotionList={promotionList} />
-			<HotMatch hotEventList={hotEventList} />
+			<div className='w-full'>
+				<Announcement />
+				<Banner />
+			</div>
+			<div className='mx-auto lg:max-w-[1400px]'>
+				<WelcomeInfo />
+				<PromotionSwiper promotionList={promotionList} />
+				<HotMatch hotEventList={hotEventList} />
+			</div>
 		</>
 	)
 }

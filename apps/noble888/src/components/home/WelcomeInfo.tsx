@@ -3,15 +3,20 @@
 import { useClientTranslation } from '@noble888/src/i18n/client'
 import { paths } from 'JF-constants'
 import { bannerUrl, LocaleLink, useLocaleRouter } from 'JF-core'
-import { useAuthStore } from 'JF-operations'
+import { useAuthStore, useModalStore } from 'JF-operations'
+import dynamic from 'next/dynamic'
 import React from 'react'
+
+const LoginModal = dynamic(() => import('../customModals/LoginModal'), {
+	ssr: false,
+})
 
 const WelcomeInfo: React.FC = () => {
 	const { t } = useClientTranslation()
 	// const { onMenuOpen } = useMenuOpen()
 	const router = useLocaleRouter()
 	const { isLogin } = useAuthStore()
-
+	const { openModal } = useModalStore()
 	// TODO winning open，affiliate onClick
 	// 開法跟 menuData 內定義的不同，故另外寫物件餵給 onMenuOpen
 	// const sportSoccerItem = {
@@ -23,14 +28,16 @@ const WelcomeInfo: React.FC = () => {
 
 	const handleReferralClick = () => {
 		if (!isLogin) {
-			// TODO loginCallback
+			openModal({
+				content: <LoginModal />,
+			})
 			return
 		}
 		router.push(paths.referral.root)
 	}
 
 	return (
-		<div className='mx-auto mt-7 hidden max-w-[88vw] justify-center gap-8 lg:flex'>
+		<div className='mt-7 hidden justify-center gap-5 lg:flex'>
 			{isLogin ? (
 				<div className='relative'>
 					<img
@@ -38,18 +45,20 @@ const WelcomeInfo: React.FC = () => {
 						src={bannerUrl('/desktop/img/4.0/welcome-affiliate.png')}
 						alt='welcome-affiliate'
 					/>
-					<div className='absolute bottom-16 h-14 w-full px-12 text-center'>
-						<div className='text-primary-600 text-xl'>
-							{t('Label_General_Affiliate')}
+					<div className='absolute bottom-0 grid w-full grid-cols-1 gap-8 px-9 text-center'>
+						<div className='h-16'>
+							<div className='text-lg font-semibold'>
+								{t('Label_General_Affiliate')}
+							</div>
+							<div className='mt-1 text-sm text-gray-500'>
+								{t('Label_Affiliate_Program_desc')}
+							</div>
 						</div>
-						<div className='mt-1 text-xs text-gray-600'>
-							{t('Label_Affiliate_Program_desc')}
+						<div className='h-12 px-7'>
+							<button className='bg-secondary-500 h-full w-full rounded-t-3xl px-10 text-center text-lg font-semibold'>
+								{t('Label_General_MoreInfo')}
+							</button>
 						</div>
-					</div>
-					<div className='absolute bottom-0 w-full px-10 text-center'>
-						<button className='bg-primary-600 h-10 rounded-t-[1.25rem] px-10 text-center text-white'>
-							{t('Label_General_MoreInfo')}
-						</button>
 					</div>
 				</div>
 			) : (
@@ -59,22 +68,21 @@ const WelcomeInfo: React.FC = () => {
 						src={bannerUrl('/desktop/img/4.0/welcome-join.png')}
 						alt='welcome-join'
 					/>
-					<div className='absolute bottom-16 h-14 w-full px-12 text-center'>
-						<div className='text-primary-600 text-xl'>
-							{t('Label_General_Join')}
+					<div className='absolute bottom-0 grid w-full grid-cols-1 gap-8 px-9 text-center'>
+						<div className='h-16'>
+							<div className='text-lg font-semibold'>
+								{t('Label_General_Join')}
+							</div>
+							<div className='mt-1 text-sm text-gray-500'>
+								{t('Label_Home_JoinDescription')}
+							</div>
 						</div>
-						<div className='mt-1 text-xs text-gray-600'>
-							{t('Label_Home_JoinDescription')}
-						</div>
+						<LocaleLink href={paths.join.root} className='h-12 px-7'>
+							<button className='bg-secondary-500 h-full w-full rounded-t-3xl px-10 text-center text-lg font-semibold'>
+								{t('Label_General_MoreInfo')}
+							</button>
+						</LocaleLink>
 					</div>
-					<LocaleLink
-						href={paths.join.root}
-						className='absolute bottom-0 w-full px-10 text-center'
-					>
-						<button className='bg-primary-600 h-10 rounded-t-[1.25rem] px-10 text-center text-white'>
-							{t('Label_General_MoreInfo')}
-						</button>
-					</LocaleLink>
 				</div>
 			)}
 			<div className='relative'>
@@ -83,73 +91,76 @@ const WelcomeInfo: React.FC = () => {
 					src={bannerUrl('/desktop/img/4.0/welcome-winning.png')}
 					alt='welcome-winning'
 				/>
-				<div className='absolute bottom-16 h-14 w-full px-12 text-center'>
-					<div className='text-success-500 text-xl'>
-						{t('Label_Home_StartWinning')}
+				<div className='absolute bottom-0 grid w-full grid-cols-1 gap-8 px-9 text-center'>
+					<div className='h-16'>
+						<div className='text-lg font-semibold'>
+							{t('Label_Home_StartWinning')}
+						</div>
+						<div className='mt-1 text-sm text-gray-500'>
+							{t('Label_Home_StartWinningDescription')}
+						</div>
 					</div>
-					<div className='mt-1 text-xs text-gray-600'>
-						{t('Label_Home_StartWinningDescription')}
+					<div className='h-12 px-7'>
+						<button
+							className='bg-secondary-500 h-full w-full rounded-t-3xl px-10 text-center text-lg font-semibold'
+							// onClick={() => {
+							// 	onMenuOpen(sportSoccerItem, {
+							// 		loginCallback: () => {
+							// 			router.push(paths.login.root)
+							// 		},
+							// 	})
+							// }}
+						>
+							{t('Label_General_MoreInfo')}
+						</button>
 					</div>
-				</div>
-				<div className='absolute bottom-0 w-full px-10 text-center'>
-					<button
-						className='bg-success-500 h-10 rounded-t-[1.25rem] px-10 text-center text-white'
-						// onClick={() => {
-						// 	onMenuOpen(sportSoccerItem, {
-						// 		loginCallback: () => {
-						// 			router.push(paths.login.root)
-						// 		},
-						// 	})
-						// }}
-					>
-						{t('Label_General_MoreInfo')}
-					</button>
 				</div>
 			</div>
 			<div className='relative'>
 				<img
 					className='rounded-b-[1.25rem]'
-					src='https://banner.0814media.net/desktop/img/4.0/welcome-vip.png'
+					src={bannerUrl('/desktop/img/4.0/welcome-vip.png')}
 					alt='welcome-vip'
 				/>
-				<div className='absolute bottom-16 h-14 w-full px-12 text-center'>
-					<div className='text-danger-500 text-xl'>
-						{t('Label_Home_GetReward')}
+				<div className='absolute bottom-0 grid w-full grid-cols-1 gap-8 px-9 text-center'>
+					<div className='h-16'>
+						<div className='text-lg font-semibold'>
+							{t('Label_Home_GetReward')}
+						</div>
+						<div className='mt-1 text-sm text-gray-500'>
+							{t('Label_Home_GetRewardDescription')}
+						</div>
 					</div>
-					<div className='mt-1 text-xs text-gray-600'>
-						{t('Label_Home_GetRewardDescription')}
-					</div>
+					<LocaleLink href={paths.promotion.root} className='h-12 px-7'>
+						<button className='bg-secondary-500 h-full w-full rounded-t-3xl px-10 text-center text-lg font-semibold'>
+							{t('Label_General_MoreInfo')}
+						</button>
+					</LocaleLink>
 				</div>
-				<LocaleLink
-					href={paths.promotion.root}
-					className='absolute bottom-0 w-full px-10 text-center'
-				>
-					<button className='bg-danger-500 h-10 rounded-t-[1.25rem] px-10 text-center text-white'>
-						{t('Label_General_MoreInfo')}
-					</button>
-				</LocaleLink>
 			</div>
 			<div className='relative'>
 				<img
 					className='rounded-b-[1.25rem]'
-					src='https://banner.0814media.net/desktop/img/4.0/welcome-referral.png'
+					src={bannerUrl('/desktop/img/4.0/welcome-referral.png')}
 					alt='welcome-referral'
 				/>
-				<div className='absolute bottom-16 h-14 w-full px-12 text-center'>
-					<div className='text-xl text-purple-600'>
-						{t('Label_Home_SimpleReferral')}
+				<div className='absolute bottom-0 grid w-full grid-cols-1 place-content-between gap-8 px-9 text-center'>
+					<div className='h-16'>
+						<div className='text-lg font-semibold'>
+							{t('Label_Home_SimpleReferral')}
+						</div>
+						<div className='mt-1 text-sm text-gray-500'>
+							{t('Label_Home_SimpleReferralDescription')}
+						</div>
 					</div>
-					<div className='mt-1 text-xs text-gray-600'>
-						{t('Label_Home_SimpleReferralDescription')}
+					<div className='h-12 px-7'>
+						<button
+							className='bg-secondary-500 h-full w-full rounded-t-3xl px-10 text-center text-lg font-semibold'
+							onClick={handleReferralClick}
+						>
+							{t('Label_General_MoreInfo')}
+						</button>
 					</div>
-				</div>
-				<div className='absolute bottom-0 w-full px-10 text-center'>
-					<button
-						className='h-10 rounded-t-[1.25rem] bg-purple-600 px-10 text-center text-white'
-						onClick={handleReferralClick}
-					>
-						{t('Label_General_MoreInfo')}
-					</button>
 				</div>
 			</div>
 		</div>

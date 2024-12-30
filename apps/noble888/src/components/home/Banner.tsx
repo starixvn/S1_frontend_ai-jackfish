@@ -3,13 +3,19 @@
 import Carousel from '@noble888/src/components/carousel'
 import { getBanner } from 'JF-api/site/client'
 import { TBannerData } from 'JF-api/site/type'
-import { paths } from 'JF-constants'
 import { cn, useBannerClick, useLocaleRouter } from 'JF-core'
+import { useModalStore } from 'JF-operations'
+import dynamic from 'next/dynamic'
 import React from 'react'
 import { SwiperProps, SwiperSlide } from 'swiper/react'
 
+const LoginModal = dynamic(() => import('../customModals/LoginModal'), {
+	ssr: false,
+})
+
 const Banner: React.FC = () => {
 	const router = useLocaleRouter()
+	const { openModal } = useModalStore()
 	const { bannerData, isLoading } = getBanner()
 	const { bannerClick } = useBannerClick()
 
@@ -32,7 +38,7 @@ const Banner: React.FC = () => {
 		},
 	}
 
-	// TODO 修改 loading component
+	// TODO loading component
 	if (isLoading) {
 		return null
 		// return <Loading className='h-[30vw] lg:h-[20vw]' size={60} />
@@ -49,8 +55,10 @@ const Banner: React.FC = () => {
 								? () => router.push(item.redirectLink ?? '/')
 								: () =>
 										bannerClick(item, {
-											// TODO 修改 loginCallback
-											loginCallback: () => router.push(paths.login.root),
+											loginCallback: () =>
+												openModal({
+													content: <LoginModal />,
+												}),
 										})
 						}
 					>

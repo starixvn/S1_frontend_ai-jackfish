@@ -57,7 +57,7 @@ const PromotionSwiper: React.FC<{ promotionList: TPromotionData[] }> = ({
 					<div
 						className={cn(
 							'h-[5px] w-[18vw] [clip-path:polygon(0_0,100%_0,100%_100%,6%_100%)] lg:w-[8vw]',
-							'from-secondary-500 bg-gradient-to-r to-white',
+							'from-secondary-500 bg-gradient-to-r to-black',
 						)}
 					/>
 				</div>
@@ -65,7 +65,9 @@ const PromotionSwiper: React.FC<{ promotionList: TPromotionData[] }> = ({
 					href={paths.promotion.root}
 					className='hidden cursor-pointer items-center gap-2 text-base lg:flex'
 				>
-					<span>{t('Label_General_More').toUpperCase()}</span>
+					<span className='text-gray-0 font-semibold'>
+						{t('Label_General_More').toUpperCase()}
+					</span>
 					<ImArrowRight2 className='text-secondary-500' />
 				</Link>
 			</div>

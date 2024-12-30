@@ -2,6 +2,13 @@ import dayjs from 'dayjs'
 import { TpMaintainData } from 'JF-api/site/type'
 import { find } from 'lodash-es'
 
+export const openLiveChat = () => {
+	if (window !== undefined && 'LiveChatWidget' in window) {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		new (window as any).LiveChatWidget.call('maximize')
+	}
+}
+
 export const onWindowOpenProduct = ({
 	pathname,
 	windowKey,

@@ -6,4 +6,5 @@ export type TVipImageData = {
 	settingDisplayKey?: string
 	levelTabsName?: string
 	level?: number
+	levelColor: string
 }

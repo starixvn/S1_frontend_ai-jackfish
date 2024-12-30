@@ -16,7 +16,7 @@ const Wallet = () => {
 	const { t } = useClientTranslation(locale)
 	const ref = useRef(null)
 	const { value: isActive, toggle, setFalse } = useBoolean(false)
-	const { userInfo, wallet, getWalletInfo } = useAuthStore()
+	const { userInfo, TUKWallet, getWalletInfo } = useAuthStore()
 	const { userName } = userInfo
 	const {
 		mainWallet,
@@ -25,7 +25,7 @@ const Wallet = () => {
 		rollover,
 		turnover,
 		promoCategoryId,
-	} = wallet
+	} = TUKWallet
 	const { isSpinActive, onIconSpin } = useIconSpin()
 	const handleRefetchWallet = () => {
 		getWalletInfo()

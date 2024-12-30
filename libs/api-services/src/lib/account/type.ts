@@ -7,25 +7,13 @@ export interface ITpWalletInfoData {
 	tpName?: string
 }
 
-export interface IBonusWallets {
-	bonusId: number
-	bonus: number
-	rollover: number
-	turnover: number
-	fullFillType: number
-	promoCategoryId: number
-	tpId: number
-	status: number
-	expiryTime: string | null
-}
-
 export interface IWalletInfoData {
 	balance: number
 	isHideBalance: boolean
 	lastLoginTime: string
 	lastTransaction: string
 	tpWallets: ITpWalletInfoData[]
-	bonusWallets: IBonusWallets[]
+	bonusWallets: ICustBonusWalletData[]
 }
 
 export interface ISetLangArgs {
@@ -106,4 +94,66 @@ export type TReferralSettingDetailData = {
 export interface ISetChangePasswordArgs {
 	oldPassword: string
 	newPassword: string
+}
+
+export interface IMainWalletInfoData {
+	balance: number
+	lastLoginTime: string
+	lastTransaction: string
+	isHideBalance: boolean
+}
+
+export enum CustBonusWalletStatusEnum {
+	Initial = 0,
+	Running,
+	Canceled,
+	Expiry,
+	Fulfill,
+}
+
+export enum CustBonusWalletFullFillTypeEnum {
+	RollOver = 1,
+	WinOver,
+}
+export interface ICustBonusWalletData {
+	bonusId: number
+	bonus: number
+	rollover: number
+	turnover: number
+	promoCategoryId: number
+	tpId: number
+	expiryTime: string
+	status: CustBonusWalletStatusEnum
+	fullFillType: CustBonusWalletFullFillTypeEnum
+}
+
+export enum TpWalletListTypeEnum {
+	All,
+	Transferred,
+}
+export interface ITpWalletData {
+	tpId: number
+	tpName: string
+	displayKey: string
+	description: string
+	walletMode: number
+}
+
+export interface ITpWalletInfoData {
+	tpId: number
+	balance: number
+	bonus: number
+	walletStatus: number
+	// tpName 為 前端自行 mapping 進來的值
+	tpName?: string
+}
+
+export interface TCustVIPProgress {
+	currentVipLevel: number
+	upDeposit: null | number
+	actualDeposit: number
+	downDeposit: null | number
+	downTurnover: null | number
+	upTurnover: null | number
+	turnoverSummary: null | number
 }

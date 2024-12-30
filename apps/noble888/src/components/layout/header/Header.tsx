@@ -2,7 +2,7 @@
 import TemporarySwitch from '../TemporarySwitch'
 import LoginForm from './LoginForm'
 import Logo from './Logo'
-import MemberInfo from './MemberInfo'
+import MemberInfo from './memberInfo/MemberInfo'
 import Menu from './menu'
 
 interface IHeaderProps {
@@ -16,7 +16,7 @@ export default function Header({ isLogin }: IHeaderProps) {
 			<div className='absolute right-2 top-2 z-30'>
 				<TemporarySwitch />
 			</div>
-			<header className='bg-primary-900 grid w-full grid-cols-12 items-center px-3 py-2 lg:px-6 lg:py-6'>
+			<header className='z-10 grid w-full grid-cols-12 items-center bg-black px-3 py-2 lg:px-6 lg:py-6'>
 				<Logo />
 
 				<div className='col-span-8 flex items-center justify-end gap-4 md:col-span-9 lg:col-span-10'>

@@ -11,7 +11,6 @@ export const BalanceInfo = () => {
 		userInfo: { currencyId = CurrenciesEnum.THB },
 	} = useAuthStore()
 	const { withdrawalBalance } = useWithdrawalInfo()
-
 	const {
 		availableBalance = 0,
 		balance = 0,

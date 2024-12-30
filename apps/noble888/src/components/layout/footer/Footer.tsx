@@ -7,11 +7,8 @@ import FooterBottom from './FooterBottom'
 import FooterCenter from './FooterCenter'
 import FooterNavMobile from './FooterNavMobile'
 import FooterNavigation from './FooterNavigation'
-interface FooterProps {
-	isLogin: boolean
-}
 
-export default function Footer({ isLogin }: FooterProps) {
+export default function Footer() {
 	const {
 		userInfo: { currencyId, langId },
 	} = useAuthStore()
@@ -43,10 +40,10 @@ export default function Footer({ isLogin }: FooterProps) {
 			/>
 
 			{/* footer-bottom */}
-			<FooterBottom isLogin={isLogin} promotionTextList={promotionTextList} />
+			<FooterBottom promotionTextList={promotionTextList} />
 
 			{/* Login && h5 才有的footer功能列 */}
-			{isLogin && <FooterNavMobile />}
+			{<FooterNavMobile />}
 		</div>
 	)
 }

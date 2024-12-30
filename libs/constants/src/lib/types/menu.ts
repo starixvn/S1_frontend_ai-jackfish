@@ -70,6 +70,7 @@ export enum MenuActionEnum {
 export interface IGoToGameArgs {
 	tpId: number
 	langId: string
+	appType?: number
 	inputs: {
 		gameId?: null | string | number
 		fun: '0' | '1' // * '1' 為開啟模式
@@ -292,4 +293,9 @@ export type TMenuData = {
 	query?: { provider: string }
 	subMenu: ISubMenu[]
 	subMenuAllowCurrenciesWithAuth: boolean
+}
+
+export enum LoginGameTypeEnum {
+	returnGameUrl = 1,
+	returnHtml,
 }

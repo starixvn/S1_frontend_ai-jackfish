@@ -1,5 +1,6 @@
 'use client'
 
+import { LoginModal } from '@noble888/src/components'
 import { ALLOWED_CURRENCIES } from '@noble888/src/data/static'
 import { EVENT_DATA } from '@noble888/src/data/static/event'
 import { useClientTranslation } from '@noble888/src/i18n/client'
@@ -11,7 +12,7 @@ import {
 	isEventPeriod,
 	useLocaleRouter,
 } from 'JF-core'
-import { useAuthStore } from 'JF-operations'
+import { useAuthStore, useModalStore } from 'JF-operations'
 import {
 	ISubMenu,
 	MenuIconTypeEnum,
@@ -60,6 +61,8 @@ const SubMenu = ({
 		userInfo: { langId, currencyId },
 		isLogin,
 	} = useAuthStore()
+	const { openModal } = useModalStore()
+
 	const menus = menuList.map(mainMenuItem => {
 		const { lobbyCategoryId, subMenu, category } = mainMenuItem || {}
 		const active = debouncedMenuKey === String(category)
@@ -110,19 +113,22 @@ const SubMenu = ({
 								className={cn(
 									'relative max-w-36 transition-transform hover:-translate-x-[-4px] hover:duration-300',
 									{
-										active: subMenuItem?.isTpMaintain,
+										grayscale: subMenuItem?.isTpMaintain,
 									},
 								)}
 								onMouseEnter={() => setMenuKey(debouncedMenuKey)}
 								onClick={() => {
 									onMenuOpen(subMenuItem, {
-										loginCallback: () => <></>,
-										// messageCallBack: (message: string) => <></>,
+										loginCallback: () => {
+											openModal({
+												content: <LoginModal />,
+											})
+										},
+										messageCallBack: message =>
+											openModal({
+												content: message,
+											}),
 										liveStreamingCallback: () => <></>,
-										// TODO: 等modal做好後回復
-										// loginCallback: () => modal.open(<LoginModal />),
-										// messageCallBack: message => modal.error(message),
-										// liveStreamingCallback: () =>
 										// 	modal.open(<LiveStreamingModalDesktop />),
 									})
 								}}
@@ -137,7 +143,7 @@ const SubMenu = ({
 									{displayName || subMenuItem?.productName}
 								</span>
 								{subMenuItem?.isTpMaintain && (
-									<div className='under'>
+									<div className='disabled absolute top-1/2 translate-y-[-50%] rounded-md bg-gray-800 px-2 py-1 text-center text-sm text-white'>
 										{t('Label_General_UnderMaintenance')}
 									</div>
 								)}
@@ -188,10 +194,11 @@ const SubMenu = ({
 				<button
 					onClick={
 						!isLogin
-							? () => <></>
-							: // TODO: 等modal做好後回復
-								// ? () => modal.open(<LoginModal />)
-								() => router.push(paths.referral.root)
+							? () =>
+									openModal({
+										content: <LoginModal />,
+									})
+							: () => router.push(paths.referral.root)
 					}
 					className='relative max-w-36 transition-transform hover:-translate-x-[-4px] hover:duration-300'
 				>

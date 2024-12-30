@@ -1,18 +1,18 @@
 'use client'
 
 import { useClientTranslation } from '@noble888/src/i18n/client'
-import { IFooterData } from 'JF-constants'
-import { cn } from 'JF-core'
+import { IFooterData, paths } from 'JF-constants'
+import { cn, useGetPathname } from 'JF-core'
 import { useAuthStore } from 'libs/operations/src/lib/auth/store'
 import { Fragment, useState } from 'react'
 
 interface FooterBottomProps {
-	isLogin: boolean
 	promotionTextList: IFooterData['promotionTextList']
 }
 
-const FooterBottom = ({ isLogin, promotionTextList }: FooterBottomProps) => {
+const FooterBottom = ({ promotionTextList }: FooterBottomProps) => {
 	const { t } = useClientTranslation()
+	const { currentPath } = useGetPathname()
 	const {
 		userInfo: { currencyId },
 	} = useAuthStore()
@@ -21,9 +21,10 @@ const FooterBottom = ({ isLogin, promotionTextList }: FooterBottomProps) => {
 	return (
 		<div
 			className={cn(
-				'bg-info-900 text-primary-50 px-3 py-6 text-start lg:px-28',
+				'bg-secondary-400 text-primary-50 px-3 py-6 pb-28 text-start lg:px-28 lg:pb-6',
 				{
-					'pb-28': isLogin,
+					// 'pb-28': isLogin,
+					'hidden lg:block': paths.home.root !== currentPath,
 				},
 			)}
 		>
@@ -36,7 +37,7 @@ const FooterBottom = ({ isLogin, promotionTextList }: FooterBottomProps) => {
 				>
 					Affiliate Program
 				</a>
-				<div className='text-xs text-gray-400 lg:leading-5'>
+				<div className='text-xs lg:leading-5'>
 					Nova88 uses cookies to enhance your website experience. By staying on
 					the website, you agree to the use of these cookies.
 				</div>
@@ -46,7 +47,7 @@ const FooterBottom = ({ isLogin, promotionTextList }: FooterBottomProps) => {
 			{isShow ? (
 				<div className='hidden lg:block'>
 					<button
-						className='text-secondary-500 text-xs font-semibold underline'
+						className='text-xs font-semibold underline'
 						onClick={() => setIsShow(false)}
 					>
 						{t('Label_HideInfo')}
@@ -64,10 +65,10 @@ const FooterBottom = ({ isLogin, promotionTextList }: FooterBottomProps) => {
 					<h3 className='font-semibold lg:mb-2'>
 						{t(`Label_Sports_Betting_Online_${currencyId}`)}
 					</h3>
-					<div className='text-xs text-gray-400 lg:leading-5'>
+					<div className='text-xs lg:leading-5'>
 						{t(`Label_Sports_Betting_Online_Desc`)}
 						<button
-							className='text-secondary-500 font-semibold underline lg:mx-2'
+							className='font-semibold underline lg:mx-2'
 							onClick={() => setIsShow(true)}
 						>
 							{isShow ? null : `${t('Label_General_ReadMore')} >`}

@@ -7,7 +7,7 @@ import { fallbackLng, languages } from './i18n/settings'
 // config 寫在外部 import 不會運作，不管用哪種 import 方式都一樣，待解決，先這樣寫
 export const config = {
 	matcher: [
-		'/((?!api/|img/|tp|_next/|health|favicon.ico|sw.js|site.webmanifest|[^/]+/Cashier/|block-ip).*)',
+		'/((?!api/|img/|tp|_next/|health|launcher|favicon.ico|sw.js|site.webmanifest|[^/]+/Cashier/|block-ip).*)',
 	],
 }
 

@@ -1,10 +1,11 @@
+import { TCustVIPProgress } from 'JF-api/account/type'
 import { TUserInfoData } from 'JF-api/accountStrict/type'
 
 export interface IAuthState {
 	isLogin: boolean | undefined
 	isLoading: boolean
 	userInfo: TUserInfoData
-	wallet: {
+	TUKWallet: {
 		mainWallet?: string
 		bonusWallet?: string
 		totalWallet?: string
@@ -12,6 +13,7 @@ export interface IAuthState {
 		turnover: number
 		promoCategoryId: number // 用來判斷使用者獲得的bonus是哪類型的Live casino, saba......
 	}
+	custVIPProgress: TCustVIPProgress
 }
 
 export interface IAuthAction {
@@ -36,4 +38,5 @@ export interface IAuthAction {
 	getUserInfo: () => Promise<void>
 	resetAuth: () => void
 	getWalletInfo: () => Promise<void>
+	getCustVIPProgress: () => Promise<void>
 }

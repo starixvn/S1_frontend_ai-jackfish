@@ -6,6 +6,7 @@ import {
 } from '@noble888/src/data/country'
 import { CURRENCY_TO_LANG_KEY, CurrenciesEnum } from 'JF-constants'
 import { bannerUrl, cn, useLanguageGroup } from 'JF-core'
+import { useAuthStore } from 'JF-operations'
 import { IoIosArrowDown } from 'react-icons/io'
 
 interface ICountryProps {
@@ -15,14 +16,15 @@ interface ICountryProps {
 }
 
 const Country = ({ toggle, isActive, selectedText = '' }: ICountryProps) => {
-	// TODO: 有sign in功能之後再換這個
-	// const { isLogin } = useAuthStore()
-	const isLogin = false // 先用這裡做登入前後國家樣式的切換
+	const { isLogin } = useAuthStore()
 	const { icon, onSetLanguage } = useLanguageGroup()
 	return (
 		<div className='relative w-full'>
 			<div className='flex items-center gap-2' onClick={toggle}>
-				<button className='h-10 w-10 overflow-hidden rounded-full border-2 border-white'>
+				<button
+					className='h-10 w-10 overflow-hidden rounded-full border-2 border-white'
+					type='button'
+				>
 					<img
 						className='h-full w-full'
 						src={bannerUrl(`/desktop/img/flag/${icon}.jpg`)}
@@ -37,7 +39,7 @@ const Country = ({ toggle, isActive, selectedText = '' }: ICountryProps) => {
 			{isActive && (
 				<div
 					className={cn(
-						'absolute top-full z-30 mt-2 w-64 rounded-lg bg-gray-100 p-2 shadow-lg ltr:right-0 rtl:left-0',
+						'text-primary-900 absolute top-full z-30 mt-2 w-64 rounded-lg bg-gray-100 p-2 shadow-lg ltr:right-0 rtl:left-0',
 						{
 							'static w-60 bg-white p-0 shadow-none': isLogin,
 						},

@@ -3,16 +3,21 @@
 import useSWR from 'swr'
 import { IAxiosError, IAxiosResponse, fetcher } from '../baseApi'
 import {
+	ICustBonusWalletData,
+	IMainWalletInfoData,
 	ISetChangePasswordArgs,
+	ITpWalletData,
+	ITpWalletInfoData,
 	IWalletInfoData,
 	TCustBankInfoData,
+	TCustVIPProgress,
 	TEWalletData,
 	TReferralSettingDetailData,
 	TReferralSummaryData,
 	TWithdrawalAvailableBalanceData,
+	TpWalletListTypeEnum,
 } from './type'
 import { accountApiUrl } from './url'
-
 
 export const onlineCheck = async () => {
 	try {
@@ -27,6 +32,68 @@ export const getWalletInfo = async () => {
 	try {
 		const data = await fetcher<IWalletInfoData, null>(
 			`${accountApiUrl.getWalletInfo}`,
+		)
+		return data?.data
+	} catch (e) {
+		return null
+	}
+}
+
+/**
+ * @getMainWalletInfo 主錢包 API
+ * @getCustBonusWallet Bonus wallet API
+ * @getTpWalletList TP Wallet API
+ * @getTpWalletInfoByTpId 單一TP Wallet API
+ */
+export const getMainWalletInfo = async () => {
+	try {
+		const data = await fetcher<IMainWalletInfoData, null>(
+			`${accountApiUrl.getMainWalletInfo}`,
+		)
+		return data?.data
+	} catch (e) {
+		return null
+	}
+}
+
+export const getCustBonusWallet = async () => {
+	try {
+		const data = await fetcher<ICustBonusWalletData[], null>(
+			`${accountApiUrl.getCustBonusWallet}`,
+		)
+		return data?.data
+	} catch (e) {
+		return []
+	}
+}
+
+export const getTpWalletList = async ({
+	langId,
+	listType,
+}: {
+	langId: string
+	listType: TpWalletListTypeEnum
+}) => {
+	try {
+		const data = await fetcher<ITpWalletData[]>(
+			`${accountApiUrl.getTpWalletList}/${langId}`,
+			{
+				listType,
+			},
+		)
+		return data?.data
+	} catch (e) {
+		return []
+	}
+}
+
+export const getTpWalletInfoByTpId = async (tpId: number) => {
+	try {
+		const data = await fetcher<ITpWalletInfoData>(
+			`${accountApiUrl.getTpWalletBalance}`,
+			{
+				tpId,
+			},
 		)
 		return data?.data
 	} catch (e) {
@@ -132,5 +199,19 @@ export const changePassword = async (args: ISetChangePasswordArgs) => {
 		)
 	} catch (error) {
 		throw error as IAxiosError
+	}
+}
+
+/**
+ * 撈取用戶VIP等級資料
+ */
+export const getCustVIPProgress = async (): Promise<TCustVIPProgress> => {
+	try {
+		const { data } = await fetcher<TCustVIPProgress>(
+			accountApiUrl.getCustVIPProgress,
+		)
+		return data
+	} catch (e) {
+		return {} as TCustVIPProgress
 	}
 }

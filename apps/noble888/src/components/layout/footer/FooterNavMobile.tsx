@@ -25,7 +25,7 @@ const FooterNavMobile = () => {
 							'border-b-2 border-b-[#ff7600]': currentPath === paths.home.root,
 						})}
 					>
-						Home
+						{t('Label_General_Home')}
 					</p>
 				</LocaleLink>
 				<LocaleLink href={paths.promotion.root} className='w-fit text-center'>
@@ -41,7 +41,7 @@ const FooterNavMobile = () => {
 								currentPath === paths.promotion.root,
 						})}
 					>
-						Promotion
+						{t('Label_General_Promotion')}
 					</p>
 				</LocaleLink>
 				<div className='w-fit'>
@@ -65,7 +65,9 @@ const FooterNavMobile = () => {
 						src={`${bannerUrl('/h5/img/4.0/footer/livechat.png')}`}
 						alt=''
 					/>
-					<p className='text-xs text-[#d1d1d1]'>Live Chat</p>
+					<p className='text-xs text-[#d1d1d1]'>
+						{t('Label_General_LiveChat')}
+					</p>
 				</a>
 				<LocaleLink href={paths.menu.root} className='w-fit text-center'>
 					<img
@@ -79,7 +81,7 @@ const FooterNavMobile = () => {
 							'border-b-2 border-b-[#ff7600]': currentPath === paths.menu.root,
 						})}
 					>
-						Me
+						{t('Label_General_Me')}
 					</p>
 				</LocaleLink>
 			</div>
@@ -88,7 +90,7 @@ const FooterNavMobile = () => {
 
 			<div
 				className={cn(
-					'fixed bottom-0 flex w-full transform items-start justify-center rounded-tl-[50px] rounded-tr-[50px] bg-[#efefef] transition-all duration-500 ease-in-out',
+					'bg-primary-800 fixed bottom-0 flex w-full transform items-start justify-center rounded-tl-[50px] rounded-tr-[50px] transition-all duration-500 ease-in-out',
 					{
 						'translate-y-full p-0': !isActive,
 						'translate-y-0 p-[5vw_23vw_25vw]': isActive,
@@ -97,7 +99,7 @@ const FooterNavMobile = () => {
 			>
 				<div className='flex gap-x-8'>
 					<LocaleLink href={paths.deposit.root}>
-						<div className='mx-auto h-12 w-12 rounded-full bg-[#ffffff] p-2'>
+						<div className='mx-auto h-12 w-12 rounded-full bg-white p-2'>
 							<img
 								src={`${bannerUrl('/h5/img/4.0/footer/deposit.png')}`}
 								alt=''
@@ -106,7 +108,7 @@ const FooterNavMobile = () => {
 						<p className='text-center text-xs'>{t('Label_General_Deposit')}</p>
 					</LocaleLink>
 					<LocaleLink href={paths.withdrawal.root}>
-						<div className='mx-auto h-12 w-12 rounded-full bg-[#ffffff] p-2'>
+						<div className='mx-auto h-12 w-12 rounded-full bg-white p-2'>
 							<img
 								src={`${bannerUrl('/h5/img/4.0/footer/withdrawal.png')}`}
 								alt=''
@@ -117,7 +119,7 @@ const FooterNavMobile = () => {
 						</p>
 					</LocaleLink>
 					<LocaleLink href={paths.transferFunds.root}>
-						<div className='mx-auto h-12 w-12 rounded-full bg-[#ffffff] p-2'>
+						<div className='mx-auto h-12 w-12 rounded-full bg-white p-2'>
 							<img
 								src={`${bannerUrl('/h5/img/4.0/footer/transfer.png')}`}
 								alt=''

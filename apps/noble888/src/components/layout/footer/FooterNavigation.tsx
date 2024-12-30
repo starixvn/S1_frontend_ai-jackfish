@@ -7,7 +7,7 @@ import Link from 'next/link'
 const FooterNavigation = () => {
 	const { t } = useClientTranslation()
 	return (
-		<div className='text-primary-900 hidden items-center justify-center gap-20 bg-[#f3f3f3] text-sm font-medium lg:flex lg:py-5'>
+		<div className='hidden items-center justify-center gap-20 bg-gray-900 text-sm font-medium lg:flex lg:py-5'>
 			<a
 				href='https://aff.nova88mas102.com/?lang=en'
 				className='flex items-center gap-2'

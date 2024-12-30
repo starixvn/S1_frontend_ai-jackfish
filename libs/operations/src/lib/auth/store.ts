@@ -1,9 +1,16 @@
 // authStore.ts
-import { getWalletInfo } from 'JF-api/account/client'
+import {
+	getCustBonusWallet,
+	getCustVIPProgress,
+	getMainWalletInfo,
+	getTpWalletList,
+} from 'JF-api/account/client'
+import { TpWalletListTypeEnum } from 'JF-api/account/type'
 import { getUserInfo } from 'JF-api/accountStrict/client'
 import { signInPhone, signInUserName, signOut } from 'JF-api/auth/client'
 import { CURRENCY_NAME_BY_CURRENCY } from 'JF-constants'
 import { numberFormat } from 'JF-core'
+import { toast } from 'react-toastify'
 import { create } from 'zustand'
 import { IAuthAction, IAuthState } from './type'
 
@@ -12,14 +19,7 @@ const defaultUserInfo = {
 	langId: String(process.env.NEXT_PUBLIC_DEFAULT_LANG),
 	currencyId: Number(process.env.NEXT_PUBLIC_DEFAULT_CURRENCY),
 }
-const defaultWalletInfo = {
-	balance: 0,
-	isHideBalance: false,
-	lastLoginTime: '',
-	lastTransaction: '',
-	tpWallets: [],
-	bonusWallets: [],
-}
+
 const defaultWallet = {
 	mainWallet: '0',
 	bonusWallet: '0',
@@ -29,15 +29,32 @@ const defaultWallet = {
 	promoCategoryId: 0,
 }
 
+const defaultMainWalletInfo = {
+	balance: 0,
+	lastLoginTime: '',
+	lastTransaction: '',
+	isHideBalance: false,
+}
+const defaultVIPProgress = {
+	actualDeposit: 0,
+	currentVipLevel: 1,
+	downDeposit: null,
+	downTurnover: null,
+	turnoverSummary: 0,
+	upDeposit: 0,
+	upTurnover: 0,
+}
+
 /**
- * @defaultWalletInfo api取回的資料格式
+ * @defaultTUKWalletInfo TUK用的walletInfo
  * @defaultWallet 加工過後讓畫面使用的錢包金額與bonus金額
  */
 const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 	isLoading: false,
 	isLogin: false,
 	userInfo: defaultUserInfo,
-	wallet: defaultWallet,
+	TUKWallet: defaultWallet,
+	custVIPProgress: defaultVIPProgress,
 	setUserInfo: newUserInfo => set({ userInfo: newUserInfo }),
 	onSignInUserName: async ({ userName, password }) => {
 		if (typeof window === 'undefined') return
@@ -160,20 +177,31 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 	resetAuth: () => {
 		set({ isLogin: false, userInfo: defaultUserInfo })
 	},
-	// 撈用戶錢包資訊
+
 	getWalletInfo: async () => {
 		set({ isLoading: true })
-
-		const data = (await getWalletInfo()) ?? defaultWalletInfo
-		const {
-			balance = 0,
-			bonusWallets: [
-				{ bonus = 0, rollover = 0, turnover = 0, promoCategoryId = 0 } = {},
-			] = [],
-		} = data
 		const currencyId = get().userInfo.currencyId
+
+		const [mainWalletInfo, custBonusWalletInfo = []] = await Promise.all([
+			getMainWalletInfo(),
+			getCustBonusWallet(),
+			getTpWalletList({
+				langId: get().userInfo.langId,
+				listType: TpWalletListTypeEnum.All,
+			}),
+		])
+
+		const { balance } = mainWalletInfo ?? defaultMainWalletInfo
+
+		// TUK Wallet---
+		const {
+			bonus = 0,
+			rollover = 0,
+			turnover = 0,
+			promoCategoryId = 0,
+		} = custBonusWalletInfo[0]
 		set({
-			wallet: {
+			TUKWallet: {
 				mainWallet: numberFormat(balance, currencyId),
 				bonusWallet: numberFormat(bonus, currencyId),
 				totalWallet: numberFormat(balance + bonus, currencyId),
@@ -181,7 +209,21 @@ const useAuthStore = create<IAuthState & IAuthAction>((set, get) => ({
 				turnover,
 				promoCategoryId,
 			},
+			isLoading: false,
 		})
+	},
+
+	/**
+	 * 取得玩家目前ＶＩＰ等級資料
+	 */
+	getCustVIPProgress: async () => {
+		set({ isLoading: true })
+		try {
+			const data = (await getCustVIPProgress()) ?? defaultVIPProgress
+			set({ custVIPProgress: data })
+		} catch (err) {
+			toast.error((err as Error).message)
+		}
 
 		set({ isLoading: false })
 	},

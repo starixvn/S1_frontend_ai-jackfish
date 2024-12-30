@@ -33,7 +33,7 @@ const Profile = () => {
 	const { value: isActive } = useBoolean(false)
 	const {
 		userInfo: { currencyId, userName },
-		wallet,
+		TUKWallet,
 		getWalletInfo,
 	} = useAuthStore()
 	const {
@@ -43,7 +43,7 @@ const Profile = () => {
 		rollover,
 		turnover,
 		promoCategoryId,
-	} = wallet
+	} = TUKWallet
 	const { isSpinActive, onIconSpin } = useIconSpin()
 
 	// 定義桌機和手機的media query
@@ -260,7 +260,7 @@ const Profile = () => {
 					</MenuCard>
 				)}
 				<MenuCard
-					className='bg-tertiary-400 to-primary-300 active:from-secondary-300 mt-1 mb-4 bg-gradient-to-b'
+					className='bg-tertiary-400 to-primary-300 active:from-secondary-300 mb-4 mt-1 bg-gradient-to-b'
 					onClick={handleSignOut}
 				>
 					<img

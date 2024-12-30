@@ -9,7 +9,7 @@ import {
 	META_DATA,
 	VIP_CLUB_IMAGES,
 } from '@noble888/src/data/static'
-import { useGetPathname } from 'JF-core'
+import { QueryProvider, useGetPathname } from 'JF-core'
 import {
 	useChangePasswordModalEffect,
 	useInitEffect,
@@ -57,7 +57,6 @@ export default function Layout({
 			MENU_DATA,
 		})
 	}, [initStaticData])
-
 	// 初始化
 	useInitEffect({ isSignedIn, langToCurrency: LANG_TO_CURRENCY })
 
@@ -73,12 +72,14 @@ export default function Layout({
 	return (
 		<html dir={locale === 'ar' ? 'rtl' : 'ltr'}>
 			<body>
-				<GlobalModal />
-				<div className='flex h-full w-full flex-col'>
-					<Header isLogin={isSignedIn} />
-					<main className='h-fit flex-grow'>{children}</main>
-					<Footer isLogin={isSignedIn} />
-				</div>
+				<QueryProvider>
+					<GlobalModal />
+					<div className='flex h-full w-full flex-col'>
+						<Header isLogin={isSignedIn} />
+						<main className='h-fit flex-grow'>{children}</main>
+						<Footer />
+					</div>
+				</QueryProvider>
 			</body>
 		</html>
 	)

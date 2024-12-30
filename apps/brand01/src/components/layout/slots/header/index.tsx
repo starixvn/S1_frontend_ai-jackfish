@@ -9,12 +9,12 @@ const Header = ({ tpId: providerTpId }: { tpId: string }) => {
 	const { locale } = useGetPathname()
 	const { t } = useClientTranslation(locale)
 	const { providerList } = useSlotPageStore()
-	const { wallet, getWalletInfo } = useAuthStore()
+	const { TUKWallet, getWalletInfo } = useAuthStore()
 	const [providerLogo, setProviderLogo] = useState<string | undefined>('')
 	const [slotBalance, setSlotBalance] = useState<string | undefined>('0')
 	const { isSpinActive, onIconSpin } = useIconSpin()
 
-	const { mainWallet, totalWallet, promoCategoryId } = wallet
+	const { mainWallet, totalWallet, promoCategoryId } = TUKWallet
 
 	const handleRefetchWallet = () => {
 		getWalletInfo()

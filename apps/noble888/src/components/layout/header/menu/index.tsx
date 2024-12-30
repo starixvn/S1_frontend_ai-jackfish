@@ -1,5 +1,6 @@
 'use client'
 
+import { LoginModal } from '@noble888/src/components'
 import { ALLOWED_CURRENCIES } from '@noble888/src/data/static/allowedCurrencies'
 import { MENU_DATA } from '@noble888/src/data/static/menu'
 import { useClientTranslation } from '@noble888/src/i18n/client'
@@ -13,7 +14,7 @@ import {
 	TDynamicSubMenuItem,
 } from 'JF-constants'
 import { cn, isEventPeriod, LocaleLink, useMenuOpen } from 'JF-core'
-import { useAuthStore, useHomeStore } from 'JF-operations'
+import { useAuthStore, useHomeStore, useModalStore } from 'JF-operations'
 import useMenu from 'libs/core/src/lib/hooks/useMenu'
 import { includes, toUpper, union } from 'lodash-es'
 import { useEffect, useState } from 'react'
@@ -51,6 +52,8 @@ const Menu = () => {
 	const { menuList } = useMenu({ homeMenuData: MENU_DATA })
 	const { onMenuOpen } = useMenuOpen({})
 	const { fetchLobbyHeader } = useHomeStore()
+	const { openModal } = useModalStore()
+
 	const [menuKey, setMenuKey] = useState<string>()
 	const [debouncedMenuKey] = useDebounceValue(menuKey, 150)
 
@@ -66,7 +69,6 @@ const Menu = () => {
 	useEffect(() => {
 		fetchLobbyHeader()
 	}, [fetchLobbyHeader])
-
 	const menus = menuList.map(mainMenuItem => {
 		const {
 			displayKey,
@@ -116,13 +118,14 @@ const Menu = () => {
 								desktop: { menuActionType: MenuActionEnum.EnterPage },
 							} as TDynamicSubMenuItem,
 							{
-								loginCallback: () => <></>,
-								messageCallBack: () => <></>,
-								// TODO: 等modal做好後回復
-								// liveStreamingCallback: () =>
-								// 	modal.open(<LiveStreamingModalDesktop />),
-								// loginCallback: () => modal.open(<LoginModal />),
-								// messageCallBack: message => modal.error(message),
+								loginCallback: () =>
+									openModal({
+										content: <LoginModal />,
+									}),
+								messageCallBack: message =>
+									openModal({
+										content: message,
+									}),
 								// liveStreamingCallback: () =>
 								// 	modal.open(<LiveStreamingModalDesktop />),
 							},
@@ -142,7 +145,9 @@ const Menu = () => {
 				<a
 					className={headerMenuCss}
 					key={lobbyCategoryId}
-					onMouseEnter={() => setMenuKey(category)}
+					onMouseEnter={() => {
+						setMenuKey(category)
+					}}
 				>
 					{icon}
 					{menuText}
@@ -167,7 +172,7 @@ const Menu = () => {
 
 	return (
 		<div className='hidden lg:block' onMouseLeave={() => setMenuKey(undefined)}>
-			<div className='bg-primary-50 flex h-16 w-full items-center justify-evenly'>
+			<div className='flex h-16 w-full items-center justify-evenly bg-gray-900'>
 				<LocaleLink
 					href={paths.home.root}
 					onMouseEnter={() => setMenuKey('Home')}

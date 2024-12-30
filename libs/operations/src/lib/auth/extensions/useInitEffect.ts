@@ -34,6 +34,7 @@ const useInitEffect = ({ isSignedIn, langToCurrency }: IUseInitEffectProps) => {
 		getUserInfo,
 		setUserInfo,
 		userInfo: { langId, currencyId },
+		getCustVIPProgress,
 		getWalletInfo,
 	} = useAuthStore()
 	const { getSocialChannels } = useSocialChannelStore()
@@ -42,6 +43,7 @@ const useInitEffect = ({ isSignedIn, langToCurrency }: IUseInitEffectProps) => {
 	useEffect(() => {
 		if (isSignedIn) {
 			getUserInfo()
+			getCustVIPProgress()
 			getWalletInfo()
 		} else {
 			setUserInfo({
@@ -53,10 +55,11 @@ const useInitEffect = ({ isSignedIn, langToCurrency }: IUseInitEffectProps) => {
 	}, [
 		cookieCurrencyId,
 		cookieLangId,
+		getCustVIPProgress,
 		getUserInfo,
-		getWalletInfo,
 		isSignedIn,
 		setUserInfo,
+		getWalletInfo,
 	])
 	// 初始化 cookie landgId & currencyId，
 	// 已登入設定成 userInfo 資料，並且判斷 locale 是否符合帳號資料，不符合則倒轉

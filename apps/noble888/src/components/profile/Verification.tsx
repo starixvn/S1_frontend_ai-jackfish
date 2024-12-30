@@ -44,7 +44,7 @@ const Verification = () => {
 	}
 
 	return (
-		<div className='mb-5 mt-5 space-y-4'>
+		<div className='mb-5 mt-5 space-y-4 lg:h-96 lg:flex lg:flex-col lg:justify-center lg:col-span-2 lg:bg-gray-1000'>
 			{/* VIP 徽章區 */}
 			<div className='flex flex-col items-center'>
 				<div className='mb-2 h-28 w-28'>
@@ -152,13 +152,6 @@ const Verification = () => {
 					</Tooltip>
 				</div>
 			</div>
-			<div className='flex flex-col items-center'>
-				<span className='mb-2 text-lg font-bold'>
-					{t('Label_Profile_ShippingAddress')}
-				</span>
-				<span className='text-xs'>{t('Label_Profile_ShippingHint')}</span>
-			</div>
-		
 		</div>
 	)
 }

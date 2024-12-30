@@ -58,7 +58,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 	placement = TooltipPlacementEnum.Top,
 	arrow = true,
 	maxWidth = 'auto',
-	trigger = TooltipTriggerEnum.Hover,
+	trigger = TooltipTriggerEnum.Click,
 }) => {
 	const triggerProp = trigger === TooltipTriggerEnum.Hover ? "mouseenter" : trigger
 	// console.log(triggerProp)
